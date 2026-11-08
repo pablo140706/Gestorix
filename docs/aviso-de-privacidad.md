@@ -50,7 +50,7 @@ Solo entregaríamos información a una autoridad que la solicite conforme a la l
 ## 5. Cuánto tiempo la guardamos
 
 - Mientras tu cuenta exista.
-- Si **borras tu cuenta**, se eliminan tu correo, tu avance, tu horario y tu agenda. Tus comentarios se borran o quedan como "usuario eliminado", sin forma de ligarlos a ti.
+- Si **borras tu cuenta**, se eliminan tu correo, tu avance, tu horario y tu agenda. Tus comentarios se quedan publicados como "usuario eliminado", sin forma de ligarlos a ti. Si quieres que se borren también, bórralos antes de borrar tu cuenta o pídelo al correo de contacto.
 - Los reportes y las acciones de moderación se conservan [6 meses] para poder atender reincidencias, y después se borran.
 
 ## 6. Tus derechos

@@ -27,7 +27,7 @@
 
 1. ~~Crear el repo~~ ✅ `pablo140706/Gestorix`, público, clonado en `C:\db\repos\proyectos\gestorix`.
 2. ~~Darle acceso a Claude a `pablo140706`~~ ✅ (2026-11-08).
-3. **Verificar Docker Desktop** en la PC: `docker --version` y `docker compose version`. Si no está, instalarlo con WSL2 antes de la Fase 1.
+3. ~~Verificar Docker Desktop~~ ✅ Docker 29.9.2 y Compose v5.6.1, con la imagen `postgres:17` ya descargada (2026-11-08).
 4. **Pedir el GitHub Student Pack** (servidor y dominio). Pasos en el mensaje de la sesión del 2026-11-08.
 5. **Correo:** se usa **uno que el usuario ya tiene**, como contacto del aviso de privacidad y como remitente. Él lo pone en el aviso y en `.env`.
 6. **Elegir el servicio de envío** para la verificación y el "olvidé mi contraseña". Recomiendo **Brevo** (plan gratuito, sin tarjeta) o, si ese correo es de Gmail, una **contraseña de aplicación**.
@@ -42,6 +42,16 @@
 
 1. ~~Subir la versión con calendario~~ ✅ `pablo140706/iscweb-inicio`, rama `feat/multi-carrera-ia-lcd`, commit `2419470`.
 2. ~~Correo de contacto~~ ✅ Uno que ya tiene el usuario. Falta: ¿qué nombre va como responsable? Por defecto, "Gestorix, proyecto escolar".
+3. ~~Optativas de IA y LCD con dos claves~~ ✅ Se guardan las dos; la que no marca el PDF lleva `se_ofrece = false`.
+4. ~~Cupo~~ ✅ Tal cual SAES; la app suma el +4 de sobrecupo de 2.º en adelante. Los valores raros (1, 255) se revisan al cargar, en la Fase 1.
+5. ~~Escalas de cada comentario~~ ✅ Recomienda sí/no; calidad y dificultad enteros de 0 a 10.
+6. ~~Al borrar una cuenta~~ ✅ Sus comentarios se quedan como "usuario eliminado".
+
+## Fase 0 — Lo que ya quedó (2026-11-08)
+
+- **Front de iscweb** (`2419470`) copiado a `src/`: `index.html`, `styles.css`, `favicon.svg`, `manifest.webmanifest`, `sw.js` y los 19 `.js` de módulos. **No** se copiaron los 9 `.js` de datos (`roster`, `metrics`, `schedule`, `calendario`, `planes`, `optativas`, `cupos`, `historial`, `maestros_manual`): por eso el front no arranca solo hasta la Fase 2, cuando lea de la API.
+- **HTML de SAES** copiado a `data/{isc,ia,lcd}/` (11 archivos). Los PDFs se quedan en iscweb.
+- **Esquema** en `sql/00-tablas.sql`, probado en un Postgres 17 desechable. Resumen y cambios en `CLAUDE.md` §8.
 
 ---
 

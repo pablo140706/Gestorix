@@ -242,37 +242,63 @@ gestorix/
 
 ---
 
-## 8. Esquema (propuesta para cerrar en la Fase 0)
+## 8. Esquema
+
+**Escrito en `sql/00-tablas.sql` el 2026-11-08** y probado en un Postgres 17 desechable (carga sin
+errores; los CHECK rechazan dificultad 64, una 3.ª vez cursada, alias repetido con otras mayúsculas,
+grupo mal escrito y dos ofertas "sin profesor" iguales). Ese archivo manda; esto es el resumen.
+
+**Decisiones del usuario al cerrarlo (2026-11-08):**
+- Optativas de IA/LCD: se guardan **las dos claves** (6.º y 7.º); la que no marca el PDF lleva `se_ofrece = false`.
+- **Cupo: se guarda tal cual viene de SAES.** El sobrecupo (+4 de 2.º en adelante) lo suma la app.
+- Comentario propio: **recomienda sí/no** (la ficha muestra el % de "sí"); **calidad y dificultad, enteros 0–10**.
+- Al borrar una cuenta, **sus comentarios se quedan como "usuario eliminado"**.
 
 ```
-carrera          codigo PK · letra · nombre · plan · carga_min_ua (4) · carga_media_ua (7/6)
-                 · carga_max_ua (9)
-materia          clave PK · carrera · nombre · nombre_saes · tipo (OBL/OPT) · semestre · creditos
-                 · ua (1, o 2 en TT) · horas_t · horas_p · orden · descripcion · pdf
-seriacion        materia · requisito · oficial (bool)
-ruta_optativa    id · carrera · nombre               (14 ramas ISC + 7 parejas IA/LCD)
-ruta_materia     ruta · materia · semestre
+carrera          codigo PK (ISC/IA/LCD) · letra · nombre · plan · carga_min_ua · carga_media_ua · carga_max_ua
+materia          clave PK · carrera · nombre · nombre_saes · tipo · semestre · creditos · ua · horas_t
+                 · horas_p · orden · se_ofrece · descripcion · pdf       UNIQUE (carrera, semestre, nombre_saes)
+seriacion        materia · requisito · oficial                       PK (materia, requisito)
+ruta_optativa    id · carrera · nombre
+ruta_materia     ruta · materia
 periodo          codigo PK (27/1) · inicio · fin
-evento_calendario id · periodo · inicio · fin · tipo · nombre · prioridad
-profesor         id · nombre · nombre_norm UNIQUE · cedula · titulo_profesional
-                 · mp_link · mp_calidad · mp_recomiendan · mp_dificultad
-oferta           id · periodo · grupo · materia · profesor (NULL = sin asignar) · turno (M/V/X)
-                 · edificio · salon · cupo (40; 36 en 1.º) · inscritos
-sesion           oferta · dia (1–6) · bloque (1–9)
-usuario          id · correo UNIQUE · hash · verificado · alias UNIQUE · rol · carrera
-                 · creado · suspendido_hasta · baneado
-token            usuario · tipo (verificar/recuperar) · hash · expira
-avance           usuario · materia · veces (1–2) · calif · acreditada_por (ordinario/recurse/ets)
-                 · calif_ets · ruta_optativa
+evento_calendario id · periodo (NULL = fuera de periodo) · inicio · fin (NULL = un día) · tipo
+profesor         id · nombre · nombre_norm UNIQUE · cedula · titulo_profesional · mp_link · mp_calidad
+                 · mp_recomiendan · mp_dificultad (0–10)
+oferta           id · periodo · grupo · materia · profesor (NULL) · turno (calculado del grupo) · edificio
+                 · salon · cupo · inscritos          UNIQUE NULLS NOT DISTINCT (periodo, grupo, materia, profesor)
+bloque           numero PK (1–9) · inicio · fin      (sembrado en el mismo archivo)
+sesion           oferta · dia (1–6) · bloque         PK (oferta, dia, bloque)
+usuario          id · correo UNIQUE (minúsculas) · hash · verificado · alias (único sin importar
+                 mayúsculas) · rol · carrera · creado · suspendido_hasta · baneado
+token            hash PK (sha256) · usuario · tipo · expira          (se borra al usarlo)
+avance           usuario · materia · veces · calif · calif_ets       PK (usuario, materia)
 horario          usuario · oferta
-recordatorio     id · usuario · fecha_hora · titulo · materia (opcional) · nota
-comentario       id · usuario · profesor · materia (etiqueta, de las del profesor) · calidad
-                 · recomienda · dificultad · texto VARCHAR(500) · creado · estado (visible/oculto)
-                 (sin UNIQUE: un usuario puede comentar las veces que quiera)
+recordatorio     id · usuario · fecha_hora · titulo · materia · nota
+comentario       id · usuario (NULL = eliminado) · profesor · materia · calidad · recomienda (sí/no)
+                 · dificultad · texto VARCHAR(500) · creado · editado · estado
 rubrica          comentario · concepto · porcentaje
-reporte          id · comentario · reportante · motivo · estado · resuelto_por
-bitacora         id · actor · accion (ocultar/suspender/banear/…) · objetivo · motivo · cuando
+reporte          id · comentario · reportante · motivo · creado · estado · resuelto_por
+bitacora         id · actor · accion · objetivo_usuario · objetivo_comentario · motivo · cuando
+vista avance_status   status (pendiente / en recurse / aprobada / reprobada / solo por ETS /
+                      aprobada por ETS) y calif_final, derivados de veces + calif + calif_ets
 ```
+
+**Cambios contra la propuesta anterior:**
+
+| Qué | Por qué |
+|---|---|
+| Fuera `avance.acreditada_por` | Se deduce de `veces` y `calif_ets`; ahora sale de la vista `avance_status` |
+| Fuera `avance.ruta_optativa` | Cada optativa pertenece a una sola ruta (revisado en `optativas.js`): se deduce de `ruta_materia` |
+| Fuera `ruta_materia.semestre` | Ya está en `materia.semestre` |
+| Fuera `evento_calendario.nombre` y `prioridad` | El CSV no los trae; la prioridad es por tipo y vive en `calendario-ui.js` |
+| `oferta.turno` calculado | Es la 3.ª letra del grupo; así no puede contradecirlo |
+| Nueva tabla `bloque` | Las horas de los 9 bloques quedan en la base, no como número mágico |
+| Nuevo `materia.se_ofrece` | Marca la clave de IA/LCD que no corresponde al semestre del PDF |
+| `nombre_saes` guarda el texto completo de SAES | En ISC las optativas vienen como `MINERIA DE DATOS\|DATA MINING`; así cruzan tal cual |
+| `bitacora.objetivo` → `objetivo_usuario` + `objetivo_comentario` | Dos llaves foráneas reales en vez de un texto |
+| Sin tabla de sesiones de login | Se usa la sesión normal de PHP |
+| Rol de mínimo privilegio | Va en la Fase 1, con un `.sh` de initdb que lee la contraseña del `.env` |
 
 ---
 
