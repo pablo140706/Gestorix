@@ -4,12 +4,81 @@
 const horarioListEl = document.getElementById("horarioList");
 const credSummaryEl = document.getElementById("credSummary");
 
+// ---------- carga académica en UA (CLAUDE.md §4.1) ----------
+// Lo que inscribes + lo que ya solo puede ir por ETS (cuenta aunque no esté
+// en el horario). TT I y TT II valen 2 UA; las demás, 1.
+function cargaActual() {
+  const enHorario = state.horario.reduce((a, h) => a + uaDe(h.sid), 0);
+  const soloEts = uaBloqueadas();
+  return { enHorario, soloEts, total: enHorario + soloEts };
+}
+
+function semDeId(id) { return Number(id.match(/^s(\d+)-/)[1]) + 1; }
+
+// Avisos del horario. Solo avisan, nunca bloquean (salvo pasar de la máxima,
+// que ni se deja agregar).
+function avisosDelHorario() {
+  const av = [];
+  const c = cargaActual();
+  if (c.total > CARGA.max) {
+    av.push(`Llevas ${c.total} UA y el máximo es ${CARGA.max}. Quita ${c.total - CARGA.max}.`);
+  } else if (c.total > CARGA.media) {
+    av.push(`Llevas ${c.total} UA, arriba de la carga media (${CARGA.media}). Inscribir más de la media requiere un trámite ante la Unidad Académica.`);
+  } else if (state.horario.length && c.total < CARGA.min) {
+    av.push(`Llevas ${c.total} UA, abajo de la carga mínima (${CARGA.min}).`);
+  }
+
+  // Seriación: solo avisa (CLAUDE.md §4.4).
+  state.horario.forEach((h) => {
+    const falta = prereqsFaltantesDe(h.sid);
+    if (falta.length) {
+      av.push(`Seriación: ${h.materia} va después de ${falta.map((f) => f.name).join(" y ")}, que no tienes aprobada.`);
+    }
+  });
+
+  // Art. 98: materias de a lo más 3 semestres consecutivos, y no adeudar
+  // materias de más de 2 semestres antes del más alto que inscribes.
+  if (state.horario.length) {
+    const sems = state.horario.map((h) => semDeId(h.sid));
+    const lo = Math.min(...sems), hi = Math.max(...sems);
+    if (hi - lo >= 3) {
+      av.push(`Art. 98: tu horario va de ${lo}.º a ${hi}.º semestre; solo se permiten materias de hasta 3 semestres consecutivos.`);
+    }
+    const viejas = [];
+    PLAN.forEach((blk, s) => blk.materias.forEach(([name], i) => {
+      const rec = getSub(idOf(s, i), name);
+      if (rec.status === "reprobada" && s + 1 < hi - 2) viejas.push(`${rec.name} (${s + 1}.º)`);
+    }));
+    if (viejas.length) {
+      av.push(`Art. 98: adeudas ${viejas.join(", ")}, de más de 2 semestres antes del ${hi}.º que inscribes.`);
+    }
+  }
+  return av;
+}
+
+// ¿Cabe una materia más? Pasar de la carga máxima no se permite.
+function cabeEnCarga(sid) {
+  const despues = cargaActual().total + uaDe(sid);
+  if (despues <= CARGA.max) return true;
+  alert(`No cabe: llevarías ${despues} UA y la carga máxima es ${CARGA.max}.`);
+  return false;
+}
+
+// Quitar del horario algo cuya baja no procede: avisa y deja decidir.
+function confirmarBaja(item) {
+  const motivos = [];
+  if (item.tipo === "recurse") motivos.push("la estás recursando, y la baja de un recurse no procede");
+  const quedan = cargaActual().total - uaDe(item.sid);
+  if (quedan > 0 && quedan < CARGA.min) motivos.push(`quedarías con ${quedan} UA, abajo de la carga mínima (${CARGA.min})`);
+  if (!motivos.length) return true;
+  return confirm(`Ojo con ${item.materia}: ${motivos.join("; y ")}.\n\n¿Quitarla de tu horario de todos modos?`);
+}
+
 function renderHorario() {
+  const carga = cargaActual();
   const inscritos = state.horario.reduce((a, h) => a + h.cred, 0);
-  const credBloq = creditosBloqueados();
   const nMaterias = state.horario.length;
-  const maxEfectivo = MAX_CRED - credBloq;
-  const over = inscritos > maxEfectivo;
+  const nivel = carga.total > CARGA.max ? "danger" : carga.total > CARGA.media ? "warn" : "";
 
   // P12: promedios de calidad y dificultad (simples, sin ponderar)
   let sumCal = 0, sumDif = 0, nCal = 0, nDif = 0;
@@ -22,13 +91,13 @@ function renderHorario() {
   const promDif = nDif ? (sumDif / nDif) : null;
 
   credSummaryEl.innerHTML = `
-    <div class="cs-card ${over ? "danger" : ""}">
-      <div class="cs-val">${fmt(inscritos)} <span class="cs-max">/ ${fmt(maxEfectivo)}</span></div>
-      <div class="cs-label">Créditos inscritos${credBloq ? ` <span class="cs-bloq">(${fmt(credBloq)} cr bloq.)</span>` : ""}</div>
+    <div class="cs-card ${nivel}">
+      <div class="cs-val">${carga.total} <span class="cs-max">/ ${CARGA.media} UA</span></div>
+      <div class="cs-label">Carga (media ${CARGA.media}, máx. ${CARGA.max})${carga.soloEts ? ` <span class="cs-bloq">(${carga.soloEts} solo por ETS)</span>` : ""}</div>
     </div>
     <div class="cs-card">
       <div class="cs-val">${nMaterias}</div>
-      <div class="cs-label">Materias inscritas</div>
+      <div class="cs-label">Materias inscritas · ${fmt(inscritos)} cr</div>
     </div>
     <div class="cs-card">
       <div class="cs-val ${promCal != null ? "color-" + metricColor(promCal.toFixed(1), "cal") : ""}">${promCal != null ? promCal.toFixed(1) : "—"}</div>
@@ -39,11 +108,12 @@ function renderHorario() {
       <div class="cs-label">Dificultad promedio</div>
     </div>`;
 
-  if (over) {
-    const warn = document.createElement("div");
-    warn.className = "over-warn";
-    warn.textContent = `⚠️ Llevas ${fmt(inscritos)} créditos inscritos; tu máximo efectivo es ${fmt(maxEfectivo)}${credBloq ? ` (55 − ${fmt(credBloq)} bloqueados)` : ""}. Quita ${fmt(inscritos - maxEfectivo)} créditos.`;
-    credSummaryEl.appendChild(warn);
+  const avisos = avisosDelHorario();
+  if (avisos.length) {
+    const box = document.createElement("div");
+    box.className = "over-warn avisos";
+    box.innerHTML = `<b>⚠️ Avisos</b><ul>${avisos.map((a) => `<li>${esc(a)}</li>`).join("")}</ul>`;
+    credSummaryEl.appendChild(box);
   }
 
   // Rejilla semanal
@@ -99,6 +169,7 @@ function renderHorario() {
 
   horarioListEl.querySelectorAll(".hdel").forEach((btn) => {
     btn.onclick = () => {
+      if (!confirmarBaja(state.horario[parseInt(btn.dataset.idx)])) return;
       state.horario.splice(parseInt(btn.dataset.idx), 1);
       save();
       renderHorario();

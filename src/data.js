@@ -18,7 +18,7 @@ const CARRERA = carreraActiva();
 const PLAN_ACTIVO = PLANES[CARRERA];
 
 // ============================================================
-//  PLAN DE ESTUDIOS (derivado de planes.js según la carrera activa)
+//  PLAN DE ESTUDIOS (derivado de PLANES, api/planes.php, según la carrera activa)
 // ============================================================
 // Forma heredada: [{ sem: "1.er semestre", materias: [[nombre, créditos], ...] }]
 // El ORDEN importa: los ids son s{semestre0}-{índice0} y el avance guardado en
@@ -46,19 +46,22 @@ PLAN.forEach((blk, s) => {
   });
 });
 
-// Puente clave oficial <-> id de posición. La seriación de `planes.js` va por
+// Puente clave oficial <-> id de posición. La seriación de PLANES va por
 // clave (`C203`) y el estado del alumno por id (`s1-2`); esto los une.
 const ID_DE_CLAVE = {};
 const CLAVE_DE_ID = {};
+const UA_DE_ID = {};          // unidades de aprendizaje: 1, o 2 en Trabajo Terminal I y II
 PLAN.forEach((blk, s) => {
   blk.materias.forEach((m, i) => {
     const mat = PLAN_ACTIVO.materias.find((x) => x.sem === s + 1 && x.nom === m[0]);
-    if (!mat) return; // los slots de optativa no tienen clave fija
     const id = "s" + s + "-" + i;
+    UA_DE_ID[id] = (mat && mat.ua) || 1;   // los lugares de optativa valen 1
+    if (!mat) return; // los slots de optativa no tienen clave fija
     ID_DE_CLAVE[mat.clave] = id;
     CLAVE_DE_ID[id] = mat.clave;
   });
 });
+function uaDe(id) { return UA_DE_ID[id] || 1; }
 
 // ============================================================
 //  DIFICULTAD POR MATERIA (promedio real de profes M+V, escala 0–6 → 1–10)
@@ -118,7 +121,9 @@ function difBadge(name) {
 const STATES = { pendiente: "Pendiente", aprobada: "Aprobada", reprobada: "Reprobada" };
 const ORDER = ["aprobada", "reprobada", "pendiente"];
 const TOTAL = PLAN_ACTIVO.creditos;       // ISC 387 · IA 351 · LCD 366
-const MAX_CRED = PLAN_ACTIVO.maxCred;     // 55 en las tres (tope institucional)
+// Carga académica en UA (CLAUDE.md §4.1). El tope de 55 créditos quedó derogado.
+//   hasta la media: sin aviso · entre la media y la máxima: con trámite · más: no
+const CARGA = PLAN_ACTIVO.carga;          // { min: 4, media: 7 (ISC) o 6, max: 9 }
 // ISC conserva su clave original para no perder el avance ya capturado.
 const KEY = CARRERA === "ISC" ? "avanceISC_v2" : "avance_" + CARRERA + "_v1";
 

@@ -1,0 +1,7 @@
+# Ofertas que vienen en el HTML de SAES pero NO se cargan.
+# importador/horarios.php y importador/cupos.php se las saltan, así no
+# regresan aunque vuelvas a correrlos. Para que una regrese, borra su línea
+# y vuelve a correr los importadores.
+#
+# periodo,grupo,materia,motivo
+27/1,6CM5,C611,"Aprendizaje automático sin profesor, cupo 1 y no sale en el PDF de salones: no se abrió (usuario, 2026-11-08)"

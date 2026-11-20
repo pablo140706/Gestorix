@@ -118,15 +118,33 @@ function deriveStatus(calif) {
   return n >= 6 ? "aprobada" : "reprobada";
 }
 
+// Estado de una materia (CLAUDE.md §4.2). `status` es uno de los tres de
+// siempre (pendiente / aprobada / reprobada); el ETS se marca aparte:
+//   porEts  → reprobó el curso pero aprobó el ETS: cuenta como aprobada
+//   soloEts → reprobó el recurse: ya no se puede cursar, solo presentar ETS
 function getSub(id, defName) {
   const r = state.subjects[id] || {};
   const calif = r.calif || "";
+  const calif_ets = r.calif_ets || "";
+  const veces = Number(r.veces || 1);
+  const delCurso = deriveStatus(calif);
+  const porEts = delCurso === "reprobada" && calif_ets !== "" && Number(calif_ets) >= 6;
   return {
     calif,
-    veces: Number(r.veces || 1),
-    status: deriveStatus(calif),
+    calif_ets,
+    veces,
+    status: porEts ? "aprobada" : delCurso,
+    porEts,
+    soloEts: delCurso === "reprobada" && !porEts && veces >= 2,
     name: r.name || defName,
   };
+}
+
+// La calificación que entra al promedio: la aprobatoria (del curso o del
+// ETS). Las reprobadas no entran (decisión del usuario, CLAUDE.md §4.2).
+function califFinal(rec) {
+  if (rec.porEts) return Number(rec.calif_ets);
+  return rec.status === "aprobada" ? Number(rec.calif) : null;
 }
 
 function setSub(id, patch) {
@@ -135,28 +153,37 @@ function setSub(id, patch) {
   save();
 }
 
-// ¿La materia puede inscribirse al horario? No si está aprobada, ni reprobada en 2da vuelta.
+// ¿La materia puede inscribirse al horario? No si está aprobada (por curso o
+// por ETS), ni si ya solo puede ir por ETS (reprobó el recurse).
 function canInscribir(rec) {
   if (rec.status === "aprobada") return false;
-  if (rec.status === "reprobada" && rec.veces >= 2) return false;
+  if (rec.soloEts) return false;
   return true;
 }
 
-function creditosBloqueados() {
-  let total = 0;
+// Las materias que ya solo pueden ir por ETS cuentan en la carga aunque no
+// estén en el horario (decisión del usuario, CLAUDE.md §4.1).
+function materiasSoloEts() {
+  const res = [];
   for (let s = 0; s < PLAN.length; s++) {
-    PLAN[s].materias.forEach(([, cred], i) => {
-      const rec = getSub(idOf(s, i), "");
-      if (rec.status === "reprobada" && rec.veces >= 2) total += cred;
+    PLAN[s].materias.forEach(([name, cred], i) => {
+      const id = idOf(s, i);
+      const rec = getSub(id, name);
+      if (rec.soloEts) res.push({ id, name: rec.name, cred, ua: uaDe(id), sem: s + 1 });
     });
   }
-  return total;
+  return res;
 }
+function creditosBloqueados() { return materiasSoloEts().reduce((a, m) => a + m.cred, 0); }
+function uaBloqueadas() { return materiasSoloEts().reduce((a, m) => a + m.ua, 0); }
 
 // Texto del badge de estado
 function statusBadgeText(rec, inscrita) {
-  if (rec.status === "aprobada") return rec.veces === 2 ? "Aprobada (recurse)" : "Aprobada";
-  if (rec.status === "reprobada") return rec.veces >= 2 ? "🔒 Bloqueada · sin 3.er intento" : "Reprobada";
+  if (rec.status === "aprobada") {
+    if (rec.porEts) return "Aprobada por ETS";
+    return rec.veces === 2 ? "Aprobada (recurse)" : "Aprobada";
+  }
+  if (rec.status === "reprobada") return rec.soloEts ? "🔒 Solo por ETS" : "Reprobada · recurse o ETS";
   // pendiente: si ya está en el horario, mostrar "Inscrita"
   if (inscrita) return rec.veces >= 2 ? "🔁 Inscrita (recurse)" : "Inscrita";
   // pendiente sin inscribir: distingue 1ª vez de recurse en curso (2ª vez sin calif)
@@ -238,26 +265,15 @@ function scheduleFor(s, i) {
   const slot = OPT_SLOTS[id];
   const sched = schedActual();
   if (slot) {
-    // IA y LCD no tienen ramas A/B ni roster: el slot acepta cualquier optativa
-    // de ese semestre que ESCOM haya abierto este periodo.
-    if (CARRERA !== "ISC") {
-      const nombres = new Set(
-        PLAN_ACTIVO.optativas.filter((o) => o.sem === slot.sem).map((o) => norm(o.saes))
-      );
-      const sc = String(slot.sem);
-      return sched.filter((e) => e.grupo.startsWith(sc) && nombres.has(norm(e.materia)));
-    }
-    const profs = new Set(
-      ROSTER.filter((e) => e.m === "OPTATIVA " + slot.label).map((e) => e.t)
+    // El slot acepta cualquier optativa de su semestre que ESCOM haya abierto
+    // este periodo, en las tres carreras. (En ISC antes había un filtro A =
+    // matutino / B = vespertino sacado del roster del Excel; esa división se
+    // abandonó y el roster ya no la trae.)
+    const nombres = new Set(
+      PLAN_ACTIVO.optativas.filter((o) => o.sem === slot.sem).map((o) => norm(o.saes))
     );
-    const semChar = String(slot.sem);
-    return sched.filter((e) => {
-      if (!e.materia.includes("|") || !e.grupo.startsWith(semChar)) return false;
-      // Vespertino no tiene división A/B: mostrar todas las optativas del semestre.
-      // Matutino conserva el filtro A/B exacto por roster.
-      if (turnoDeGrupo(e.grupo) === "V") return true;
-      return profs.has(e.profesor);
-    });
+    const sc = String(slot.sem);
+    return sched.filter((e) => e.grupo.startsWith(sc) && nombres.has(norm(e.materia)));
   }
   const def = PLAN[s].materias[i][0];
   const k = norm(def);

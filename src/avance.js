@@ -81,7 +81,10 @@ PLAN.forEach((blk, s) => {
           </select>
           <input class="calif" type="number" min="0" max="10" step="1" placeholder="Cal"
                  value="${esc(rec.calif)}" aria-label="Calificación de ${esc(name)}">
-          <span class="status-badge" data-st="${rec.status}" data-blocked="${rec.status === "reprobada" && rec.veces >= 2 ? "1" : "0"}" data-recurse="${esEnRecurse(rec) ? "1" : "0"}" data-inscrita="${rec.status === "pendiente" && estaInscrita(id) ? "1" : "0"}">${statusBadgeText(rec, estaInscrita(id))}</span>
+          <input class="calif ets" type="number" min="0" max="10" step="1" placeholder="ETS"
+                 value="${esc(rec.calif_ets)}" aria-label="Calificación del ETS de ${esc(name)}"
+                 title="Calificación del ETS (examen a título de suficiencia)">
+          <span class="status-badge" data-st="${rec.status}" data-blocked="${rec.soloEts ? "1" : "0"}" data-recurse="${esEnRecurse(rec) ? "1" : "0"}" data-inscrita="${rec.status === "pendiente" && estaInscrita(id) ? "1" : "0"}">${statusBadgeText(rec, estaInscrita(id))}</span>
           <button class="profsBtn" type="button">Maestros <span class="caret">▾</span></button>
         </div>
       </div>
@@ -89,6 +92,7 @@ PLAN.forEach((blk, s) => {
 
     const vecesSel = subj.querySelector("select.veces");
     const calif = subj.querySelector(".calif");
+    const ets = subj.querySelector(".ets");
     const badge = subj.querySelector(".status-badge");
     const profsBtn = subj.querySelector(".profsBtn");
     const drop = subj.querySelector(".drop");
@@ -96,13 +100,13 @@ PLAN.forEach((blk, s) => {
     vecesSel.value = String(rec.veces);
     applyRowMode(subj, rec);
 
-    vecesSel.onchange = () => {
-      const newVeces = Number(vecesSel.value);
-      setSub(id, { veces: newVeces });
-      rec.veces = newVeces;
-      rec.status = deriveStatus(rec.calif);
+    // Después de cualquier cambio: recalcular el estado, y si la materia ya
+    // no se puede inscribir (aprobada, o solo por ETS) sacarla del horario.
+    const tras = () => {
+      Object.assign(rec, getSub(id, name));
+      calif.value = rec.calif;
+      ets.value = rec.calif_ets;
       applyRowMode(subj, rec);
-      // Si quedó bloqueada (reprobada + veces=2), quitar del horario
       if (!canInscribir(rec)) {
         const antes = state.horario.length;
         state.horario = state.horario.filter((h) => h.sid !== id);
@@ -112,43 +116,41 @@ PLAN.forEach((blk, s) => {
       render();
     };
 
-    calif.onchange = () => {
-      const raw = calif.value.trim();
-      if (raw === "") {
-        calif.value = "";
-        setSub(id, { calif: "" });
-        rec.calif = ""; rec.status = "pendiente";
-        applyRowMode(subj, rec);
-        render();
-        return;
-      }
+    // Entero de 0 a 10, o "" (vacío). null = no es válido.
+    const leerCalif = (input, anterior) => {
+      const raw = input.value.trim();
+      if (raw === "") return "";
       const n = Number(raw);
-      if (!Number.isFinite(n) || !Number.isInteger(n) || n < 0 || n > 10) {
-        alert("Error: la calificación debe ser un entero del 0 al 10.");
-        calif.value = rec.calif;
-        return;
+      if (!Number.isInteger(n) || n < 0 || n > 10) {
+        alert("La calificación debe ser un entero del 0 al 10.");
+        input.value = anterior;
+        return null;
       }
-      const v = String(n);
-      calif.value = v;
-      setSub(id, { calif: v });
-      rec.calif = v;
-      rec.status = deriveStatus(v);
-      applyRowMode(subj, rec);
-      // P1: al quedar aprobada → quitar del horario
-      if (rec.status === "aprobada") {
-        const antes = state.horario.length;
-        state.horario = state.horario.filter((h) => h.sid !== id);
-        if (state.horario.length !== antes) save();
-        drop.classList.remove("open");
-      }
-      // Si reprobada + veces=2 → bloqueada, quitar del horario
-      if (!canInscribir(rec)) {
-        const antes = state.horario.length;
-        state.horario = state.horario.filter((h) => h.sid !== id);
-        if (state.horario.length !== antes) save();
-        drop.classList.remove("open");
-      }
-      render();
+      return String(n);
+    };
+
+    // Cambiar de 1.ª a 2.ª vez (o al revés) es otro curso: el ETS que se
+    // haya presentado era del curso anterior y se borra.
+    vecesSel.onchange = () => {
+      setSub(id, { veces: Number(vecesSel.value), calif_ets: "" });
+      tras();
+    };
+
+    calif.onchange = () => {
+      const v = leerCalif(calif, rec.calif);
+      if (v === null) return;
+      // Solo hay ETS si reprobaste el curso.
+      const patch = { calif: v };
+      if (v === "" || Number(v) >= 6) patch.calif_ets = "";
+      setSub(id, patch);
+      tras();
+    };
+
+    ets.onchange = () => {
+      const v = leerCalif(ets, rec.calif_ets);
+      if (v === null) return;
+      setSub(id, { calif_ets: v });
+      tras();
     };
 
     profsBtn.onclick = () => {
@@ -175,9 +177,11 @@ function applyRowMode(subj, rec) {
   const inscrita = rec.status === "pendiente" && estaInscrita(id);
   const profsBtn = subj.querySelector(".profsBtn");
   const badge = subj.querySelector(".status-badge");
-  const isBlocked = rec.status === "reprobada" && rec.veces >= 2;
   badge.dataset.st = rec.status;
-  badge.dataset.blocked = isBlocked ? "1" : "0";
+  badge.dataset.blocked = rec.soloEts ? "1" : "0";
+  // El campo de ETS solo aparece si reprobaste el curso (ordinario o recurse).
+  const ets = subj.querySelector(".ets");
+  if (ets) ets.hidden = !(rec.calif !== "" && Number(rec.calif) < 6);
   badge.dataset.recurse = esEnRecurse(rec) ? "1" : "0";
   badge.dataset.inscrita = inscrita ? "1" : "0";
   badge.textContent = statusBadgeText(rec, inscrita);
@@ -247,35 +251,45 @@ function renderDrop(drop, s, i) {
         (h) => h.sid === id && h.maestro === entry.profesor && (h.grupo || "") === entry.grupo
       );
 
-      // Si es optativa y se está agregando, fija el nombre con la rama
+      // Si es optativa y se está agregando, el lugar queda con esa optativa:
+      // su nombre (con la rama en ISC) y su clave, que es lo que se guarda
+      // en la cuenta.
       if (isOpt && adding) {
-        // ISC guarda "RAMA|NOMBRE EN INGLÉS": nos quedamos con la rama.
-        // IA y LCD no tienen ramas, así que el nombre de la materia es el que va.
-        const rama = entry.materia.includes("|")
-          ? entry.materia.split("|")[0].trim()
-          : entry.materia.trim();
-        if (rama) {
-          setSub(id, { name: "Optativa " + OPT_SLOTS[id].label + " · " + titleCase(rama) });
-          const nameEl = drop.closest(".subject").querySelector(".name");
-          nameEl.innerHTML = esc(getSub(id, "").name) + `<span class="opttag">${OPT_SLOTS[id].label}</span>`;
-        }
+        setSub(id, { name: nombreDeSlot(id, entry.materia), clave: entry.clave });
+        const nameEl = drop.closest(".subject").querySelector(".name");
+        nameEl.innerHTML = esc(getSub(id, "").name) + `<span class="opttag">${OPT_SLOTS[id].label}</span>`;
       }
 
-      const subRec = getSub(id, "");
-      toggleHorario({
-        sid: id,
-        materia: subjectName(s, i),
-        matReal: entry.materia,   // materia del schedule (con rama) para cruzar cupos
-        maestro: entry.profesor,
-        grupo: entry.grupo,
-        edificio: entry.edificio,
-        salon: entry.salon,
-        sesiones: entry.sesiones,
-        cred: cred,
-        tipo: subRec.veces >= 2 || subRec.status === "reprobada" ? "recurse" : "nueva",
-      }, btn);
+      toggleHorario(armarItemHorario(entry, s, i), btn);
     };
   });
+}
+
+// Nombre de un lugar de optativa ya elegido: "Optativa A1 · Minería De Datos".
+// ISC escribe "RAMA|NOMBRE EN INGLÉS" y nos quedamos con la rama; IA y LCD
+// no tienen ramas, así que va el nombre de la materia.
+function nombreDeSlot(id, materiaSaes) {
+  const rama = materiaSaes.includes("|") ? materiaSaes.split("|")[0].trim() : materiaSaes.trim();
+  return "Optativa " + OPT_SLOTS[id].label + " · " + titleCase(rama);
+}
+
+// Una oferta de SCHEDULE convertida en renglón del horario del alumno.
+// También la usa cuenta.js para rearmar el horario guardado en la cuenta.
+function armarItemHorario(entry, s, i) {
+  const subRec = getSub(idOf(s, i), "");
+  return {
+    sid: idOf(s, i),
+    oferta: entry.id,         // id de la oferta en la base: es lo que guarda la cuenta
+    materia: subjectName(s, i),
+    matReal: entry.materia,   // materia del schedule (con rama) para cruzar cupos
+    maestro: entry.profesor,
+    grupo: entry.grupo,
+    edificio: entry.edificio,
+    salon: entry.salon,
+    sesiones: entry.sesiones,
+    cred: PLAN[s].materias[i][1],
+    tipo: subRec.veces >= 2 || subRec.status === "reprobada" ? "recurse" : "nueva",
+  };
 }
 
 function miniMetrics(m) {
@@ -297,6 +311,7 @@ function toggleHorario(item, btn) {
       (h.grupo || "") === (item.grupo || "")
   );
   if (idx >= 0) {
+    if (!confirmarBaja(state.horario[idx])) return;
     state.horario.splice(idx, 1);
     if (btn) { btn.classList.remove("added"); btn.textContent = "+ Horario"; }
   } else {
@@ -306,8 +321,14 @@ function toggleHorario(item, btn) {
       alert(`Ya tienes "${dup.materia}" en tu horario (con ${dup.maestro}, ${dup.grupo}). Solo puedes inscribir una vez la misma materia.`);
       return;
     }
+    if (!cabeEnCarga(item.sid)) return;          // más de la carga máxima no se permite
     state.horario.push(item);
     if (btn) { btn.classList.add("added"); btn.textContent = "✓ En horario"; }
+    // Seriación: solo avisa (CLAUDE.md §4.4).
+    const falta = prereqsFaltantesDe(item.sid);
+    if (falta.length) {
+      alert(`Aviso de seriación: ${item.materia} va después de ${falta.map((f) => f.name).join(" y ")}, que no tienes aprobada. Se agregó a tu horario de todos modos.`);
+    }
   }
   save();
   // Refrescar el badge de la materia en la pestaña Mi avance (Pendiente ⇄ Inscrita)
@@ -334,9 +355,9 @@ function render() {
       const rec = getSub(id, name);
       counts[rec.status]++; counts.todas++;
       if (rec.status === "aprobada") { creditosOk += cred; semOk++; }
-      if ((rec.status === "aprobada" || rec.status === "reprobada") && rec.calif !== "") {
-        sumCalif += parseFloat(rec.calif); nCalif++;
-      }
+      // Promedio: solo la calificación con que se aprobó (curso o ETS).
+      const fin = califFinal(rec);
+      if (fin !== null) { sumCalif += fin; nCalif++; }
     });
     sec.querySelector(".semOk").textContent = semOk;
     sec.querySelector(".semFill").style.width = (semOk / blk.materias.length) * 100 + "%";

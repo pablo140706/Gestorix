@@ -10,7 +10,7 @@
 // tiene por qué ir en un enlace que vas a pegar en un chat.
 //
 // De cada materia se guardan cuatro cosas (id, grupo, maestro, materia real) y
-// el resto —días, horas, salón, créditos— se vuelve a sacar de schedule.js al
+// el resto —días, horas, salón, créditos— se vuelve a sacar de SCHEDULE (api/horarios.php) al
 // abrirlo. Así el enlace es corto y, si ESCOM cambia un salón, el enlace
 // muestra el salón nuevo.
 
@@ -68,7 +68,7 @@ function rehidratar(filas) {
     const cred = p && PLAN[+p[1]] && PLAN[+p[1]].materias[+p[2]]
       ? PLAN[+p[1]].materias[+p[2]][1] : 0;
     items.push({
-      sid, materia: p ? subjectName(+p[1], +p[2]) : titleCase(o.materia),
+      sid, oferta: o.id, materia: p ? subjectName(+p[1], +p[2]) : titleCase(o.materia),
       matReal: o.materia, maestro: o.profesor, grupo: o.grupo,
       edificio: o.edificio, salon: o.salon, sesiones: o.sesiones,
       cred, tipo: "nueva",

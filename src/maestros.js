@@ -250,7 +250,7 @@ let currentProfDetail = null; // maestro cuyo detalle está abierto (para repint
 
 function ofertasDeMaestro(name) {
   // Siempre las tres carreras: un maestro da donde da, y su horario real es el
-  // conjunto. Cruce por norm() porque schedule.js guarda los nombres sin acentos
+  // conjunto. Cruce por norm() porque los nombres pueden venir con o sin acentos
   // y aquí llegan con ellos (HURTADO AVILÉS vs HURTADO AVILES).
   const sched = typeof SCHEDULE !== "undefined" ? SCHEDULE : [];
   const nn = norm(name);
@@ -360,7 +360,7 @@ function showProfDetail(name) {
         <div class="pd-sub">
           <span class="pd-turno">${turnoLabel}</span>
           ${link ? `· <a href="${esc(link)}" target="_blank" rel="noopener" class="pd-link">🔗 Fuente</a>` : ""}
-          ${man ? `<span class="pd-tag manual" title="Calificaciones del CSV manual">manual</span>` : `<span class="pd-tag oficial" title="Calificaciones de metrics.js">oficial</span>`}
+          ${man ? `<span class="pd-tag manual" title="Calificaciones de MisProfesores, con link a su ficha">manual</span>` : `<span class="pd-tag oficial" title="Calificaciones de MisProfesores">oficial</span>`}
         </div>
       </div>
     </div>

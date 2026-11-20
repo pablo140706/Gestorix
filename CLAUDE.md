@@ -64,8 +64,14 @@ gestorix/
 ├── data/isc|ia|lcd/         HTML pegado de SAES
 ├── src/                     lo que sirve Apache
 │   ├── index.html, *.js, styles.css     front vanilla de iscweb
+│   ├── arranque.js                      pide los datos a la API y luego carga los módulos
 │   ├── api/*.php                        endpoints que regresan JSON
+│   ├── api/cuenta/*.php                 registro, verificar, entrar, salir, yo, alias, olvide, recuperar, borrar
+│   ├── api/mis-datos.php                avance y horario del usuario con sesión
+│   ├── cuenta.js                        ventana de la cuenta y sincronización con la base
 │   ├── lib/db.php                       una sola conexión PDO, con getenv
+│   ├── lib/api.php                      lo común de los endpoints
+│   ├── lib/sesion.php, cuenta.php, correo.php   sesión, CSRF, tokens, alias, envío de correo
 │   └── materias/<clave>.pdf             planes sintéticos
 ├── docs/                    fases, decisiones, aviso de privacidad
 ├── screenshots/
@@ -73,7 +79,44 @@ gestorix/
 ```
 
 - **PHP sin framework, sin Composer** salvo que el envío de correos lo exija. Front **vanilla JS**, sin bundler.
+
+**Cómo lee datos el front (Fase 2, 2026-11-08):**
+- Cada endpoint reemplaza un `.js` de datos de iscweb y regresa **la misma forma**, en la misma variable global: `planes`→`PLANES`, `horarios`→`SCHEDULE`, `roster`→`ROSTER`, `metricas`→`TEACHER_METRICS`, `calendario`→`CALENDARIO`, `optativas`→`ESPECIALIZACIONES` (estos 6 los pide `arranque.js` antes de cargar los módulos) y `cupos`→`CUPOS`+`CUPOS_HIST`, `links`→`MANUAL_LINKS`, `historial`→`HISTORIAL` (estos 3 los pide `lazy.js` cuando hacen falta).
+- **Periodo vigente** = el más reciente con ofertas (`max(periodo)`). El historial y los cupos viejos usan llaves `"2026/2"`/`"2027/1"`, porque `maestros.js` las tiene escritas así: `periodoLargo()` en `lib/api.php`.
+- `materia` en horarios, historial y cupos es `nombre_saes`: así cruza el front plan, ofertas y cupos (con `norm()`). Cada oferta trae también su `clave`.
+- `planes` solo manda optativas con `se_ofrece`, y trae `ua` por materia y `carga: {min, media, max}` por carrera (en el front, `CARGA` y `uaDe(id)`). `slots` (A1/B1/A2/B2 en ISC, A/B/C/D en IA y LCD) siguen fijos en `api/planes.php`. El viejo `maxCred: 55` ya no existe.
+- `roster` ya no es el Excel: son los profes de periodos pasados **sin** oferta en el vigente, con sus materias y sin grupos. Sirve para que salgan en la lista de Maestros.
+- El filtro A/B de optativas de ISC se quitó de `core.js` (`scheduleFor`).
+- `arranque.js` carga los módulos después del evento `load`, por eso `init.js` registra el *service worker* aunque `load` ya haya pasado.
+
+**Cuentas y sincronización (Fase 3, 2026-11-08):**
+- En el navegador el avance va por **posición** (`state.subjects["s0-0"]`) y en la base por **clave**. `cuenta.js` traduce con `ID_DE_CLAVE`/`CLAVE_DE_ID` (`estadoAFilas`, `aplicarDatos`). Los lugares de optativa guardan `clave` y `name`; cada renglón del horario guarda `oferta` (el id) y se arma con `armarItemHorario()` (`avance.js`).
+- `cuenta.js` envuelve `save()`: con sesión, cada guardado local programa una subida a `mis-datos.php` (POST con todo el estado). Al cerrar la pestaña, `sendBeacon`.
+- El plan se dibuja una sola vez al cargar. Si la cuenta trae datos distintos a los del navegador, se guardan y se **recarga una vez**; `firmaDelEstado()` evita el ciclo.
+- No se entra sin activar la cuenta. Al **salir** se borra la llave de `localStorage` de esa carrera. El *service worker* no guarda en caché `api/cuenta/*` ni `api/mis-datos.php`.
+- Estados con ETS en `getSub()`: `status` sigue siendo pendiente/aprobada/reprobada, más `porEts` y `soloEts`. `califFinal()` alimenta el promedio.
+- Carga en UA: `cargaActual()`, `cabeEnCarga()` (no deja pasar de la máxima), `avisosDelHorario()` y `confirmarBaja()` en `horario.js`. El automático llena hasta la **media**.
+- **Art. 98 como lo interpreta la app** (falta confirmarlo): avisa si el horario abarca más de 3 semestres seguidos, o si adeudas materias de más de 2 semestres antes del más alto que inscribes.
+- Apache manda `Cache-Control: no-cache` para todo `src/` (`Dockerfile`): el navegador revalida (304) y nadie se queda con archivos viejos.
 - **El importador corre dentro de Docker:** `docker compose run --rm web php importador/…`.
+
+**Comandos (Fase 1, 2026-11-08):**
+
+| Para | Comando |
+|---|---|
+| Levantar todo | `docker compose up -d` → app en `localhost:8080`, pgAdmin en `localhost:5050` |
+| 1. Cargar horarios de SAES | `docker compose run --rm web php importador/horarios.php 27/1` (repetible: no duplica ni pisa lo corregido en pgAdmin) |
+| 2. Cargar cupos de SAES | `docker compose run --rm web php importador/cupos.php 27/1` (aquí SAES **sí pisa**: deja la tabla `cupo` igual que el HTML) |
+| 3. Corregir salones con el PDF oficial | En Git Bash: `pdftotext -table -enc UTF-8 data/salones/27-1.pdf data/salones/27-1.txt` y luego `docker compose run --rm web php importador/salones.php 27/1` |
+| Apagar | `docker compose down` (la base se queda en el volumen `gestorix_pgdata`) |
+| Volver a sembrar desde cero | `docker compose down -v` y luego `up -d` + importador. **Borra la base**: solo si no hay nada que conservar |
+
+- `sql/` se monta entero en `/docker-entrypoint-initdb.d/` y **solo corre cuando el volumen está vacío**. Si un `.sql` truena, el volumen queda a medias: hay que borrarlo (`down -v`) y volver a levantar.
+- `sql/02`–`07` los generó **una vez** `importador/iscweb/convertir.php` desde iscweb `2419470`. No se vuelve a correr: las correcciones van en pgAdmin o en `migraciones/`.
+- `sql/08-ofertas-extra.sql`: las 5 ofertas de 27/1 que no vienen en SAES y el usuario conservó.
+- **Mientras no haya base en producción** (Fase 6), los cambios de esquema van directo en `sql/00-tablas.sql` y se aplican a mano a la base local. `migraciones/` empieza cuando la base publicada tenga datos de usuarios.
+- `pdftotext` (xpdf 4.06) viene con MSYS2 UCRT64, no con el contenedor; por eso el texto del PDF se saca en la PC y se guarda junto al PDF.
+- En el contenedor `web`: `/var/www/html` = `src/`, `/var/www/importador` y `/var/www/data` de solo lectura. La app entra con `APP_DB_USER` (variables `DB_*`); pgAdmin, con el administrador (`POSTGRES_USER`).
 - **pgAdmin** es donde el usuario corrige los datos.
 - El prototipo en Node de la Fase 1 queda en el zip del usuario como referencia (§9); no entra al repo.
 
@@ -103,10 +146,10 @@ gestorix/
 | `nombres.csv` | Nombre legible con acentos y **orden** de cada materia dentro de su semestre |
 | `AESTR_*.csv` → `metrics.js` | Métricas de MisProfesores (202 profes), ya corregidas |
 | `maestros_manual.csv` | 205 links a MisProfesores |
-| `historial.js` | Historial de 26/2 y 27/1 (solo ISC) |
+| `historial.js` | Historial de 26/2 (solo ISC). Su 27/1 (350 filas, versión vieja) **no se carga**: lo reemplaza SAES (usuario, 2026-11-08) |
 | `planes.js` (seriación) | ISC: 21 pares oficiales. IA y LCD: 12 + 11 pares aprobados por el usuario |
 
-5. Lo que no existe todavía se muestra **como faltante**, sin inventarlo: historial de IA y LCD, métricas de 73 profes, links de 65 y cédulas.
+5. Lo que no existe todavía se muestra **como faltante**, sin inventarlo: historial de IA y LCD, métricas de 72 profes, links de 69 (contados en la base sobre los 260 con clase en 27/1) y cédulas.
 
 ---
 
@@ -126,7 +169,7 @@ gestorix/
 - **En la app:** hasta la media, sin aviso. Entre la media y 9, se permite con un aviso de que requiere trámite ante la Unidad Académica. Más de 9 no se permite.
 - **No se modela la situación escolar** (adeudos, desfase, dictamen, baja temporal): solo la carga media.
 - **TT I y TT II valen 2 UA cada una.** Las demás, 1.
-- **Las UA adeudadas cuentan** en la carga.
+- **Las UA adeudadas cuentan** en la carga. **Cuáles** (usuario, 2026-11-08): las que ya **solo pueden ir por ETS** (reprobadas en recurse) ocupan carga aunque no estén en el horario, como hacía iscweb con los créditos bloqueados. Las reprobadas en 1.ª vez solo cuentan si se meten al horario.
 - La app **avisa** (no bloquea) en dos casos: el Art. 98 (no cursar materias de más de 3 periodos consecutivos, ni adeudar de más de 2 periodos previos) y las bajas que no proceden (si recursas la materia, o si quedas bajo la mínima).
 - Los créditos se muestran como dato informativo.
 
@@ -136,7 +179,7 @@ gestorix/
 - **El ETS no cuenta como curso.** Flujo:
   - Reprobaste el **ordinario** → puedes recursar **o** presentar ETS.
   - Reprobaste el **recurse** → el ETS es **obligatorio**: ya no se puede volver a cursar.
-- **Aprobar por ETS cuenta como aprobada y entra al promedio.**
+- **Aprobar por ETS cuenta como aprobada y entra al promedio.** El promedio general es **solo de aprobadas** (usuario, 2026-11-08): la calificación con que se aprobó cada materia (ordinario, recurse o ETS). Las reprobadas no lo bajan. Es `calif_final` de la vista `avance_status`.
 - La calificación es un **entero de 0 a 10**. Aprobada con ≥ 6.
 - Status derivado:
 
@@ -176,10 +219,13 @@ gestorix/
 
 ### 4.5 Grupos, cupos y horario
 
-- Código `[1-8][ABC][MVX][1-9]`. `C` = ISC, `B` = IA, `A` = LCD. Número ≥ 6 = recurse.
-- **Trabajo Terminal** va en grupos `X`, sin horario fijo: ISC `7CX1` (TT I) y `8CX1` (TT II), IA `7BX1`/`8BX1`, LCD `7AX1`/`8AX1`. En TT, `grupo + materia` no es llave única (varios asesores).
-- **Cupo: 40 de 2.º semestre en adelante** (36 regulares + 4 de sobrecupo); **36 en 1.er semestre**. El usuario mandará los cupos actualizados de las 3 carreras.
-- **Profesor sin asignar:** se guarda **sin profesor** (`NULL`) y el usuario lo corrige a mano. Caso actual: `6CM5`.
+- Código `[1-8][ABC][MVX][1-9][0-9]?`: el número **puede tener dos dígitos** (en 26/2 existió `1CM10`). `C` = ISC, `B` = IA, `A` = LCD. Número ≥ 6 = recurse.
+- **Trabajo Terminal** va en grupos `X`, sin horario fijo: ISC `7CX1` (TT I) y `8CX1` (TT II), IA `7BX1`/`8BX1`, LCD `7AX1`/`8AX1`. En TT, `grupo + materia` no es llave única (varios asesores). **Pero el HTML de SAES de 27/1 no trae grupos X**: TT I de ISC viene en `7CM1`/`7CM2` (de las 5 extra) y TT II de IA en `8BM1`/`8BM2`.
+- **Cupo: 40 de 2.º semestre en adelante** (36 regulares + 4 de sobrecupo); **36 en 1.er semestre**. Los cupos de SAES (27/1, cargados el 2026-11-08) lo confirman: 159 de 664 tienen más inscritos que cupo, como mucho +4.
+- **El cupo es de grupo + materia, no de cada oferta** (en TT varios asesores comparten un cupo): vive en su propia tabla `cupo` (decisión del usuario, 2026-11-08). Los cupos de SAES sí traen grupos X de TT (`7CX1`, `7CX2`, `8CX2`, `7BX1`, `8BX1`, `7AX1`, `8AX1`) con cupo 250/255 = sin límite, aunque no tengan horario ni oferta.
+- **Salones: manda el PDF oficial** "Distribución de salones" de ESCOM (`data/salones/27-1.pdf`) sobre el HTML de SAES (usuario, 2026-11-08). Formato `1206` = edificio 1, salón 206; `SA` = sin asignar. Llenó 128 salones vacíos y corrigió 20. **El laboratorio que trae el PDF no se guarda.**
+- **Profesor sin asignar:** se guarda **sin profesor** (`NULL`) y el usuario lo corrige a mano. Hoy no hay ninguno: el único (`6CM5` C611, Aprendizaje automático) se quitó porque no se abrió (sin profe, cupo 1, no sale en el PDF).
+- **Ofertas que no se cargan:** `data/excluir.csv` (periodo, grupo, materia, motivo). `horarios.php` y `cupos.php` se las saltan aunque vengan en SAES.
 - Rejilla: 9 bloques de 1:30, de 07:00 a 21:30, con recesos de 10:00–10:30 y 18:00–18:30, de lunes a sábado.
 - Periodo 27/1: clases del **24 de agosto al 18 de diciembre de 2026**.
 
@@ -195,8 +241,8 @@ gestorix/
 - **La dificultad no es de 0 a 6**, como suponía iscweb: MisProfesores muestra valores reales de 6.4 (JURADO JIMÉNEZ) y 6.1 (JUÁREZ LEÓN), confirmados por el usuario. El `CHECK` va de **0 a 10**. Los colores de iscweb siguen igual (≥ 5 es rojo fuerte).
 - Las métricas son **globales por profesor**, no por carrera.
 - **Cédula:** la busca el usuario en el Registro Nacional de Profesionistas (SEP) y la captura en pgAdmin.
-- Cifras confirmadas: **665 ofertas, 276 maestros.** El prototipo cargó 275; el que falta se revisa con la versión de la PC.
-- **Correcciones de captura** que se aplican al cargar: BARRALES recomiendan 1.4 → 14; TELLEZ BARRERA rec/dif invertidos; LUNA BENOSO dificultad 44 → 4.4; MÁRQUEZ ARREGUÍN 33 → 3.3; OLALDE MOGOLLÁN calidad 83 → 8.3; **LEVARIO MEDINA dificultad 6.4 → 3.5** (confirmado en MisProfesores por el usuario).
+- **Cifras en la base (2026-11-08):** 27/1 tiene **664 ofertas** (659 del HTML de SAES + 5 extra; se quitó `6CM5` C611), 2,021 sesiones, 663 cupos y **260 profes con clase**. La tabla `profesor` tiene **274** (los 260 + 14 que solo dieron clase en 26/2), sin duplicados. El "276 maestros" del prototipo no cuadra con ningún conteo consistente; manda el de la base.
+- **Correcciones de captura** que se aplican al cargar: BARRALES recomiendan 1.4 → 14; TELLEZ BARRERA rec/dif invertidos; LUNA BENOSO dificultad 44 → 4.4; MÁRQUEZ ARREGUÍN 33 → 3.3; OLALDE MOGOLLÁN calidad 83 → 8.3; **LEVARIO MEDINA dificultad 6.4 → 3.5** (confirmado en MisProfesores por el usuario). Su calidad 6.1 y recomiendan 47 % coinciden con los de JURADO JIMÉNEZ, pero el usuario confirmó que son correctos.
 - Los nombres se cruzan siempre normalizados (sin acentos) y se muestra el acentuado.
 
 ### 4.7 Materias
@@ -218,6 +264,9 @@ gestorix/
 - Roles: alumno · moderador · admin. **El admin es el usuario, y él nombra a los moderadores.**
 - Contraseñas con `password_hash`. Sesión con una cookie. Sin cookies de rastreo.
 - Nadie más usa iscweb, así que **no hace falta importar avance** del navegador.
+- **Al crear cuenta o iniciar sesión** (usuario, 2026-11-08): si la cuenta está vacía, se sube lo que ese navegador tenía capturado (avance y horario); si la cuenta ya tiene datos, manda la cuenta.
+- **Borrar la cuenta** (`api/cuenta/borrar.php`, 2026-11-08): pide la contraseña otra vez. Las llaves foráneas hacen el resto: `CASCADE` en avance, horario, recordatorio y token; `SET NULL` en comentario (queda "usuario eliminado"), reporte y bitácora. El único admin no puede borrarse.
+- **Correos mientras no haya servicio** (usuario, 2026-11-08): no se manda nada; el texto y el enlace salen en `docker compose logs web`. Cuando se elija Brevo o Gmail, solo se llena el `.env`.
 - Aviso de privacidad y reglas para comentar: `docs/aviso-de-privacidad.md` (borrador). El **correo de contacto** será uno que el usuario ya tiene; él lo escribe (no va en esta memoria). Faltan el nombre del responsable (por defecto, "Gestorix, proyecto escolar") y los proveedores de hosting y de correo.
 - **Ese mismo correo** sirve como remitente de los correos de verificación y recuperación. Su contraseña de aplicación o su clave SMTP van **solo en `.env`**, nunca en el repo.
 
@@ -250,25 +299,26 @@ grupo mal escrito y dos ofertas "sin profesor" iguales). Ese archivo manda; esto
 
 **Decisiones del usuario al cerrarlo (2026-11-08):**
 - Optativas de IA/LCD: se guardan **las dos claves** (6.º y 7.º); la que no marca el PDF lleva `se_ofrece = false`.
-- **Cupo: se guarda tal cual viene de SAES.** El sobrecupo (+4 de 2.º en adelante) lo suma la app.
+- **Cupo: se guarda tal cual viene de SAES.** El sobrecupo (+4 de 2.º en adelante) lo suma la app. Desde el 2026-11-08 va en su **propia tabla `cupo`** (periodo, grupo, materia), no en `oferta`.
 - Comentario propio: **recomienda sí/no** (la ficha muestra el % de "sí"); **calidad y dificultad, enteros 0–10**.
 - Al borrar una cuenta, **sus comentarios se quedan como "usuario eliminado"**.
 
 ```
 carrera          codigo PK (ISC/IA/LCD) · letra · nombre · plan · carga_min_ua · carga_media_ua · carga_max_ua
-materia          clave PK · carrera · nombre · nombre_saes · tipo · semestre · creditos · ua · horas_t
+materia          clave PK · carrera · nombre · nombre_saes · nombre_en · tipo · semestre · creditos · ua · horas_t
                  · horas_p · orden · se_ofrece · descripcion · pdf       UNIQUE (carrera, semestre, nombre_saes)
 seriacion        materia · requisito · oficial                       PK (materia, requisito)
-ruta_optativa    id · carrera · nombre
+ruta_optativa    id · carrera · nombre · icono
 ruta_materia     ruta · materia
 periodo          codigo PK (27/1) · inicio · fin
 evento_calendario id · periodo (NULL = fuera de periodo) · inicio · fin (NULL = un día) · tipo
 profesor         id · nombre · nombre_norm UNIQUE · cedula · titulo_profesional · mp_link · mp_calidad
                  · mp_recomiendan · mp_dificultad (0–10)
 oferta           id · periodo · grupo · materia · profesor (NULL) · turno (calculado del grupo) · edificio
-                 · salon · cupo · inscritos          UNIQUE NULLS NOT DISTINCT (periodo, grupo, materia, profesor)
+                 · salon                             UNIQUE NULLS NOT DISTINCT (periodo, grupo, materia, profesor)
 bloque           numero PK (1–9) · inicio · fin      (sembrado en el mismo archivo)
 sesion           oferta · dia (1–6) · bloque         PK (oferta, dia, bloque)
+cupo             periodo · grupo · materia · cupo · inscritos   PK (periodo, grupo, materia); se cruza con oferta
 usuario          id · correo UNIQUE (minúsculas) · hash · verificado · alias (único sin importar
                  mayúsculas) · rol · carrera · creado · suspendido_hasta · baneado
 token            hash PK (sha256) · usuario · tipo · expira          (se borra al usarlo)
@@ -299,6 +349,10 @@ vista avance_status   status (pendiente / en recurse / aprobada / reprobada / so
 | `bitacora.objetivo` → `objetivo_usuario` + `objetivo_comentario` | Dos llaves foráneas reales en vez de un texto |
 | Sin tabla de sesiones de login | Se usa la sesión normal de PHP |
 | Rol de mínimo privilegio | Va en la Fase 1, con un `.sh` de initdb que lee la contraseña del `.env` |
+| `oferta.cupo` e `inscritos` → tabla `cupo` (2026-11-08) | El cupo de SAES es de grupo + materia: en TT lo comparten varios asesores y los grupos X tienen cupo sin oferta |
+| `oferta.grupo` acepta 2 dígitos (2026-11-08) | En 26/2 existió `1CM10` |
+| Nuevos `materia.nombre_en` y `ruta_optativa.icono` (2026-11-08) | El front de optativas de ISC los muestra; SAES escribe mal el inglés ("COMPUTTING") y no trae íconos. Salen de `optativas.js` |
+| Nuevo `sql/09-cupos-26-2.sql` (2026-11-08) | La ficha del maestro muestra los inscritos de 26/2 |
 
 ---
 

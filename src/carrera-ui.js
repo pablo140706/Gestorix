@@ -1,7 +1,7 @@
 // ============================================================
 //  SELECTOR DE CARRERA
 // ============================================================
-// Cambiar de carrera recarga la página: PLAN, OPT_SLOTS, TOTAL, MAX_CRED y KEY
+// Cambiar de carrera recarga la página: PLAN, OPT_SLOTS, TOTAL, CARGA y KEY
 // se derivan de la carrera activa al cargar data.js, así que no se pueden
 // recalcular en caliente sin repintar todo. Recargar es más barato y más seguro.
 //

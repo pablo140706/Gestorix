@@ -40,8 +40,8 @@
         <h1 class="pt-h1">Tu carrera completa,<br>en una sola página.</h1>
         <p class="pt-lead">
           El plan de estudios, quién da cada materia y qué tal califica, cuántos lugares
-          quedan en cada grupo y un horario que se arma solo sin choques. Todo vive en tu
-          navegador: no hay cuenta, no hay servidor, no se sube nada.
+          quedan en cada grupo y un horario que se arma solo sin choques. Úsala sin cuenta
+          (todo se queda en tu navegador) o crea una para guardar tu avance y verlo desde donde sea.
         </p>
         <div class="pt-stats" id="ptStats"></div>
       </header>
@@ -67,7 +67,7 @@
           <span class="pt-ico" aria-hidden="true">🗓️</span>
           <h3>Armar tu horario</h3>
           <p>Arrastra materias a la rejilla o deja que el modo automático te lo cuadre
-             dentro de tu horario, sin huecos y respetando el tope de 55 créditos.</p>
+             dentro de tu horario, sin huecos y respetando tu carga académica.</p>
         </article>
         <article class="pt-feat">
           <span class="pt-ico" aria-hidden="true">🎯</span>
@@ -95,6 +95,7 @@
           <button class="iconbtn" id="buscarBtn" title="Buscar (/)" aria-label="Buscar">🔍</button>
           <button class="iconbtn" id="temaBtn" title="Cambiar tema" aria-label="Cambiar tema"></button>
           <button class="iconbtn" id="inicioBtn" title="Ir a la portada" aria-label="Ir a la portada">🏠</button>
+          <button class="btn cuenta-btn" id="cuentaBtn" title="Entrar o crear cuenta">Entrar</button>
           <label class="carrerapick">
             <span>Carrera</span>
             <select id="carreraSel" aria-label="Carrera">
@@ -231,7 +232,7 @@
     <section class="tabpane" id="pane-horario">
       <div class="pane-head">
         <h2 class="pane-title">Generar horario</h2>
-        <p class="pane-sub">Agrega maestros desde tus materias pendientes o reprobadas en la pestaña <b>Mi avance</b>. Aquí se contabilizan los créditos inscritos (máx. <b>55</b>).</p>
+        <p class="pane-sub">Agrega maestros desde tus materias pendientes o reprobadas en la pestaña <b>Mi avance</b>. Aquí se cuenta tu carga en <b>unidades de aprendizaje (UA)</b>: cada materia vale 1 y Trabajo Terminal, 2. Hasta la carga media no hay trámite; más, hasta 9, sí.</p>
       </div>
 
       <div id="horarioAviso"></div>
@@ -364,34 +365,19 @@
     </div>
   </div>
 
-  <!-- Datos (literales). Solo los que hacen falta para el primer pintado;
-       cupos.js y maestros_manual.js entran por prefetch e historial.js a
-       demanda, los tres desde lazy.js. -->
-  <script src="roster.js"></script>
-  <script src="metrics.js"></script>
-  <script src="schedule.js"></script>
-  <script src="calendario.js"></script>
-  <script src="planes.js"></script>
-  <script src="optativas.js"></script>
-  <!-- App (antes app.js, ahora modularizado; el orden reproduce el archivo original) -->
-  <script src="lazy.js"></script>
-  <script src="data.js"></script>
-  <script src="core.js"></script>
-  <script src="avance.js"></script>
-  <script src="maestros.js"></script>
-  <script src="horario.js"></script>
-  <script src="optativas-ui.js"></script>
-  <script src="auto.js"></script>
-  <script src="export.js"></script>
-  <script src="historial-ui.js"></script>
-  <script src="calendario-ui.js"></script>
-  <script src="carrera-ui.js"></script>
-  <script src="tema.js"></script>
-  <script src="buscador.js"></script>
-  <script src="comparador.js"></script>
-  <script src="compartir.js"></script>
-  <script src="atajos.js"></script>
-  <script src="portada.js"></script>
-  <script src="init.js"></script>
+  <!-- ===== CUENTA (entrar, crear cuenta, tu cuenta) — la llena cuenta.js ===== -->
+  <div class="modal" id="cuenta" hidden>
+    <div class="modal-box modal-sm" role="dialog" aria-modal="true" aria-labelledby="cuentaTit">
+      <header class="modal-head">
+        <h2 id="cuentaTit">Entrar</h2>
+        <button class="iconbtn" id="cuentaCerrar" aria-label="Cerrar">✕</button>
+      </header>
+      <div class="modal-body" id="cuentaBody"></div>
+    </div>
+  </div>
+
+  <!-- arranque.js pide los datos a la API (src/api/*.php) y después carga
+       los módulos de la app en orden (lazy.js, data.js, core.js… init.js). -->
+  <script src="arranque.js"></script>
 </body>
 </html>

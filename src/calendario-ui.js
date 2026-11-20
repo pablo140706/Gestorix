@@ -6,7 +6,7 @@
 // falta para que terminen clases y para la próxima reinscripción, y qué días
 // no hay clase.
 //
-// Los datos salen de calendario.js (generado desde calendario.csv).
+// Los datos salen de api/calendario.php (tablas periodo y evento_calendario).
 
 const CAL_MESES = ["ene", "feb", "mar", "abr", "may", "jun",
                    "jul", "ago", "sep", "oct", "nov", "dic"];
@@ -139,7 +139,7 @@ renderCalFranja();
 // ============================================================
 //  PESTAÑA · CALENDARIO
 // ============================================================
-// Misma rejilla de meses que el PDF del IPN, pero generada desde calendario.js.
+// Misma rejilla de meses que el PDF del IPN, pero generada desde los datos de api/calendario.php.
 // Cuando un día cae en varias cosas a la vez, el relleno es el del tipo más
 // importante y el resto se ve en el tooltip.
 
@@ -200,8 +200,7 @@ function renderCalendario() {
   const hoy = calHoy();
   const actual = calPeriodoDe(hoy);
   if (sub) {
-    sub.innerHTML = `Calendario oficial del IPN, modalidad escolarizada. Transcrito de
-      <b>data/calendarioipn-escolarizada.pdf</b>; para corregirlo, edita <b>calendario.csv</b>.`;
+    sub.innerHTML = `Calendario oficial del IPN, modalidad escolarizada, transcrito del PDF del IPN.`;
   }
 
   wPer.innerHTML = CALENDARIO.periodos.map((p) => {

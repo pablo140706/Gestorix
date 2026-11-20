@@ -1,0 +1,5 @@
+# Los scripts que corren dentro de Linux (Docker) necesitan fin de línea LF,
+# aunque el repo se clone en Windows.
+*.sh   text eol=lf
+*.sql  text eol=lf
+*.php  text eol=lf

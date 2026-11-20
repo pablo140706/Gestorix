@@ -1,0 +1,5 @@
+# Contraseñas: nunca a git
+.env
+
+# Páginas de SAES con datos personales (boleta, nombre, calificaciones): nunca a git
+SAES.BROMA.html

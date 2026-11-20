@@ -1,39 +1,45 @@
 // ============================================================
 //  CARGA DIFERIDA DE DATOS
 // ============================================================
-// index.html cargaba ~430 KB de literales JS antes de pintar un pixel, y casi
-// la mitad era historial.js, que solo usa una pestaña. Aquí quedan los dos
-// mecanismos para no pagar eso de entrada:
+// Los datos vienen de la API (src/api/*.php). No todos hacen falta para el
+// primer pintado, y el historial pesa ~320 KB y solo lo usa una pestaña:
 //
-//   cargarDato(archivo)   -> promesa; mete un <script> una sola vez.
+//   cargarDato(nombre)    -> promesa; pide el dato a la API una sola vez.
 //   prefetchDatos([...])  -> lo mismo, pero en cuanto el navegador esté libre.
 //
 // Qué se carga cuándo:
-//   crítico (en index.html):  planes · schedule · roster · metrics · calendario · optativas
-//   prefetch tras el 1.er pintado:  cupos.js · maestros_manual.js
-//   a demanda:  historial.js  (pestaña Historial y ficha del maestro)
+//   crítico (arranque.js):  planes · horarios · roster · métricas · calendario · optativas
+//   prefetch tras el 1.er pintado:  cupos · links de MisProfesores
+//   a demanda:  historial  (pestaña Historial y ficha del maestro)
 //
-// cupos y maestros_manual van en prefetch, no a demanda, porque los usan casi
-// todas las pestañas (incluida Mi avance): sacarlos del arranque adelanta el
-// pintado y llegan solos unos milisegundos después. historial.js sí es a
-// demanda porque nada más lo toca su pestaña.
-//
-// Funciona en file:// igual que servido: son <script>, no fetch.
+// Los nombres ("cupos.js"…) son los de los archivos de iscweb que estos datos
+// reemplazan; se conservan para no tocar a quien los pide.
+
+const DATOS_DIFERIDOS = {
+  "cupos.js": ["api/cupos.php", (d) => { window.CUPOS = d.actual; window.CUPOS_HIST = d.historial; }],
+  "maestros_manual.js": ["api/links.php", (d) => { window.MANUAL_LINKS = d; }],
+  "historial.js": ["api/historial.php", (d) => { window.HISTORIAL = d; }],
+};
 
 const _lazyProm = {};
 
 function cargarDato(archivo) {
   if (_lazyProm[archivo]) return _lazyProm[archivo];
-  _lazyProm[archivo] = new Promise((resolver, rechazar) => {
-    const s = document.createElement("script");
-    s.src = archivo;
-    s.onload = () => { alLlegarDato(archivo); resolver(archivo); };
-    s.onerror = () => {
+  const [url, guardar] = DATOS_DIFERIDOS[archivo];
+  _lazyProm[archivo] = fetch(url)
+    .then((r) => {
+      if (!r.ok) throw new Error(url + " respondió " + r.status);
+      return r.json();
+    })
+    .then((datos) => {
+      guardar(datos);
+      alLlegarDato(archivo);
+      return archivo;
+    })
+    .catch((e) => {
       delete _lazyProm[archivo];               // que un reintento pueda volver a pedirlo
-      rechazar(new Error("No se pudo cargar " + archivo));
-    };
-    document.head.appendChild(s);
-  });
+      throw new Error("No se pudo cargar " + url + ": " + e.message);
+    });
   return _lazyProm[archivo];
 }
 

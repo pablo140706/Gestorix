@@ -39,6 +39,7 @@ CREATE TABLE materia (
     carrera      VARCHAR(3)    NOT NULL REFERENCES carrera,
     nombre       TEXT          NOT NULL,               -- como se ve en la app, con acentos
     nombre_saes  TEXT          NOT NULL,               -- tal cual lo escribe SAES (para cruzar)
+    nombre_en    TEXT,                                 -- nombre oficial en inglés (optativas de ISC)
     tipo         CHAR(3)       NOT NULL CHECK (tipo IN ('OBL', 'OPT')),
     semestre     SMALLINT      NOT NULL CHECK (semestre BETWEEN 1 AND 8),
     creditos     NUMERIC(4,1)  NOT NULL CHECK (creditos > 0),   -- solo informativo
@@ -71,6 +72,7 @@ CREATE TABLE ruta_optativa (
     id       SERIAL      PRIMARY KEY,
     carrera  VARCHAR(3)  NOT NULL REFERENCES carrera,
     nombre   TEXT        NOT NULL,
+    icono    VARCHAR(4),                 -- siglas para la tarjeta: BD, IoT, PLN…
     UNIQUE (carrera, nombre)
 );
 
@@ -130,16 +132,16 @@ CREATE TABLE profesor (
 CREATE TABLE oferta (
     id         SERIAL      PRIMARY KEY,
     periodo    VARCHAR(4)  NOT NULL REFERENCES periodo,
-    grupo      CHAR(4)     NOT NULL CHECK (grupo ~ '^[1-8][ABC][MVX][1-9]$'),
+    -- El número puede tener dos dígitos: en 26/2 existió 1CM10.
+    grupo      VARCHAR(5)  NOT NULL CHECK (grupo ~ '^[1-8][ABC][MVX][1-9][0-9]?$'),
     materia    VARCHAR(5)  NOT NULL REFERENCES materia,
     profesor   INT         REFERENCES profesor,         -- NULL = sin asignar; se corrige a mano
     turno      CHAR(1)     GENERATED ALWAYS AS (substr(grupo, 3, 1)) STORED,  -- M, V o X (TT)
-    edificio   TEXT,                                    -- NULL si SAES trae X o POR DEFINIR
+    -- Edificio y salón: los del HTML de SAES, corregidos con el PDF oficial
+    -- de distribución de salones (importador/salones.php), que manda.
+    -- NULL si no hay dato (SAES trae X o POR DEFINIR; el PDF, SA).
+    edificio   TEXT,
     salon      TEXT,
-    -- Cupo tal cual lo da SAES (NULL = sin dato). El sobrecupo (+4 de 2.º
-    -- en adelante) lo suma la app; no se guarda.
-    cupo       SMALLINT    CHECK (cupo >= 0),
-    inscritos  SMALLINT    CHECK (inscritos >= 0),
     -- NULLS NOT DISTINCT: dos ofertas "sin profesor" del mismo grupo y
     -- materia también cuentan como repetidas.
     UNIQUE NULLS NOT DISTINCT (periodo, grupo, materia, profesor)
@@ -170,6 +172,20 @@ CREATE TABLE sesion (
     dia     SMALLINT  CHECK (dia BETWEEN 1 AND 6),     -- 1 = lunes … 6 = sábado
     bloque  SMALLINT  REFERENCES bloque,
     PRIMARY KEY (oferta, dia, bloque)
+);
+
+-- Cupo de SAES (importador/cupos.php). Es de grupo + materia, no de cada
+-- oferta: en TT varios asesores comparten un cupo, y los grupos X de TT
+-- tienen cupo aunque no tengan oferta. Se cruza con oferta por
+-- periodo + grupo + materia. Disponibles = cupo − inscritos (sale negativo
+-- con sobrecupo). El +4 de sobrecupo de 2.º en adelante lo suma la app.
+CREATE TABLE cupo (
+    periodo    VARCHAR(4)  REFERENCES periodo,
+    grupo      VARCHAR(5)  CHECK (grupo ~ '^[1-8][ABC][MVX][1-9][0-9]?$'),
+    materia    VARCHAR(5)  REFERENCES materia,
+    cupo       SMALLINT    NOT NULL CHECK (cupo >= 0),       -- tal cual SAES; 250/255 en TT = sin límite
+    inscritos  SMALLINT    NOT NULL CHECK (inscritos >= 0),
+    PRIMARY KEY (periodo, grupo, materia)
 );
 
 

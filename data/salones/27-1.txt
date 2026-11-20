@@ -1,0 +1,1132 @@
+                                    INSTITUTO POLITÉCNICO NACIONAL
+
+                                       ESCUELA SUPERIOR DE CÓMPUTO
+
+                                       SUBDIRECCIÓN ACADÉMICA
+
+                              EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                              DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+                           INGENIERÍA EN SISTEMAS AUTOMOTRICES
+
+                                                       ÚNICO TURNO
+
+                GRUPO                           UNIDAD DE APRENDIZAJE                             SALÓN    LAB
+
+                7SV1       Aplicaciones con Microcontroladores para el Automóvil  (ISISA)         4010     LD1
+
+                7SV1       Arquitecturas Embebidas Automotrices (ISISA)                           4109     NA
+
+                7SV1       Humanidades IV (ISISA)                                                 4010     NA
+
+                7SV1       Ingeniería Ambiental Automotríz (ISISA)                                4010     NA
+
+                7SV1       Sistemas Digitales (ISISA)                                             4010     LD1
+
+                7SV1       Tópicos Selectos I (ISISA)                                             4010     LD2
+
+                9SV1       Proyecto Integrador                                                    SA       NA
+
+                INGENIERÍA EN SISTEMAS COMPUTACIONALES
+
+                                    PRIMER Y SEGUNDO SEMESTRE (ISC)
+
+                TURNO MATUTINO                                                      TURNO VESPERTINO
+
+GRUPO  UNIDAD DE APRENDIZAJE           SALÓN           LAB          GRUPO         UNIDAD DE APRENDIZAJE    SALÓN      LAB
+
+1CM1   Análisis Vectorial                       1206   NA           1CV1   Análisis Vectorial                   1206  NA
+
+1CM1   Cálculo                                  1206   NA           1CV1   Cálculo                              1206  NA
+
+1CM1   Comunicación Oral y Escrita              1206   NA           1CV1   Comunicación Oral y Escrita          1206  NA
+
+1CM1   Fundamentos de Programación              1206   LP1          1CV1   Fundamentos de Programación          1206  LP1
+
+1CM1   Matemáticas Discretas                    1206   NA           1CV1   Matemáticas Discretas                1206  NA
+
+1CM1   Taller de Nivelación Académica           1206   NA           1CV1   Taller de Nivelación Académica       1206  NA
+
+1CM2   Análisis Vectorial                       1207   NA           1CV2   Análisis Vectorial                   2002  NA
+
+1CM2   Cálculo                                  1207   NA           1CV2   Cálculo                              2002  NA
+
+1CM2   Comunicación Oral y Escrita              1207   NA           1CV2   Comunicación Oral y Escrita          2002  NA
+
+1CM2   Fundamentos de Programación              1207   LP1          1CV2   Fundamentos de Programación          2002  LP1
+
+1CM2   Matemáticas Discretas                    1207   NA           1CV2   Matemáticas Discretas                2002  NA
+
+1CM2   Taller de Nivelación Académica           1207   NA           1CV2   Taller de Nivelación Académica       4010  NA
+
+1CM3   Análisis Vectorial                       1209   NA           1CV3   Análisis Vectorial                   1209  NA
+
+1CM3   Cálculo                                  1209   NA           1CV3   Cálculo                              1209  NA
+
+1CM3   Comunicación Oral y Escrita              1209   NA           1CV3   Comunicación Oral y Escrita          1209  NA
+
+1CM3   Fundamentos de Programación              1209   LP2          1CV3   Fundamentos de Programación          1209  LP1
+
+1CM3   Matemáticas Discretas                    1209   NA           1CV3   Matemáticas Discretas                1209  NA
+
+1CM3   Taller de Nivelación Académica           1209   NA           1CV3   Taller de Nivelación Académica       1209  NA
+
+1CM4   Análisis Vectorial                       1210   NA           1CV4   Análisis Vectorial                   1210  NA
+
+1CM4   Cálculo                                  1210   NA           1CV4   Cálculo                              1210  NA
+                                   INSTITUTO POLITÉCNICO NACIONAL
+
+                                      ESCUELA SUPERIOR DE CÓMPUTO
+
+                                         SUBDIRECCIÓN ACADÉMICA
+
+                                   EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                                   DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+1CM4  Comunicación Oral y Escrita        1210  NA    1CV4  Comunicación Oral y Escrita        1210  NA
+
+1CM4  Fundamentos de Programación        1210  LP1   1CV4  Fundamentos de Programación        1210  LP1
+
+1CM4  Matemáticas Discretas              1210  NA    1CV4  Matemáticas Discretas              1012  NA
+
+1CM4  Taller de Nivelación Académica     1210  NA    1CV4  Taller de Nivelación Académica     1210  NA
+
+1CM5  Análisis Vectorial                 1211  NA    1CV5  Análisis Vectorial                 1211  NA
+
+1CM5  Cálculo                            1211  NA    1CV5  Cálculo                            1211  NA
+
+1CM5  Comunicación Oral y Escrita        1211  NA    1CV5  Comunicación Oral y Escrita        1211  NA
+
+1CM5  Fundamentos de Programación        1211  LP1   1CV5  Fundamentos de Programación        1211  LP1
+
+1CM5  Matemáticas Discretas              1211  NA    1CV5  Matemáticas Discretas              1211  NA
+
+1CM5  Taller de Nivelación Académica     1211  NA    1CV5  Taller de Nivelación Académica     1211  NA
+
+1CM6  Análisis Vectorial                 1212  NA    1CV6  Análisis Vectorial                 1212  NA
+
+1CM6  Cálculo                            1212  NA    1CV6  Cálculo                            1212  NA
+
+1CM6  Comunicación Oral y Escrita        1212  NA    1CV6  Matemáticas Discretas              1212  NA
+
+1CM6  Fundamentos de Programación        1212  LP3   1CV7  Cálculo                            1213  NA
+
+1CM6  Matemáticas Discretas              1212  NA    2CV1  Álgebra Lineal                     1007  NA
+
+1CM6  Taller de Nivelación Académica     1212  NA    2CV1  Algoritmos y Estructuras de Datos  1007  LP2
+
+1CM7  Análisis Vectorial                 1213  NA    2CV1  Cálculo Aplicado                   1007  NA
+
+1CM7  Cálculo                            1213  NA    2CV1  Fundamentos Económicos             1007  LGP1
+
+1CM7  Fundamentos de Programación        1213  LP1   2CV1  Mecánica y Electromagnetismo       1213  NA
+
+1CM7  Matemáticas Discretas              1213  NA    2CV2  Álgebra Lineal                     1011  NA
+
+1CM8  Cálculo                            SA    NA    2CV2  Algoritmos y Estructuras de Datos  1011  LP1
+
+1CM9  Cálculo                            SA    NA    2CV2  Cálculo Aplicado                   1011  NA
+
+2CM1  Álgebra Lineal                     1007  NA    2CV2  Fundamentos Económicos             1011  LGP1
+
+2CM1  Algoritmos y Estructuras de Datos  1007  LP2   2CV2  Ingeniería Ética y Sociedad        1007  NA
+
+2CM1  Cálculo Aplicado                   1007  NA    2CV2  Mecánica y Electromagnetismo       1011  NA
+
+2CM1  Fundamentos Económicos             1007  LGP1  2CV3  Álgebra Lineal                     1111  NA
+
+2CM1  Ingeniería Ética y Sociedad        1007  NA    2CV3  Algoritmos y Estructuras de Datos  2204  LP1
+
+2CM1  Mecánica y Electromagnetismo       1007  NA    2CV3  Cálculo Aplicado                   1012  NA
+
+2CM2  Álgebra Lineal                     1011  NA    2CV3  Fundamentos Económicos             1012  LGP1
+
+2CM2  Algoritmos y Estructuras de Datos  1011  LP2   2CV3  Ingeniería Ética y Sociedad        1012  NA
+
+2CM2  Cálculo Aplicado                   1011  NA    2CV3  Mecánica y Electromagnetismo       2211  NA
+
+2CM2  Fundamentos Económicos             1011  LGP1  2CV4  Álgebra Lineal                     1013  NA
+
+2CM2  Ingeniería Ética y Sociedad        1011  NA    2CV4  Algoritmos y Estructuras de Datos  1013  LP2
+
+2CM2  Mecánica y Electromagnetismo       1011  NA    2CV4  Cálculo Aplicado                   1013  NA
+
+2CM3  Álgebra Lineal                     1012  NA    2CV4  Fundamentos Económicos             1013  LGP1
+
+2CM3  Algoritmos y Estructuras de Datos  1012  LP2   2CV4  Ingeniería Ética y Sociedad        1013  NA
+
+2CM3  Cálculo Aplicado                   1012  NA    2CV4  Mecánica y Electromagnetismo       1013  NA
+
+2CM3  Fundamentos Económicos             1012  LGP1  2CV5  Álgebra Lineal                     1014  NA
+                                    INSTITUTO POLITÉCNICO NACIONAL
+
+                                     ESCUELA SUPERIOR DE CÓMPUTO
+
+                                          SUBDIRECCIÓN ACADÉMICA
+
+                                    EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                                    DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+2CM3   Ingeniería Ética y Sociedad        1012   NA    2CV5   Algoritmos y Estructuras de Datos  1014   LP1
+
+2CM3   Mecánica y Electromagnetismo       1012   NA    2CV5   Cálculo Aplicado                   1014   NA
+
+2CM4   Álgebra Lineal                     1013   NA    2CV5   Fundamentos Económicos             1014  LGP1
+
+2CM4   Algoritmos y Estructuras de Datos  1013   LP2   2CV5   Ingeniería Ética y Sociedad        1014   NA
+
+2CM4   Cálculo Aplicado                   1013   NA    2CV5   Mecánica y Electromagnetismo       1213   NA
+
+2CM4   Fundamentos Económicos             1013   LGP1  2CV6   Álgebra Lineal                     1214   NA
+
+2CM4   Ingeniería Ética y Sociedad        1013   NA    2CV6   Ingeniería Ética y Sociedad        1214   NA
+
+2CM4   Mecánica y Electromagnetismo       1013   NA
+
+2CM5   Álgebra Lineal                     1014   NA
+
+2CM5   Algoritmos y Estructuras de Datos  1014   LP2
+
+2CM5   Fundamentos Económicos             1014   LGP1
+
+2CM5   Ingeniería Ética y Sociedad        1014   NA
+
+2CM5   Mecánica y Electromagnetismo       1014   NA
+
+2CM6   Álgebra Lineal                     1214   NA
+
+2CM6   Algoritmos y Estructuras de Datos  1214   NA
+
+2CM6   Cálculo Aplicado                   1214   NA
+
+2CM6   Fundamentos Económicos             1214   LGP1
+
+2CM6   Ingeniería Ética y Sociedad        1214   NA
+
+                                    TERCER Y CUARTO SEMESTRE (ISC)
+
+                   TURNO MATUTINO                                             TURNO VESPERTINO
+
+GRUPO  UNIDAD DE APRENDIZAJE              SALÓN  LAB   GRUPO  UNIDAD DE APRENDIZAJE              SALÓN       LAB
+
+3CM1   Análisis y Diseño de               2206   LP3   3CV1   Análisis y Diseño de Algoritmos    2206        NA
+
+       Algoritmos                                      3CV1   Bases de Datos                     2206        LS1
+
+3CM1   Bases de Datos                     2206   LS1   3CV1   Circuitos Eléctricos               2206        LE1
+
+3CM1   Circuitos Eléctricos               2206   LE1   3CV1   Ecuaciones Diferenciales           2206        NA
+
+3CM1   Ecuaciones Diferenciales           2206   NA    3CV1   Finanzas Empresariales             2206        LGP1
+
+3CM1   Finanzas Empresariales             2006   LGP1  3CV1   Fundamentos de Diseño Digital      2206        LD2
+
+3CM1   Fundamentos de Diseño              2005   LD2
+
+       Digital                                         3CV1   Paradigmas de Programación         2206        LP3
+
+3CM1   Paradigmas de Programación         2206   LP3   3CV2   Análisis y Diseño de Algoritmos    2207        NA
+
+3CM2   Análisis y Diseño de               2207   LP3   3CV2   Bases de Datos                     2207        LS1
+
+       Algoritmos                                      3CV2   Circuitos Eléctricos               2207        LE1
+
+3CM2   Bases de Datos                     2207   LS3
+
+3CM2   Circuitos Eléctricos               2207   LE1   3CV2   Ecuaciones Diferenciales           2207        NA
+
+3CM2   Ecuaciones Diferenciales           2207   NA    3CV2   Finanzas Empresariales             2207        LGP1
+
+3CM2   Finanzas Empresariales             2207   LGP1  3CV2   Paradigmas de Programación         2207        LP3
+
+                                                       3CV3   Análisis y Diseño de Algoritmos    2209        NA
+                                    INSTITUTO POLITÉCNICO NACIONAL
+
+                                      ESCUELA SUPERIOR DE CÓMPUTO
+
+                                      SUBDIRECCIÓN ACADÉMICA
+
+                                  EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                                  DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+3CM2  Fundamentos de Diseño           2207  LD1   3CV3  Bases de Datos                     2209  LS1
+
+      Digital                                     3CV3  Circuitos Eléctricos               2209  LE1
+
+3CM2  Paradigmas de Programación      2207  LP3   3CV3  Ecuaciones Diferenciales           2209  NA
+
+3CM3  Análisis y Diseño de            2209  LP3
+
+      Algoritmos                                  3CV3  Finanzas Empresariales             2209  LGP1
+
+3CM3  Bases de Datos                  2209  LS2   3CV3  Fundamentos de Diseño Digital      2002  LD1
+
+3CM3  Circuitos Eléctricos            2209  LE1   3CV3  Paradigmas de Programación         2209  LP3
+
+3CM3  Ecuaciones Diferenciales        2209  NA    3CV4  Análisis y Diseño de Algoritmos    2210  LP3
+
+3CM3  Finanzas Empresariales          2209  LGP1  3CV4  Bases de Datos                     2210  LS1
+
+3CM3  Fundamentos de Diseño           2002  LD1   3CV4  Circuitos Eléctricos               2210  LE1
+
+      Digital                                     3CV4  Ecuaciones Diferenciales           2210  NA
+
+3CM3  Paradigmas de Programación      2209  LP3
+
+      Análisis y Diseño de                        3CV4  Finanzas Empresariales             2210  LGP1
+
+3CM4  Algoritmos                      2210  LP2   3CV4  Fundamentos de Diseño Digital      2210  LD2
+
+3CM4  Bases de Datos                  2210  LS1   3CV4  Paradigmas de Programación         2210  LP3
+
+3CM4  Circuitos Eléctricos            2210  LE1   3CV5  Fundamentos de Diseño Digital      1210  LD2
+
+3CM4  Ecuaciones Diferenciales        2210  NA    4CV1  Diseño de Sistemas Digitales       2003  LD1
+
+3CM4  Finanzas Empresariales          2210  LGP1  4CV1  Electrónica Analógica              2003  LE1
+
+3CM4  Fundamentos de Diseño           2210  LD2   4CV1  Matemáticas Avanzadas para la      2003  NA
+
+      Digital                                           Ingeniería
+
+3CM4  Paradigmas de Programación      2210  LP1   4CV1  Probabilidad y Estadística         2003  NA
+
+3CM5  Análisis y Diseño de            2211  LP1   4CV1  Sistemas Operativos                2109  LS1
+
+      Algoritmos                                        Tecnologías para el Desarrollo de
+
+3CM5  Circuitos Eléctricos            2211  LE1   4CV1  Aplicaciones Web                   2003  LS4
+
+4CM1  Diseño de Sistemas Digitales    2003  LD2   4CV1  Teoría de la Computación           2003  LP3
+
+4CM1  Electrónica Analógica           2003  LE1   4CV2  Diseño de Sistemas Digitales       2004  LD2
+
+4CM1  Matemáticas Avanzadas para      2003  NA    4CV2  Electrónica Analógica              2004  LE1
+
+      la Ingeniería                                     Matemáticas Avanzadas para la
+
+4CM1  Probabilidad y Estadística      2003  NA    4CV2  Ingeniería                         2004  NA
+
+4CM1  Sistemas Operativos             2003  LS1   4CV2  Sistemas Operativos                2004  LS1
+
+4CM1  Tecnologías para el Desarrollo  2003  LS2   4CV2  Tecnologías para el Desarrollo de  2004  LS1
+
+      de Aplicaciones Web                               Aplicaciones Web
+
+4CM1  Teoría de la Computación        2003  LP1   4CV2  Teoría de la Computación           2004  LP2
+
+4CM2  Diseño de Sistemas Digitales    2004  LD2   4CV3  Diseño de Sistemas Digitales       2005  LD1
+
+4CM2  Electrónica Analógica           2004  LE1   4CV3  Electrónica Analógica              2005  LE1
+
+4CM2  Matemáticas Avanzadas para      2004  NA    4CV3  Probabilidad y Estadística         2005  NA
+
+      la Ingeniería                               4CV3  Sistemas Operativos                2005  LS1
+
+4CM2  Probabilidad y Estadística      2004  NA          Tecnologías para el Desarrollo de
+
+4CM2  Sistemas Operativos             2004  LS1   4CV3  Aplicaciones Web                   2005  LS2
+
+4CM2  Tecnologías para el Desarrollo  2004  LS4   4CV3  Teoría de la Computación           2005  LP2
+
+      de Aplicaciones Web                         4CV4  Diseño de Sistemas Digitales       2006  LD1
+
+4CM2  Teoría de la Computación        2004  LP2
+
+4CM3  Diseño de Sistemas Digitales    2213  LD2   4CV4  Electrónica Analógica              2006  LE1
+                                     INSTITUTO POLITÉCNICO NACIONAL
+
+                                       ESCUELA SUPERIOR DE CÓMPUTO
+
+                                         SUBDIRECCIÓN ACADÉMICA
+
+                                   EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                                   DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+4CM3   Electrónica Analógica             2005        LE1        4CV4  Matemáticas Avanzadas para la      2006   NA
+
+       Matemáticas Avanzadas para                                     Ingeniería
+
+4CM3   la Ingeniería                     2206        NA         4CV4  Probabilidad y Estadística         2006   NA
+
+4CM3   Probabilidad y Estadística        2005        NA         4CV4  Sistemas Operativos                2006   LS1
+
+4CM3   Sistemas Operativos               2005        LS1        4CV4  Tecnologías para el Desarrollo de  2006   LS2
+
+4CM3   Teoría de la Computación          2005        LP2              Aplicaciones Web
+
+4CM4   Diseño de Sistemas Digitales      2006        LD2        4CV4  Teoría de la Computación           2006   LP2
+
+                                                                4CV5  Matemáticas Avanzadas para la      2007   NA
+
+4CM4   Electrónica Analógica             2006        LE1              Ingeniería
+
+4CM4   Matemáticas Avanzadas para        2206        NA         4CV5  Probabilidad y Estadística         2202   NA
+
+       la Ingeniería
+
+4CM4   Sistemas Operativos               2006        LS1
+
+4CM4   Tecnologías para el Desarrollo    2110        LS4
+
+       de Aplicaciones Web
+
+4CM4   Teoría de la Computación          2006        LP2
+
+4CM5   Electrónica Analógica             2007        LE1
+
+4CM5   Probabilidad y Estadística        2007        NA
+
+4CM5   Tecnologías para el Desarrollo    1202        LS1
+
+       de Aplicaciones Web
+
+                                       QUINTO Y SEXTO SEMESTRE (ISC)
+
+                      TURNO MATUTINO                                              TURNO VESPERTINO
+
+GRUPO  UNIDAD DE APRENDIZAJE             SALÓN            LAB   GRUPO  UNIDAD DE APRENDIZAJE             SALÓN  LAB
+
+5CM1   Análisis y Diseño de Sistemas           3008       LS2   5CV1   Análisis y Diseño de Sistemas     3108   LS3
+
+5CM1   Arquitectura de Computadoras            3108       LD2   5CV1   Arquitectura de Computadoras      3108   LD2
+
+5CM1   Compiladores                            3108       LP1   5CV1   Compiladores                      3108   LP1
+
+5CM1   Formulación y Evaluación de             3108       LGP1  5CV1   Formulación y Evaluación de       3108   LGP1
+
+       Proyectos Informáticos                                          Proyectos Informáticos
+
+5CM1   Instrumentación y Control               3108       LE1   5CV1   Instrumentación y Control         3108   LE1
+
+5CM1   Procesamiento Digital de Señales        3108       LD2   5CV1   Procesamiento Digital de Señales  3108   LD1
+
+5CM1   Redes de Computadoras                   3108       LR    5CV1   Redes de Computadoras             3108   LR
+
+5CM2   Análisis y Diseño de Sistemas           3109       LS3   5CV2   Análisis y Diseño de Sistemas     3109   LS3
+
+5CM2   Arquitectura de Computadoras            3109       LD1   5CV2   Arquitectura de Computadoras      3109   LD2
+
+5CM2   Compiladores                            3109       LP1   5CV2   Compiladores                      3109   LP1
+
+5CM2   Formulación y Evaluación de             3109       LGP1  5CV2   Formulación y Evaluación de       3109   LGP1
+
+       Proyectos Informáticos                                          Proyectos Informáticos
+
+5CM2   Instrumentación y Control               3109       LE1   5CV2   Instrumentación y Control         3109   LE1
+
+5CM2   Procesamiento Digital de Señales        3109       LD2   5CV2   Procesamiento Digital de Señales  3109   LD2
+
+5CM2   Redes de Computadoras                   3109       LR    5CV2   Redes de Computadoras             3109   LR
+
+5CM3   Análisis y Diseño de Sistemas           3110       LS3   5CV3   Arquitectura de Computadoras      3110   LD1
+
+5CM3   Arquitectura de Computadoras            3110       LD2   5CV3   Compiladores                      3110   LP2
+                                   INSTITUTO POLITÉCNICO NACIONAL
+
+                                      ESCUELA SUPERIOR DE CÓMPUTO
+
+                                        SUBDIRECCIÓN ACADÉMICA
+
+                               EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                               DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+5CM3  Compiladores                      3110  LP1   5CV3  Formulación y Evaluación de        3110  LGP1
+
+5CM3  Formulación y Evaluación de       3110  LGP1        Proyectos Informáticos
+
+      Proyectos Informáticos                        5CV3  Instrumentación y Control          3110  LE1
+
+5CM3  Instrumentación y Control         3110  LE1   5CV3  Procesamiento Digital de Señales   3110  LD2
+
+5CM3  Procesamiento Digital de Señales  3110  LD1   5CV3  Redes de Computadoras              3110  LS4
+
+5CM3  Redes de Computadoras             3110  LR    5CV4  Análisis y Diseño de Sistemas      3111  LS3
+
+5CM4  Análisis y Diseño de Sistemas     3111  LS2   5CV4  Arquitectura de Computadoras       3111  LD2
+
+5CM4  Arquitectura de Computadoras      3111  LD2   5CV4  Compiladores                       3111  LP1
+
+5CM4  Compiladores                      3111  LP1   5CV4  Formulación y Evaluación de        3111  LGP1
+
+5CM4  Formulación y Evaluación de       3111  LGP1        Proyectos Informáticos
+
+      Proyectos Informáticos                        5CV4  Instrumentación y Control          3111  LE1
+
+5CM4  Instrumentación y Control         3111  LE1   5CV4  Procesamiento Digital de Señales   3111  LD1
+
+5CM4  Procesamiento Digital de Señales  3111  LD1   5CV4  Redes de Computadoras              3111  LR
+
+5CM4  Redes de Computadoras             3008  LR    5CV5  Análisis y Diseño de Sistemas      3112  LS2
+
+5CM5  Arquitectura de Computadoras      3112  LD2   6CV1  Aplicaciones para                  2109  LR
+
+5CM5  Procesamiento Digital de Señales  3112  LD2         Comunicaciones en Red
+
+5CM5  Redes de Computadoras             3112  LR    6CV1  Computer Security                  3210  LS4
+
+6CM1  Aplicaciones para Comunicaciones  3210  LR    6CV1  Ingeniería de Software             3210  LS2
+
+      en Red                                        6CV1  Inteligencia Artificial            3008  LIA1
+
+6CM1  High Technology Enterprise        3210  LGP1  6CV1  Métodos Cuantitativos para la      3210  LGP1
+
+      Management                                          Toma de Desiciones
+
+6CM1  Ingeniería de Software            3210  LS4   6CV1  Sistemas en Chip                   3210  LD2
+
+6CM1  Inteligencia Artificial           3210  NA    6CV2  Aplicaciones para                  2110  LR
+
+6CM1  Introduction to Cryptography      4008  LP3         Comunicaciones en Red
+
+6CM1  Métodos Cuantitativos para la     3210  LGP1  6CV2  Ingeniería de Software             3211  LS4
+
+      Toma de Decisiones                            6CV2  Inteligencia Artificial            3211  LIA1
+
+6CM1  Sistemas en Chip                  3210  LD1   6CV2  Machine Learning                   3211  LCD1
+
+6CM2  Aplicaciones para Comunicaciones  3211  LR    6CV2  Métodos Cuantitativos para     la  3211  LGP1
+
+      en Red                                              Toma de Desiciones
+
+6CM2  Ingeniería de Software            3011  LS2   6CV2  Sistemas en Chip                   3211  LD2
+
+6CM2  Inteligencia Artificial           3211  LIA1  6CV3  Aplicaciones para                  3212  LR
+
+6CM2  Métodos Cuantitativos para la     3211  LGP1        Comunicaciones en Red
+
+      Toma de Decisiones                            6CV3  Computer Graphics                  3212  LP3
+
+6CM2  Sistemas en Chip                  3211  LD1   6CV3  Ingeniería de Software             3212  LS4
+
+6CM2  Software Quality Assurance and    4011  LS3   6CV3  Inteligencia Artificial            3212  LIA2
+
+      Desing Patterns                                     Métodos Cuantitativos para la
+
+6CM2  Virtual Instrumentation           3211  LE2   6CV3  Toma de Desiciones                 3212  LGP1
+
+6CM3  Aplicaciones para Comunicaciones  3212  LR    6CV3  Sistemas en Chip                   3212  LD1
+
+      en Red                                        6CV4  Genetic Algorithms                 3213  LP2
+
+6CM3  Ingeniería de Software            3212  LS4
+
+6CM3  Inteligencia Artificial           3212  LP3   6CV4  Inteligencia Artificial            3011  LP3
+
+6CM3  Métodos Cuantitativos para la     3212  LGP1  6CV4  Introduction to Cryptography       3213  LP3
+
+      Toma de Decisiones                            6CV4  Sistemas en Chip                   3213  LD2
+                                    INSTITUTO POLITÉCNICO NACIONAL
+
+                                      ESCUELA SUPERIOR DE CÓMPUTO
+
+                                              SUBDIRECCIÓN ACADÉMICA
+
+                                 EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                                 DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+6CM3   Non Relational Databases               3212   LS2
+
+6CM3   Sistemas en Chip                       3212   LD1
+
+6CM4   Aplicaciones para Comunicaciones       3213   LR
+
+       en Red
+
+6CM4   Ingeniería de Software                 3213   LS1
+
+6CM4   Inteligencia Artificial                3008   LIA1
+
+6CM4   Machine Learning                       3213   LIA2
+
+6CM4   Métodos Cuantitativos para la          3213   LGP1
+
+       Toma de Decisiones
+
+6CM4   Sistemas en Chip                       3213   LD1
+
+6CM5   Embedded Systems                       1112   LD2
+
+6CM5   Sistemas en Chip                       SA     LD2
+
+6CM5   Statistical Tools for Data Analytics   1214   NA
+
+                                 SÉPTIMO Y OCTAVO SEMESTRE (ISC)
+
+                    TURNO MATUTINO                                          TURNO VESPERTINO
+
+GRUPO  UNIDAD DE APRENDIZAJE                  SALÓN  LAB   GRUPO  UNIDAD DE APRENDIZAJE               SALÓN  LAB
+
+7CM1   Administración de Servicios en Red     4011   LR    7CV1   Administración de Servicios en Red  4011   LR
+
+7CM1   Desarrollo de Aplicaciones Móviles     4011   LS3   7CV1   Bioinformatics                      4011   LIA2
+
+       Nativas                                                    Desarrollo de Aplicaciones Móviles
+
+7CM1   Selected Topics in Cryptography        4011   LP3   7CV1   Nativas                             4011   LS4
+
+7CM1   Sistemas Distribuidos                  4011   LS3   7CV1   Sistemas Distribuidos               4011   LS3
+
+7CM1   Virtual Instrumentiation Applications  4011   LE2   7CV1   Virtual and Augmented Reality       4011   LP2
+
+7CM2   Administración de Servicios en Red     4108   LR    7CV2   Administración de Servicios en Red  4108   LR
+
+7CM2   Desarrollo de Aplicaciones Móviles     4108   LS3   7CV2   Desarrollo de Aplicaciones Móviles  4108   LS3
+
+       Nativas                                                    Nativas
+
+7CM2   Internet of Things                     4108   LS2   7CV2   Sistemas Distribuidos               4108   LS4
+
+7CM2   Sistemas Distribuidos                  4108   LS4   7CV3   Administración de Servicios en Red  4109   LR
+
+7CM2   Web Client and Backend                 4108   LS4   7CV3   Desarrollo de Aplicaciones Móviles  4109   LS2
+
+       Developmen Frameworks                                      Nativas
+
+7CM3   Administración de Servicios en Red     4109   LR    7CV3   Selected Topics in Cryptography     4008   LP2
+
+7CM3   Desarrollo de Aplicaciones Móviles     4109   LS3   7CV3   Sistemas Distribuidos               4109   LS3
+
+       Nativas                                             7CV4   Administración de Servicios en Red  4110   LR
+
+7CM3   Image Analysis                         4109   LP3   7CV4   Big Data                            4110   LP3
+
+7CM3   Natural Language Processing            4109   LIA2         Desarrollo de Aplicaciones Móviles
+
+7CM3   Sistemas Distribuidos                  4109   LS3   7CV4   Nativas                             4110   LS4
+
+7CM4   Administración de Servicios en Red     4110   LR    7CV4   IT Governance                       4110   LGP1
+
+7CM4   Data Mining                            4110   LIA2  7CV4   Sistemas Distribuidos               4110   LS3
+
+7CM4   Desarrollo de Aplicaciones Móviles     4110   LS3   8CV1   Desarrollo de Habilidades Sociales  4113   NA
+
+       Nativas                                                    para la Alta Dirección
+
+7CM4   Sistemas Distribuidos                  4110   LS3   8CV1   Gestión Empresarial                 4113   LGP1
+                                    INSTITUTO POLITÉCNICO NACIONAL
+
+                                     ESCUELA SUPERIOR DE CÓMPUTO
+
+                                              SUBDIRECCIÓN ACADÉMICA
+
+                                  EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                               DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+7CM5   Economic Engineering                   2006       NA    8CV1   Liderazgo Personal                   4113   NA
+
+8CM1   Desarrollo de Habilidades    Sociales  4209       NA    8CV2   Desarrollo de Habilidades  Sociales  4112   NA
+
+       para la Alta Dirección                                         para la Alta Dirección
+
+8CM1   Gestión Empresarial                    4209       LGP1  8CV2   Gestión Empresarial                  4011   LGP1
+
+8CM1   Liderazgo Personal                     4209       NA    8CV2   Liderazgo Personal                   4112   NA
+
+8CM2   Desarrollo de Habilidades    Sociales  4208       NA    8CV3   Desarrollo de Habilidades  Sociales  4111   NA
+
+       para la Alta Dirección                                         para la Alta Dirección
+
+8CM2   Gestión Empresarial                    4208       LGP1  8CV3   Gestión Empresarial                  4111   LGP1
+
+8CM2   Liderazgo Personal                     4208       NA    8CV3   Liderazgo Personal                   4111   NA
+
+8CM3   Desarrollo de Habilidades    Sociales  4113       NA
+
+       para la Alta Dirección
+
+8CM3   Gestión Empresarial                    4113       LGP1
+
+8CM3   Liderazgo Personal                     4208       NA
+
+8CM4   Desarrollo de Habilidades    Sociales  2202       NA
+
+       para la Alta Dirección
+
+8CM4   Gestión Empresarial                    4113       LGP1
+
+8CM4   Liderazgo Personal                     4113       NA
+
+                               INGENIERÍA EN INTELIGENCIA ARTIFICIAL
+
+                                    PRIMER Y SEGUNDO           SEMESTRE (IIA)
+
+                TURNO MATUTINO                                                 TURNO VESPERTINO
+
+GRUPO  UNIDAD DE APRENDIZAJE                  SALÓN  LAB       GRUPO  UNIDAD DE APRENDIZAJE                SALÓN  LAB
+
+1BM1   Cálculo                                1204   NA        1BV1   Cálculo                              1204   NA
+
+1BM1   Comunicación Oral y Escrita            1204   NA        1BV1   Comunicación Oral y Escrita          1204   NA
+
+1BM1   Fundamentos de Programación            1204   LP1       1BV1   Fundamentos de Programación          1204   LP1
+
+1BM1   Fundamentos Económicos                 1204   LGP1      1BV1   Fundamentos Económicos               1204   LGP1
+
+1BM1   Matemáticas Discretas                  1204   NA        1BV1   Matemáticas Discretas                1212   NA
+
+1BM1   Mecánica y Electromagnetismo           1204   NA        1BV1   Mecánica y Electromagnetismo         1204   NA
+
+1BM1   Taller de Nivelación Académica IIA     4213   NA        1BV1   Taller de Nivelación Académica IIA   4213   NA
+
+1BM2   Cálculo                                1205   NA        1BV2   Cálculo                              1205   NA
+
+1BM2   Comunicación Oral y Escrita            1205   NA        1BV2   Comunicación Oral y Escrita          1205   NA
+
+1BM2   Fundamentos de Programación            1205   LP1       1BV2   Fundamentos de Programación          1205   LP1
+
+1BM2   Fundamentos Económicos                 1205   LGP1      1BV2   Fundamentos Económicos               1205   LGP1
+
+1BM2   Matemáticas Discretas                  2007   NA        1BV2   Matemáticas Discretas                1205   NA
+
+1BM2   Mecánica y Electromagnetismo           1205   NA        1BV2   Mecánica y Electromagnetismo         1205   NA
+
+1BM2   Taller de Nivelación Académica IIA     4213   NA        1BV2   Taller de Nivelación Académica IIA   1205   NA
+
+2BM1   Álgebra Lineal                         1113   NA        2BV1   Álgebra Lineal                       1113   NA
+
+2BM1   Algoritmos y Estructuras de Datos      1113   LP2       2BV1   Algoritmos y Estructuras de Datos    1113   LIA1
+                                     INSTITUTO POLITÉCNICO NACIONAL
+
+                                        ESCUELA SUPERIOR DE CÓMPUTO
+
+                                          SUBDIRECCIÓN ACADÉMICA
+
+                                    EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                                    DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+2BM1   Cálculo Multivariable              1113   NA         2BV1   Cálculo Multivariable              1113   NA
+
+2BM1   Finanzas Empresariales             1113  LGP1        2BV1   Finanzas Empresariales             1113   LGP1
+
+2BM1   Fundamentos de Diseño Digital      1113   LD1        2BV1   Fundamentos de Diseño Digital      1113   LD2
+
+2BM1   Ingeniería Ética y Sociedad        1113   NA         2BV1   Ingeniería Ética y Sociedad        1113   NA
+
+2BM2   Álgebra Lineal                     1114   NA         2BV2   Álgebra Lineal                     3008   NA
+
+2BM2   Algoritmos y Estructuras de Datos  1114   LP2        2BV2   Cálculo Multivariable              3008   NA
+
+2BM2   Cálculo Multivariable              1114   NA
+
+2BM2   Finanzas Empresariales             1114  LGP1
+
+2BM2   Fundamentos de Diseño Digital      1114   LD1
+
+2BM2   Ingeniería Ética y Sociedad        1114   NA
+
+                                      TERCER Y CUARTO       SEMESTRE (IIA)
+
+                       TURNO MATUTINO                                          TURNO VESPERTINO
+
+GRUPO  UNIDAD DE APRENDIZAJE              SALÓN       LAB   GRUPO  UNIDAD DE APRENDIZAJE              SALÓN  LAB
+
+3BM1   Análisis y Diseño de Algoritmos    2204        LIA1  3BV1   Análisis y Diseño de Algoritmos    2204   LIA2
+
+3BM1   Bases de Datos                     2204        LS1   3BV1   Bases de Datos                     2204   LS3
+
+3BM1   Diseño de Sistemas Digitales       2204        LD2   3BV1   Diseño de Sistemas Digitales       2204   LD2
+
+3BM1   Ecuaciones Diferenciales           2204        NA    3BV1   Ecuaciones Diferenciales           2204   NA
+
+3BM1   Liderazgo Personal                 2204        NA    3BV1   Liderazgo Personal                 2204   NA
+
+3BM1   Paradigmas de Programación         2204        LP3   3BV1   Paradigmas de Programación         2204   LP3
+
+3BM2   Análisis y Diseño de Algoritmos    2205        LP3   3BV2   Análisis y Diseño de Algoritmos    2205   LP2
+
+3BM2   Bases de Datos                     2205        LS4   3BV2   Bases de Datos                     2205   LS3
+
+3BM2   Diseño de Sistemas Digitales       2005        LD2   3BV2   Diseño de Sistemas Digitales       2205   LD1
+
+3BM2   Ecuaciones Diferenciales           2205        NA    3BV2   Ecuaciones Diferenciales           2205   NA
+
+3BM2   Liderazgo Personal                 2205        NA    3BV2   Paradigmas de Programación         2205   LP3
+
+3BM2   Paradigmas de Programación         2205        LP2   4BV1   Análisis y Diseño de Sistemas      2110   LS1
+
+4BM1   Análisis y Diseño de Sistemas      2006        LS1   4BV1   Fundamentos de Inteligencia        2110   LIA1
+
+       Fundamentos de Inteligencia                                 Artificial
+
+4BM1   Artificial                         2110        LIA1  4BV1   Matemáticas Avanzadas para la      2110   NA
+
+       Matemáticas Avanzadas para la                               Ingeniería
+
+4BM1   Ingeniería                         2110        NA    4BV1   Probabilidad y Estadística         2110   NA
+
+4BM1   Probabilidad y Estadística         2110        NA    4BV1   Procesamiento Digital de           3211   LIA1
+
+4BM1   Procesamiento Digital de Imágenes  2110        LIA2         Imágenes
+
+       Tecnologías para el Desarrollo de                    4BV1   Tecnologías para el Desarrollo de  2110   LS4
+
+4BM1   Aplicaciones Web                   2110        LS3          Aplicaciones Web
+
+4BM2   Análisis y Diseño de Sistemas      2002        LS1
+
+4BM2   Fundamentos de Inteligencia        2002        LIA1
+
+       Artificial
+
+4BM2   Matemáticas Avanzadas para la      2002        NA
+
+       Ingeniería
+                                    INSTITUTO POLITÉCNICO NACIONAL
+
+                                        ESCUELA SUPERIOR DE CÓMPUTO
+
+                                          SUBDIRECCIÓN ACADÉMICA
+
+                                   EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                                   DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+4BM2   Probabilidad y Estadística             2002        NA
+
+4BM2   Procesamiento Digital de Imágenes      2109        LIA1
+
+4BM2   Tecnologías para el Desarrollo de      2002        LS4
+
+       Aplicaciones Web
+
+                                    QUINTO       Y  SEXTO       SEMESTRE (IIA)
+
+                 TURNO MATUTINO                                                  TURNO VESPERTINO
+
+GRUPO  UNIDAD DE APRENDIZAJE              SALÓN     LAB         GRUPO  UNIDAD DE APRENDIZAJE              SALÓN  LAB
+
+5BM1   Algoritmos Bioinspirados           3211      LIA2        5BV1   Algoritmos Bioinspirados           1213   LIA1
+
+5BM1   Aprendizaje de Máquina             4010      LIA2        5BV1   Aprendizaje de Máquina             1214   LIA1
+
+5BM1   Aprendizaje de Máquina             SA        LIA2        5BV1   Aprendizaje de Máquina             SA     LIA1
+
+5BM1   Procesamiento de Señales           4010      LD2         5BV1   Procesamiento de Señales           1214   LD1
+
+5BM1   Tecnologías de Lenguaje Natural    4010      LIA1        5BV1   Tecnologías de Lenguaje Natural    1214   LIA1
+
+5BM1   Teoría de la Computación           4010      LIA1        5BV1   Teoría de la Computación           1214   LP1
+
+5BM1   Visión Artificial                  4010      LIA1        5BV1   Visión Artificial                  1214   LIA1
+
+5BM2   Algoritmos Bioinspirados           3011      LIA2        6BV1   Cómputo en la Nube                 3208   LS4
+
+5BM2   Aprendizaje de Máquina             3011      LIA1        6BV1   Cómputo Paralelo                   3208   LS4
+
+5BM2   Aprendizaje de Máquina             SA        LIA1        6BV1   Ingeniería de Software para        3208   NA
+
+5BM2   Procesamiento de Señales           3011      LD1                Sistemas Inteligentes
+
+                                                                6BV1   Metodología de la Investigación y  3208   NA
+
+5BM2   Tecnologías de Lenguaje Natural    3211      LIA1               Divulgación Científica
+
+5BM2   Teoría de la Computación           3011      LIA1        6BV1   Propiedad Intelectual              3208   LGP1
+
+5BM2   Visión Artificial                  3011      LIA1        6BV1   Redes Neuronales y Aprendizaje     3208   LIA1
+
+5BV1   Algoritmos Bioinspirados           1213      LIA1               Profundo
+
+                                                                5BV1   Algoritmos Bioinspirados           1213   LIA1
+
+5BV1   Aprendizaje de Máquina             1214      LIA1        5BV1   Aprendizaje de Máquina             1214   LIA1
+
+5BV1   Aprendizaje de Máquina             SA        LIA1        5BV1   Aprendizaje de Máquina             SA     LIA1
+
+5BV1   Procesamiento de Señales           1214      LD1         5BV1   Procesamiento de Señales           1214   LD1
+
+5BV1   Tecnologías de Lenguaje Natural    1214      LIA1        5BV1   Tecnologías de Lenguaje Natural    1214   LIA1
+
+5BV1   Teoría de la Computación           1214      LP1
+
+5BV1   Visión Artificial                  1214      LIA1
+
+6BM1   Aplicaciones de Lenguaje Natural   3208      LIA2
+
+6BM1   Cómputo Paralelo                   3208      LS4
+
+6BM1   Ingeniería de Software para        3208      LS2
+
+       Sistemas Inteligentes
+
+6BM1   Metodología de la Investigación y  3208      NA
+
+       Divulgación Científica
+
+6BM1   Redes Neuronales y Aprendizaje     3208      LIA1
+
+       Profundo
+
+6BM1   Sistemas Multiagentes              3208      LIA1
+
+6BM2   Cómputo Paralelo                   3209      LS3
+                                    INSTITUTO POLITÉCNICO NACIONAL
+
+                                       ESCUELA SUPERIOR DE CÓMPUTO
+
+                                                SUBDIRECCIÓN ACADÉMICA
+
+                               EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                               DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+6BM2   Ingeniería de Software para              3209     LS2
+
+       Sistemas Inteligentes
+
+6BM2   Interacción Humano Máquina               3209     LIA2
+
+6BM2   Metodología de la Investigación y        3209     NA
+
+       Divulgación Científica
+
+6BM2   Minería de Datos                         3209     LIA2
+
+6BM2   Redes Neuronales y Aprendizaje           3209     LIA2
+
+       Profundo
+
+                                    SÉPTIMO           Y  OCTAVO   SEMESTRE (IIA)
+
+                    TURNO MATUTINO                                                   TURNO VESPERTINO
+
+GRUPO           UNIDAD DE APRENDIZAJE           SALÓN        LAB  GRUPO  UNIDAD DE APRENDIZAJE               SALÓN  LAB
+
+7BM1   Aplicaciones de Inteligencia Artificial  4009     LD2      7BV1   Formulación y Evaluación de         4009   LGP1
+
+       en Sistemas Embebidos                                             Proyectos Informáticos
+
+7BM1   Big Data                                 4009     LCD2     7BV1   Reconocimiento de Voz               4009   LIA1
+
+7BM1   Formulación y Evaluación de              4009     NA       7BV1   Técnicas de Programación para       4009   LE1
+
+       Proyectos Informáticos                                            Robots Móviles
+
+7BM1   Reconocimiento de Voz                    4009     LP2      7BV1   Temas Selectos de Inteligencia      4009   LIA1
+
+       Formulación y Evaluación de                                       Artificial
+
+7BM2   Proyectos Informáticos                   4010     NA       8BV1   Desarrollo de Habilidades Sociales  4111   NA
+
+       Innovación y Emprendimiento                                       para la Alta Dirección
+
+7BM2   Tecnológico                              4010     NA       8BV1   Gestión Empresarial                 3112   LGP1
+
+7BM2   Reconocimiento de Voz                    4010     LIA1
+
+8BM1   Desarrollo de Habilidades Sociales       4112     NA
+
+       para la Alta Dirección
+
+8BM1   Gestión Empresarial                      4112     NA
+
+8BM2   Desarrollo de Habilidades Sociales       4112     NA
+
+       para la Alta Dirección
+
+8BM2   Gestión Empresarial                      4112     NA
+
+                               LICENCIATURA EN CIENCIA DE DATOS
+
+                                    PRIMER Y SEGUNDO SEMESTRE (LCD)
+
+                    TURNO MATUTINO                                                   TURNO VESPERTINO
+
+GRUPO  UNIDAD DE APRENDIZAJE                    SALÓN    LAB      GRUPO  UNIDAD DE APRENDIZAJE               SALÓN  LAB
+
+1AM1   Cálculo                                  1202     NA       1AV1   Cálculo                             1202   NA
+
+1AM1   Comunicación Oral y Escrita              1202     NA       1AV1   Comunicación Oral y Escrita         1202   NA
+
+1AM1   Fundamentos de Programación              1202     LP1      1AV1   Fundamentos de Programación         1202   LCD1
+
+1AM1   Introducción a la Ciencia de Datos       1202     NA       1AV1   Introducción a la Ciencia de Datos  1202   NA
+
+1AM1   Matemáticas Discretas                    2007     NA       1AV1   Matemáticas Discretas               1202   NA
+
+1AM1   Taller de Nivelación Académica CD        1202     NA       1AV1   Taller de Nivelación Académica CD   1202   NA
+
+1AM2   Cálculo                                  1203     NA       1AV2   Cálculo                             1203   NA
+
+1AM2   Comunicación Oral y Escrita              1203     NA       1AV2   Comunicación Oral y Escrita         1203   NA
+                                  INSTITUTO POLITÉCNICO NACIONAL
+
+                                        ESCUELA SUPERIOR DE CÓMPUTO
+
+                                           SUBDIRECCIÓN ACADÉMICA
+
+                                 EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                                 DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+1AM2   Fundamentos de Programación         1203   LP1   1AV2   Fundamentos de Programación         1203   LCD1
+
+1AM2   Introducción a la Ciencia de Datos  1203   NA    1AV2   Introducción a la Ciencia de Datos  1203   NA
+
+1AM2   Matemáticas Discretas               1203   NA    1AV2   Matemáticas Discretas               1012   NA
+
+1AM2   Taller de Nivelación Académica CD   1203   NA    1AV2   Taller de Nivelación Académica CD   1203   NA
+
+2AM1   Álgebra Lineal                      1111   NA    2AV1   Álgebra Lineal                      1111   NA
+
+2AM1   Algoritmos y Estructuras de Datos   1111   LP3   2AV1   Algoritmos y Estructuras de Datos   1111   LP3
+
+2AM1   Cálculo Multivariable               1111   NA    2AV1   Cálculo Multivariable               1111   NA
+
+2AM1   Ética y Legalidad                   1111   NA    2AV1   Ética y Legalidad                   1111   NA
+
+2AM1   Fundamentos Económicos              1111   LGP1  2AV1   Fundamentos Económicos              1012   LGP1
+
+2AM2   Álgebra Lineal                      1112   NA    2AV2   Álgebra Lineal                      1112   NA
+
+2AM2   Algoritmos y Estructuras de Datos   1112   LP3   2AV2   Algoritmos y Estructuras de Datos   1112   LCD1
+
+2AM2   Cálculo Multivariable               1112   NA    2AV2   Cálculo Multivariable               1112   NA
+
+2AM2   Ética y Legalidad                   1112   NA
+
+2AM2   Fundamentos Económicos              1112   LGP1
+
+                                  TERCER Y CUARTO       SEMESTRE (LCD)
+
+                     TURNO MATUTINO                                          TURNO VESPERTINO
+
+GRUPO         UNIDAD DE APRENDIZAJE        SALÓN  LAB   GRUPO         UNIDAD DE APRENDIZAJE        SALÓN  LAB
+
+3AM1   Análisis y Diseño de Algoritmos     2202   LP3   3AV1   Análisis y Diseño de Algoritmos     2203   LCD1
+
+3AM1   Bases de Datos                      2202   LS1   3AV1   Bases de Datos                      2203   LS1
+
+3AM1   Finanzas Empresariales              2202   LGP1  3AV1   Finanzas Empresariales              2203   LGP1
+
+3AM1   Métodos Numéricos                   2202   LCD1  3AV1   Métodos Numéricos                   2007   LP1
+
+3AM1   Probabilidad                        2202   NA    3AV1   Probabilidad                        2203   NA
+
+3AM1   Programación para la Ciencia de     2202   LCD1  3AV1   Programación para la Ciencia de     2203   LCD1
+
+       Datos                                                   Datos
+
+3AM2   Análisis y Diseño de Algoritmos     2203   LIA1  4AV1   Bases de Datos Avanzadas            2213   LCD1
+
+3AM2   Bases de Datos                      2203   LS1   4AV1   Cómputo de Alto Desempeño           2202   LS4
+
+3AM2   Finanzas Empresariales              2203   LGP1  4AV1   Desarrollo de Aplicaciones para     2213   LCD1
+
+3AM2   Métodos Numéricos                   2203   LCD1         Análisis de Datos
+
+3AM2   Probabilidad                        2203   NA    4AV1   Desarrollo de Aplicaciones Web      2213   LS2
+
+       Programación para la Ciencia de                  4AV1   Estadística                         2109   NA
+
+3AM2   Datos                               2203   LCD1  4AV1   Liderazgo Personal                  2213   NA
+
+4AM1   Bases de Datos Avanzadas            2213   LCD1
+
+4AM1   Cómputo de Alto Desempeño           2213   LS4
+
+4AM1   Desarrollo de Aplicaciones para     2213   LCD1
+
+       Análisis de Datos
+
+4AM1   Desarrollo de Aplicaciones Web      2213   LS2
+
+4AM1   Estadística                         2213   NA
+
+4AM2   Cómputo de Alto Desempeño           2109   LS4
+
+4AM2   Desarrollo de Aplicaciones para     2002   LCD1
+
+       Análisis de Datos
+                                     INSTITUTO POLITÉCNICO NACIONAL
+
+                                           ESCUELA SUPERIOR DE CÓMPUTO
+
+                                           SUBDIRECCIÓN ACADÉMICA
+
+                                 EVALUACIÓN Y SEGUIMIENTO ACADÉMICO
+
+                                 DISTRIBUCIÓN DE SALONES SEMESTRE 27-1
+
+4AM2   Desarrollo de Aplicaciones Web      2109         LS2
+
+4AM2   Liderazgo Personal                  2109         NA
+
+                                      QUINTO      Y SEXTO    SEMESTRE (LCD)
+
+                   TURNO MATUTINO                                                TURNO VESPERTINO
+
+GRUPO  UNIDAD DE APRENDIZAJE               SALÓN  LAB        GRUPO  UNIDAD DE APRENDIZAJE                  SALÓN  LAB
+
+5AM1   Analítica y Visualización de Datos  3008   LIA2       5AV1   Analítica y Visualización de Datos     3008   LIA1
+
+5AM1   Aprendizaje de Máquina e            3108   LIA1       5AV1   Aprendizaje de Máquina e               3008   LIA1
+
+       Inteligencia Artificial                                      Inteligencia Artificial
+
+5AM1   Matemáticas Avanzadas para la       3008   LCD1       5AV1   Matemáticas Avanzadas para la          1111   LCD1
+
+       Ciencia de Datos                                             Ciencia de Datos
+
+5AM1   Metodología de la Investigación     3008   NA         5AV1   Metodología de la Investigación     y  3008   NA
+
+       y Divulgación Científica                                     Divulgación Científica
+
+5AM1   Minería de Datos                    3213   LCD1       5AV1   Minería de Datos                       2205   LCD1
+
+5AM1   Procesos Estocásticos               3008   LCD1       5AV1   Procesos Estocásticos                  4010   LIA2
+
+6AM1   Análisis de Series de Tiempo        3113   LCD1       6AV1   Análisis de Series de Tiempo           3113   LCD1
+
+6AM1   Analítica Avanzada de Datos         3113   LP2        6AV1   Analítica Avanzada de Datos            3113   LCD1
+
+6AM1   Ciberseguridad                      3113   LS3        6AV1   Bioinformática Básica                  3113   LP1
+
+6AM1   Estadística Avanzada                3113   LCD1       6AV1   Modelado Predictivo                    3113   LCD1
+
+6AM1   Modelado Predictivo                 3113   NA         6AV1   Procesamiento de Lenguaje              3113   LIA1
+
+       Procesamiento de Lenguaje                                    Natural
+
+6AM1   Natural                             3113   LCD1       6AV1   Simulación Básica                      3113   LCD1
+
+6AM2   Sistemas de Información             4108   LP3
+
+       Geográfica
+
+                                     SÉPTIMO Y    OCTAVO SEMESTRE (LCD)
+
+                   TURNO MATUTINO                                                TURNO VESPERTINO
+
+GRUPO  UNIDAD DE APRENDIZAJE               SALÓN       LAB   GRUPO  UNIDAD DE APRENDIZAJE                  SALÓN  LAB
+
+7AM1   Administración de Proyectos de TI   4008   LGP1       7AV1   Administración de Proyectos de TI      3112   LGP1
+
+7AM1   Big Data                            3210   LIA1       7AV1   Big Data                               4008   NA
+
+7AM1   Modelos Econométricos               4109   NA         7AV1   Bioinformática Avanzada                3011   LIA2
+
+7AM1   Protección de Datos                 4008   LS4        7AV1   Innovación y Emprendimiento            4008   LGP1
+
+       Temas Selectos de Aprendizaje                                Tecnológico
+
+7AM1   Profundo                            4008   NA         7AV1   Modelos Econométricos                  4008   NA
+
+8AM1   Desarrollo de Habilidades Sociales  4111   NA         7AV2   Temas Selectos de Inteligencia         3210   LCD1
+
+       para la Alta Dirección                                       Artificial
+
+8AM1   Gestión Empresarial                 4111   LGP1       8AV1   Desarrollo de Habilidades Sociales     4111   NA
+
+                                                                    para la Alta Dirección
+

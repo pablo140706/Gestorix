@@ -140,7 +140,7 @@ function catalogoPlano(elecciones) {
       </article>`;
   }).join("");
 
-  return `<div class="opt-nota">En ${esc(CARRERA)} las optativas no van en pareja 6.° → 7.° como en ISC: es un catálogo plano y cada materia se puede llevar en cualquiera de los dos semestres, con la clave que le toque.</div>
+  return `<div class="opt-nota">En ${esc(CARRERA)} cada optativa se ofrece solo en el semestre que marca su mapa curricular (6.° o 7.°), con la clave de ese semestre.</div>
     <div class="rutas-grid">${cards}</div>`;
 }
 

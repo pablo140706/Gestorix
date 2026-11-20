@@ -56,7 +56,7 @@ function shuffle(arr) {
 // ============================================================
 //  SERIACIÓN
 // ============================================================
-// Vive en `planes.js` como PLAN_ACTIVO.seriacion, con clave → [claves].
+// Viene de api/planes.php como PLAN_ACTIVO.seriacion, con clave → [claves].
 // Una materia SOLO entra en modo Auto si TODOS sus prerrequisitos están
 // APROBADOS (si alguno está reprobado o pendiente, se bloquea).
 //
@@ -127,9 +127,11 @@ function generarHorarioAuto() {
   if (iniMin >= finMin) { alert("La hora de salida debe ser mayor que la de entrada."); return; }
 
   const base = state.horario.filter((h) => !h._auto);
-  const credBloq = creditosBloqueados();
-  const credBase = base.reduce((a, h) => a + h.cred, 0);
-  const credDisponibles = MAX_CRED - credBloq - credBase;
+  // Carga en UA: el automático llena hasta la carga MEDIA (pasarla requiere
+  // trámite; eso lo decide el alumno a mano). Las solo por ETS cuentan.
+  const uaBloq = uaBloqueadas();
+  const uaBase = base.reduce((a, h) => a + uaDe(h.sid), 0);
+  const uaDisponibles = CARGA.media - uaBloq - uaBase;
 
   // 1) Todas las pendientes inscribibles que no estén ya en el horario
   const pendientes = [];
@@ -139,7 +141,7 @@ function generarHorarioAuto() {
       if (OPT_SLOTS[id]) return;
       const rec = getSub(id, name);
       if (rec.status === "pendiente" && canInscribir(rec) && !base.some((h) => h.sid === id)) {
-        pendientes.push({ id, name, cred, i, s, recurse: rec.veces >= 2 });
+        pendientes.push({ id, name, cred, ua: uaDe(id), i, s, recurse: rec.veces >= 2 });
       }
     });
   }
@@ -173,9 +175,11 @@ function generarHorarioAuto() {
   const fueraVentana = faltantes.filter((f) => f.s > maxSem);
   faltantes = faltantes.filter((f) => f.s <= maxSem);
 
-  if (credDisponibles <= 0) {
+  if (uaDisponibles <= 0) {
     autoPool = []; if (otraBtn) otraBtn.hidden = true;
-    resultEl.innerHTML = `<div class="auto-warn">No hay créditos disponibles (${fmt(credBase)} inscritos + ${fmt(credBloq)} bloqueados = ${fmt(credBase + credBloq)} de ${MAX_CRED}).</div>`;
+    resultEl.innerHTML = `<div class="auto-warn">Ya llegaste a la carga media: ${uaBase} UA inscritas` +
+      (uaBloq ? ` + ${uaBloq} solo por ETS` : "") + ` = ${uaBase + uaBloq} de ${CARGA.media}. ` +
+      `Para pasar de la media (hasta ${CARGA.max}, con trámite) agrega materias a mano.</div>`;
     return;
   }
 
@@ -205,19 +209,19 @@ function generarHorarioAuto() {
     for (const s of semKeys) orden.push(...shuffle([...bySem[s]]));
 
     const elegidas = [];
-    let credAcum = 0;
+    let uaAcum = 0;
     for (const f of orden) {
       if (elegidas.length >= addMax) break;
-      if (credAcum + f.cred > credDisponibles) continue;
+      if (uaAcum + f.ua > uaDisponibles) continue;
       const ops = shuffle(f.ofs).filter((of) => !elegidas.some((e) => sesionesChocan(e.sesiones, of.sesiones)));
       if (ops.length) {
         const of = ops[0];
         elegidas.push({
-          sid: f.id, materia: f.name, maestro: of.profesor, grupo: of.grupo,
+          sid: f.id, oferta: of.id, materia: f.name, matReal: of.materia, maestro: of.profesor, grupo: of.grupo,
           edificio: of.edificio, salon: of.salon, sesiones: of.sesiones,
           cred: f.cred, tipo: f.recurse ? "recurse" : "nueva", _auto: true,
         });
-        credAcum += f.cred;
+        uaAcum += f.ua;
       }
     }
     if (!elegidas.length) continue;
@@ -281,7 +285,7 @@ function aplicarSolucionAuto() {
   const resumenSems = Object.keys(porSem).sort((a, b) => a - b)
     .map((s) => `${porSem[s].length} de ${PLAN[s].sem}`).join(", ");
   let html = `<div class="auto-ok">✅ Agregué <b>${colocadas}</b> materia(s): ${resumenSems}. ` +
-    `Horario: <b>${state.horario.length}</b> materias · ${fmt(totalCred)} créditos · ` +
+    `Horario: <b>${state.horario.length}</b> materias · <b>${cargaActual().total} UA</b> · ${fmt(totalCred)} créditos · ` +
     `<b>${sol.huecos === 0 ? "sin horas muertas" : sol.huecos + " hueco(s)"}</b>.</div>`;
   if (sinFit > 0) {
     html += `<div class="auto-warn">⚠️ ${sinFit} materia(s) no cupieron sin chocar en tu ventana de horas. Amplía el horario o agrégalas a mano.</div>`;

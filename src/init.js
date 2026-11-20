@@ -25,8 +25,12 @@ prefetchDatos(["cupos.js", "maestros_manual.js"]);
 
 // Service worker: la app abre sin internet una vez visitada. Solo corre en
 // https o localhost; en file:// el navegador ni lo intenta y no pasa nada.
+// Ojo: este archivo ya no carga con la página sino después de que llegan los
+// datos de la API (arranque.js), así que el evento "load" pudo haber pasado.
 if ("serviceWorker" in navigator) {
-  addEventListener("load", () => {
+  const registrarSW = () => {
     navigator.serviceWorker.register("sw.js").catch(() => { /* sin SW, la app funciona igual */ });
-  });
+  };
+  if (document.readyState === "complete") registrarSW();
+  else addEventListener("load", registrarSW);
 }

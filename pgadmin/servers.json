@@ -1,0 +1,13 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Gestorix",
+      "Group": "Servers",
+      "Host": "db",
+      "Port": 5432,
+      "MaintenanceDB": "gestorix",
+      "Username": "gestorix_admin",
+      "SSLMode": "prefer"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+# Gestorix: la app (web), la base (db) y pgAdmin.
+#   Levantar:    docker compose up -d
+#   Importador:  docker compose run --rm web php importador/horarios.php 27/1
+# Las contraseñas salen del archivo .env (copia .env.example).
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"                      # la app en http://localhost:8080
+    environment:
+      DB_HOST: db
+      DB_NAME: ${POSTGRES_DB}
+      DB_USER: ${APP_DB_USER}          # la app NO entra como administrador
+      DB_PASSWORD: ${APP_DB_PASSWORD}
+      APP_URL: ${APP_URL:-http://localhost:8080}   # para los enlaces de los correos
+      SMTP_HOST: ${SMTP_HOST:-}                    # vacío = los correos salen en el log
+    volumes:
+      - ./src:/var/www/html            # lo que sirve Apache
+      - ./importador:/var/www/importador:ro
+      - ./data:/var/www/data:ro        # HTML de SAES
+    working_dir: /var/www
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      APP_DB_USER: ${APP_DB_USER}            # los usa sql/99-rol-app.sh
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD}
+      TZ: America/Mexico_City
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d:ro  # solo corre la primera vez
+    # Sin "ports": la base no se publica fuera de Docker.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 3s
+      retries: 30
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "127.0.0.1:5051:80"            # solo desde esta PC: http://localhost:5051 (5050 lo usa otro proyecto)
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+      - ./pgadmin/servers.json:/pgadmin4/servers.json:ro
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
+  pgadmin:
