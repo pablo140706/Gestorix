@@ -1,0 +1,69 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Image analysis
+SEMESTRE: VII
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Implementa soluciones a problemas de procesamiento, extracción e interpretación de imágenes digitales con base
+en técnicas de análisis de imágenes.
+CONTENIDOS:
+I. Fundamentos del análisis de imágenes
+II. Transformaciones de imágenes digitales
+III. Extracción y etiquetado de regiones de interés
+IV. Aprendizaje automatizado para imágenes
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d)Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos
+Solución de casos X Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación X Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Bhattacharyya, S. 2018
+Hybrid metaheuristics for image
+analysis
+Springer/ 978-
+3030084974
+Bredies, K. &
+Lorenz, D.
+2018 Mathematical image processing
+Springer/ 978-
+3030014575
+Gonzalez, R. C. &
+Woods, R. E.
+2018 Digital image processing 4th edition
+Pearson/
+9780133356779
+Kwaśnicka, H. &
+Jain, L. C.
+2018
+Bridging the semantic gap in image
+and video analysis
+Springer/ 978-
+3030088798
+Lakshmanan, V.,
+Görner, M. y
+Gillard, R.
+2021
+Practical Machine Learning for
+Computer Vision: End-to-End Machine
+Learning for Images
+O’Reilly Media/
+978-1098102364
+

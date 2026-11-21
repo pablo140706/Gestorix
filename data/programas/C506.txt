@@ -1,0 +1,72 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Formulación y Evaluación de Proyectos Informáticos SEMESTRE: V
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Evalúa proyectos informáticos a partir de su entorno, fases de formulación, innovación, gestión y viabilidad
+financiera.
+CONTENIDOS:
+I. Aspectos generales de un proyecto y el análisis del entorno
+II. Innovación y la gestión del mercado
+III. Gestión técnica y ambiental del proyecto
+IV. Gestión del presupuesto del proyecto
+V. Evaluación financiera del proyecto
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d) Heurístico X d) Prácticas de taller o laboratorio
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos
+Solución de casos Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación X Otras evidencias para evaluar:
+Infografías y productos de las fases del
+proyecto.
+Reportes de prácticas X
+Evaluación escrita
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Angulo, L. 2016 Proyectos. Formulación y evaluación
+AlfaOmega /
+9786076226834
+*Baca, G. 2005
+Formulación y evaluación de proyectos
+informáticos
+McGraw Hill
+Interamericana /
+9781456258306
+*Pressman, R. 2010
+Ingeniería de software un enfoque
+práctico
+McGraw Hill
+Educación /
+9786071503145
+Project
+Management
+Institute
+2017
+Guía de los fundamentos para la
+dirección de proyectos (Guía del
+PMBOK)
+Project Management
+Institute /
+9781628251944
+Serrano, M. &
+Blázquez, P.
+2016
+Design Tkinking Lidera el presente
+Crea el futuro
+AlfaOmega /
+9786076225929
+*Bibliografía clásica
+

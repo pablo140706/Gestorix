@@ -1,0 +1,57 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Bioinformatics
+SEMESTRE: VII
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Construye aplicaciones de bioinformática con base en el análisis de secuencias biológicas y la representación
+computacional del flujo de información de cadenas peptídicas a estructura tridimensional con función biológica y la
+simulación de su dinámica.
+CONTENIDOS:
+I. Bioinformática estructural
+II. Análisis de secuencias biológicas
+III. Bioinformática aplicada
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d)Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos
+Solución de casos X Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación X Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Baxevanis, A. D.,
+Bader, G. D. y
+Wishart, D. S.
+2020 Bioinformatics
+John Wiley & Sons/ 978-
+1119335580
+Jensen, F. 2017
+Introduction to Computational
+Chemistry
+Wiley/ 978-1118825990
+Lesk, A. 2019 Introduction to Bioinformatics
+Oxford university press/
+978-0198794141
+Lesk, A. 2017 Introduction to Genomics
+Oxford university press/
+978-0198754831
+Singh, D. B. 2020 Computer-Aided Drug Design
+Springer/ 978-
+9811568176
+

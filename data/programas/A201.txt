@@ -1,0 +1,66 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA:UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA CAMPUS COAHUILA,
+ESCUELA SUPERIOR DE CÓMPUTO
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Algoritmos y estructuras de datos SEMESTRE: 2
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Utiliza algoritmos y estructuras de datos con base en sus órdenes de complejidad y características.
+CONTENIDOS:
+I. Algoritmos fundamentales
+II. Estructuras de datos lineales
+III. Estructuras de datos no lineales
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) Basado en la lógica de la
+disciplina
+X d) Aprendizaje autónomo X
+e) Heurístico X e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios X
+Reporte de proyectos Exposiciones
+Reportes de indagación
+Otras evidencias a evaluar:
+Programas de cómputo funcionando según
+requerimientos
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Aho A., Hopcroft J. &
+Ullman J.
+1999*
+Estructuras de datos y algoritmos Pearson/
+9789684443457
+Cormen, T. 1990* Introduction to algorithms
+The MIT Press/
+9780262033848
+Roughgarden T. 2018
+Algorithms Illuminated Part 2: Graph
+Algorithms and Data Structures
+Soundlikeyourself
+Poblishing/
+9780999282922
+Vinu V. Das 2014
+Principles of Data structures using C
+and C++
+New Age
+International/
+9788122418583
+Weiss M. 2013
+Data structures and algorithm Analysis
+in C++
+Pearson/
+9780273769385
+*Bibliografía clásica
+

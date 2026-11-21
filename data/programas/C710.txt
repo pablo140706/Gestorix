@@ -1,0 +1,71 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Natural language processing
+SEMESTRE: VII
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Aplica el procesamiento de lenguaje natural a partir de los procesos de normalización de textos, extracción de
+información, clasificación de textos, análisis de opinión y sistemas de diálogo.
+CONTENIDOS:
+I. Contextualización y normalización del texto
+II. Representación del texto y extracción de información
+III. Clasificación y agrupamiento de textos
+IV. Análisis de opinión y detección de emociones
+V. Sistemas de diálogo
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d)Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación X
+Otras evidencias a evaluar:
+Reporte de uso de software
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Aggarwal, C. 2018 Machine learning for text
+Springer/
+9783319735306
+Jurafsky, D. y
+Martin, J.
+2021 Speech and Language Processing
+Pearson Prentice
+Hall/ 9780131873216
+*Manning, C. y
+Schutze, H.
+1999
+Foundations of statistical natural
+language processing
+MIT press/
+9780262133609
+Sarkar, D. 2019
+Text analytics with Python: a
+practitioner's guide to natural
+language processing
+Apress/
+9781484243534
+Zhai, C.y
+Massung, S.
+2016
+Text data management and analysis:
+a practical introduction to information
+retrieval and text mining
+Morgan & Claypool/
+978-1970001167
+*Bibliografía clásica
+

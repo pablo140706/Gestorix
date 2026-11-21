@@ -1,0 +1,68 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA CAMPUS COAHUILA,
+ESCUELA SUPERIOR DE CÓMPUTO
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Ingeniería, ética y sociedad SEMESTRE: 2
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Valora las implicaciones éticas y el impacto social del ejercicio profesional de la Ingeniería en Inteligencia Artificial,
+a partir del desarrollo histórico del conocimiento, la evolución científica y tecnológica, así como el marco regulatorio
+de la disciplina.
+CONTENIDOS:
+I. Desarrollo histórico del conocimiento científico y tecnológico
+II. Revoluciones Industriales: tecnología e impacto
+III. Ingeniería y sociedad
+IV. Ética e ingeniería en inteligencia artificial
+V. Inteligencia artificial, productividad y sustentabilidad
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas
+c) Analógico X c) Aprendizaje orientado proyectos
+d) d) Aprendizaje colaborativo X
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación X Otras evidencias a evaluar:
+Retos completados correctamente
+Respuestas de preguntas dirigidas
+Ensayos
+Reportes de prácticas
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Alba, F. 2011 El desarrollo de la tecnología
+Fondo de Cultura Económica/
+978-968-16-6630-9
+Carbajal, C. &
+Chávez, E.
+2016 Ética para ingenieros
+Grupo Editorial Patria/ 978-970-
+817-231-8
+Mayer-
+Schönberger, V.
+& Cukier, K.
+2014
+Big Data: A revolution that will
+transform how we live, work and
+think
+Eamon Dolan/ Mariner Books/
+978-0544227750
+Orbe, A. 2017
+Una mirada al futuro. Inteligencia
+artificial abundancia empleo y
+sociedad
+Alfaomega Grupo Editor/
+9786076228517
+Pérez, R. 2011 ¿Existe el método científico?
+Fondo de Cultura Económica/
+978-968-16-6942-3
+

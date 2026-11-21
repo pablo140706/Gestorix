@@ -1,0 +1,70 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA
+ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Teoría de la Computación SEMESTRE: V
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Aplica los fundamentos y aplicaciones de la Teoría de la Computación a partir de la teoría de autómatas,
+expresiones regulares y lenguaje y máquina de Turing.
+CONTENIDOS:
+I. Autómatas finitos
+II. Lenguajes y expresiones regulares
+III. Autómatas de Pila
+IV. Máquina de Turing
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje basado en problemas
+c) Analógico X c) Aprendizaje orientado proyectos X
+d) d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Exposiciones X
+Reporte de proyectos X
+Reportes de indagación Otras evidencias a evaluar:
+Conclusiones de discusiones dirigidas
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Hopcroft, J.;
+Ullman, J. y
+Motwani, R*
+2007
+Teoría De Autómatas,
+Lenguajes y Computación
+Pearson Educación /
+9788478290888
+Anderson, J. 2006
+Automata Theory with Modern
+Applications
+Cambridge University
+Press / 9780521613248
+Sipser, M. 2012
+Introduction to the Theory of
+Computation
+Thomson South-
+Western /
+971133187813
+Linz P. 2006
+An Introduction to Formal
+Languages and Automata
+Jones & Bartlett
+Learning /
+9780763737986
+Giro J. 2016
+Lenguajes formales y teoría de
+autómatas
+Alfaomega /
+9789871609819
+* Bibliografía Clásica
+

@@ -1,0 +1,63 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Cellular automata
+SEMESTRE: VI
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Realiza una modelación computacional de sistemas complejos a partir de la programación de sistemas discretos,
+autómatas celulares y sistemas multiagentes.
+CONTENIDOS:
+I. Sistemas discretos
+II. Dinámica de autómatas celulares
+III. Sistemas multiagentes
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d) Heurístico d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación X
+Otras evidencias a evaluar:
+Ejercicios resueltos
+Reportes de prácticas X
+Evaluación escrita
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+McIntosh, H. 2009 One Dimensional Cellular Automata
+Luniver Press/ 1-
+905986-20-3
+Ilachinski, A. 2001
+Cellular Automata: A Discrete
+Universe
+World Scientific
+Publishing Company/
+978-9812381835
+Shoham, Y. y
+Leyton-Brown,
+K.
+2008
+Multiagent Systems: Algorithmic,
+Game-Theoretic, and Logical
+Foundations
+Cambridge University
+Press/ 978-0521899437
+Weiss, G. 2013 Multiagent Systems
+The MIT Press/ 978-
+0262018890
+Wolfram, S. 2002 A New Kind of Science
+Wolfram Media/ 978-
+1579550080
+

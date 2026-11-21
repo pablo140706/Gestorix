@@ -1,0 +1,75 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Virtual and augmented reality
+SEMESTRE: VII
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla aplicaciones de realidad virtual y aumentada con base en las tecnologías y los principios de
+funcionamiento y programación.
+CONTENIDOS:
+I. Antecedentes y tecnologías para realidad virtual y aumentada
+II. Programación de los sistemas de realidad virtual y aumentada
+III. Aplicaciones de los sistemas de realidad virtual y aumentada
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d) Heurístico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación X
+Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial/ ISBN
+Arnaldi, B., Guitton, P.
+& Moreau, G.
+2018
+Virtual reality and augmented reality:
+Myths and realities.
+John Wiley & Sons/
+978-1-786-30105-5
+Glover, J. 2018
+Unity 2018 augmented reality
+projects: build four immersive and fun
+AR applications using ARKit,
+ARCore, and Vuforia.
+Packt Publishing
+Ltd/ 978-1-78883-
+876-4
+Glover, J. & Linowes,
+J.
+2019
+Complete Virtual Reality and
+Augmented Reality Development
+with Unity: Leverage the power of
+Unity and become a pro at creating
+mixed reality applications.
+Packt Publishing
+Ltd./
+978-1-83864-486-4
+Greengard, S. 2019 Virtual Reality.
+Mit Press / 978-
+026253-752-0
+Remondino, F.,
+Georgopoulos, A. &
+Gonzalez-Aguilera, D.
+2018
+Latest developments in reality-based
+3D surveying and modelling.
+MDPI AG /
+978-3-03842-685-1
+

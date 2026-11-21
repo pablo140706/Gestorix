@@ -11,6 +11,7 @@
 //   crítico (arranque.js):  planes · horarios · roster · métricas · calendario · optativas
 //   prefetch tras el 1.er pintado:  cupos · links de MisProfesores
 //   a demanda:  historial  (pestaña Historial y ficha del maestro)
+//               materias   (propósito, temas y PDF: ventana de la materia)
 //
 // Los nombres ("cupos.js"…) son los de los archivos de iscweb que estos datos
 // reemplazan; se conservan para no tocar a quien los pide.
@@ -19,6 +20,7 @@ const DATOS_DIFERIDOS = {
   "cupos.js": ["api/cupos.php", (d) => { window.CUPOS = d.actual; window.CUPOS_HIST = d.historial; }],
   "maestros_manual.js": ["api/links.php", (d) => { window.MANUAL_LINKS = d; }],
   "historial.js": ["api/historial.php", (d) => { window.HISTORIAL = d; }],
+  "materias.js": ["api/materias.php", (d) => { window.MATERIAS_INFO = d; }],   // ventana de la materia
 };
 
 const _lazyProm = {};

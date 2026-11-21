@@ -1,0 +1,74 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA CAMPUS COAHUILA
+(UPIIC), ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Licenciatura en Ciencias de Datos
+UNIDAD DE APRENDIZAJE: Procesamiento de lenguaje natural SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Descubre aspectos relevantes de textos con base la normalización, procesamiento semántico, clasificación y
+agrupamiento, análisis de personalidad, opinión y relación con otros tipos de datos y extracción de información.
+CONTENIDOS:
+I. Contextualización y normalización de textos
+II. Procesamiento semántico de texto
+III. Clasificación y agrupamiento de textos
+IV. Análisis de personalidad y opinión
+V. Análisis de textos en relación con otros tipos de datos
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas
+c) Analógico c) Aprendizaje orientado a proyectos X
+d) Heurístico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos
+Problemas resueltos Problemarios
+Reporte de proyectos X Reporte de seminarios
+Reportes de indagación X Otras evidencias a evaluar: presentación
+electrónica de resultados de indagación, reporte
+de uso de software, presentación del proyecto.
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Bird, S., Klein,
+E., Loper, E.
+2009
+Natural Language Processing with
+Python
+O’Reilly/
+9780596516499
+Eisenstein, J. 2019
+Introduction to Natural Language
+Processing
+MIT press/
+9780262042840
+Jurafsky, D., &
+Martin, J.
+2008 Speech and Language Processing
+Pearson Prentice
+Hall/ 9780131873216
+Vajjala, S.,
+Majumder, B.,
+Gupta, A., &
+Surana, H.
+2020
+Practical Natural Language
+Processing: A Comprehensive Guide
+to Building Real-World NLP Systems
+O'Reilly Media/
+9781492054054
+Zhai, C.,
+Massung, S.
+2016 Text Data Management and Analysis
+ACM and Morgan &
+Claypool Publishers/
+9781970001167
+*Bibliografía básica
+

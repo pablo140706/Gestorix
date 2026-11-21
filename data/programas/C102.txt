@@ -1,0 +1,66 @@
+ISC
+- 2020
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Matemáticas discretas SEMESTRE: I
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Plantea algoritmos matemáticos y estructuras discretas con base en sus propiedades y argumentos válidos con
+lenguaje formal.
+CONTENIDOS:
+I. Lógica.
+II. Teoría de Conjuntos y
+III. Números Enteros.
+III. Estructuras Discretas para la Computación.
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Deductivo X a) Estudio de Casos
+b) Inductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d)
+e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Reportes de tareas
+Reporte de proyectos Reporte de seminarios
+Reportes de indagación Otras evidencias a evaluar:
+Lista de cotejo
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+*Grimaldi, R. 1994
+Matemáticas Discretas y
+Combinatoria.
+Prentice Hall /
+9684443242
+Johnsonbaugh, R. 2005 Matemáticas Discretas.
+Editorial Pearson /
+9702606373
+Rosend, K. 2005
+Matemática Discreta y sus
+aplicaciones.
+Editorial Mc Graw
+Hill /
+8448140737
+*Tremblay, J. & Manohar,
+R.
+1999
+Matemáticas discretas con aplicación
+a las ciencias de la computación.
+Editorial CECSA
+/ 9682612543
+Veerarajan, T. 2007
+Matemáticas discretas con teoría de
+gráficas y combinatoria
+Mc. Graw Hill /
+9789701065303
+

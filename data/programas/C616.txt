@@ -1,0 +1,73 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: High technology enterprise management
+SEMESTRE: VI
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Construye proyectos de innovación tecnológica con base en los procesos de transferencia de tecnología
+establecidos en materia de legislación nacional e internacional vigentes.
+CONTENIDOS:
+I. La innovación tecnológica
+II. Estrategia de innovación tecnológica
+III. Cooperación estratégica tecnológica
+IV. Proceso de transferencia de tecnología
+V. Protección estratégica tecnológica
+VI. Nuevos productos: Creación, marketing y comercialización
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d)Heurístico
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación X
+Otras evidencias a evaluar:
+Ensayo
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Kenney, M. 2000
+Understanding silicon valley: the
+anatomy of an entrepreneurial region.
+Stanford Business
+Books/ 978-
+0804737340
+Lee, C. Miller,
+W. Hancock,
+M. y Rowen, H
+2001
+A habitat for innovation and
+entrepreneurship
+Stanford Business
+Books/ 9780804740630
+Morcillo, P. 2007
+Dirección estratégica de la tecnología e
+innovación: un enfoque de
+competencias
+Civitas/ 8447009106
+Russo, D. y
+Bleier, R.
+2010
+17 rules successful companies use to
+attract and keep top talent: Why
+engaged employees are your greatest
+sustainable advantage.
+Pearson/
+9780137146703
+Lázaro, J. 2019 Gestión de la innovación
+Universo de letras/
+9788418036248
+

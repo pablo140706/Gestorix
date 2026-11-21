@@ -1,0 +1,57 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA CAMPUS COAHUILA,
+ESCUELA SUPERIOR DE CÓMPUTO
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Cálculo multivariable SEMESTRE: 2
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Resuelve problemas de ingeniería con base en las derivadas parciales e integrales múltiples.
+CONTENIDOS:
+I. Vectores y funciones vectoriales
+II. Derivadas parciales
+III. Integrales múltiples
+IV. Teoremas de integración
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) Analítico X d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación X
+Otras evidencias a evaluar:
+Ejercicios resueltos de manera individual y en
+equipo
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Becerril, R. & Reyes, J. 2012
+Cálculo diferencial e integral en
+varias variables
+Trillas/ 9786071710918
+George, T. 2010 Cálculo de varias variables
+Pearson Education/
+9786073202091
+Larson, R. 2010 Cálculo 2: de varias variables
+McGraw HIll/
+9789701071342
+Stewart, J. 2018 Cálculo de varias variables
+CENGAGE/
+9786075265520
+Zill, D. 2015
+Matemáticas 3: Cálculo de varias
+variables
+McGraw Hill/
+9786071512857
+

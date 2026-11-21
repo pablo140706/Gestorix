@@ -1,0 +1,64 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO; UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS COAHUILA; UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Matemáticas avanzadas para la ingeniería SEMESTRE: IV
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Aplica métodos y modelos matemáticos a partir de funciones de variable compleja y vectoriales, de la
+descomposición y análisis de matrices y de los principios de entropía e información mutua.
+CONTENIDOS:
+I. Variable compleja, sus funciones y series
+II. Optimización de función vectorial
+III. Algebra lineal avanzada
+IV. Teoría de la información
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) Analítico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Reporte de seminarios
+Reportes de indagación X Otras evidencias a evaluar:
+Conclusiones de discusión
+Reporte de actividades
+Reportes de prácticas
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Angulo, J. C. 2012
+Variable compleja: Resolución
+de problemas y aplicaciones
+Paraninfo /
+9788428304733
+Eiselt, H. A. &
+Sandblom C.-L.
+2019
+Nonlinear Optimization:
+Methods and Applications
+Springer /
+9783030194611
+Kochenderfer, M. J.,
+Wheeler, T. A.
+2019 Algorithms for Optimization
+MIT Press /
+9780262039420
+MacKay, D. J. C. 2003
+Information Theory, Inference
+and Learning Algorithms
+Cambridge University
+Press / 9780521642989
+Martínez, I., et al 2017 Investigación de operaciones
+Grupo Editorial Patria /
+9786074386967
+

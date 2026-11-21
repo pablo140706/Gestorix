@@ -1,0 +1,66 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Arquitectura de computadoras
+SEMESTRE: V
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Implementa un procesador de arquitectura RISC con base en un lenguaje de descripción de hardware (HDL) y
+dispositivos reconfigurables del tipo FPGA.
+CONTENIDOS:
+I. Organización y arquitectura de computadoras
+II. Arquitectura del conjunto de instrucciones de RISC
+III. Diseño e implementación de un procesador monociclo de arquitectura RISC
+IV. Segmentación de la ruta de datos de un procesador RISC.
+V. Organización del sistema de memoria.
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo x a) Estudio de Casos
+b) Deductivo x b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos x
+d) Heurístico x
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica x Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos Problemarios
+Reporte de proyectos x Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Código de programas con instrucciones del
+procesador RISC y código de programas en
+HDL
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Patterson D. y
+Henessy J.
+2021 Computer Organization and
+Design MIPS edition: The
+Hardware/ Software interface
+Morgan Kaufmann /
+0128201096
+Patterson D. y
+Henessy J.
+2021 Computer Organization and
+Design RISC-V edition: The
+Hardware/ Software interface
+Morgan Kaufmann /
+0128203315
+Patterson D. y
+Waterman A.
+2017 The RISC-V Reader: An Open
+Architecture Atlas.
+Strawberry Canyon/
+0999249118
+Tanenbaum, A. 2016 Modern Operating Systems Pearson India/
+9789332575776
+Pedroni, V. 2010 Circuit desing with VHDL (*) MIT Press Edition /
+0262014335
+

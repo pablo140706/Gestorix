@@ -1,0 +1,64 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Análisis y diseño de algoritmos SEMESTRE: III
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Evalúa la resolución de problemas computacionales con base en las técnicas de análisis de complejidad y las
+estrategias de diseño de algoritmos.
+CONTENIDOS:
+I. Análisis de complejidad computacional
+II. Estrategias de diseño de algoritmos
+III. Problemas NP
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d) Intuitivo X d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación X Otras evidencias a evaluar:
+Ejercicios resueltos
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Cormen, T. &
+Leiserson, C.
+2009 Introduction to Algorithms
+The MIT
+Press/ 978-
+0262033848
+Dasgupta, S.,
+Papadimitriou, C. &
+Vazirani, U.
+2006 Algorithms
+McGrawHill
+Education/ 978-
+0073523408
+Kleinberg, J. & Tardos,
+E.
+2013 Algorithm Design
+Pearson/ 978-
+0321295354
+Roughgarden, T. 2019
+Algorithms Illuminated, Parts 1, 2
+& 3.
+Soundlikeyourself
+Publishing, LLC/
+978-0999282908
+Skienna, S. 2011 The Algorithm Design Manual
+Springer/ 978-
+1849967204
+

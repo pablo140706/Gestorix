@@ -1,0 +1,77 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Software Quality Assurance And Design Patterns SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla productos de software que cumplan con los estándares y normas de calidad de software.
+CONTENIDOS:
+Unidad
+I. Conceptos básicos de calidad de software
+II. Aseguramiento de la calidad basado en el producto de software
+III. Estándares de calidad aplicados en la construcción de software basado en el
+servicio.
+IV. Aplicación de las normas ISO, IEEE, ISTQB en el desarrollo de software
+V. Patrones de diseño para el aseguramiento de calidad del software.
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo x a) Estudio de Casos x
+b) Deductivo b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos x
+d)Heurístico
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica x Saberes Previamente Adquiridos X
+Solución de casos x Organizadores gráficos
+Problemas resueltos Problemarios
+Reporte de proyectos x Exposiciones x
+Reportes de indagación
+Otras evidencias a evaluar:
+Proyecto final con un caso práctico
+Reportes de prácticas x
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Graham D., Black R.,
+Van Veenendaal E.
+2019
+Foundations of Software Testing
+ISTQS Certification, 4th edition
+Cengage Learning
+EMEA /
+9781473764798
+Gamma E., Helm R.,
+Johnson R., Vlissides
+J.
+1994
+Design Patterns: Elements of
+reusable Object Oriented Sofwtare
+Addison Wesley
+Professional /
+9780201633610
+García O., García
+I.,Piattini M.,Pino F. 2018
+Calidad de Sistemas de
+información 4a. Edición Ampliada
+y actualizada
+Rama/978849964
+7333
+Kendall k., kendall J. 2011
+Análisis y diseño de sistemas
+8va.edición.
+Pearson
+education /978-
+607-32-0577-1
+Piattini V.,Calero
+M.,Coral M.
+2010
+Calidad del producto y proceso del
+software
+Ra-Ma 978-84-
+7897-961-5
+

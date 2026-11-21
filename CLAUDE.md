@@ -30,7 +30,7 @@ App web para que un alumno de ESCOM (ISC, IA o LCD) lleve su avance, arme su hor
 | Git | Credenciales del usuario como `pablo140706` |
 
 - **Docker:** hace falta **Docker Desktop** (con WSL2). PHP y Postgres corren en contenedores, **no** se instalan en Windows. Antes de empezar, verifica `docker --version` y `docker compose version`.
-- **Puertos sugeridos:** la app en `localhost:8080` (en Windows el 80 suele estar ocupado) y pgAdmin en `localhost:5050`. El preview viejo de iscweb usaba `localhost:8123`.
+- **Puertos sugeridos:** la app en `localhost:8080` (en Windows el 80 suele estar ocupado) y pgAdmin en `localhost:5051` (el 5050 lo usa otro proyecto). El preview viejo de iscweb usaba `localhost:8123`.
 - **Lo que se copia de iscweb a Gestorix:** el front (`index.html`, los `.js` de módulos, `styles.css`, `favicon.svg`, `manifest.webmanifest`, `sw.js`) a `src/`, y el HTML de SAES a `data/`. Los CSV y los `.js` de datos **no** se copian: se convierten **una vez** en `.sql` de carga inicial y se commitea el SQL.
 - **Entrega:** **primera semana de diciembre de 2026, funcionando en un sitio web.** La meta interna es terminar el 28 de noviembre.
 - **Requisitos del profesor:** contenerizado, base de datos relacional, con back y front, y publicado. El stack es libre.
@@ -104,10 +104,12 @@ gestorix/
 
 | Para | Comando |
 |---|---|
-| Levantar todo | `docker compose up -d` → app en `localhost:8080`, pgAdmin en `localhost:5050` |
+| Levantar todo | `docker compose up -d` → app en `localhost:8080`, pgAdmin en `localhost:5051` |
 | 1. Cargar horarios de SAES | `docker compose run --rm web php importador/horarios.php 27/1` (repetible: no duplica ni pisa lo corregido en pgAdmin) |
 | 2. Cargar cupos de SAES | `docker compose run --rm web php importador/cupos.php 27/1` (aquí SAES **sí pisa**: deja la tabla `cupo` igual que el HTML) |
 | 3. Corregir salones con el PDF oficial | En Git Bash: `pdftotext -table -enc UTF-8 data/salones/27-1.pdf data/salones/27-1.txt` y luego `docker compose run --rm web php importador/salones.php 27/1` |
+| 4. Propósito, temas y PDF de cada materia | `docker compose run --rm web php importador/materias.php` (lee `src/materias/*.pdf`, `data/programas/*.txt` e `investigadas.csv`; repetible). Si hay PDFs nuevos: `mapa.csv` + `sh importador/programas/copiar.sh "…/Planes de estudio"` en Git Bash |
+| 5. Links de MisProfesores y cédulas | `docker compose run --rm web php importador/profesores.php` (lee `data/profesores/links-cedulas.csv`; `--prueba` solo reporta; repetible: no pisa links y reemplaza las cédulas de quien venga en el CSV) |
 | Apagar | `docker compose down` (la base se queda en el volumen `gestorix_pgdata`) |
 | Volver a sembrar desde cero | `docker compose down -v` y luego `up -d` + importador. **Borra la base**: solo si no hay nada que conservar |
 
@@ -149,7 +151,7 @@ gestorix/
 | `historial.js` | Historial de 26/2 (solo ISC). Su 27/1 (350 filas, versión vieja) **no se carga**: lo reemplaza SAES (usuario, 2026-11-08) |
 | `planes.js` (seriación) | ISC: 21 pares oficiales. IA y LCD: 12 + 11 pares aprobados por el usuario |
 
-5. Lo que no existe todavía se muestra **como faltante**, sin inventarlo: historial de IA y LCD, métricas de 72 profes, links de 69 (contados en la base sobre los 260 con clase en 27/1) y cédulas.
+5. Lo que no existe todavía se muestra **como faltante**, sin inventarlo: historial de IA y LCD, métricas de 72 profes y las cédulas que falten (links: solo 9 sin perfil en MisProfesores, 2026-11-20).
 
 ---
 
@@ -240,7 +242,7 @@ gestorix/
 - Escalas de MisProfesores: calidad 0–10, recomiendan 0–100 %, dificultad (bajo = bueno). **Nunca se promedian** con las calificaciones de los comentarios propios: van lado a lado.
 - **La dificultad no es de 0 a 6**, como suponía iscweb: MisProfesores muestra valores reales de 6.4 (JURADO JIMÉNEZ) y 6.1 (JUÁREZ LEÓN), confirmados por el usuario. El `CHECK` va de **0 a 10**. Los colores de iscweb siguen igual (≥ 5 es rojo fuerte).
 - Las métricas son **globales por profesor**, no por carrera.
-- **Cédula:** la busca el usuario en el Registro Nacional de Profesionistas (SEP) y la captura en pgAdmin.
+- **Cédula:** la busca el usuario en el Registro Nacional de Profesionistas (SEP) y la captura en `data/profesores/links-cedulas.csv` (columnas: link, licenciatura o ingeniería con "-L"/"-I", maestría, doctorado y **especialidad = numC-T**, usuario 2026-11-20). `importador/profesores.php` la carga en la **tabla `cedula`** (profesor, número, nivel; varias por profe), que reemplazó a `profesor.cedula` y `titulo_profesional`. En 6 profes la especialidad repetía el número del doctorado: se guarda una vez, como doctorado.
 - **Cifras en la base (2026-11-08):** 27/1 tiene **664 ofertas** (659 del HTML de SAES + 5 extra; se quitó `6CM5` C611), 2,021 sesiones, 663 cupos y **260 profes con clase**. La tabla `profesor` tiene **274** (los 260 + 14 que solo dieron clase en 26/2), sin duplicados. El "276 maestros" del prototipo no cuadra con ningún conteo consistente; manda el de la base.
 - **Correcciones de captura** que se aplican al cargar: BARRALES recomiendan 1.4 → 14; TELLEZ BARRERA rec/dif invertidos; LUNA BENOSO dificultad 44 → 4.4; MÁRQUEZ ARREGUÍN 33 → 3.3; OLALDE MOGOLLÁN calidad 83 → 8.3; **LEVARIO MEDINA dificultad 6.4 → 3.5** (confirmado en MisProfesores por el usuario). Su calidad 6.1 y recomiendan 47 % coinciden con los de JURADO JIMÉNEZ, pero el usuario confirmó que son correctos.
 - Los nombres se cruzan siempre normalizados (sin acentos) y se muestra el acentuado.
@@ -248,7 +250,16 @@ gestorix/
 ### 4.7 Materias
 
 - **Un PDF de plan sintético por materia**: el usuario ya los tiene de las 3 carreras. Se sirven como archivos estáticos; la base solo guarda la ruta.
-- **Descripción corta** por materia, que **genera Claude a partir del PDF** (propósito y temas). Se marca como resumen y el PDF queda como la referencia oficial.
+- ~~Descripción corta que genera Claude~~ → **Decidido en la Fase 5 (usuario, 2026-11-20):** la descripción es el **propósito y la lista de unidades tal cual** el programa sintético (1.ª hoja del PDF), sin redactar nada. La ventana dice "Tal cual el programa sintético oficial".
+
+**Cómo quedó (Fase 5, 2026-11-20):**
+- Los PDFs originales están en `C:\Users\Px\Documents\Escuela\Planes de estudio\{ia,isc,lcd}` (177). Van **en el repo**, en `src/materias/<clave>.pdf` (44 MB; decisión del usuario).
+- `data/programas/mapa.csv` dice qué PDF es de qué clave (lo armó una vez `importador/programas/mapear.php`). `importador/programas/copiar.sh` (Git Bash, necesita `pdftotext`) copia los PDFs y saca el texto de su 1.ª hoja con `pdftotext -raw -l 1` a `data/programas/<clave>.txt`. `importador/materias.php` llena `materia.pdf`, `descripcion` (propósito, línea en blanco, una línea por unidad "I. …") y `descripcion_fuente`.
+- **22 PDFs son escaneos** (6 de IA, 16 de LCD), sin texto. El usuario pidió investigarlos: su descripción está en `data/programas/investigadas.csv` y lleva `descripcion_fuente` (la app la marca **"orientativa"** y remite al PDF). A729, A801 y A802 usan el programa oficial idéntico de IA/ISC; B746 usa los temas de Big Data de ISC/LCD; las demás son resúmenes propios a partir de los mapas curriculares de ESCOM. Los programas de esas materias no existen como texto en internet.
+- En IA y LCD la clave gemela (la que no se ofrece) toma el PDF de su pareja del mismo nombre.
+- Sin PDF (6): Estancia profesional (C804, B803, A804), Tópicos selectos de algoritmos bioinspirados (B653, B753) y Aprendizaje automático aplicado a visión (C614).
+- "Teoría de Conjuntos y" (Matemáticas discretas, las 3 carreras) viene cortado **en el PDF oficial**; se deja tal cual.
+- En la app: botón **ⓘ** junto a cada materia en Mi avance y Optativas (`materia-ui.js`) → ventana con clave, semestre, créditos, UA, horas, seriación (con enlaces), propósito, temas y "Ver programa oficial (PDF)". Los textos los trae `api/materias.php` la primera vez que se abre (`lazy.js`).
 
 ---
 
@@ -281,6 +292,19 @@ gestorix/
 - **Editar o borrar el propio comentario solo en las primeras 24 h.**
 - Los usuarios **reportan**. Moderadores y admins pueden **ocultar** el comentario, **suspender** la cuenta un tiempo o **banearla**. Cada acción queda en una bitácora.
 
+**Decisiones al construirla (Fase 4, 2026-11-20):**
+- **Suspendido:** entra, ve y guarda su avance y horario; **no comenta ni reporta** (`exigirQuePuedaComentar()` en `lib/sesion.php`). El baneado no entra.
+- **Rúbrica opcional**; si se llena, máximo 6 conceptos que suman **exactamente 100 %**.
+- **Oculto:** su autor lo sigue viendo, marcado "Oculto por moderación"; nadie más salvo moderadores. Ya no se puede editar ni borrar. El resumen de la ficha solo cuenta los visibles.
+- **Banear** oculta de una vez todos los comentarios visibles de la cuenta (una línea de bitácora por cada uno). **Desbanear no los vuelve a mostrar**: se revisan uno por uno.
+- Suspensión de **1, 7 o 30 días**. Toda acción lleva **motivo**, salvo descartar reportes.
+- Jerarquía: nadie se modera a sí mismo; a un admin no se le modera; a un moderador solo lo modera un admin.
+- Reportar: motivo de una lista (`MOTIVOS_REPORTE`) + detalle opcional; uno pendiente por persona y comentario; no se reporta lo propio.
+- Los comentarios **se leen sin cuenta** y solo muestran el **alias**. El correo sigue solo en pgAdmin.
+- **Admin y moderadores se nombran en pgAdmin** (`UPDATE usuario SET rol = …`). No hay pantalla para eso.
+- La ficha pide todo a `api/profesor.php?nombre=…` (por `profesor.nombre` exacto, que es el mismo que usa el front). El *service worker* no guarda en caché `api/profesor.php`, `api/comentarios/*` ni `api/moderacion/*`.
+- El resumen de comentarios propios va **en su propio bloque**, bajo el de MisProfesores, nunca promediado con él.
+
 ---
 
 ## 7. Agenda
@@ -288,6 +312,14 @@ gestorix/
 - Recordatorios personales sobre el calendario: **fecha, hora, título** y materia opcional ("12 nov, 10:00, Examen de Bases de Datos").
 - Solo los ve su dueño.
 - **Solo se muestran en el calendario.** No mandan avisos por correo ni notificaciones.
+
+**Decisiones al construirla (Fase 5, 2026-11-20):**
+- **Solo con cuenta** (tabla `recordatorio`, `api/agenda.php`). Sin cuenta, el calendario invita a entrar. Un suspendido sí usa su agenda.
+- **Se agregan tocando un día** del calendario (ventana con los del día y un formulario). Arriba del calendario, **"Tus próximos recordatorios"** (los 8 siguientes) y "+ Nuevo". Los días con recordatorio llevan un puntito.
+- **La hora es opcional**: sin hora = "todo el día". Por eso el esquema cambió `fecha_hora` por `fecha DATE` + `hora TIME NULL`.
+- **Los pasados se quedan**, en gris (puntito y lista del día); no salen en "Próximos". Se borran a mano.
+- Materia opcional, solo de tu carrera. Título hasta 100 caracteres, nota hasta 500, máximo 1,000 recordatorios por cuenta.
+- El *service worker* no guarda en caché `api/agenda.php`. Al borrar la cuenta se van con ella (`CASCADE`).
 
 ---
 
@@ -312,8 +344,9 @@ ruta_optativa    id · carrera · nombre · icono
 ruta_materia     ruta · materia
 periodo          codigo PK (27/1) · inicio · fin
 evento_calendario id · periodo (NULL = fuera de periodo) · inicio · fin (NULL = un día) · tipo
-profesor         id · nombre · nombre_norm UNIQUE · cedula · titulo_profesional · mp_link · mp_calidad
+profesor         id · nombre · nombre_norm UNIQUE · mp_link · mp_calidad
                  · mp_recomiendan · mp_dificultad (0–10)
+cedula           profesor · numero · nivel (licenciatura/ingenieria/especialidad/maestria/doctorado)   PK (profesor, numero)
 oferta           id · periodo · grupo · materia · profesor (NULL) · turno (calculado del grupo) · edificio
                  · salon                             UNIQUE NULLS NOT DISTINCT (periodo, grupo, materia, profesor)
 bloque           numero PK (1–9) · inicio · fin      (sembrado en el mismo archivo)

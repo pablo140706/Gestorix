@@ -1,0 +1,62 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Teoría de la Computación SEMESTRE: IV
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Construye soluciones a problemas computacionales con base en los modelos de cómputo para lenguajes regulares,
+lenguajes independientes del contexto y la noción de computabilidad.
+CONTENIDOS:
+I. Lenguajes regulares
+II. Lenguajes independientes del contexto
+III. Computabilidad
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d)Heurístico d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación X
+Otras evidencias a evaluar:
+Ejercicios resueltos
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Hopcroft, J.
+Motwani, R. & Ullman,
+J.
+2007
+Teoría de autómatas, lenguajes y
+computación
+Addison-Wesley/
+8478290885
+Kelley, D. 2001
+Teoría de autómatas y lenguajes
+formales
+Prentice Hall/
+9780135187050
+Sipser, M. 2012
+Introduction to the Theory of
+Computation
+Cengage
+Learning/
+113318779X
+Eugene, X. 2008
+Theory of automata, formal
+languages and computation
+New Age
+International/
+8122415083
+

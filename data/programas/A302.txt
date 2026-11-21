@@ -1,0 +1,60 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA
+ESCUELA SUPERIOR DE CÓMPUTO
+UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Programación para Ciencia de Datos SEMESTRE: III
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Programa técnicas estadísticas con Lenguaje R a partir de análisis exploratorios, técnicas y métodos de
+modelados.
+CONTENIDOS:
+I. Programación orientada al manejo de datos en Lenguaje R.
+II. Análisis exploratorio de datos.
+III. Técnicas y métodos de modelado.
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Deductivo a) Estudio de Casos
+b) Inductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico X c) Aprendizaje Orientado a Proyectos
+d) Especializado d)
+e) Heurístico X e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Reporte de seminarios
+Reportes de indagación Otras evidencias a evaluar:
+Discusión dirigida
+Programas en lenguaje R
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Chapman, H. 2019 Advanced R
+CRC Press /
+9780815384571
+*Freeman, M.
+& Ross, J.
+2013 Programming skills for Data Science
+Addison Wesley /
+9780135133101
+Mailund, T. 2019 R for Data Science. Quick reference
+Apress /
+9781484248935
+*Matloff, N. 2011 The art of R programming
+No Starch Press /
+9781593273842
+Wickham, H.
+& Grolemund
+G.
+2016 R for Data Science
+O’Reilly / 9781
+491910399
+*Bibliografía clásica
+

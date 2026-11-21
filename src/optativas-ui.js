@@ -80,13 +80,13 @@ function rutasPorRama(elecciones) {
         <div class="ruta-pasos">
           <div class="ruta-paso sem6 ${slot6 ? "active" : ""}">
             <div class="ruta-paso-tag">6.° SEM · ${esc(sem6.clave)}${slot6 ? ` · ${slot6}` : ""}</div>
-            <div class="ruta-paso-name">${esc(sem6.nombre)}</div>
+            <div class="ruta-paso-name">${esc(sem6.nombre)}${botonMateria(sem6.clave)}</div>
             <div class="ruta-paso-en">${esc(sem6.en)}</div>
           </div>
           <div class="ruta-flecha">→</div>
           <div class="ruta-paso sem7 ${slot7 ? "active" : ""}">
             <div class="ruta-paso-tag">7.° SEM · ${esc(sem7.clave)}${slot7 ? ` · ${slot7}` : ""}</div>
-            <div class="ruta-paso-name">${esc(sem7.nombre)}</div>
+            <div class="ruta-paso-name">${esc(sem7.nombre)}${botonMateria(sem7.clave)}</div>
             <div class="ruta-paso-en">${esc(sem7.en)}</div>
           </div>
         </div>
@@ -123,7 +123,7 @@ function catalogoPlano(elecciones) {
       <article class="ruta ${hit ? "elegida" : ""}">
         <header class="ruta-head">
           <span class="ruta-badge">${esc(iniciales(o.nom))}</span>
-          <span class="ruta-name">${esc(o.nom)}</span>
+          <span class="ruta-name">${esc(o.nom)}${botonMateria(o.claves[6] || o.claves[7])}</span>
           ${hit ? `<span class="ruta-chip">✓ ${esc(hit.slot)}</span>` : ""}
         </header>
         <div class="ruta-pasos">

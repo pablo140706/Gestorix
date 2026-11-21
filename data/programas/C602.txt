@@ -1,0 +1,68 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Sistemas en Chip SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla aplicaciones embebidas y de procesamiento digital de señales a partir de los diversos recursos
+periféricos de un sistema en chip, lenguaje ensamblador y un lenguaje de alto nivel.
+CONTENIDOS:
+I. Arquitectura del sistema en chip
+II. Periféricos básicos del sistema en chip
+III. Interfaces de comunicación del sistema en chip
+IV. Convertidor analógico digital
+V. Sistemas operativos de tiempo real en sistemas en chip
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo x a) Estudio de Casos
+b) Deductivo x
+b) Aprendizaje Basado en
+Problemas
+c) Analógico
+c) Aprendizaje Orientado a
+Proyectos
+x
+d) Heurístico x
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica x Saberes Previamente Adquiridos x
+Solución de casos Organizadores gráficos
+Problemas resueltos x Problemarios
+Reporte de proyectos x Exposiciones x
+Reportes de indagación
+Otras evidencias a evaluar:
+Ejercicios resueltos
+Reportes de prácticas x
+Evaluación escrita x
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Ibrahim, D. 2014 PIC Microcontroller Projects in C Newnes/9780080999678
+Patterson, D. y
+Henessy, J.
+2021
+Computer Organization and Design
+RISC-V edition: The Hardware /
+Software interface
+Morgan Kaufmann /
+0128203315
+Amos, B. 2020 Hands-On RTOS with Microcontrollers
+Packt Publishing/
+1838826734
+Axelson, J. 2007
+Serial Port Complete: COM Ports, USB
+Virtual COM Portd and Ports for
+Embedded Systems
+Lakeview Research /
+193144806X
+Paz, H. 2014
+Microprocesadores y
+microcontroladores un enfoque teórico
+práctico
+IPN /
+9786074144406
+

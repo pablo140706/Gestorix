@@ -1,0 +1,65 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Redes de Computadoras SEMESTRE: V
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Diseña las topologías lógica y física de una red de área local a partir de sus fundamentos, técnicas de transmisión
+de datos, capas de acceso a la red, Internet y transporte.
+CONTENIDOS:
+I. Fundamentos de redes
+II. Transmisión de datos
+III. Capa de Acceso a la Red
+IV. Capa de Internet
+V. Capa de Transporte
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos x
+d)Heurístico d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica x Saberes Previamente Adquiridos
+Solución de casos Organizadores gráficos
+Problemas resueltos x Problemarios x
+Reporte de proyectos x Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Prácticas de laboratorio haciendo uso de
+simuladores y/o emuladores de Red.
+Reportes de prácticas x
+Evaluación escrita x
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Peterson Larry L. 2021
+Computer Networks. A system
+approach (Sixth edition)
+ISBN: 978-0-12-385059-1
+Morgan Kauffman
+Stallings W. 2004
+Comunicaciones y Redes de
+Computadores (7ma edición)
+ISBN-13: 978-8420541105
+Prentice Hall
+Sanders, C. 2007
+Practical Packet Analysis: using
+wireshark to solve real world
+ISBN-13: 978-1-59327-149-7
+No Starch Press
+Kurose, R. 2013
+Computer Networking: A Top-
+Down Approach (6th edition)
+ISBN-13: 978-0-13-285620-1
+Pearson
+Goralski, W. 2017
+The Ilustrated Network How TCP/IP
+Works in a Modern Network (2nd Ed)
+ISBN-13: 978-0128110270
+Morgan Kaufmann
+Publishers
+

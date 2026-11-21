@@ -1,0 +1,74 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO; UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS COAHUILA; UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Algoritmos bioinspirados SEMESTRE: V
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Implementa soluciones a problemas con base en algoritmos bioinspirados.
+CONTENIDOS:
+I. Introducción algoritmos bioinspirados
+II. Cómputo evolutivo 1: Algoritmos genéticos
+III. Cómputo evolutivo 2: Programación genética
+IV. Autómatas celulares
+V. Inteligencia de enjambre
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico X c) Aprendizaje orientado proyectos
+d) Heurístico
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Ejercicios resueltos
+Programas de cómputo funcionando según
+requerimientos
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Karl-Peter
+Hadeler, KP. &
+Müller, J.
+2017
+Cellular Automata: Analysis and
+applications
+Springer /
+9783319530420
+Keller, J. M;
+Derong L. &
+Fogel, D.
+2016
+Fundamentals of Computational
+intelligence – Neural networks, Fuzzy
+systems, and evolutionary computation
+IEEE /
+9781110214342
+Kennedy, J &
+Eberhart, R. C.
+2001 Swarm intelligence
+Morgan
+Kaufmann /
+9781558605954
+Sivanandam, SN.
+& Deepa, S.N.
+2008 Introduction to Genetic Algorithms
+Springer /
+9783540731894
+Slowik, A. 2020
+Swarm intelligence Algorithms- A
+tutorial
+CRC Press /
+9781138384491
+*Bibliografía clásica
+

@@ -1,0 +1,71 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Data mining
+SEMESTRE: VII
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla proyectos estructurados a partir de las técnicas de minería de datos CRISP-DM o SEMMA.
+CONTENIDOS:
+I Gestión de cubos OLAP
+II Fundamentos y técnicas de minería de datos estadísticas
+III Fundamentos estadísticos
+IV Clasificación
+V Agrupamiento (Clúster)
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d) Analítico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+*Hernández, J.,
+Ramírez, M., F,
+M. & Ferri, C.
+2004 Introducción a la Minería de datos Pearson/ 84-205-4091-9
+Larose, D. y
+Larose, C.
+2015
+Data Mining and Predictive
+Analytics
+Wiley/ 978-1-118-
+11619-7
+Pang-Ning, T.,
+Steinbach, M., y
+Kumar, V
+2005 Introduction to data mining
+Pearson/ 978-1-292-
+02615-2
+Ratner, B. 2011
+Statistical and Machine-Learning
+Data Mining Techniques for Better
+Predictive Modeling and Analysis
+of Big Data
+CRC Press
+Taylor & Francis Group/
+978-1-4398-6092-2
+Rokach, L. &
+Maimon, O.
+2015
+Data Mining with decision trees.
+Theory and Applications
+World Scientific
+Publishing Co. Pte. Ltd/
+978-9814590075
+

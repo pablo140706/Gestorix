@@ -1,0 +1,59 @@
+ISC
+- 2020
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO; UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Fundamentos económicos SEMESTRE: II
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Analiza la toma de decisiones económicas con base en su entorno nacional e internacional.
+CONTENIDOS:
+I. Fundamentos de la Economía
+II. Microeconomía: teoría del comportamiento del consumidor y del productor
+III. Teoría del mercado: oferta, demanda y precio
+IV. Macroeconomía: indicadores, variables y política económica
+V. Economía internacional y sustentabilidad
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos X
+b) Deductivo X b) Aprendizaje colaborativo
+c) Analógico X c) Aprendizaje basado en problemas
+d) d) Prácticas X
+e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Problemas resueltos Organizadores gráficos X
+Reporte de proyectos Exposiciones X
+Reportes de investigación X Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Mc. Eachern, W. 2014 ECON-Microeconomía
+Cengage Learning/
+9786075190457
+Mc. Eachern, W. 2014
+ECON-Macroeconomía.
+México
+Cengage Learning/
+9786075190464.
+Parkin, M. & Loría, E. 2015
+Microeconomía: versión
+para Latinoamérica.
+Pearson Educación/
+9786073233408
+Parkin, M. & Loría, E. 2015
+Macroeconomía: versión
+para Latinoamérica.
+Pearson Educación/
+9786073233323
+Parkin, M 2018 Economía
+Pearson Education/
+9786073243391
+

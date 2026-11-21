@@ -1,0 +1,59 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Complex systems
+SEMESTRE: VII
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Modela computacionalmente las características de un sistema complejo con base en un análisis de su dinámica no
+lineal y el comportamiento estocástico fuera del equilibrio.
+CONTENIDOS:
+I. Fundamentos teóricos de sistemas complejos
+II. Mecánica estadística fuera del equilibrio
+III. Dinámica no lineal
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos X
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d)Heurístico d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica Saberes Previamente Adquiridos
+Solución de casos X Organizadores gráficos
+Problemas resueltos Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación Otras evidencias a evaluar:
+Las que correspondan
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Bar-Yam, Y. 2020 Dynamics of Complex Systems
+CRC Press / 978-
+0367154974
+Bertin, E. 2021 Statistical Physics of Complex Systems
+Springer/ 978-
+3030799489
+Fieguth, P. 2021
+An Introduction to Complex Systems:
+Society, Ecology, and Nonlinear Dynamics
+Springer/ 978-
+303631673
+Mitchell, M. 2011 Complexity: a Guided Tour
+Oxford University
+Press/ 978-
+0199798100
+Strogatz, S. 2015
+Nonlinear Dynamics and Chaos: With
+Applications to Physics, Biology, Chemistry
+and Engineering
+CRC Press/ 978-
+081349107
+

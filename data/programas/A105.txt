@@ -1,0 +1,68 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+EN INGENIERÍA CAMPUS COAHUILA
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Introducción a la Ciencia de datos SEMESTRE: I
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Explica la importancia de la ciencia de datos a partir de sus campos de acción, áreas de aplicación y tendencias.
+CONTENIDOS:
+I. Contextualización histórica de la Ciencia de datos
+II. Campos y recursos
+III. Áreas de aplicación
+IV. Tendencias
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos X
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico X c) Aprendizaje Orientado A Proyectos
+d)
+d) Aprendizaje cooperativo
+y colaborativo
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación X Otras evidencias a evaluar:
+Ejercicios
+Cuestionarios
+Debate
+Mesa redonda
+Reportes de prácticas
+Evaluación escrita
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+García, J. et. al. 2018
+Ciencia De Datos: Técnicas Analíticas Y Aprendizaje
+Estadístico
+Alfa omega /
+9786075382524
+Jones H. 2019
+Ciencia de Los Datos: La Guía Definitiva Sobre Análisis de Datos,
+Minería de Datos, Almacenamiento de Datos, Visualización de
+Datos, Big Data Para Empresas Y Aprendizaje Automático Para
+Principiantes
+Independently
+Published /
+9781090802965
+Ng, A. & Soo K. 2017 Numsense! Data Science for the Layman: No Math Added
+Annalyn Ng & Kenneth
+Soo / 978-9811110689
+Peng, R. &
+Matsui, E.
+2016 The Art of Data Science
+Lulu.com /
+9781365061462
+Shan, C. et. al 2015
+The Data Science Handbook: Advice and Insights from 25
+Amazing Data Scientists
+Data Science Bookshelf
+/ 978-0692434871
+

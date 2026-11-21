@@ -7,10 +7,8 @@ $correo = strtolower(trim((string)($d['correo'] ?? '')));
 $pass = (string)($d['contrasena'] ?? '');
 
 $st = db()->prepare(
-    "SELECT id, correo, alias, rol, carrera, hash, verificado, baneado,
-            CASE WHEN suspendido_hasta > now()
-                 THEN to_char(suspendido_hasta AT TIME ZONE 'America/Mexico_City', 'DD/MM/YYYY HH24:MI') END AS suspendido_hasta
-     FROM usuario WHERE correo = ?");
+    'SELECT id, correo, alias, rol, carrera, hash, verificado, baneado, ' . SQL_SUSPENDIDO_HASTA . ' AS suspendido_hasta
+     FROM usuario WHERE correo = ?');
 $st->execute([$correo]);
 $u = $st->fetch();
 
@@ -24,9 +22,7 @@ if (!$u['verificado']) {
 if ($u['baneado']) {
     fallar(403, 'Esta cuenta fue dada de baja por romper las reglas para comentar.');
 }
-if ($u['suspendido_hasta']) {
-    fallar(403, "Tu cuenta está suspendida hasta el {$u['suspendido_hasta']}.");
-}
+// Suspendido sí entra (ve y guarda su avance); solo no puede comentar.
 if (password_needs_rehash($u['hash'], PASSWORD_DEFAULT)) {
     db()->prepare('UPDATE usuario SET hash = ? WHERE id = ?')->execute([password_hash($pass, PASSWORD_DEFAULT), $u['id']]);
 }

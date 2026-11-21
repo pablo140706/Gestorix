@@ -1,0 +1,73 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Paradigmas de Programación SEMESTRE: III
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Crea soluciones computacionales con base en los fundamentos y técnicas de diferentes lenguajes de programación
+y sus paradigmas.
+CONTENIDOS:
+I. Introducción a los lenguajes de programación y sus paradigmas
+II. Programación Orientada a Objetos
+III. Lenguajes multiparadigma y de uso específico
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos X
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico X c) Aprendizaje Orientado a Proyectos
+d)Heurístico
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación
+Otras evidencias a evaluar:
+Conclusiones de discusiones
+Código fuente de programas de cómputo
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Appleby, D. &
+Vandekopple, J.
+1998
+Lenguajes de programación.
+Paradigma y práctica
+Mc Graw Hill /
+9789701019450
+Kenneth, C. &
+Kenneth, A.
+2011
+Programming languages:
+principles and practice
+McGraw Hill /
+9781111529413
+Pratt, T. & Zelkowitz,
+M.
+2000
+Lenguajes de programación.
+Diseño e implementación
+Prentice Hall.
+Hispanoamericana
+/ 9789701700464
+Sebesta, R. 2015
+Concepts of programming
+language
+Pearson /
+9780133943023
+Tucker, A. and
+Noonan, R.
+2006
+Programming Languages:
+Principles and Paradigms
+McGraw-Hill
+Education /
+9780072866094
+

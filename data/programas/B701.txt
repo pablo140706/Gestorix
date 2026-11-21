@@ -1,0 +1,62 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA CAMPUS COAHUILA
+(UPIIC), ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Trabajo terminal I SEMESTRE: VII
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla la primera fase de un proyecto científico o tecnológico en cómputo viable y factible con base en
+metodologías y técnicas de desarrollo de sistemas.
+CONTENIDOS:
+I. Planeación de proyecto
+II. Análisis y diseño
+III. Prototipos
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d)Heurístico d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica Saberes Previamente Adquiridos
+Solución de casos Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación
+Otras evidencias a evaluar:
+Fichas de trabajo
+Prototipo
+Reportes de prácticas X
+Evaluación escrita
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Hernández, R. 2016 Fundamentos de investigación
+McGraw-Hill /
+9786071513953
+Piatinni, M., García,
+F., Pinto, F. et al
+2019 Calidad de sistemas de información
+RA-MA/
+978-1681656977
+Pressman, R. 2010
+Ingeniería de Software, un enfoque
+práctico
+McGraw Hill
+Education/ 978-
+6071503145
+Sommerville, I. 2011 Ingeniería de software
+Pearson/
+9786073206044
+Tamayo, M 2015
+El proceso de la Investigación
+Científica Fundamentos de
+investigación Manual de evaluación
+de Proyectos
+Limusa/ 968182281
+

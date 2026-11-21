@@ -1,13 +1,8 @@
 // ============================================================
 //  P17 · MODO AUTOMÁTICO
 // ============================================================
-document.querySelectorAll(".auto-tab").forEach((btn) => {
-  btn.onclick = () => {
-    document.querySelectorAll(".auto-tab").forEach((b) => b.classList.toggle("active", b === btn));
-    const mode = btn.dataset.mode;
-    document.querySelector(".auto-config[data-mode='auto']").hidden = (mode !== "auto");
-  };
-});
+// Antes había pestañas Manual / Automático; la de Manual no mostraba nada.
+// Ahora el automático es una sola barra siempre visible (index.html).
 
 function hhmmToMin(t) { const [h, m] = t.split(":").map(Number); return h * 60 + m; }
 
@@ -284,16 +279,12 @@ function aplicarSolucionAuto() {
   });
   const resumenSems = Object.keys(porSem).sort((a, b) => a - b)
     .map((s) => `${porSem[s].length} de ${PLAN[s].sem}`).join(", ");
-  let html = `<div class="auto-ok">✅ Agregué <b>${colocadas}</b> materia(s): ${resumenSems}. ` +
-    `Horario: <b>${state.horario.length}</b> materias · <b>${cargaActual().total} UA</b> · ${fmt(totalCred)} créditos · ` +
-    `<b>${sol.huecos === 0 ? "sin horas muertas" : sol.huecos + " hueco(s)"}</b>.</div>`;
-  if (sinFit > 0) {
-    html += `<div class="auto-warn">⚠️ ${sinFit} materia(s) no cupieron sin chocar en tu ventana de horas. Amplía el horario o agrégalas a mano.</div>`;
-  }
-  if (autoPool.length > 1) {
-    html += `<div class="auto-hint">¿No te convence? Pulsa <b>🎲 Otra opción</b> para barajar otra combinación igual de compacta.</div>`;
-  }
-  resultEl.innerHTML = html;
+  // Todo en una línea: lo agregado y, si hubo, lo que no cupo.
+  resultEl.innerHTML = `<div class="auto-res${sinFit > 0 ? " con-aviso" : ""}">` +
+    `<span>✅ <b>${colocadas}</b> agregada${colocadas === 1 ? "" : "s"} (${resumenSems})</span>` +
+    `<span>${cargaActual().total} UA · ${fmt(totalCred)} cr · ${sol.huecos === 0 ? "sin horas muertas" : sol.huecos + " hueco" + (sol.huecos === 1 ? "" : "s")}</span>` +
+    (sinFit > 0 ? `<span class="auto-res-warn" title="Amplía tu horario de entrada y salida, cambia de turno o agrégalas a mano">⚠️ ${sinFit} no ${sinFit === 1 ? "cupo" : "cupieron"} sin choques</span>` : "") +
+    `</div>`;
 }
 
 document.getElementById("autoGenBtn").onclick = () => generarHorarioAuto();

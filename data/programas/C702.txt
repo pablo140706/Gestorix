@@ -1,0 +1,68 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Sistemas distribuidos
+SEMESTRE: VII
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Diseña soluciones tecnológicas confiables y escalables con base en servicios basados en cómputo en la nube.
+CONTENIDOS:
+I. Antecedentes del cómputo en la nube
+II. Aspectos básicos del cómputo en la nube
+III. Servicios distribuidos
+IV. Seguridad en la nube
+V. Servicios web y microservicios
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d)Heurístico d) Aprendizaje basado en TIC
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación X
+Otras evidencias a evaluar:
+Cuestionario resuelto, video, reporte de análisis
+de texto y ensayo
+Reportes de prácticas X
+Evaluación escrita
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Chopra, R. 2017 Cloud Computing: An Introduction
+Mercury Learning and
+Information/
+9781683920922
+Le D.N., Kumar,
+R. & Nguyen, G.
+2018
+Cloud Computing and
+Virtualization
+Wiley-Scrivener/
+9781119487906
+Manvi, S. y
+Shyam, G.
+2021
+Cloud Computing: Concepts and
+Technologies
+CRC/ 9780367554613
+Nayyar, A. 2019
+Handbook of Cloud Computing:
+Basic to Advance research on the
+concepts and design of Cloud
+Computing
+BPB Publications/
+9789388176668
+López-Fuentes, F. 2015 Sistemas distribuidos
+UAM/
+9786072804760
+

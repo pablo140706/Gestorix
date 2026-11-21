@@ -1,0 +1,59 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA
+ESCUELA SUPERIOR DE CÓMPUTO
+UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Análisis y diseño de algoritmos SEMESTRE: III
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Determina el algoritmo más adecuado en la solución de un problema a partir de las estrategias de diseño y la
+complejidad algorítmica.
+CONTENIDOS:
+I. Contextualización y notaciones
+II. Estrategias de diseño deterministas
+III. Estrategias de diseño no deterministas
+IV. Introducción a la teoría de la complejidad
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje basado en problemas X
+c) Analógico X c) Aprendizaje orientado proyectos
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Exposiciones
+Reporte de proyectos
+Reportes de indagación X Otras evidencias a evaluar:
+Discusión dirigida.
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Cormen, T., Leireson,
+C. & Rivest, R.*
+2009 Introduction to Algorithms
+MIT /
+9780262533058
+Dasgupta, C. et. al.* 2006 Algorithms
+McGraw-Hill /
+9780073523408
+Harel, D.; Feldman, Y 2014
+Algorithmics The Spirit of
+Computing
+Springer /
+9783642441356
+Sedgewick, R. &
+Wayne K.*
+2011 Algorithms
+Addison Wesley /
+9780321573513
+Skiena, S.* 2008 The Algorithm Design Manual
+Springer /
+9781849967204
+*Bibliografía clásica
+

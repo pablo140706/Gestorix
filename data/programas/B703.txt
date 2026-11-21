@@ -1,0 +1,63 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA;
+(UPIIC), ESCUELA SUPERIOR DE COMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Formulación y evaluación de proyectos
+informáticos
+SEMESTRE: VII
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Aplica la formulación y evaluación de proyectos a partir de sus principios, práctica y la legislación vigente.
+CONTENIDOS:
+I. Planteamiento del proyecto
+II. Evaluación de un proyecto
+III. Desarrollo de un proyecto
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos X
+b) Deductivo b) Aprendizaje basado en problemas
+c) Analógico X c) Aprendizaje orientado proyectos
+d) d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Exposiciones
+Reporte de proyectos X
+Reportes de indagación Otras evidencias a evaluar:
+Conclusiones de discusiones dirigidas
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Angulo, L. 2016 Proyectos: Formulación y evaluación
+Alfaomega/
+9786076226834
+Baca, G. 2016 Evaluación de proyectos
+McGraw Hill Educación/
+9781456258306
+López, A. y
+Lankenau, D.
+2017 Administración de proyectos
+Pearson/
+9786073241748
+Solorio, O. 2018
+Derecho de la formulación y
+evaluación de proyectos informáticos
+Oxford/ 9786074261301
+Garriga, A. 2019
+Guía práctica en gestión de proyectos:
+Aprende a aplicar las técnicas de
+gestión de proyectos a proyectos
+reales
+Albert Garriga
+Rodriguez/
+9788409155064
+* Bibliografía Clásica
+

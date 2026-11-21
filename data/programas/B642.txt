@@ -1,0 +1,71 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA;
+(UPIIC), ESCUELA SUPERIOR DE COMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Aplicaciones de lenguaje natural SEMESTRE: VI, VII
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Propone sistemas de procesamiento de lenguaje natural a partir de la clasificación y agrupación de textos, emisión
+de respuestas a preguntas, recomendaciones y la detección de autoría o plagio de textos.
+CONTENIDOS:
+I. Aplicaciones de clasificación y agrupamiento de textos
+II. Aplicaciones de recomendación basadas en personalidad y opinión
+III. Aplicaciones de análisis semántico de lenguaje natural
+IV. Aplicaciones de análisis de textos en lenguaje natural
+V. Aplicaciones de generación de textos en lenguaje natural
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas
+c) Analógico c) Aprendizaje orientado proyectos X
+d) Heurístico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Beysolow II, T. 2018
+Applied Natural Language
+Processing with Python.
+Apress /
+9781484237328
+Jurafsky, D. &
+Martin, J.
+2008
+Speech and Language
+Processing.
+Pearson Prentice Hall /
+9780131873216
+Sarkar, D. 2019 Text Analytics with Python.
+Apress /
+9781484243534
+Vajjala, S., Majumder,
+B., Gupta, A. &
+Surana, H.
+2020
+Practical Natural Language
+Processing: A Comprehensive
+Guide to Building Real-World
+NLP System.
+O'Reilly Media /
+9781492054054
+Zhai, C. & Massung,
+S.
+2016
+Text Data Management and
+Analysis.
+ACM and Morgan &
+Claypool Publishers /
+9781970001167
+

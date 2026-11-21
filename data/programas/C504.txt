@@ -1,0 +1,67 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Instrumentación y Control SEMESTRE: V
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Construye sistemas de medición y control a partir de sensores, acondicionamiento e instrumentación electrónica.
+CONTENIDOS:
+I. Sensores y Acondicionamiento de señales
+II. Convertidores
+III. Sistemas de control
+IV. Introducción a los sistemas de medición virtual
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico X c) Aprendizaje Orientado a Proyectos X
+d)Heurístico
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación
+Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Creus, A. 2011
+Instrumentación industrial. 8ª.
+Edición
+Alfaomega
+Marcombo
+9786077070429
+*Coughlin, R.,
+Driscoll, F.
+1999
+Amplificadores operacionales y
+circuitos integrados lineales. 5ª
+edición
+Prentice-Hall
+Hispanoamerican
+a 9701702670
+Ogata, Katsuhiko 2010
+Ingeniería de Control Moderna.
+5a. Edición
+Pearson
+Educación S.A.
+9788483226605
+Pallas Areny, R. 2007
+Sensores y Acondicionadores de
+Señal. 4ª Edición
+Alfaomega
+Marcombo.
+9789701512319
+Pérez García M.A. 2014 Instrumentación Electrónica
+Paraninfo.
+9788428337021
+*Biliografía clásica
+

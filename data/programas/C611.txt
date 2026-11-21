@@ -1,0 +1,63 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Machine learning
+SEMESTRE: VI
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla aplicaciones de aprendizaje automático con base en los clasificadores lineales, no lineales y clustering.
+CONTENIDOS:
+I. Fundamentos del aprendizaje automático
+II. Clasificación basada en las técnicas de las redes Bayesianas
+III. Clasificadores lineales
+IV. Clasificadores no lineales
+V. Análisis de clústers (Clustering)
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d) Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos Problemarios X
+Reporte de proyectos Exposiciones X
+Reportes de indagación X
+Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Deisenroth,
+M.
+2020 Mathematics for Machine Learning
+Cambridge University
+Press/ 978-1108455145
+Hard, M. &
+Recht, B.
+2022
+Patterns, Predictions, and Actions:
+Foundations of Machine Learning
+Princeton University
+Press/ 978-0691233734
+Hui, J. 2022 Machine Learning fundamentals
+Cambridge University
+Press/ 978-1108837040
+Huyen, C. 2022
+Designing Machine Learning
+Systems: An Iterative Process for
+Production-Ready Applications
+O'Reilly Media/ 978-
+1098107963
+Kubat, M. 2021 An Introduction to Machine Learning
+Springer/ 978-
+3030819347
+

@@ -1,0 +1,66 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Computer Security SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Implementa mecanismos de seguridad informática a partir de medidas y controles de monitorización, dispositivos
+de conectividad y arquitecturas de seguridad.
+CONTENIDOS:
+I. Seguridad ofensiva
+II. Seguridad defensiva
+III. Administración de la seguridad
+IV. Monitorización y arquitecturas de seguridad
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos X
+b) Deductivo b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d) Heurístico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos
+Problemas resueltos Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación
+Otras evidencias a evaluar:
+Las que correspondan
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Bejtlich, R. *2013
+The Practice of Network Security
+Monitoring: Understanding Incident
+Detection and Response
+Non Starch Press/
+9781593275099
+Brotherston, L &
+Berlin, A.
+2017 Defensive Security Handbook
+O'Reilly Media, Inc/
+9781491960387
+Bullock, J. &
+Parker, J.
+2017
+Wireshark for Security
+Professionals: Using Wireshark and
+Metasploit Framework
+John Wiley & Sons/
+9781118918227
+OccupyTheWeb 2018
+Linux basics for hackers: getting
+started with networking, scripting,
+and security in Kali
+Non Starch Press/
+978-1-59327-855-7
+Oriyano, S. 2016 Penetration Testing Essentials
+John Wiley & Sons/
+9781119235330
+

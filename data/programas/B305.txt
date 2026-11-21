@@ -1,0 +1,60 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO; UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS COAHUILA; UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Diseño de sistemas digitales SEMESTRE: III
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Diseña sistemas digitales secuenciales y de memoria a partir de máquinas deterministas y lenguajes de descripción
+de hardware.
+CONTENIDOS:
+I. Registros
+II. Diseño de sistemas digitales
+III. Contadores
+IV. Memorias
+V. V. Máquina de estado algorítmica
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación X
+Otras evidencias a evaluar:
+Ejercicios resueltos.
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Brown, S. 2006
+Fundamentos de lógica digital con
+diseño VHDL
+Mc Graw Hill /
+9701056094
+Floyd, T. 2016 Fundamentos de diseño digital
+Pearson /
+849035300X
+Morris, M. 2013 Diseño digital
+Pearson Prentice
+Hall / 6073220405
+Pedroni, V. 2010 Circuit desing with VHDL
+Cambridge /
+0262014335
+Tocci, G., Ronald, J.,
+Widmer, N. & Moss.
+2017
+Sistemas digitales principios y
+aplicaciones
+Pearson /
+6073241542
+

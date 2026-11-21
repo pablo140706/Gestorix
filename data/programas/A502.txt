@@ -1,0 +1,69 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA
+ESCUELA SUPERIOR DE CÓMPUTO
+UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Analítica y visualización de datos SEMESTRE: V
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Aplica técnicas a datos recolectados a partir de su preprocesamiento, análisis y visualización.
+CONTENIDOS:
+I. Datos y preprocesamiento de datos.
+II. Visualización de datos.
+III. Correlación.
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Deductivo a) Estudio de Casos
+b) Inductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico X c) Aprendizaje Orientado a Proyectos
+d) Basado en la lógica de la
+disciplina
+d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Reporte de seminarios
+Reportes de indagación Otras evidencias a evaluar:
+Discusión dirigida
+Programas en lenguajes para Ciencia de Datos
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Runkler, T 2020
+Data Analytics, Models and Algorithms for
+Intelligent Data Analysis
+Springer /
+9783658297794
+Bruce, P. &
+Bruce, A.
+2020 Practical Statistics for Data Scientists
+O’Reilly /
+9781484239247
+AI Publishing 2020
+Data Preprocessing with Python for
+Absolute Beginners: Step-by-Step.
+AI Publishing /
+9781734790108
+García S. &
+Luengo, J.
+2015 Data Preprocessing in Data Mining.
+Springer /
+9783319102467
+EMC
+Education
+Services
+2015
+Data Science & Big Data Analytics:
+Discovering, Analyzing, Visualizing and
+Presenting Data
+John Wiley &
+Sons /
+9781118876138
+

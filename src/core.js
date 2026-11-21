@@ -16,6 +16,8 @@ function schedActual() {
 // ============================================================
 let memFallback = null;
 
+// teacherMats ya no se usa (las materias de cada maestro salen de la base,
+// ver MATS_DE_PROF); se conserva para no romper respaldos viejos.
 function blankState() {
   return { subjects: {}, horario: [], teacherMats: {} };
 }
@@ -352,8 +354,8 @@ function allTeachers() {
     if (o.grupo) { t.grupos.add(o.grupo); t.semestres.add(parseInt(o.grupo[0])); }
   });
 
-  // ROSTER es solo de ISC, pero suma: trae los profes con métrica que no dan clase
-  // este periodo, y los nombres de slot OPTATIVA A1/B1/A2/B2 que el horario no usa.
+  // ROSTER (api/roster.php): las materias que cada profe dio en periodos pasados y
+  // este ya no. Así salen también los profes que este periodo no dan clase.
   ROSTER.forEach((e) => {
     const t = add(e.t);
     t.materias.add(e.m);
@@ -399,15 +401,6 @@ function carreraBadges(name) {
   ).join("");
 }
 
-// Catálogo de materias de la carrera activa (para el menú "Agregar materia")
-const ALL_MATERIAS = (() => {
-  const seen = new Set(); const out = [];
-  TEACHERS.flatMap((t) => t.materias).sort((a, b) => a.localeCompare(b)).forEach((m) => {
-    const k = norm(m); if (!seen.has(k)) { seen.add(k); out.push(m); }
-  });
-  return out;
-})();
-
 // Turno (M/V) a partir del código de grupo. 3.er char: M=matutino, V=vespertino.
 function turnoDeGrupo(g) {
   const m = String(g).trim().match(/^[1-8][A-Z]([MV])/);
@@ -445,43 +438,35 @@ function titleCase(s) {
   return String(s).toLowerCase().replace(/(^|\s|\()([a-záéíóúñ])/g, (m) => m.toUpperCase());
 }
 
-// Materias que imparte un maestro en la carrera activa (horario + roster en ISC).
-// Sale de TEACHERS, que ya hizo esa unión.
-const _matsPorProf = new Map(TEACHERS.map((t) => [t.name, t.materias]));
-function rosterMatsOf(name) {
-  return _matsPorProf.get(name) || [];
-}
-
-// Lista de materias del maestro con su estado activo (verde) / inactivo (rojo)
-function teacherMaterias(name) {
-  const rmats = rosterMatsOf(name);
-  const tm = state.teacherMats[name] || {};
-  const all = new Set(rmats);
-  Object.keys(tm).forEach((m) => all.add(m));
-  return [...all].sort((a, b) => a.localeCompare(b)).map((mat) => {
-    const inRoster = rmats.includes(mat);
-    const active = mat in tm ? tm[mat] : inRoster; // roster: verde por defecto; agregada: lo guardado
-    return { mat, active, added: !inRoster };
+// Materias de cada maestro y si las da este periodo. Sale de la base, nadie
+// lo edita:
+//   · active: true  → tiene oferta de esa materia en el periodo vigente
+//                     (api/horarios.php, las tres carreras);
+//   · active: false → la dio en un periodo pasado y este ya no
+//                     (api/roster.php); periodo = el último en que la dio.
+// Antes era una nota manual guardada en el navegador (state.teacherMats) y
+// todo arrancaba en verde, aunque el profe ya no diera la materia.
+const MATS_DE_PROF = (() => {
+  const m = new Map();                       // nombre normalizado → Map(materia normalizada → {…})
+  const de = (nombre) => {
+    const k = norm(nombre);
+    if (!m.has(k)) m.set(k, new Map());
+    return m.get(k);
+  };
+  (typeof SCHEDULE !== "undefined" ? SCHEDULE : []).forEach((o) => {
+    if (o.profesor) de(o.profesor).set(norm(o.materia), { mat: o.materia, active: true, periodo: null });
   });
-}
+  (typeof ROSTER !== "undefined" ? ROSTER : []).forEach((e) => {
+    const mats = de(e.t);
+    if (!mats.has(norm(e.m))) mats.set(norm(e.m), { mat: e.m, active: false, periodo: e.p || null });
+  });
+  return m;
+})();
 
-function toggleMat(name, mat) {
-  const tm = (state.teacherMats[name] = state.teacherMats[name] || {});
-  const cur = mat in tm ? tm[mat] : rosterMatsOf(name).includes(mat);
-  tm[mat] = !cur;
-  save();
-  renderProfs();
-}
-
-function addMat(name, mat) {
-  const tm = (state.teacherMats[name] = state.teacherMats[name] || {});
-  tm[mat] = false; // se agrega como inactiva (roja); haz clic para activarla
-  save();
-  renderProfs();
-}
-
-function removeMat(name, mat) {
-  const tm = state.teacherMats[name];
-  if (tm && mat in tm) { delete tm[mat]; save(); renderProfs(); }
+// Las que da primero, luego las que ya no; dentro de cada grupo, por nombre.
+function teacherMaterias(name) {
+  const mats = MATS_DE_PROF.get(norm(name));
+  if (!mats) return [];
+  return [...mats.values()].sort((a, b) => (b.active - a.active) || a.mat.localeCompare(b.mat));
 }
 

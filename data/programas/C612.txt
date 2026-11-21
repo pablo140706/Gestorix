@@ -1,0 +1,65 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Genetic Algorithms SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Evalúa la solución a problemas computables con base en los algoritmos genéticos.
+CONTENIDOS:
+I. CONCEPTOS GENERALES
+II. REPRESENTACIÓN DE SOLUCIONES Y OPERADORES GENÉTICOS
+III. PROBLEMAS DEL MUNDO REAL Y EVALUACIÓN DE RESULTADOS
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo b) Aprendizaje Basado en Problemas X
+c) Analógico X c) Aprendizaje Orientado a Proyectos
+d)Heurístico X d) Prácticas de taller o laboratorio X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica Saberes Previamente Adquiridos
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación Otras evidencias que evaluar:
+ Programas de cómputo funcionando
+según requerimientos.
+ Códigos fuente de implementación
+de algoritmos.
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Gestal, M. (et al.) 2010* Introducción a los algoritmos
+genéticos y la programación
+genética
+Universidade da
+Coruña. ISBN: 978-84-
+9749-422-9
+Golbert D. E. 1989* Genetic Algorithms in Search,
+Optimization and Machine
+Learning
+Addison-Wesley
+Longman Publishing
+Co., Inc. ISBN: 978-0-
+201-15767-3
+Kramer O. 2017 Genetic Algorithm Essentials Springer, ISBN: 978-3-
+319-52156-5
+Sivanandam S. N. and
+Deepa S. N.
+2010* Introduction to Genetic
+Algorithms
+Springer, ISBN: 978-3-
+642-09224-4
+Wirsansky E. 2020 Hands-On Genetic
+Algorithms with Python
+Packt Publishing
+ISBN: 978-
+1838557744
+* Bibliografía clásica
+

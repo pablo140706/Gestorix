@@ -1,0 +1,59 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA CAMPUS COAHUILA,
+ESCUELA SUPERIOR DE CÓMPUTO
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial, Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Fundamentos Económicos SEMESTRE: 1,2
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Examina las economías nacional e internacional con base en los enfoques micro y macroeconómico, así como la
+economía circular y la sustentabilidad.
+CONTENIDOS:
+I. Economía
+II. Microeconomía
+III. Teoría del Mercado
+IV. Macroeconomía
+V. Economía Internacional y sustentabilidad
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico X c) Aprendizaje orientado proyectos
+d) d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Ejercicios resueltos en equipo.
+Ensayo
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial
+Mc. Eachern, W. 2014 ECON-Microeconomía
+Cengage Learning /
+9786075190457.
+Mc. Eachern, W. 2014 ECON-Macroeconomía
+Cengage Learning /
+9786075190464.
+Parkin, M. & Loría, E 2015
+Microeconomía. Versión para
+Latinoamérica
+Pearson Educación
+/ 9786073233408
+Parkin, M. & Loría, E 2015
+Macroeconomía. Versión para
+Latinoamérica
+Pearson Educación
+/ 9786073233323
+Parkin, M 2018 Economía
+Pearson Educación
+/ 9786073243391
+

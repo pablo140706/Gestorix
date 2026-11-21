@@ -1,0 +1,60 @@
+ISC
+- 2020
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Comunicación oral y escrita SEMESTRE: I
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Presenta discursos con base en la comunicación oral, escrita y su contexto.
+CONTENIDOS:
+I. La comunicación para el siglo XXI
+II. Comunicación escrita
+III. Comunicación oral
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos X
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d)Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Textos técnicos y no técnicos redactados
+Planeación, guión, presentaciones electrónicas,
+presentación del discurso
+Sociodrama
+Reportes de prácticas X
+Evaluación escrita
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Amaro, M. y Rojas, A. 2016
+Redacción para los universitarios
+de hoy
+Parmenia /
+9786077490258
+Cantú, L. y Roque, C. 2010 Comunicación para ingenieros
+Editorial Patria /
+9786074382105
+Castelló, M. (coord.) 2007
+Escribir y comunicarse en
+contextos científicos y académicos
+Graó /
+9788478274772
+Chávez, F. 2016 Comunicación oral y escrita
+Pearson
+Education /
+9786073238212
+De Castro, A. 2017 ¡Comunícate!
+Ecoe /
+9789587413823
+

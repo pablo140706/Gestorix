@@ -1,0 +1,74 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Computing selected topics II
+SEMESTRE: VII
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Implementa soluciones de software con base en los métodos, técnicas y herramientas de desarrollo de la tecnología
+disruptiva elegida y sus inconvenientes económicos, tecnológicos y éticos.
+CONTENIDOS:
+I. Ámbitos de aplicación de la tecnología disruptiva
+II. Métodos, técnicas y herramientas de desarrollo
+III. Inconvenientes económicos, tecnológicos y éticos
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos X
+b) Deductivo b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d)Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación
+Otras evidencias a evaluar:
+Las que correspondan
+Reportes de prácticas X
+Evaluación escrita
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Armstrong, P. 2017
+Disruptive technologies: understand,
+evaluate, respond
+Kogan Page
+Publishers/
+9780749477288
+Baker, D. & Ellis, L. 2020
+Future directions in digital
+information: Predictions, practice,
+participation
+Elsevier/
+9780128221440
+Bali, V., Bhatnagar,
+V., Sinha, S. &
+Johri, P.
+2021
+Disruptive technologies for society
+5.0: Exploration of new ideas,
+techniques, and tools
+CRC Press/
+9780367724078
+Christensen, C. M. 2016
+The innovator's dilemma: when new
+technologies cause great firms to fail
+Harvard Business
+Review Press/
+9781633691780
+Delello, J. A. &
+McWhorter, R. R.
+2020
+Disruptive and emerging technology
+trends across education and the
+workplace.
+IGI Global/
+9781799829157
+

@@ -1,0 +1,61 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA CAMPUS COAHUILA
+(UPIIC), ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Licenciatura en Ciencias de Datos
+UNIDAD DE APRENDIZAJE: Modelos Econométricos SEMESTRE: VII
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Propone modelos econométricos con base en la valoración de los métodos predictivos.
+CONTENIDOS:
+I. Estrategias para los Modelos Econométricos
+II. Análisis de los supuestos del modelo clásico
+III. Modelos predictivos de clasificación
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) Analítico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Reporte de seminarios
+Reportes de indagación Otras evidencias a evaluar: Conclusión de
+discusión dirigida, ejercicios resueltos
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Cohen, J., Cohen, P.,
+West, S. G., & Aiken,
+L. S.*
+2013
+Applied multiple regression/correlation
+analysis for the behavioral sciences
+Routledge/
+9780203774441
+Greene, W.H. 2008* Econometric Analysis
+Pearson/978013
+4461366
+Gujarati, D. N. &
+Porter, D. C.
+2010* Econometría / 5 Ed.
+Mc Graw Hill/
+9786071502940
+Racine, J. S. 2019 Reproducible Econometrics Using R
+Oxford/
+9780190900670
+Willard, C. A. 2020
+Statistical Methods: An Introduction to
+Basic Statistical Concepts and Analysis
+Routledge/
+9780429261039
+* Bibliografía clásica
+

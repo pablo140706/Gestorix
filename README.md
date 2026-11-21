@@ -36,6 +36,15 @@ Necesitas Docker Desktop.
    docker compose run --rm web php importador/salones.php 27/1
    ```
    `salones.php` lee `data/salones/27-1.txt`, que se saca del PDF con `pdftotext -table -enc UTF-8` (viene con MSYS2).
+4. Carga el propósito, los temas y el PDF de cada materia (los PDFs ya vienen en `src/materias/` y su texto en `data/programas/`):
+   ```bash
+   docker compose run --rm web php importador/materias.php
+   ```
+   Si llegan PDFs nuevos de programas: agrégalos a `data/programas/mapa.csv` y corre antes, en Git Bash, `sh importador/programas/copiar.sh "/ruta/a/Planes de estudio"`.
+5. Carga los links de MisProfesores y las cédulas que capturas en `data/profesores/links-cedulas.csv` (con `--prueba` solo te dice qué cambiaría):
+   ```bash
+   docker compose run --rm web php importador/profesores.php
+   ```
 
 - App: <http://localhost:8080> (se usa sin cuenta; con cuenta, el avance y el horario se guardan en la base). Mientras no haya servicio de correo, el enlace para activar una cuenta sale en `docker compose logs web`.
 - pgAdmin: <http://localhost:5051> (correo y contraseña de `PGADMIN_*` en `.env`; el servidor "Gestorix" ya viene registrado y pide la contraseña de `POSTGRES_PASSWORD`).

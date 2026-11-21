@@ -1,0 +1,73 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Tecnologías para el desarrollo de aplicaciones Web SEMESTRE: IV
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla aplicaciones Web con base en las tecnologías HTML, XML, Java, JavaScript, AJAX, un framework
+JavaScript y la conexión a bases de datos.
+CONTENIDOS:
+I. Aspectos básicos del desarrollo de aplicaciones Web
+II. Páginas Web con HTML
+III. Java Servlets
+IV. Lenguaje de Marcado eXtensible (XML)
+V. Hojas de estilo en cascada
+VI. JavaScript y AJAX
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo x a) Estudio de Casos
+b) Deductivo b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos x
+d)Heurístico d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica x Saberes Previamente Adquiridos x
+Solución de casos Organizadores gráficos x
+Problemas resueltos Problemarios
+Reporte de proyectos x Exposiciones x
+Reportes de indagación Otras evidencias a evaluar:
+Conclusiones sobre discusiones dirigidas
+Reporte de lectura
+Ejercicios resueltos
+Reportes de prácticas x
+Evaluación escrita x
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Bourre, R. et. al. 2007
+Advanced XML
+Applications from the Experts at
+The XML Guild
+Thomson Course
+Technology PTR/
+1-59863-214-0
+Carey, P. 2017
+New Perspectives on HTML5
+and CSS3
+Cengage
+Learning/ 978-1-
+305-50393-9
+Flanagan, D. 2020
+Javascript: The definitive guide:
+Master the world's most-used
+programming language
+O'Reilly Media,
+Inc./
+9781491952023
+Godbole, A. &
+Kahate A.
+2017 Web Technologies
+McGraw Hill
+Education/
+9781259062681
+Hunter, J. &
+Crawford, W.
+1998 Java Servlet Programming
+O’Reilly &
+Associates, Inc/ 1-
+56592-391-X
+

@@ -90,22 +90,15 @@ function renderHorario() {
   const promCal = nCal ? (sumCal / nCal) : null;
   const promDif = nDif ? (sumDif / nDif) : null;
 
+  // Una sola franja (antes eran 4 tarjetas grandes).
+  const prom = (v, kind) => v == null ? "—" : `<b class="cs-val color-${metricColor(v.toFixed(1), kind)}">${v.toFixed(1)}</b>`;
   credSummaryEl.innerHTML = `
-    <div class="cs-card ${nivel}">
-      <div class="cs-val">${carga.total} <span class="cs-max">/ ${CARGA.media} UA</span></div>
-      <div class="cs-label">Carga (media ${CARGA.media}, máx. ${CARGA.max})${carga.soloEts ? ` <span class="cs-bloq">(${carga.soloEts} solo por ETS)</span>` : ""}</div>
-    </div>
-    <div class="cs-card">
-      <div class="cs-val">${nMaterias}</div>
-      <div class="cs-label">Materias inscritas · ${fmt(inscritos)} cr</div>
-    </div>
-    <div class="cs-card">
-      <div class="cs-val ${promCal != null ? "color-" + metricColor(promCal.toFixed(1), "cal") : ""}">${promCal != null ? promCal.toFixed(1) : "—"}</div>
-      <div class="cs-label">Calidad promedio</div>
-    </div>
-    <div class="cs-card">
-      <div class="cs-val ${promDif != null ? "color-" + metricColor(promDif.toFixed(1), "dif") : ""}">${promDif != null ? promDif.toFixed(1) : "—"}</div>
-      <div class="cs-label">Dificultad promedio</div>
+    <div class="cs-strip ${nivel}">
+      <span title="Carga media ${CARGA.media} UA, máxima ${CARGA.max}"><b>${carga.total}</b>/${CARGA.media} UA
+        <small>(máx. ${CARGA.max})</small>${carga.soloEts ? ` <span class="cs-bloq">${carga.soloEts} solo por ETS</span>` : ""}</span>
+      <span><b>${nMaterias}</b> materia${nMaterias === 1 ? "" : "s"} · ${fmt(inscritos)} cr</span>
+      <span title="Promedio de MisProfesores de tus maestros">Calidad ${prom(promCal, "cal")}</span>
+      <span title="Promedio de MisProfesores de tus maestros (bajo = más fácil)">Dificultad ${prom(promDif, "dif")}</span>
     </div>`;
 
   const avisos = avisosDelHorario();
@@ -146,8 +139,9 @@ function renderHorario() {
     const m = getMetric(h.maestro);
     const hasConflict = conflictWith[idx].size > 0;
     const aula = h.edificio ? `Ed. ${esc(h.edificio)} · Salón ${esc(h.salon)}` : "";
+    const mantenida = !h._auto;
     return `
-    <div class="hcard ${hasConflict ? "conflict" : ""}">
+    <div class="hcard ${hasConflict ? "conflict" : ""}" id="hcard-${idx}">
       <div class="hcard-info">
         <div class="hcard-top">
           <span class="hcard-mat">${esc(h.materia)}</span>
@@ -158,30 +152,160 @@ function renderHorario() {
         <div class="hcard-prof"><a href="#" class="prof-link" data-prof="${esc(h.maestro)}">${esc(h.maestro)}</a> · <span class="hcard-grupo">${esc(h.grupo || "")}${aula ? " · " + aula : ""}</span></div>
         ${h.sesiones && h.sesiones.length ? `<div class="hcard-ses">${esc(sesionesText(h.sesiones))}</div>` : ""}
         ${miniMetrics(m)}
+        <div class="hcard-alts" id="halts-${idx}"></div>
       </div>
-      <button class="hdel" data-idx="${idx}" title="Quitar del horario">✕</button>
+      <div class="hcard-acc">
+        <button class="hacc" data-hacc="cambiar" data-idx="${idx}" title="Ver otros grupos y maestros de esta materia">🔄 Cambiar</button>
+        <button class="hacc${mantenida ? " on" : ""}" data-hacc="mantener" data-idx="${idx}" aria-pressed="${mantenida}"
+          title="${mantenida ? "El automático no la toca. Pulsa para que 🎲 Otra la pueda cambiar." : "🎲 Otra la puede cambiar. Pulsa para conservarla."}">📌 ${mantenida ? "Se queda" : "Mantener"}</button>
+        <button class="hacc peligro" data-hacc="quitar" data-idx="${idx}" title="Quitar del horario">✕ Quitar</button>
+      </div>
     </div>`;
   }).join("");
 
   horarioListEl.querySelectorAll(".prof-link").forEach((a) => {
     a.onclick = (e) => { e.preventDefault(); showProfDetail(a.dataset.prof); };
   });
+}
 
-  horarioListEl.querySelectorAll(".hdel").forEach((btn) => {
-    btn.onclick = () => {
-      if (!confirmarBaja(state.horario[parseInt(btn.dataset.idx)])) return;
-      state.horario.splice(parseInt(btn.dataset.idx), 1);
-      save();
-      renderHorario();
-      // refrescar botones del plan si el drop está abierto
-      planEl.querySelectorAll(".drop.open").forEach((d) => {
-        const subj = d.closest(".subject");
-        const [, s, i] = subj.dataset.id.match(/^s(\d+)-(\d+)$/).map(Number);
-        renderDrop(d, s, i);
-      });
-    };
+// ============================================================
+//  Acciones de cada materia del horario: Cambiar · Mantener · Quitar
+// ============================================================
+// Las usan las tarjetas de la lista y el menú que sale al tocar una materia
+// en la rejilla. Cualquier cambio a mano invalida las combinaciones que ya
+// tenía barajadas el automático (🎲 Otra vuelve a calcular).
+
+function trasCambioManual() {
+  if (typeof autoPool !== "undefined") { autoPool = []; autoLastKey = null; }
+  save();
+  renderHorario();
+  // refrescar los botones del plan si hay un "Maestros" abierto
+  planEl.querySelectorAll(".drop.open").forEach((d) => {
+    const subj = d.closest(".subject");
+    const [, s, i] = subj.dataset.id.match(/^s(\d+)-(\d+)$/).map(Number);
+    renderDrop(d, s, i);
   });
 }
+
+function quitarDelHorario(idx) {
+  if (!confirmarBaja(state.horario[idx])) return;
+  state.horario.splice(idx, 1);
+  trasCambioManual();
+}
+
+// 📌 Mantener: el automático conserva todo lo que no trae _auto.
+function alternarMantener(idx) {
+  const h = state.horario[idx];
+  if (h._auto) delete h._auto; else h._auto = true;
+  trasCambioManual();
+}
+
+// Las otras ofertas de la MISMA materia (otro grupo u otro maestro), con
+// si chocan con el resto de tu horario. Orden: las que no chocan, las de tu
+// mismo turno, y luego por calidad del maestro.
+function alternativasDe(idx) {
+  const h = state.horario[idx];
+  const [, s, i] = h.sid.match(/^s(\d+)-(\d+)$/).map(Number);
+  const otras = state.horario.filter((_, k) => k !== idx);
+  const mat = norm(h.matReal || h.materia);
+  const turno = turnoDeGrupo(h.grupo);
+  return scheduleFor(s, i)
+    .filter((e) => norm(e.materia) === mat && !(e.grupo === h.grupo && norm(e.profesor) === norm(h.maestro)))
+    .map((e) => {
+      const item = armarItemHorario(e, s, i);
+      const cal = Number(getMetric(e.profesor).calidad);
+      return { e, item, choca: otras.some((o) => itemsConflict(item, o)), otroTurno: turnoDeGrupo(e.grupo) !== turno,
+               cal: Number.isFinite(cal) ? cal : -1 };
+    })
+    .sort((a, b) => (a.choca - b.choca) || (a.otroTurno - b.otroTurno) || (b.cal - a.cal) || a.e.grupo.localeCompare(b.e.grupo));
+}
+
+function abrirCambiar(idx) {
+  const caja = document.getElementById("halts-" + idx);
+  if (!caja) return;
+  if (caja.innerHTML) { caja.innerHTML = ""; return; }      // segundo clic: cerrar
+  const alts = alternativasDe(idx);
+  caja.innerHTML = !alts.length
+    ? `<div class="drop-empty">No hay otro grupo ni otro maestro de esta materia este periodo.</div>`
+    : `<div class="halts-tit">Otros grupos de esta materia (${alts.length})</div>` + alts.map((a, k) => {
+        const m = getMetric(a.e.profesor);
+        return `<div class="halt${a.choca ? " choca" : ""}">
+          <div class="halt-info">
+            <b>${esc(a.e.grupo)}</b> · ${esc(a.e.profesor || "Sin profesor")} ${metricCell(m.calidad, "cal")}
+            ${cupoBadge(a.e.grupo, a.e.materia)}
+            ${a.choca ? `<span class="conflict-tag">Choca</span>` : ""}
+            <div class="halt-ses">${esc(sesionesText(a.e.sesiones || []))}</div>
+          </div>
+          <button class="btn" data-hacc="elegir" data-idx="${idx}" data-alt="${k}">Elegir</button>
+        </div>`;
+      }).join("");
+  caja._alts = alts;
+  caja.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function elegirAlternativa(idx, k) {
+  const caja = document.getElementById("halts-" + idx);
+  const alt = caja && caja._alts && caja._alts[k];
+  if (!alt) return;
+  if (alt.choca && !confirm("Ese grupo choca con otra materia de tu horario. ¿Cambiarlo de todos modos?")) return;
+  state.horario[idx] = alt.item;          // sin _auto: lo elegiste tú, se queda
+  trasCambioManual();
+}
+
+horarioListEl.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-hacc]");
+  if (!b) return;
+  const idx = Number(b.dataset.idx);
+  ({
+    cambiar: () => abrirCambiar(idx),
+    mantener: () => alternarMantener(idx),
+    quitar: () => quitarDelHorario(idx),
+    elegir: () => elegirAlternativa(idx, Number(b.dataset.alt)),
+  })[b.dataset.hacc]?.();
+});
+
+// ---------- menú corto al tocar una materia en la rejilla ----------
+const hmenuEl = document.createElement("div");
+hmenuEl.className = "hmenu";
+hmenuEl.hidden = true;
+document.body.appendChild(hmenuEl);
+
+function cerrarHmenu() { hmenuEl.hidden = true; }
+
+document.getElementById("horarioTable").addEventListener("click", (e) => {
+  const cell = e.target.closest(".sched-cell[data-idx]");
+  if (!cell) return;
+  e.stopPropagation();
+  const idx = Number(cell.dataset.idx);
+  const h = state.horario[idx];
+  hmenuEl.innerHTML = `
+    <div class="hmenu-tit">${esc(h.materia)}<small>${esc(h.grupo || "")} · ${esc(h.maestro || "")}</small></div>
+    <button data-hm="cambiar">🔄 Cambiar grupo o maestro</button>
+    <button data-hm="mantener">📌 ${h._auto ? "Mantener" : "Dejar que el automático la cambie"}</button>
+    <button data-hm="quitar" class="peligro">✕ Quitar del horario</button>`;
+  hmenuEl.dataset.idx = idx;
+  hmenuEl.hidden = false;
+  const r = cell.getBoundingClientRect();
+  const ancho = hmenuEl.offsetWidth;
+  hmenuEl.style.left = Math.max(8, Math.min(r.left + window.scrollX, window.scrollX + document.documentElement.clientWidth - ancho - 8)) + "px";
+  hmenuEl.style.top = (r.bottom + window.scrollY + 4) + "px";
+});
+
+hmenuEl.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-hm]");
+  if (!b) return;
+  const idx = Number(hmenuEl.dataset.idx);
+  cerrarHmenu();
+  if (b.dataset.hm === "cambiar") {
+    document.getElementById("hcard-" + idx)?.classList.add("resaltado");
+    abrirCambiar(idx);
+  }
+  if (b.dataset.hm === "mantener") alternarMantener(idx);
+  if (b.dataset.hm === "quitar") quitarDelHorario(idx);
+});
+document.addEventListener("click", (e) => { if (!hmenuEl.hidden && !hmenuEl.contains(e.target)) cerrarHmenu(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") cerrarHmenu(); });
+// El menú va en coordenadas de la página: se mueve con ella al desplazarte.
 
 function fmt(n) { return n % 1 ? n.toFixed(1) : String(n); }
 
@@ -242,7 +366,8 @@ function renderHorarioTable() {
         const inner = items
           .map((h) => {
             const c = colorOf.get(h.sid);
-            return `<div class="sched-cell" style="background:${c.bg};color:${c.fg};border-color:${c.bd}" title="${esc(h.materia)} · ${esc(h.maestro)}">
+            // data-idx: al tocarla sale el menú Cambiar / Mantener / Quitar
+            return `<div class="sched-cell" data-idx="${state.horario.indexOf(h)}" style="background:${c.bg};color:${c.fg};border-color:${c.bd}" title="${esc(h.materia)} · ${esc(h.maestro)} — toca para cambiar o quitar">
               <div class="sched-mat">${esc(shortMat(h.materia))}</div>
               <div class="sched-meta">${esc(h.grupo || "")}${h.salon ? " · S." + esc(h.salon) : ""}</div>
               ${cupoBadge(h.grupo, h.matReal || h.materia)}

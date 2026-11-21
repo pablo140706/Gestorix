@@ -1,0 +1,67 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Finanzas Empresariales SEMESTRE: III
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Utiliza las herramientas matemáticas y financieras a partir de la información generada en la empresa.
+CONTENIDOS:
+I. La empresa y su entorno
+II. Importancia y utilización de la información financiera
+III. Análisis de la información financiera
+IV. Elementos de matemáticas financieras y la planeación financiera
+V. Métodos de evaluación de proyectos de inversión
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d)Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación
+Otras evidencias a evaluar:
+Infografías, ejercicios resueltos
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Díaz, C; Parra, R &
+López, L. 2012
+Presupuestos enfoque para
+la planeación financiera
+Pearson/
+9789586992206
+Gitman, L. 2016
+Principios de Administración
+Financiera
+Pearson/
+9786073237215
+Instituto Mexicano de
+Contadores Públicos
+2019
+Normas de Información
+Financiera (NIF)
+Consejo Mexicano de
+Normas de
+Información Financiera
+(CINIF) A.C./
+9786078628315
+Lara, E. 2017 Primer curso de contabilidad
+Trillas/
+97860717311111
+Weston, J. &
+Copeland, T.
+1999 Finanzas empresariales
+McGraw Hill/
+9684224419
+

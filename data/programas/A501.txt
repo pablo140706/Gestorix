@@ -1,0 +1,63 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA
+ESCUELA SUPERIOR DE CÓMPUTO
+UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Aprendizaje de máquina e inteligencia artificial SEMESTRE: V
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Propone una máquina de aprendizaje con base en los tipos de aprendizaje, algoritmos y medidas de desempeño.
+CONTENIDOS:
+I. Inteligencia artificial y sus aplicaciones
+II. Aprendizaje supervisado
+III. Aprendizaje no supervisado
+IV. Modelos de predicción
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje basado en problemas
+c) Analógico X c) Aprendizaje orientado proyectos X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación Otras evidencias a evaluar:
+Discusión dirigida
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Ammet, J. 2020
+Machine Learning and Artificial
+Intelligence
+Springer /
+9783030266219
+Chollet, F. 2017 Deep Learning with Python
+Manning Publication /
+9781617294433
+Pajares, M., Sanz,
+G. & De La Cruz, J.
+2010
+Aprendizaje Automático un
+Enfoque Práctico.
+RA-MA /
+9788499640112
+Ponce, P. 2010
+Inteligencia Artificial con
+Aplicaciones a la Ingeniería
+Alfa Omega /
+9786077854838
+Russell, S. &
+Norvig, P.
+2020
+Artificial Intelligence: A Modern
+Approach
+Ed. Prentice Hall /
+9780134610993
+

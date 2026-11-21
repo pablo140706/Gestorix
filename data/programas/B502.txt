@@ -1,0 +1,66 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO; UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS COAHUILA; UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Visión artificial SEMESTRE: V
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Implementa sistemas de visión artificial con base en los algoritmos de segmentación de zonas de interés,
+extracción de características y reconocimiento.
+CONTENIDOS:
+I. Fundamentos de visión artificial.
+II. Segmentación
+III. Reconocimiento de objetos en la imagen
+IV. Visión en múltiples dimensiones.
+V. Seguimiento de movimiento.
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico X c) Aprendizaje orientado proyectos
+d) Basado en la lógica de la
+disciplina
+d) Aprendizaje autónomo X
+e) Heurístico e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Ejercicios resueltos en equipo
+Programas de cómputo funcionando según
+requerimientos
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Corke, P. 2017 Robotics, Vision and control
+Springer /
+9783319544120
+Davies, E.R. 2018 Computer Vision
+Academic press /
+9780128092842
+Gonzales, R. y Woods,
+R.
+2018 Digital Image Processing
+Pearson /
+9780133356724
+Nixon, M. y Aguado, S. 2019
+Feature Extraction and Image
+Processing
+Academic Press /
+9780128149768
+Szeliski, R. 2011
+Computer Vision: Algorithms and
+Applications
+Springer /
+9781848829350
+*Bibliografía clásica
+

@@ -1,0 +1,68 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA CAMPUS COAHUILA,
+ESCUELA SUPERIOR DE CÓMPUTO
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Fundamentos de diseño digital SEMESTRE: 2
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Construye sistemas lógicos combinacionales y de memoria a partir de su representación Booleana, los lenguajes
+de descripción de hardware y dispositivos reconfigurables.
+CONTENIDOS:
+I. Principios del diseño de Sistemas Digitales
+II. Tecnología y lenguajes de programación de dispositivos reconfigurables
+III. Lógica combinacional
+IV. Elementos básicos de memoria digital
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) Heurístico X d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios X
+Reporte de proyectos Exposiciones X
+Reportes de indagación
+Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor (es) Año Título del documento Editorial/ISBN
+Brown, S. &
+Vranesic, Z.
+2009*
+Fundamentals digital logic with
+VHDL design
+Mc Graw-Hill/
+978-0-07-352953-0
+Morris Mano, M. 2013* Diseño digital
+Pearson Prentice
+Hall/
+9786073220408
+Tocci, R. J., Widmer,
+N. S. & Moss, G. L.
+2017
+Sistemas digitales principios y
+aplicaciones
+Pearson Prentice
+Hall/
+6073241542
+Pedroni, V. 2010* Circuit design with VHDL
+MIT Press Edition /
+0262014335
+Pardo, F. & Boluda,
+J.
+2012*
+VHDL Lenguaje para síntesis y
+modelado de circuitos
+ALFAOMEGA Ra-Ma/
+978-84-9964-040-2
+*Bibliografía clásica
+

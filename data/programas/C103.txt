@@ -1,0 +1,60 @@
+ISC
+- 2020
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO; UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Cálculo SEMESTRE: I
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Soluciona problemas del área de la ingeniería a partir del cálculo diferencial y técnicas de integración.
+CONTENIDOS:
+I. Funciones algebraicas y trascendentes
+II. Límites de funciones y continuidad
+III. Derivada y optimización
+IV. Técnicas de integración
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d) Analítico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios X
+Reportes de prácticas X Otras evidencias a evaluar: Participación en
+clase mediante la exposición de la solución de
+problemas (Rúbrica)
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Larson, R. &
+Edwards, B.
+2014 Cálculo. Tomo I
+Cengage Learning
+ISBN 9781285057095
+Rogawski, J. 2012 Cálculo. Una variable
+Reverté
+ISBN 9788429151664
+Smith, R;
+Minton, R. &
+Rafhi, Z.
+2019 Cálculo trascendentes tempranas
+Mc Graw Hill
+ISBN 9781456272234
+Stewart, J. 2018
+Cálculo de una variable
+trascendentes tempranas
+Cengage Learning
+ISBN 9786075265506
+Thomas, G. 2015 Cálculo una variable
+Pearson
+ISBN 9789702627340
+*Bibliografía clásica
+

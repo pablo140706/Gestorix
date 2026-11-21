@@ -1,0 +1,66 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA
+ESCUELA SUPERIOR DE CÓMPUTO
+UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Matemáticas avanzadas para la ciencia de datos SEMESTRE: V
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Resuelve problemas de optimización y teoría de la información a partir de técnicas algorítmicas de problemas
+lineales y no lineales y la entropía.
+CONTENIDOS:
+I. Optimización lineal.
+II. Optimización no lineal.
+III. Teoría de la información.
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación X Otras evidencias a evaluar:
+Discusión dirigida y Problemas resueltos con
+software.
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+*Bazaraa, S., Jarvis J.
+& Sherali D.
+2011
+Linear Programming and Network
+Flows
+Wiley /
+9781118211328
+*Bazaraa, S., Jarvis J.
+& Sherali D.
+2013
+Nonlinear Programming: Theory
+and algorithms
+Wiley /
+9781118857564
+*Cover, M. & Thomas,
+A.
+2006 Elements of Information Theory Wiley /
+9780471241959
+Hamdy A. Taha 2017 Investigación de operaciones
+Pearson /
+9786073241212
+Luemberger David G.
+y Ye Yingyu
+2016
+Linear and Nonlinear
+Programming
+Springer /
+9783319188416
+*Bibliografía Clásica
+

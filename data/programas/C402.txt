@@ -1,0 +1,69 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Probabilidad y Estadística SEMESTRE: IV
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Analiza matemáticamente los problemas aleatorios y sus resultados a partir de los elementos de probabilidad.
+CONTENIDOS:
+I. Elementos de probabilidad
+II. Variables aleatorias discretas y continuas
+III. Distribuciones de probabilidad para variables discretas y continuas
+IV. Distribución de varias variables aleatorias
+V. Estadística paramétrica usando estimación y prueba de hipótesis
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d) Heurístico d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación X
+Otras evidencias a evaluar:
+Ejercicios resueltos
+Reportes de prácticas
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Devore, J. 2016
+Probabilidad y Estadística para
+ingeniería y ciencias
+CENGAGE L/978-
+607-522-827-3
+Gutiérrez, E. &
+Vladimirovna, O.
+2014 Probabilidad y Estadística.
+Ed. Patria/ 978-
+607-438-766-7
+Mendenhall, W.,
+Scheaffer, R. &
+Wackerly, D.
+2008
+Estadística Matemática con
+Aplicaciones
+CENGAGE
+Learning / 978-
+607-481-399-9
+Myers, R., Myers, S.,
+Walpole, R. & Ye, K.
+2012
+Probabilidad y Estadística para
+ingeniería y ciencia
+Pearson/ 978-
+607-32-1417-9
+Spiegel, M. &
+Stephens, L.
+2009 Estadística
+Mc Graw Hill /978
+-970-10-6887-8
+

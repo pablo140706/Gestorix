@@ -1,0 +1,52 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Circuitos Eléctricos SEMESTRE: III
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Resuelve problemas de circuitos eléctricos de acuerdo a las técnicas de análisis, teoremas de aplicación y
+mediciones en laboratorio.
+CONTENIDOS:
+I. Fundamentos de circuitos eléctricos
+II. Análisis de circuitos en corriente directa
+III. Análisis de circuitos en el dominio de la frecuencia
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d)Heurístico d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación
+Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Boylestad, R. 2017 Introducción al Análisis de
+Circuitos
+Pearson.
+9786073241472.
+Dorf, R. 2015 Circuitos Eléctricos Alfaomega.
+9786076223628.
+Haytt, W., Kemmerly,
+J., Phillips, J. &
+Durbin, S.
+2019 Análisis de Circuitos en Ingeniería Mc Graw Hill.
+9780073545516.
+Fraile, M. 2012 Circuitos Eléctricos Pearson.
+9788483227954.
+Fraile, M. 2013 Problemas de Circuitos Eléctricos Pearson
+Educación.
+9788490354056.
+

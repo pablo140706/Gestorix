@@ -1,0 +1,78 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Compiladores
+SEMESTRE: V
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla un compilador con base en el uso de generadores de analizadores léxicos y sintácticos e infraestructuras
+de desarrollo de compiladores.
+CONTENIDOS:
+I. Arquitectura de los compiladores
+II. Analizador léxico
+III. Analizador sintáctico
+IV. Aplicaciones de los compiladores
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d)Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación
+Otras evidencias a evaluar:
+Ejercicios resueltos
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Aho, A., Sethi R. y
+Ulman J.
+2008
+Compiladores: Principios, técnicas
+y herramientas
+Pearson/
+9789702611332
+Alfonseca, M., de la
+Cruz, M., de la Puente,
+A. & Cañabate, E.
+2006
+Compiladores e intérpretes: teoría
+y práctica
+Pearson/
+9788420550312
+Cooper, D. y Torczon,
+L.
+2011
+Engineering a compiler. Second
+edition
+Elsevier/
+9780120884780
+Gálvez S. y Mora M. 2005
+Compiladores: Traductores y
+compiladores con Lex/Yacc,
+JFlex/Cup y JavaCC
+Universidad de
+Málaga/
+8468910376
+Grune, D., Van
+Reeuwijk, K., Bal, H.,
+Jacobs, C. &
+Langendoen, K.
+2012 Modern compiler design.
+Springer Science
+& Business
+Media/
+9781461446996
+

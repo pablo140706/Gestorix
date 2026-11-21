@@ -1,23 +1,34 @@
 <?php
 // GET api/roster.php → ROSTER (reemplaza roster.js)
-//   [{ t: profesor, m: materia, g: "" }, …]
+//   [{ t: profesor, m: materia, g: "", p: "26/2" }, …]
 //
-// En iscweb el roster salía de un Excel y servía para dos cosas: el filtro
-// A/B de optativas de ISC (que ya no existe) y meter en la lista de
-// Maestros a los profes que no dan clase este periodo. Aquí queda solo lo
-// segundo: los profes de periodos pasados que no tienen oferta en el
-// vigente, con las materias que dieron. Sin grupos, para no mezclar
-// grupos viejos con los de ahora.
+// Las materias que cada profesor dio en periodos pasados y que en el
+// periodo vigente YA NO da (p = el último periodo en que la dio). Sirve
+// para la pestaña Maestros:
+//   · lo que da este periodo sale de api/horarios.php → etiqueta verde
+//     "Imparte";
+//   · lo de aquí → etiqueta roja "Ya no (26/2)";
+//   · y así también salen en la lista los profes que este periodo no dan
+//     ninguna clase.
+// Todo se calcula de las ofertas de la base; nadie lo edita a mano.
+// Sin grupos, para no mezclar grupos viejos con los de ahora.
+//
+// Se compara por NOMBRE de la materia, no por clave: si alguien dio
+// Matemáticas discretas de ISC (C102) en 26/2 y este periodo da la de IA
+// (B102), sigue dando "Matemáticas discretas" (así la junta el front).
 require __DIR__ . '/../lib/api.php';
 
 $st = db()->prepare(
-    "SELECT DISTINCT p.nombre AS t, m.nombre_saes AS m
+    "SELECT p.nombre AS t, m.nombre_saes AS m, max(o.periodo) AS p
      FROM oferta o
      JOIN profesor p ON p.id = o.profesor
      JOIN materia m ON m.clave = o.materia
-     WHERE o.periodo <> :v
-       AND NOT EXISTS (SELECT 1 FROM oferta x WHERE x.periodo = :v AND x.profesor = p.id)
+     WHERE o.periodo <> :v1
+       AND NOT EXISTS (SELECT 1 FROM oferta x JOIN materia mx ON mx.clave = x.materia
+                       WHERE x.periodo = :v2 AND x.profesor = o.profesor AND mx.nombre_saes = m.nombre_saes)
+     GROUP BY p.nombre, m.nombre_saes
      ORDER BY t, m");
-$st->execute(['v' => periodoVigente()]);
+$v = periodoVigente();
+$st->execute(['v1' => $v, 'v2' => $v]);
 
-responder(array_map(fn($r) => ['m' => $r['m'], 't' => $r['t'], 'g' => ''], $st->fetchAll()));
+responder(array_map(fn($r) => ['t' => $r['t'], 'm' => $r['m'], 'g' => '', 'p' => $r['p']], $st->fetchAll()));

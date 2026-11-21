@@ -1,0 +1,62 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Métodos cuantitativos para la toma de decisiones SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla planes de acción relacionados con el área de sistemas computacionales en cualquier giro de empresa,
+a partir de la optimización de los recursos, el uso de la metodología de métodos cuantitativos, criterios de
+sustentabilidad, e indicadores de toma de decisiones.
+CONTENIDOS:
+I. Estructura de los métodos cuantitativos para la toma de decisiones
+II. Fundamentos teóricos de la Programación Lineal
+III. Análisis de dualidad y sensibilidad
+IV. Modelos de redes y de transporte
+V. Logística y control de modelos de inventarios
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d)Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios X
+Reporte de proyectos X Exposiciones
+Reportes de indagación
+Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Anderson, D. 2004
+Métodos Cuantitativos para los
+Negocios
+Cengage Learning
+Editores/ 0324184131
+Hillier, F. 2008
+Métodos Cuantitativos para
+Administración
+McGraw-Hill/
+9701065328
+Render, B. 2016
+Métodos Cuantitativos para los
+Negocios
+Pearson Educación/
+970-26-0738-8
+Taha, H. 2012 Investigación de Operaciones
+Pearson/ 978-607-32-
+0796-6
+Winston, W. 2005
+Investigación de Operaciones.
+Aplicaciones y Algoritmos
+Thomson/ 0534380581
+PROGRAMA DE ESTUDIOS
+

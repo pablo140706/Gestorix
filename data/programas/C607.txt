@@ -1,0 +1,76 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Virtual instrumentation
+SEMESTRE: VI
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Implementa sistemas de instrumentación virtual a partir de la programación gráfica.
+CONTENIDOS:
+I. Sistemas de adquisición de datos virtuales
+II. Programación gráfica para virtualización de instrumentos
+III. Estructuras de control del lenguaje G
+IV. Tipos de datos estructurados y visualización de datos
+V. Programación modular
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico X c) Aprendizaje Orientado a Proyectos X
+d) Heurístico
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos X Exposiciones x
+Reportes de indagación X Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Bitter, R., Mohiuddin,
+T., & Nawrocki, M.
+2017
+LabVIEW™ Advanced
+Programming Techniques.
+CRC Press/
+9781315222097
+Del Río Fernández, J.,
+Shariat-Panahi, S.,
+Gandul, D. S. &
+Lázaro, A. M.
+2013
+LabVIEW Programación para
+sistemas de instrumentación
+Alfa Omega/
+9789587781236
+Lajara, J. y Pelegri, J. 2017
+LabView: entorno gráfico de
+programación
+Marcombo/
+9788426724366
+Manuel, A., Biel, D.,
+Olivé, J., Prat, J. &
+Sánchez, F.
+2001
+Instrumentación Virtual.
+Adquisición, procesado y análisis
+de señales
+EDICIONS UPC/
+8483014734
+Schwartz, M., &
+Manickum, O.
+2015
+Programming Arduino with
+Labview
+Packt Publishing
+LTD/
+9781849698221
+

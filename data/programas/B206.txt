@@ -1,0 +1,59 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS COAHUILA,
+ESCUELA SUPERIOR DE CÓMPUTO
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Finanzas empresariales SEMESTRE: 2
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Determina estados financieros pro forma y proyectos de inversión con base en las Normas de Información
+Financiera (NIF), el valor del dinero en el tiempo, la planeación y sus métodos de evaluación.
+CONTENIDOS:
+I. La empresa y su contexto
+II. Importancia y utilización de la información financiera
+III. Análisis financiero
+IV. Estados financieros proforma
+V. Métodos de evaluación de proyectos de inversión
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) Analítico X d) X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Reporte de prácticas
+Solución de ejercicios
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial
+Díaz, A. & Aguilera, V. 2008 Matemáticas financieras
+McGraw Hill /
+109701059204
+Gitman, L. 2016
+Principios de Administración
+Financiera
+Pearson / 9786073237215
+Instituto Mexicano de
+Contadores Públicos
+2019
+Normas de Información
+Financiera (NIF)
+Consejo Mexicano de
+Normas de Información
+Financiera, A.C (CINIF) /
+9786078628315
+Lara, E. 2017 Primer curso de contabilidad Trillas / 97860717311111
+Villalobos, J.L. 2016 Matemáticas financieras
+Pearson. /
+9786073238540
+

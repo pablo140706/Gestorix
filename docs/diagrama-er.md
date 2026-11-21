@@ -22,6 +22,7 @@ erDiagram
     periodo ||--o{ oferta : "en"
     materia ||--o{ oferta : "se imparte en"
     profesor |o--o{ oferta : "imparte"
+    profesor ||--o{ cedula : "tiene"
     oferta ||--o{ sesion : "se da en"
     bloque ||--o{ sesion : "ocupa"
     periodo ||--o{ cupo : "en"
@@ -49,7 +50,8 @@ erDiagram
         smallint ua "1, o 2 en TT"
         smallint orden
         boolean se_ofrece
-        text descripcion
+        text descripcion "propósito y temas del PDF"
+        text descripcion_fuente "NULL = programa oficial"
         text pdf
     }
     seriacion {
@@ -83,8 +85,6 @@ erDiagram
         serial id PK
         text nombre
         text nombre_norm UK
-        varchar cedula
-        text titulo_profesional
         text mp_link
         numeric mp_calidad "0 a 10"
         numeric mp_recomiendan "0 a 100"
@@ -99,6 +99,11 @@ erDiagram
         char turno "generado del grupo"
         text edificio
         text salon
+    }
+    cedula {
+        int profesor PK, FK
+        varchar numero PK "Registro Nacional de Profesionistas"
+        varchar nivel "licenciatura, ingenieria, especialidad, maestria, doctorado"
     }
     bloque {
         smallint numero PK "1 a 9"
@@ -172,7 +177,8 @@ erDiagram
     recordatorio {
         serial id PK
         int usuario FK
-        timestamp fecha_hora
+        date fecha
+        time hora "NULL = todo el día"
         varchar titulo
         varchar materia FK "opcional"
         varchar nota
@@ -232,6 +238,7 @@ erDiagram
 | Llave foránea | Al borrar el padre | Por qué |
 |---|---|---|
 | `sesion.oferta` | `CASCADE` | Una sesión no existe sin su clase |
+| `cedula.profesor` | `CASCADE` | Las cédulas son parte del profesor |
 | `token`, `avance`, `horario`, `recordatorio` → `usuario` | `CASCADE` | Son datos personales: se van con la cuenta |
 | `rubrica.comentario`, `reporte.comentario` | `CASCADE` | Son parte del comentario |
 | `comentario.usuario` | `SET NULL` | El comentario se queda como "usuario eliminado" (decisión del usuario) |
@@ -249,6 +256,7 @@ erDiagram
 | `oferta` | `UNIQUE NULLS NOT DISTINCT (periodo, grupo, materia, profesor)` | Dos ofertas "sin profesor" iguales |
 | `carrera` | `carga_min_ua <= carga_media_ua <= carga_max_ua` | Una carga académica imposible |
 | `seriacion` | `materia <> requisito` | Una materia que se pide a sí misma |
+| `cedula` | `numero ~ '^[0-9]{5,9}$'` y `nivel IN (…)` | Una cédula capturada con letras (`L2890498`) o un texto como `no-existe` |
 
 La vista `avance_status` deriva el status (pendiente, en recurse, aprobada, reprobada, solo por
 ETS, aprobada por ETS) y la calificación final de `veces`, `calif` y `calif_ets`, así que esos

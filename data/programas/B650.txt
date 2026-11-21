@@ -1,0 +1,69 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA;
+(UPIIC), ESCUELA SUPERIOR DE COMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Interacción humano-máquina SEMESTRE: VI, VII
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Diseña mecanismos de interacción en sistemas de computadora usables con base en el entendimiento de la
+tecnología y percepción humana.
+CONTENIDOS:
+I. Fundamentos de la interacción humano máquina
+II. Proceso de diseño de interfaces humano máquina
+III. Interacciones basadas en lenguaje natural
+IV. Interacciones basadas en visión de computadora
+V. Otros tipos de interacciones
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d) Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación Otras evidencias a evaluar: Presentación del
+proyecto.
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial
+Johnson, J. 2010 Designing with the Mind in Mind.
+Morgan Kaufmann /
+9780124079144
+Norman, L. &
+Kirakowski, J.
+2017
+The Wiley Handbook of Human
+Computer Interaction.
+Wiley /
+9781118976135
+Preece, J., Sharp,
+H. & Rogers, Y.
+2019
+Interaction Design- Beyond
+Human-Computer Interaction.
+Wiley / 9781119547259
+*Tiwary, S. &
+Siddiqui, T.J.
+2012
+Speech, Image and Language
+Processing for Human Computer
+Interaction.
+IGI Global /
+9781466609549
+*Turk, M. & Hua,
+G.
+2013 Vision-Based Interaction.
+Morgan & Claypool /
+9781608452415
+*Bibliografía básica
+

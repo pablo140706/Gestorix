@@ -1,0 +1,69 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA
+ESCUELA SUPERIOR DE CÓMPUTO
+UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Licenciatura en Ciencias de Datos
+UNIDAD DE APRENDIZAJE: Estadística SEMESTRE: IV
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Construye modelos estadísticos a partir de la inferencia paramétrica, no paramétrica, causal y la regresión.
+CONTENIDOS:
+I. Estadística descriptiva
+II. Inferencia estadística paramétrica
+III. Estadística no paramétrica
+IV. Regresión
+V. Inferencia causal
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) Analítico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Reporte de seminarios
+Reportes de indagación X Otras evidencias a evaluar:
+Uso de software y discusión dirigida.
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Bruce, P. &
+Bruce, A.
+2017
+Practical Statistics for Data
+Scientist
+O'Reilly Media /
+9781491952962
+Correa,J. &
+Barrera, C.
+2019
+Introducción a la Estadística
+Bayesiana
+Fondo Editorial ITM /
+9788585414723
+Judea, P.,
+Glymour, M, &
+Jewell, N.
+2016 Causal Inference in Statistics Wiley / 9781119186847
+Matloff, N. 2019
+Probability and Statistics for Data
+Science
+Chapman and Hall /
+9781138393295
+Vladimirovna, O. &
+Gutiérrez, E.
+2016
+Estadística Inferencial 1 para
+Ingeniería y Ciencias
+Grupo Editorial Patria /
+9786077444053
+PROGRAMA DE ESTUDIOS
+

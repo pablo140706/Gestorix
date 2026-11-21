@@ -1,0 +1,69 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Non-relational databases
+SEMESTRE: VI
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla modelos y bases de datos no relacionales a partir de las diferentes metodologías de diseño.
+CONTENIDOS:
+I. Fundamentos de las bases de datos no relacionales
+II. Bases de Datos Key Value
+III. Bases de datos de documentos
+IV. Bases de datos de columnas
+V. Bases de datos de grafos
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d) Analítico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial/ ISBN
+Harrison, G. 2015
+Next Generation Databases:
+NoSQL and Big Data
+Apress/ 978-
+1484213308
+Meier, A., Kaufmann,
+M. & Kaufmann, M.
+2016 SQL-& NoSQL-Databases.
+Springer Berlin
+Heidelberg/ 978-
+3658245481
+Perkins, L.,
+Redmond, E. &
+Wilson, J.
+2018
+Seven Databases in Seven Weeks:
+A guide to modern databases and
+the Nosql movement.
+Pragmatic
+Bookshelf/ 978-
+1934356920
+Raj, P. & Deka, G. 2018
+A Deep Dive into NoSQL
+Databases: The Use Cases and
+Applications.
+Academic Press/
+978 - 0128137864
+Sullivan, D. 2015 NoSQL for mere mortales
+Addison
+Wesley/978-
+0134023212
+

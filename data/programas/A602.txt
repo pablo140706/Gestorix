@@ -1,0 +1,67 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA CAMPUS COAHUILA
+(UPIIC), ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Analítica avanzada de datos SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Desarrolla sistemas de analítica avanzados de datos con base en Modelos de regresión avanzados, clasificación
+y agrupamiento.
+CONTENIDOS:
+I. Modelos de regresión avanzados
+II. Clasificación
+III. Modelos de agrupamiento en la analítica avanzada
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Deductivo a) Estudio de Casos
+b) Inductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico X c) Aprendizaje Orientado a Proyectos
+d) Heurístico X d)
+e) Especializado e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Reporte de seminarios
+Reportes de indagación Otras evidencias a evaluar: conclusión de
+discusión dirigida, programas en un lenguaje
+de ciencia de datos
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Bruce, P. & Bruce, A. 2020 Practical Statistics for Data Scientists
+O’Reilly /
+9781484239247
+EMC Education
+Services
+2015
+Data Science & Big Data Analytics:
+Discovering, Analyzing, Visualizing and
+Presenting Data
+John Wiley &
+Sons /
+9781118876138
+Nelly, F. 2018 Python Data Analytics
+Apress/
+9781484239124
+Ryza, S. & Laserson,
+U.
+2018
+Advanced Analytics with Spark, Patterns
+for Learning from Data at Scale
+O’Reilly/
+9781491972953
+Runkler, T 2020
+Data Analytics, Models and Algorithms
+for Intelligent Data Analysis
+Springer/
+9783658297794
+*Bibliografía básica
+

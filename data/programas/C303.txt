@@ -1,0 +1,61 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Ecuaciones Diferenciales SEMESTRE: III
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Resuelve problemas de circuitos eléctricos y de otros sistemas dinámicos a partir de ecuaciones diferenciales
+ordinarias.
+CONTENIDOS:
+I. Introducción a las ecuaciones diferenciales
+II. Ecuaciones diferenciales de primer orden
+III. Ecuaciones diferenciales lineales de segundo orden y orden superior
+IV. Transformada de Laplace
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo x a) Estudio de Casos
+b) Deductivo x b) Aprendizaje Basado en Problemas x
+c) Analógico x c) Aprendizaje Orientado a Proyectos
+d)Heurístico d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos x
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación
+Otras evidencias a evaluar:
+Ejercicios resueltos
+Reportes de prácticas
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Carballo, J.M 2019 Introducción a las ecuaciones
+diferenciales ordinarias
+IPN/
+978-607-414-622-6
+Espinosa, E. & Canals 2011 Ecuaciones diferenciales
+ordinarias. Introducción
+Reverté/
+9786077815044
+Kiseliov, M.; Krasnov,
+G. & Makarenko, G.
+1999 ecuaciones diferenciales
+ordinarias
+URSS/
+S-354-010099-3
+Spiegel, M.R. 2001 Ecuaciones Diferenciales
+Aplicadas
+Prentice-Hall
+Hispanomericana/
+9688800538
+Zill, D. G. 2018 Ecuaciones Diferenciales con
+Aplicaciones de Modelado
+Cengage-Learning/
+9786075266312
+

@@ -1,0 +1,67 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Introduction to cryptography SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Construye aplicaciones criptográficas con base en algoritmos, primitivas y servicios existentes de la criptografía de
+clave secreta y pública.
+CONTENIDOS:
+I. Fundamentos de criptografía
+II. Criptografía de clave secreta
+III. Integridad
+IV. Criptografía de clave pública
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo x a) Estudio de Casos
+b) Deductivo b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos x
+d)Heurístico x
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica x Saberes Previamente Adquiridos x
+Solución de casos Organizadores gráficos x
+Problemas resueltos Problemarios x
+Reporte de proyectos x Exposiciones x
+Reportes de indagación x
+Otras evidencias a evaluar:
+Reportes de prácticas x
+Evaluación escrita x
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial/ ISBN
+Menezes A.,
+Oorschot, P. y
+Vanstone, S.
+1996 Handbook of Applied Cryptography
+CRC Press/ 978-
+0849385230
+Para, C., Pelzl, J.
+2014
+Understanding Cryptography: a
+textbook for students and
+practitioners
+Springer Verlag/
+978-3642446498
+Stallings, W. 2017
+Cryptography and network security:
+principles and practice
+Pearson/ 978-
+1292158587
+Stinson, D. R. y
+Paterson, M. B
+2018 Cryptography: Theory and practice
+CRC Press/ 978-
+1138197015
+Trappe, W. y
+Washington, L.
+2020
+Introduction to Cryptography with
+coding Theory
+Pearson/ 978-
+0134859064
+

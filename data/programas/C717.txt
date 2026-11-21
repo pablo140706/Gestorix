@@ -1,0 +1,70 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Desarrollo de aplicaciones móviles nativas
+SEMESTRE: VII
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla aplicaciones móviles nativas escalables, seguras y confiables con base en los componentes de la
+plataforma de desarrollo Android alimentada por fuentes de datos locales y remotos.
+CONTENIDOS:
+I. Aspectos básicos en el desarrollo de aplicaciones móviles
+II. Estructura y componentes de la interfaz de usuario
+III. Almacenamiento y manejo de datos
+IV. Servicios y comunicaciones
+V. Publicación y API’s
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo b) Aprendizaje Basado en Problemas
+c) Analógico X c) Aprendizaje Orientado a Proyectos X
+d) Heurístico
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación Otras evidencias a evaluar:
+Ejercicios resueltos
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Blake G. y Laird D. 2018
+Android: Programming Android
+Database Applications for the
+Enterprise
+Zigurd Mednieks
+/978-1118183496
+Griffiths, D. 2017
+Head First Android Development:
+A Brain-Friendly Guide
+O'Reilly/
+9781491974056
+Kumar, A. 2018 Android apps with Firebase
+Packt/
+99781788624718
+Tomas, J., Carbonell,
+V., Albiol, A. y Fahli,
+M.
+2016
+Dispositivos Wearable, Visión
+Artificial, Google Glass y Android
+TV
+Marcombo/
+978-607-622-690-2
+Tomas, J., Carbonell,
+V., Barrosa J.,
+Bataller, J., García,
+M. y Catlánn, A.
+2017 El gran libro de Android Avanzado
+Marcombo/
+9788426724557
+

@@ -1,0 +1,60 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Economic engineering
+SEMESTRE: VII
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Aplica los métodos de evaluación económica de las diferentes alternativas de inversión con base en la factibilidad
+económica de las mismas.
+CONTENIDOS:
+I. Conceptualización de la ingeniería económica
+II. Valor del dinero en el tiempo
+III. Evaluación de alternativas económicas
+IV. Depreciación, impuestos y financiamiento en la evaluación económica
+V. Efectos de la inflación en la evaluación económica
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d)Heurístico d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación X Otras evidencias a evaluar:
+Ejercicios resueltos
+Presentación de modelo
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Baca, G. 2015 Ingeniería Económica.
+Mc-Graw-Hill/ 978-
+607-15-1244-4
+Blank. L. T. y
+Tarkin. A. J.
+2020 Ingeniería Económica
+Mc-Graw-Hill/ 978-
+145-62-7719-2
+Coss B., R. 2008
+Análisis y Evaluación de Proyectos de
+Inversión
+LIMUSA/ 978-968-
+18-1327-7
+García, J. 2017 Matemáticas Financieras
+Piramide/ 978-843-
+68-3858-9
+Mora, A. 2020 Matemáticas Financieras
+Alfaomega / 978-
+958-77-8511-1
+

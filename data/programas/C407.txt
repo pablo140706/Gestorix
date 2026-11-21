@@ -1,0 +1,69 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Sistemas Operativos SEMESTRE: IV
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Propone soluciones a las necesidades de sistemas computacionales actuales a partir del funcionamiento del
+sistema operativo.
+CONTENIDOS:
+I. Estructura de un sistema operativo
+II. Administración de procesos
+III. Administración de memoria
+IV. Sistema de archivos
+V. Dispositivos de entrada y salida
+VI. Seguridad y virtualización
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Basado en la lógica de la
+disciplina
+X c) Aprendizaje Orientado a Proyectos
+d) Activo X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Ejercicios resueltos
+Reporte de debate
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Carretero, J;
+Anasagasti, P de M;
+García, F; Pérez, F.
+2007
+Sistemas operativos una visión
+aplicada
+McGraw-Hill/
+9788448156435
+Robbins A. 2010
+Bash Pocket Reference
+O'REILLY/ 978-1-449-
+38788-4
+Silberschatz, A; Baer,
+G & Gagne, G.
+2018 Operating Systems Concepts Wiley/ 9781119329480
+Tanenbaum, A & Bos,
+H.
+2014 Modern Operating Systems
+Pearson Education/
+978-0-13-359162-0
+Tanenbaum, A &
+Woodhull, A.
+2006
+Operating Systems Design
+and Implementation
+Prentice-Hall/ 978-0-
+13-142938-3
+

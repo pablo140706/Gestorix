@@ -1,0 +1,67 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA,
+ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Análisis y diseño de sistemas SEMESTRE: IV
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Diseña sistemas de información a partir de las metodologías de análisis, modelado de sistemas, las herramientas
+de diseño estático y dinámico de sistema.
+CONTENIDOS:
+I. Metodologías de desarrollo y modelado de sistemas
+II. Análisis para el desarrollo de sistemas
+III. Diseño estático de sistema
+IV. Diseño dinámico de sistema
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje basado en problemas
+c) Analógico X c) Aprendizaje orientado proyectos X
+d) d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación Otras evidencias a evaluar: Conclusiones
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Alaimo M. y Salias M. 2015
+Proyectos ágiles con Scrum.
+Flexibilidad, aprendizaje, innovación y
+colaboración en contextos complejos
+Kleer /
+9789874576347
+Booch, Grady /
+Rumbaugh, James /
+Jacobson, Ivar
+2006
+Lenguaje Unificado De Modelado, El
+Manual De Referencia Uml 2.0
+Pearson
+Educación /
+9788478290765
+Kendall K. y Jendall J.* 2011 Análisis y diseño de sistemas
+Pearson /
+9786073205771
+Pressman R* 2010
+Ingeniería de software. Un enfoque
+práctico
+McGraw-Hill
+Education /
+9786071503145
+Sommerville, I.* 2011 Ingeniería de software
+Pearson
+Educación /
+9786073206037
+PROGRAMA DE ESTUDIOS
+

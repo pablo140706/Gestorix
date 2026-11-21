@@ -1,0 +1,64 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA,
+ESCUELA SUPERIOR DE CÓMPUTO; UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERIA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Procesamiento digital de imágenes SEMESTRE: IV
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Aplica diferentes técnicas en el procesamiento de imágenes digitales con base en los tipos de imágenes y modelos
+de color.
+CONTENIDOS:
+I. Imágenes digitales
+II. Transformaciones básicas
+III. Transformaciones de vecindad
+IV. Morfología matemática
+V. Modificación de la imagen en el dominio de la frecuencia
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico X c) Aprendizaje orientado proyectos
+d) d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial
+Acharya, T.& Ray, A. 2005
+Image processing principles and
+applications
+Wiley Interscience /
+9780471719984
+Burger, W. & Burge, M. 2016
+Digital image processing an
+algorithmic introduction using java
+Springer /
+9781447166832
+Gonzalez, R. & Woods,
+R.
+2018 Digital image processing
+Pearson/
+9780156724
+Soille, P. 2004
+Morphological image analysis,
+Principles and applications
+Springer /
+9783642076961
+Tyagi V. 2018
+Understanding digital Image
+processing
+CRC Press /
+9781138566842
+

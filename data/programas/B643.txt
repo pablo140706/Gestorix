@@ -1,0 +1,74 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA;
+(UPIIC), ESCUELA SUPERIOR DE COMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Sistemas Multiagentes SEMESTRE: VI, VII
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Selecciona un simulador de sistemas multiagentes con base en su objetivo, desempeño y las teorías de agentes.
+CONTENIDOS:
+I. Inteligencia Artificial distribuida
+II. Teoría de agentes
+III. Implementación de sistemas multiagentes
+IV. Simuladores de sistemas multiagentes
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos X
+b) Deductivo X b) Aprendizaje basado en problemas
+c) Analógico X c) Aprendizaje orientado proyectos
+d) Heurístico X d)
+e) e)
+00000EVALUACIÓN
+Y ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación Otras evidencias a evaluar: Reporte de
+exposición de caso
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Boissier, O., Bordini,
+R., Hübner, J. & Ricci,
+A.
+2020
+Multi-Agent Oriented
+Programming: Programming
+Multi-Agent Systems Using
+JaCaMo.
+MIT Press /
+9780262044578
+*Shoham, Y. &
+Leyton-Brown, K.
+2012
+Multiagent Systems: Algorithmic,
+Game-Theoretic, and Logical
+Foundations.
+Cambridge
+University Press /
+9780511811654
+Weiss, G. 2016 Multiagent Systems.
+MIT Press /
+9780262533874
+Wilensky, U. & Rand,
+W.
+2015
+An Introduction to Agent-Based
+Modeling: Modeling Natural,
+Social, and Engineered Complex
+Systems with Net Logo
+MIT Press /
+9780262731898
+*Wooldridge, M. 2009
+An Introduction to MultiAgent
+Systems.
+Wiley and Sons /
+978470519462
+

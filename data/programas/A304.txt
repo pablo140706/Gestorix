@@ -1,0 +1,61 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA
+ESCUELA SUPERIOR DE CÓMPUTO
+UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Licenciatura en Ciencias de Datos
+UNIDAD DE APRENDIZAJE: Probabilidad SEMESTRE: III
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Construye modelos de probabilidad a partir de axiomas, variables aleatorias y sus funciones de distribución.
+CONTENIDOS:
+I. Probabilidad axiomática
+II. Comportamiento asintótico de variables aleatorias
+III. Modelación con funciones de distribución de probabilidad
+IV. Modelación probabilista
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+d) Analítico X c) Aprendizaje orientado proyectos
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reportes de indagación Otras evidencias a evaluar:
+Discusión dirigida, uso de software, y
+ejercicios.
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+*Johnson, J. 2008
+Probability and Statistics for Computer
+Science
+John Wiley & Sons /
+9780470383421
+Matloff, N. 2019 Probability and Statistics for Data Science
+Chapman and Hall /
+9781138393295
+Van der
+Hofstad, R.
+2017 Random Graphs and Complex Networks
+Cambridge University Press
+/ 9781107172876
+Velazco, G. 2015 Probabilidad: fundamentos y aplicaciones
+Editorial Trillas /
+9786071724533
+*Vladimirovna,
+P. & Gutiérrez,
+E.
+2014
+Probabilidad y Estadística: Aplicaciones a
+la Ingeniería y la Ciencia
+Grupo Editorial Patria /
+9786074387667
+*Bibliografía Clásica
+

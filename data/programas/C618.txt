@@ -1,0 +1,70 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Ingeniería de Software SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Elabora un proyecto de software con base en una metodología de ingeniería de software.
+CONTENIDOS:
+I. Fundamentos
+II. Diseño y construcción
+III. Pruebas de software
+IV. Calidad y modelos de madurez
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo b) Aprendizaje Basado en Problemas
+c) Analógico X c) Aprendizaje Orientado a Proyectos X
+d) Heurístico d) Aprendizaje Autónomo
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación X
+Otras evidencias a evaluar:
+Las que correspondan
+Reportes de prácticas
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+IEEE Computer
+Society
+2014
+Guide to the Software
+Engineering Body of Knowledge,
+Version 3.0
+IEEE Computer
+Society Press/
+9780769551661
+Pressman, R.
+2010
+Ingeniería del software: Un
+enfoque práctico
+Mc Graw Hill/
+9786071503145
+Project
+Management
+Institute
+2018 Guía práctica de ágil
+Project Management
+Institute/
+9781628254143
+Sommerville, I. 2011
+Ingeniería del software, novena
+edición
+Pearson (Addison-
+Wesley)/
+9786073206037
+Stellman A. 2014
+Learning Agile: Understanding
+Scrum, Xp, Lean, and Kanban
+O’reilly/ 978-
+1449331924
+

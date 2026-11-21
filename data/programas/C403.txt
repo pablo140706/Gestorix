@@ -1,0 +1,63 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Matemáticas Avanzadas para la Ingeniería SEMESTRE: IV
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Obtiene las bases matemáticas de la teoría de variable compleja y el análisis de Fourier a partir de teoremas y
+propiedades fundamentales.
+CONTENIDOS:
+I. Operaciones con números complejos y derivación de funciones de variable compleja
+II. Integración de funciones de variable compleja
+III. Series y transformadas de Fourier
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d)Heurístico d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios X
+Reporte de proyectos Exposiciones
+Reportes de indagación
+Otras evidencias a evaluar:
+Ejercicios resueltos
+Graficación de problemas
+Reportes de prácticas
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Hsu Hwei, P. 1986 Análisis de Fourier
+Addison-Wesley
+Iberoamericana
+0-201-02942-1
+Kreyszig, E. 2013
+Matemáticas avanzadas
+para ingeniería
+Limusa Wiley
+978-607-05-0476-1
+O’Neil, P. 2007
+Advanced engineering
+mathematics
+CENGAGE Learning
+978-1-111-42741-2
+Spiegel, M., Lipschutz
+S., Schiller, J. &
+Spellman, D.
+2009 Variable compleja
+Mc Graw -Hill
+978-607-15-0551-4
+Zill G. D. & Wright, W. 2012
+Matemáticas avanzadas
+para ingeniería
+Mc Graw Hill
+978-607-15-0772-3
+

@@ -1,0 +1,63 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA
+ESCUELA SUPERIOR DE CÓMPUTO
+UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Bases de Datos Avanzadas Semestre: IV
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Construye sistemas de soporte de decisión a partir de bases de datos no relacionales, tecnologías OLAP y
+bancos de datos.
+CONTENIDOS:
+I. Sistemas de Soporte de Decisión y almacenes de datos.
+II. Diseño de almacenes y bancos de datos.
+III. Diseño de cubos OLAP.
+IV. Bases de datos no relacionales.
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje basado en problemas
+c) Analógico X c) Aprendizaje orientado proyectos X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Discusión dirigida
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Hernández, J.,
+Ramírez, J. &
+Ferri, C.*
+2004 Introducción A La Minería De Datos
+Pearson Educación /
+9788420540917
+Kimball, R. &
+Ross, M.*
+2008 The Data Warehouse Lifecycle Toolkit
+Wiley /
+9780470149775
+Ploetz, A. et. al. 2018
+Seven NoSQL Databases in a Week: Get
+up and running with the fundamentals and
+functionalities of seven of the most
+popular NoSQL databases
+Packt Publishing /
+9781787288867
+Ricardo, C. * 2009 Bases de Datos
+Mc Graw Hill /
+9789701072752
+Sullivan, D 2015 NoSQL for Mere Mortals
+Addison-Wesley
+Professional /
+9780134023212
+*Bibliografía Clásica
+

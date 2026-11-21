@@ -14,8 +14,8 @@
 | 1 ✅ | Base de datos y datos | 10–14 nov (hecha el 8) | `docker compose up` levanta Postgres 17, Apache + PHP y pgAdmin; el importador carga las 3 carreras desde el HTML de SAES; cuadran 665 ofertas y 276 maestros |
 | 2 ✅ | API y front leyendo de la base | 15–19 nov (hecha el 8) | Las pestañas actuales de iscweb funcionan con datos de `src/api/*.php`, sin `schedule.js` ni los demás `.js` de datos |
 | 3 ✅ | Cuentas, avance y horario | 19–22 nov (hecha el 8; el correo real queda para el final) | Registro con verificación de correo, alias, avance (con recurse y ETS) y horario guardados; carga en UA (aviso arriba de la media, tope en 9); avisos de seriación y desfase |
-| 4 | Profesores y comentarios | 23–25 nov | Ficha única del profesor (MisProfesores + link, comentarios por materia, horario, cédula), comentarios con rúbrica, edición en 24 h, reportes, ocultar, suspender y banear |
-| 5 | Materias y agenda | 25–27 nov | PDF y descripción por materia; recordatorios con fecha y hora en el calendario |
+| 4 ✅ | Profesores y comentarios | 23–25 nov (hecha el 20) | Ficha única del profesor (MisProfesores + link, comentarios por materia, horario, cédula), comentarios con rúbrica, edición en 24 h, reportes, ocultar, suspender y banear |
+| 5 ✅ | Materias y agenda | 25–27 nov (hecha el 20) | PDF y descripción por materia; recordatorios con fecha y hora en el calendario |
 | 6 | Publicación | 27–29 nov | Sitio con dominio y HTTPS, contenedores en un servidor, aviso de privacidad publicado, respaldos con `pg_dump` y una restauración probada |
 | 7 | Cierre y margen | 30 nov – 4 dic | Fases documentadas en el repo, diagrama ER, capturas, demo y arreglos de último momento |
 
@@ -63,7 +63,7 @@
 ## Fase 1 — Base de datos y datos ✅ (2026-11-08)
 
 **Hecho:**
-- `Dockerfile` (como el de Seismic, con `php.ini` de producción y zona horaria de CDMX), `docker-compose.yml` (web en `:8080`, db sin publicar, pgAdmin en `127.0.0.1:5050` con el servidor ya registrado), `.env.example` y `.gitignore`. Tu `.env` ya existe, con contraseñas al azar.
+- `Dockerfile` (como el de Seismic, con `php.ini` de producción y zona horaria de CDMX), `docker-compose.yml` (web en `:8080`, db sin publicar, pgAdmin en `127.0.0.1:5051` (el 5050 lo usa otro proyecto) con el servidor ya registrado), `.env.example` y `.gitignore`. Tu `.env` ya existe, con contraseñas al azar.
 - **Usuario de la app con mínimo privilegio** (`sql/99-rol-app.sh`): lee y escribe datos, pero no puede crear ni borrar tablas (probado).
 - **Carga inicial** `sql/01`–`08`: 3 carreras, 4 periodos y 48 eventos del calendario, 209 materias (27 con `se_ofrece = false`), 44 pares de seriación, 21 rutas, 205 profes con métricas o link (4 correcciones aplicadas) + 5 que solo salen en el historial, 430 ofertas de 26/2 y las 5 ofertas extra de 27/1. Los `sql/02`–`07` salieron **una vez** de iscweb con `importador/iscweb/convertir.php`.
 - **Importador** `importador/horarios.php`: lee el HTML de SAES de las 3 carreras. Se puede repetir sin duplicar ni pisar lo corregido en pgAdmin.
@@ -146,6 +146,47 @@
 
 **También:** Apache ahora manda `Cache-Control: no-cache` (`Dockerfile`), para que nadie quede con JS nuevo y CSS viejo después de una actualización.
 
+## Fase 4 — Profesores y comentarios ✅ (2026-11-20)
+
+**Decisiones del usuario** (en `CLAUDE.md` §6): el suspendido entra pero no comenta; rúbrica opcional que suma 100 %; el autor ve su comentario oculto, marcado; banear oculta todos los comentarios de la cuenta.
+
+**Back:**
+- `api/profesor.php?nombre=…`: la ficha en una llamada (cédula, materias que ha dado, comentarios y su resumen). No se guarda en caché.
+- `api/comentarios/`: `guardar.php` (nuevo o editar), `borrar.php` y `reportar.php`. Reglas en `src/lib/comentarios.php`.
+- `api/moderacion/`: `reportes.php` (pendientes, agrupados por comentario) y `accion.php` (ocultar, mostrar, descartar, suspender 1/7/30 días, banear, desbanear). Todo con motivo y en la bitácora.
+- Índices nuevos: `oferta(profesor)`, `comentario(profesor, creado)` y los reportes pendientes.
+
+**Front** (`src/comentarios.js`, en la ficha del maestro):
+- Cédula ("Sin cédula registrada" si falta), las calificaciones de MisProfesores y, aparte, el promedio de los comentarios propios.
+- Formulario con materia, calidad, ¿lo recomiendas?, dificultad, texto con contador y rúbrica que avisa si no suma 100.
+- Editar y borrar (24 h), reportar con motivo, y para moderadores: ocultar, mostrar, descartar, suspender y banear.
+- "Tu cuenta" muestra el rol y, a moderadores, la ventana **Reportes pendientes** con "Ver en la ficha".
+
+**Probado:** con `curl` (40 casos: validaciones, CSRF, sin sesión, 24 h, ocultos, jerarquía de roles, suspensión, baneo y bitácora) y en el navegador, también a 375 px. Las 3 cuentas de prueba y todo lo que crearon se borraron.
+
+**Para usarlo:** nadie es moderador todavía. Regístrate y en pgAdmin: `UPDATE usuario SET rol = 'admin' WHERE correo = '…';` (lo mismo con `'moderador'` para nombrar moderadores).
+
+**También (2026-11-20):** en la pestaña Maestros, "Imparte / Ya no" dejó de ser una nota manual: sale de la base (ver el pendiente 20).
+
+## Fase 5 — Materias y agenda ✅ (2026-11-20)
+
+**Decisiones del usuario** (en `CLAUDE.md` §4.7 y §7): descripción = propósito y temas tal cual el PDF; los escaneados, con una descripción investigada; PDFs en el repo; ventana al tocar la materia. Agenda solo con cuenta, clic en el día + "Próximos", hora opcional, los pasados se quedan en gris.
+
+**Materias:**
+- 177 PDFs en `src/materias/<clave>.pdf`; **203 de 209 materias** con PDF y descripción (162 del programa oficial; el resto, gemelas de IA/LCD y las 22 escaneadas, marcadas como orientativas con su fuente).
+- Herramientas: `importador/programas/mapear.php` (una vez), `importador/programas/copiar.sh` y `importador/materias.php`. Columna nueva `materia.descripcion_fuente`.
+- Front: botón ⓘ en Mi avance y Optativas → ventana con datos del plan, seriación, propósito, temas y el PDF (`materia-ui.js`, `api/materias.php`).
+
+**Agenda:**
+- `recordatorio` cambió `fecha_hora` por `fecha` + `hora` (opcional). `api/agenda.php` (ver, guardar, borrar).
+- En Calendario: "Tus próximos recordatorios", clic en un día para agregar o ver, puntito en los días con recordatorio (gris si ya pasó) (`agenda.js`).
+
+**Probado:** la API de la agenda con `curl` (sin sesión, fechas y horas inválidas, título vacío o largo, materia de otra carrera, que otra cuenta no vea ni toque lo ajeno, editar y borrar) y todo en el navegador, también a 375 px. Una base nueva desde cero con `sql/` carga sin errores. Las cuentas de prueba se borraron.
+
+**Generar horario, más compacto (2026-11-20, pedido del usuario):**
+- Las 4 tarjetas de carga y promedios → una franja de una línea. Sin pestañas Manual / Automático: el automático es una sola barra (Turno · De · a · Máx. · Generar · 🎲 Otra · ?), con la explicación en el "?" y el resultado en una línea.
+- Cada materia del horario tiene **🔄 Cambiar** (los otros grupos y maestros de esa materia: primero los que no chocan y los de tu turno, con calidad, cupo y horario), **📌 Mantener** (el automático no la toca con 🎲 Otra) y **✕ Quitar**. Lo mismo al tocar la materia en la rejilla (menú corto).
+
 ## Lo que queda incompleto o sin decidir (revisado el 2026-11-08)
 
 **Datos que vas a mandar o capturar**
@@ -153,8 +194,8 @@
 2. **Otros grupos que el PDF trae y SAES no:** `7BM2` (Formulación, Innovación, Reconocimiento de voz), `2CV2` Ética (1007) y `3BV2` Paradigmas. Mismo caso que `1CM6`: ¿existen?
 3. **Al revés, SAES los trae y el PDF no:** `4CM6` (Probabilidad, Matemáticas avanzadas), `5CV5` Procesamiento digital de señales, `3AV2` Bases de datos, `8AV1` Gestión empresarial, y 3 de las extra (`2CV1` Ética, `7CM1` y `7CM2` TT I). Se quedan, sin confirmar.
 4. **12 ofertas sin salón:** `1CM8` y `1CM9` Cálculo y `6CM5` Sistemas en chip (el PDF dice SA), `4CM6` (2) y los TT (`7CM1`, `7CM2`, `8BM1` ×3, `8BM2` ×2; en TT es normal).
-5. **Profes de 27/1:** 72 sin métricas, 69 sin link y los 260 sin cédula (la capturas en pgAdmin).
-6. **PDF de plan sintético:** ninguna de las 209 materias lo tiene todavía, ni su descripción (Fase 5).
+5. **Profes de 27/1:** ~~72 sin métricas~~ ✅ (2026-11-20) 60 cargadas; quedan 12 sin métricas: 9 sin perfil en MisProfesores y 3 con muy pocas reseñas (ARREDONDO, CARMONA, ROSAS TRIGUEROS), que arrancan solo con los comentarios de Gestorix (decisión del usuario). ~~69 sin link~~ ✅ (2026-11-20) quedan 9, que no tienen perfil en MisProfesores. Cédulas: 50 de 260 (110 cédulas de 54 profes, de `data/profesores/links-cedulas.csv`); faltan las de los profes de la C a la T.
+6. ~~**PDF de plan sintético**~~ ✅ (Fase 5, 2026-11-20) 203 de 209 materias con PDF y descripción. Faltan los PDFs de Estancia profesional (C804, B803, A804), Tópicos selectos de algoritmos bioinspirados (B653/B753) y Aprendizaje automático aplicado a visión (C614).
 7. **Fechas:** 26/2 no tiene inicio ni fin, y a 28/1 le falta el fin (el calendario no lo trae). Menor.
 8. **Historial de IA y LCD:** no existe; se muestra como faltante.
 
@@ -171,10 +212,10 @@
 17. **Art. 98** como lo interpreta la app: avisa si el horario abarca más de 3 semestres seguidos, o si adeudas materias de más de 2 semestres antes del más alto que inscribes. Confírmalo con el reglamento.
 18. El modo Automático llena **hasta la media**; para pasarla (con trámite) se agregan materias a mano.
 19. Cambiar la contraseña con sesión iniciada no existe aparte; se hace con "Olvidé mi contraseña".
-20. Las anotaciones de materias por maestro (`teacherMats`) se quedan en el navegador: no están en el esquema.
+20. ~~Las anotaciones de materias por maestro (`teacherMats`)~~ ✅ (2026-11-20) Ya no son notas manuales: "Imparte" (verde) = la da en el periodo vigente; "Ya no" (rojo, con el último periodo) = la dio antes y ya no. Sale de `api/horarios.php` y `api/roster.php`, comparando por nombre de la materia.
 
 **Mío**
-13. Commit de las Fases 1, 2 y 3: nada está commiteado todavía.
+13. ~~Commit de las Fases 1, 2 y 3~~ ✅ `c9b47a5` y `d39449e` (2026-11-20). La Fase 4 está sin commit.
 14. Probar el *service worker* (abrir sin internet) en un navegador normal.
 15. El front todavía se llama "Avance ESCOM" en el título y el `manifest.webmanifest`; cambiarlo a Gestorix cuando lo pidas.
 
@@ -206,7 +247,7 @@
 | Dificultad | Escala 0–10 (JURADO 6.4 y JUÁREZ LEÓN 6.1 son reales). LEVARIO corregido a 3.5 |
 | Recordatorios | Solo en el calendario, sin avisos |
 | Moderación | Ocultar, suspender y banear. El admin (tú) nombra moderadores |
-| Cédula | La capturas tú |
+| Cédula | La capturas tú en `data/profesores/links-cedulas.csv` y la carga `importador/profesores.php` (tabla `cedula`, varias por profe) |
 | Plan sintético | Un PDF por materia; descripción generada por Claude desde el PDF |
 | Agenda | Recordatorios con fecha y hora |
 | Profesor sin asignar | Se guarda sin profesor y se corrige a mano |

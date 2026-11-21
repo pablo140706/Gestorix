@@ -1,0 +1,68 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA;
+(UPIIC), ESCUELA SUPERIOR DE COMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Ingeniería de software para sistemas inteligentes SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Aplica la ingeniería de software en el desarrollo y gestión de proyectos a partir de las metodologías, los procesos y
+técnicas de aseguramiento de la calidad.
+CONTENIDOS:
+I. La ingeniería de software y su importancia
+II. Proceso de gestión de proyectos
+III. Metodologías de gestión de proyectos
+IV. Calidad y normas de calidad
+V. Otras temáticas de la ingeniería de software
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje Basado en Problemas
+c) Analógico X c) Aprendizaje Orientado a Proyectos X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de prácticas X Otras evidencias a evaluar: Conclusión de
+discusión.
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+*García R. &
+Félix, O.
+2008
+Medición y estimación del software: Técnicas y
+Métodos para mejorar la calidad y la
+productividad.
+Alfa Omega /
+9788478978588
+Piatinni, M.,
+García, F.,
+Pinto, F. et al.
+2019 Calidad de Sistemas de Información.
+RA-MA /
+9788499648569
+*Pressman. R. 2010 Ingenieria De Software, un enfoque práctico.
+Mc Graw Hill
+Education /
+9786071503145
+*Somerville, I. 2012 Ingeniería de software.
+Pearson /
+9786073206037
+*Rubin, K. 2012
+Essential Scrum: A practical guide to the most
+popular agile process (Addison-Wesley
+Signature): A practical guide to the most
+popular agile process (Addison-Wesley
+Signature Series (Cohn)).
+Addison-Wesley
+Professional /
+9780137043293
+*Bibliografía clásica
+

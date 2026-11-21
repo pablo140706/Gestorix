@@ -72,7 +72,7 @@ PLAN.forEach((blk, s) => {
 
     subj.innerHTML = `
       <div class="row">
-        <span class="name">${esc(rec.name)}${isOpt ? `<span class="opttag">${OPT_SLOTS[id].label}</span>` : ""}${difBadge(name)}</span>
+        <span class="name">${esc(rec.name)}${isOpt ? `<span class="opttag">${OPT_SLOTS[id].label}</span>` : ""}${difBadge(name)}${botonMateria(CLAVE_DE_ID[id] || rec.clave)}</span>
         <span class="cred">${cred}</span>
         <div class="row-controls">
           <select class="veces" aria-label="Veces cursada de ${esc(name)}">
@@ -257,7 +257,7 @@ function renderDrop(drop, s, i) {
       if (isOpt && adding) {
         setSub(id, { name: nombreDeSlot(id, entry.materia), clave: entry.clave });
         const nameEl = drop.closest(".subject").querySelector(".name");
-        nameEl.innerHTML = esc(getSub(id, "").name) + `<span class="opttag">${OPT_SLOTS[id].label}</span>`;
+        nameEl.innerHTML = esc(getSub(id, "").name) + `<span class="opttag">${OPT_SLOTS[id].label}</span>` + botonMateria(entry.clave);
       }
 
       toggleHorario(armarItemHorario(entry, s, i), btn);

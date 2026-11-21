@@ -170,14 +170,19 @@ function calMesHtml(anio, mes, hoy) {
   for (let i = 0; i < primero.getDay(); i++) celdas += `<span class="cd vacia"></span>`;
   for (let d = 1; d <= dias; d++) {
     const f = new Date(anio, mes, d);
+    const iso = `${anio}-${String(mes + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
     const tipos = calEventosDe(f).map((e) => e.tipo).filter((t) => CAL_TIPOS[t]);
     const gana = CAL_ORDEN.find((t) => tipos.includes(t));
-    const cls = ["cd", gana ? CAL_TIPOS[gana].cls : "", f.getTime() === hoy.getTime() ? "cd-hoy" : ""]
+    // Recordatorios del usuario (agenda.js): un puntito, gris si ya pasó.
+    const recs = typeof recordatoriosDel === "function" ? recordatoriosDel(iso) : [];
+    const cls = ["cd", gana ? CAL_TIPOS[gana].cls : "", f.getTime() === hoy.getTime() ? "cd-hoy" : "",
+                 recs.length ? (f < hoy ? "cd-rec pasado" : "cd-rec") : ""]
       .filter(Boolean).join(" ");
-    const titulo = tipos.length
-      ? ` title="${esc(tipos.map((t) => CAL_TIPOS[t].lbl).join(" · "))}"`
-      : "";
-    celdas += `<span class="${cls}"${titulo}>${d}</span>`;
+    const lineas = tipos.map((t) => CAL_TIPOS[t].lbl)
+      .concat(recs.map((r) => "📌 " + (r.hora ? r.hora + " " : "") + r.titulo));
+    const titulo = lineas.length ? ` title="${esc(lineas.join(" · "))}"` : "";
+    // data-fecha: al tocar el día se abre la agenda (agenda.js)
+    celdas += `<span class="${cls}" data-fecha="${iso}"${titulo}>${d}</span>`;
   }
   return `<div class="cal-mes">
       <div class="cal-mes-tit">${CAL_MESES[mes]} <span>${anio}</span></div>

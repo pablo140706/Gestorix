@@ -16,7 +16,7 @@
 // La excepción son las fuentes de Google: esas sí van caché primero, porque
 // vienen con hash en la URL y no cambian nunca.
 
-const VERSION = "v1";
+const VERSION = "v3";
 const CACHE = "gestorix-" + VERSION;
 
 // El mínimo para pintar: los archivos de la app y los datos críticos de la
@@ -31,10 +31,10 @@ const SHELL = [
   "arranque.js",
   "api/planes.php", "api/horarios.php", "api/roster.php", "api/metricas.php",
   "api/calendario.php", "api/optativas.php",
-  "lazy.js", "data.js", "core.js", "avance.js", "maestros.js", "horario.js",
+  "lazy.js", "data.js", "core.js", "materia-ui.js", "avance.js", "maestros.js", "horario.js",
   "optativas-ui.js", "auto.js", "export.js", "historial-ui.js", "calendario-ui.js",
   "carrera-ui.js", "tema.js", "buscador.js", "comparador.js", "compartir.js",
-  "atajos.js", "portada.js", "init.js", "cuenta.js",
+  "atajos.js", "portada.js", "init.js", "cuenta.js", "comentarios.js", "agenda.js",
 ];
 
 self.addEventListener("install", (e) => {
@@ -63,9 +63,10 @@ self.addEventListener("fetch", (e) => {
   const fuentes = /fonts\.(googleapis|gstatic)\.com$/.test(url.hostname);
   if (!propio && !fuentes) return;
 
-  // Lo de tu cuenta (quién eres, tu avance) nunca se guarda en la caché:
-  // en una compu compartida lo vería el siguiente.
-  if (propio && /\/api\/(cuenta\/|mis-datos)/.test(url.pathname)) return;
+  // Lo de tu cuenta (quién eres, tu avance, tu agenda) nunca se guarda en la
+  // caché: en una compu compartida lo vería el siguiente. La ficha del
+  // profesor tampoco: trae tus comentarios ocultos y lo que ya reportaste.
+  if (propio && /\/api\/(cuenta\/|mis-datos|agenda|profesor|comentarios\/|moderacion\/)/.test(url.pathname)) return;
 
   // Fuentes de Google: caché primero, no cambian nunca
   if (fuentes) {

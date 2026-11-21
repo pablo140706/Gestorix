@@ -1,0 +1,51 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS
+COAHUILA, ESCUELA SUPERIOR DE CÓMPUTO
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Ética y Legalidad SEMESTRE: 2
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Valora las implicaciones éticas del ejercicio profesional de la ciencia de datos y su impacto social, a partir del
+desarrollo histórico del conocimiento, la evolución científica y tecnológica, así como el marco regulatorio de la
+disciplina.
+CONTENIDOS:
+I. Desarrollo histórico del conocimiento científico y tecnológico
+II. Revoluciones Industriales: tecnología e impacto
+III. Ética en la ciencia de datos y su función social
+IV. Marco regulatorio de la Ciencia de Datos
+V. Ciencia de datos, productividad y sustentabilidad
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Aprendizaje colaborativo X
+b) Deductivo X b) Aprendizaje basado en problemas
+c) Analógico X c) Aprendizaje orientado proyectos
+d) d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos Exposiciones X
+Reportes de indagación X Otras evidencias a evaluar:
+Actividad de aprendizaje basada en retos:
+videos, infografías, conclusiones
+Evaluación de habilidades cognitivas
+Reportes de prácticas
+Ensayos X
+BIBLIOGRAFÍA
+BÁSICA:
+1. Alba, F. (2011). El desarrollo de la tecnología. México: Fondo de Cultura Económica. ISBN 978-
+968-16-6630-9
+2. Bernal, J.D. (2005) La Ciencia en la Historia. México: Grupo Editorial Patria. ISBN 968-39-0155-
+7 (*) Clásica
+3. Pérez, R. (2011) ¿Existe el método científico? México: Fondo de Cultura Económica. ISBN 978-
+968-16-6942-3
+4. Mayer-Schönberger, V. y Cukier, K. (2014). 8. Big Data: A Revolution That Will Transform How
+We Live, Work, and Think. Eamon Dolan/Mariner Books. ISBN-13: 978-0544227750
+5. H. Cámara de Diputados, Instituto Federal de Acceso a la Información Pública (2010). Protección
+de datos personales. Compendio de lecturas y legislación. TIRO CORTO EDITORES
+

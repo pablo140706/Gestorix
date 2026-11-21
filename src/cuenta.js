@@ -145,6 +145,8 @@ async function alEntrar(usuario) {
     return;
   }
   pintarBotonCuenta();
+  if (typeof refrescarComentarios === "function") refrescarComentarios();   // la ficha abierta ya te reconoce
+  if (typeof cargarAgenda === "function") cargarAgenda();                   // tus recordatorios en el calendario
   try {
     const d = await apiCuenta("mis-datos.php");
     const cuentaVacia = d.avance.length === 0 && d.horario.length === 0;
@@ -258,7 +260,11 @@ const VISTAS = {
     <dl class="cuenta-datos">
       <dt>Correo</dt><dd>${esc(USUARIO.correo)} <small>(solo lo ves tú)</small></dd>
       <dt>Carrera</dt><dd>${esc(USUARIO.carrera + " · " + (PLANES[USUARIO.carrera] || {}).nombre)}</dd>
+      ${USUARIO.rol !== "alumno" ? `<dt>Rol</dt><dd>${USUARIO.rol === "admin" ? "Administrador" : "Moderador"}</dd>` : ""}
     </dl>
+    ${USUARIO.suspendido_hasta ? `<p class="cuenta-msg" data-tipo="error">Tu cuenta está suspendida hasta el
+      ${esc(USUARIO.suspendido_hasta)}: puedes usar la app y guardar tu avance, pero no comentar ni reportar.</p>` : ""}
+    ${USUARIO.rol !== "alumno" ? `<p><a href="#" class="btn" data-vista="reportes">🚩 Reportes pendientes</a></p>` : ""}
     <p class="cuenta-nota">Tu avance y tu horario se guardan en tu cuenta. Al salir se borran de
       este navegador.</p>
     <div class="cuenta-acciones">
@@ -285,6 +291,7 @@ function abrirCuenta(vista, arg, mensaje, esError) {
   cuentaTitEl.textContent = titulo;
   cuentaBodyEl.innerHTML = html;
   if (mensaje) mostrarMsg(cuentaBodyEl.querySelector(".cuenta-msg"), mensaje, esError);
+  if (typeof alAbrirVistaCuenta === "function") alAbrirVistaCuenta(vista);   // comentarios.js
   abrirModal(cuentaEl);
   cuentaBodyEl.querySelector("input")?.focus();
 }

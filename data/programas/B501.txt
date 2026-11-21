@@ -1,0 +1,58 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS COAHUILA, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Aprendizaje de máquina SEMESTRE: V
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Implementa sistemas de aprendizaje automatizado a partir de sus principios, algoritmos y análisis de complejidad.
+CONTENIDOS:
+I. Principios del aprendizaje de máquina
+II. Algoritmos para tareas descriptivas
+III. Algoritmos para tareas predictivas
+IV. Aprendizaje de series de tiempo
+V. Programación dinámica y aprendizaje por refuerzo
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje orientado proyectos X
+d) Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial
+Ammet V. J. 2020
+Machine Learning and Artificial
+Intelligence
+Springer /
+9783030266219
+Bisong, E. 2019
+Building machine learning and deep
+learning models on google
+Apress /
+9781484244692
+Kubat, M. 2015 An introduction to machine learning
+Springer /
+9783319200095
+Mitchell, T.M. 1997 Machine learning
+Mc Graw Hill /
+9780070428072
+Paluszek, M. y Thomas,
+S.
+2019 MATLAB Machine Learning Recipes
+Apress /
+9781484239155
+

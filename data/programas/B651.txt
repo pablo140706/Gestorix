@@ -1,0 +1,67 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA;
+(UPIIC), ESCUELA SUPERIOR DE COMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Programación de dispositivos móviles SEMESTRE: VI, VII
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Construye aplicaciones de programación de dispositivos móviles a partir de la ingeniería de software, patrones de
+diseño, criterios de usabilidad y manejo de frameworks.
+CONTENIDOS:
+I. Ingeniería de software para dispositivos móviles
+II. Desarrollo de aplicaciones Android
+III. Desarrollo de aplicaciones iOS
+IV. Desarrollo de aplicaciones multiplataforma
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje basado en problemas
+c) Analógico X c) Aprendizaje Orientado a Proyectos X
+d) d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Exposiciones X
+Reporte de proyectos X
+Reportes de indagación Otras evidencias a evaluar: Conclusión de las
+discusiones.
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Sommerhoff, P. 2018
+Kotlin for Android App
+Development.
+Addison-Wesley
+Professional /
+978-0134854199
+Tomás, J. 2020 El gran libro de Android.
+Marcombo /
+9788426731937
+Tómas, J. Puga,
+G., Barroso J. &
+Santamaria D.
+2018
+El gran libro de Android
+Avanzado.
+Marcombo /
+9788426726650
+Wang, W. 2019
+Pro iPhone Development with
+Swift 5.
+Apress /
+978-1484249437
+Wang, W. 2019
+Beginning iPhone Development
+with Swift 5: Exploring the iOS
+SDK.
+Apress /
+9781484248645
+

@@ -1,0 +1,43 @@
+clave,descripcion,fuente
+A729,"Propone proyectos y modelos de negocio con base en los principios y fundamentos del emprendimiento e innovación tecnológica.
+
+I. Innovación
+II. Innovación tecnológica
+III. Emprendimiento
+IV. Emprendimiento tecnológico
+V. Plan de Negocio","Programa oficial de la misma unidad de aprendizaje en IIA 2020 (B740); el PDF de LCD es un escaneo sin texto."
+A801,"Desarrolla habilidades personales, sociales y directivas en la integración de equipos directivos, con base en una visión estratégica de liderazgo y de toma de decisiones.
+
+I. Fundamentos de la alta dirección y planeación estratégica
+II. Habilidades personales y sociales para la alta dirección
+III. Habilidades directivas","Programa oficial de la misma unidad de aprendizaje en IIA 2020 (B804), idéntico al de ISC 2020 (C805); el PDF de LCD es un escaneo sin texto."
+A802,"Gestiona organizaciones de innovación tecnológica con base en las competencias gerenciales.
+
+I. Aspectos básicos de la gestión empresarial
+II. Gestión estratégica en las empresas de innovación tecnológica
+III. Gestión operativa de la empresa
+IV. Gestión del capital humano y la calidad
+V. Tendencias en la gestión empresarial","Programa oficial de la misma unidad de aprendizaje en IIA 2020 (B802), idéntico al de ISC 2020 (C803); el PDF de LCD es un escaneo sin texto."
+B746,"Maneja grandes volúmenes de datos: sus principios, las plataformas para almacenarlos y procesarlos, y cómo presentar los resultados.
+
+I. Principios de grandes volúmenes de datos
+II. Plataformas de grandes volúmenes de datos
+III. Capas de presentación","Temas del programa oficial de Big Data en ISC 2020 (C703) y LCD 2020 (A701), que coinciden; el propósito es orientativo. El PDF de IIA es un escaneo sin texto."
+B641,"Conoce el marco legal de la propiedad intelectual e industrial en México (derechos de autor, patentes, marcas y secretos industriales) y cómo proteger y registrar el software y las innovaciones tecnológicas.","Investigación propia; materia confirmada en el mapa curricular de optativas IIA 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularIIA2020_optativas.pdf"
+A630,"Conoce el marco legal de la propiedad intelectual e industrial en México (derechos de autor, patentes, marcas y secretos industriales) y cómo proteger y registrar el software, los datos y las innovaciones tecnológicas.","Investigación propia; materia confirmada en el mapa curricular de optativas LCD 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularLCD2020_optativas.pdf"
+B744,"Continuación de Sistemas multiagentes: diseña e implementa aplicaciones en las que varios agentes inteligentes se coordinan, negocian o compiten (simulación, robótica, logística, mercados) sobre plataformas de agentes.","Investigación propia a partir del programa oficial de Sistemas multiagentes, que la marca como su consecuente: https://www.escom.ipn.mx/docs/oferta/uaoIIA2020/sistemasMultiagentes_IIA2020.pdf"
+B747,"Optativa de contenido variable: estudia técnicas recientes o especializadas de inteligencia artificial que no cubren las materias obligatorias. Los temas los define la academia en cada periodo.","Investigación propia; materia confirmada en el mapa curricular de optativas IIA 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularIIA2020_optativas.pdf"
+A721,"Optativa de contenido variable: estudia técnicas recientes o especializadas de inteligencia artificial aplicadas a la ciencia de datos. Los temas los define la academia en cada periodo.","Investigación propia; materia confirmada en el mapa curricular de optativas LCD 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularLCD2020_optativas.pdf"
+B749,"Programa robots móviles: modelado de su movimiento, sensores y actuadores, localización, construcción de mapas y planeación de trayectorias, con simuladores y herramientas de robótica.","Investigación propia; materia confirmada en el mapa curricular de optativas IIA 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularIIA2020_optativas.pdf"
+B752,"Lleva modelos de inteligencia artificial a dispositivos con recursos limitados (microcontroladores y tarjetas embebidas): optimización y despliegue de modelos, lectura de sensores e inferencia en el propio dispositivo.","Investigación propia; materia confirmada en el mapa curricular de optativas IIA 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularIIA2020_optativas.pdf"
+A704,"Planea, ejecuta y controla proyectos de tecnologías de la información: alcance, tiempos, costos, riesgos y calidad, con metodologías tradicionales y ágiles.","Investigación propia; materia del 7.º semestre de LCD 2020 (mapa curricular de ESCOM): https://www.escom.ipn.mx/htmls/oferta/mapaCurrLCD2020.php"
+A620,"Profundiza en lo visto en Estadística: modelos de regresión, análisis multivariado, diseño de experimentos e inferencia para analizar datos complejos.","Investigación propia; materia confirmada en el mapa curricular de optativas LCD 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularLCD2020_optativas.pdf"
+A624,"Aplica herramientas computacionales a datos biológicos: bases de datos de secuencias, alineamiento de secuencias de ADN y proteínas, y análisis básicos de genómica.","Investigación propia; materia confirmada en el mapa curricular de optativas LCD 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularLCD2020_optativas.pdf"
+A725,"Continuación de Bioinformática básica: análisis de datos genómicos a gran escala, filogenia, estructura de proteínas y aprendizaje automático aplicado a datos biológicos.","Investigación propia; materia confirmada en el mapa curricular de optativas LCD 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularLCD2020_optativas.pdf"
+A626,"Captura, almacena, analiza y visualiza datos geoespaciales: datos raster y vectoriales, sistemas de coordenadas y análisis espacial con herramientas de sistemas de información geográfica.","Investigación propia; materia confirmada en el mapa curricular de optativas LCD 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularLCD2020_optativas.pdf"
+A627,"Identifica amenazas y vulnerabilidades de los sistemas de información y aplica controles para proteger los datos: criptografía básica, seguridad en redes y gestión de riesgos.","Investigación propia; materia confirmada en el mapa curricular de optativas LCD 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularLCD2020_optativas.pdf"
+A728,"Continuación de Ciberseguridad: protege datos personales y sensibles con base en la legislación mexicana de protección de datos, técnicas de anonimización y buenas prácticas de privacidad.","Investigación propia; materia confirmada en el mapa curricular de optativas LCD 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularLCD2020_optativas.pdf"
+A631,"Construye modelos de simulación de sistemas: generación de números aleatorios, simulación Monte Carlo y de eventos discretos, y análisis de sus resultados.","Investigación propia; materia confirmada en el mapa curricular de optativas LCD 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularLCD2020_optativas.pdf"
+A732,"Continuación de Simulación básica: modelos de simulación más complejos (dinámica de sistemas, basados en agentes), su validación y su uso para tomar decisiones.","Investigación propia; materia confirmada en el mapa curricular de optativas LCD 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularLCD2020_optativas.pdf"
+A722,"Optativa de contenido variable sobre aprendizaje profundo: arquitecturas recientes de redes neuronales y sus aplicaciones. Los temas los define la academia en cada periodo.","Investigación propia; materia confirmada en el mapa curricular de optativas LCD 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularLCD2020_optativas.pdf"
+A723,"Optativa de contenido variable sobre procesamiento de lenguaje natural: modelos y técnicas recientes para analizar y generar texto. Los temas los define la academia en cada periodo.","Investigación propia; materia confirmada en el mapa curricular de optativas LCD 2020 de ESCOM: https://www.escom.ipn.mx/docs/oferta/mapaCurricularLCD2020_optativas.pdf"

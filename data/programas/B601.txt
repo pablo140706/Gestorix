@@ -1,0 +1,65 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA;
+(UPIIC), ESCUELA SUPERIOR DE COMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Cómputo paralelo SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Diseña aplicaciones paralelas con base en el cómputo paralelo.
+CONTENIDOS:
+I. Acercamiento al cómputo paralelo.
+II. Diseño y análisis de programas paralelos.
+III. Programación paralela en sistemas de memoria compartida.
+IV. Programación paralela en sistemas distribuidos.
+V. Programación basada en flujo de datos.
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico X c) Aprendizaje orientado proyectos
+d) Basado en la lógica de la
+disciplina
+d) Aprendizaje autónomo X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación Otras evidencias a evaluar: Ejercicios resueltos
+en equipo y programas de cómputo funcionando
+según requerimientos.
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Czech, J. 2016 Introduction to parallel computing.
+Cambridge university
+press / 9781107174399
+*Grama, A., Kumar,
+V., Gupta, A. &
+Karypis, G.
+2003 Introduction to Parallel Computing.
+Addison-Wesley /
+0201648652
+Kale, V. 2020
+Parallel computing Architectures and
+APIs–Iot Big Data Stream Processin.
+CRC press /
+9781138553910
+Kirk, D. & HWu, W. 2017
+Principles of Parallel Programming,
+Programming Massively Parallel
+Processors: A Hands-on Approach.
+Morgan Kaufmann /
+9780128119860
+*Pacheco, P. 2011 An Introduction to Parallel Computing.
+Morgan Kaufmann /
+9780123742605
+*Bibliografía clásica
+

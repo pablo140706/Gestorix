@@ -65,28 +65,58 @@ function leerJson(): array
 }
 
 // Lo que el usuario puede saber de sí mismo. El correo solo se le muestra
-// a él (y a moderadores y admins, en casos graves).
+// a él (y a moderadores y admins, en casos graves). suspendido_hasta es
+// texto ("25/11/2026 14:30") o null.
 function perfil(array $u): array
 {
-    return ['alias' => $u['alias'], 'correo' => $u['correo'], 'carrera' => $u['carrera'], 'rol' => $u['rol']];
+    return ['alias' => $u['alias'], 'correo' => $u['correo'], 'carrera' => $u['carrera'], 'rol' => $u['rol'],
+            'suspendido_hasta' => $u['suspendido_hasta'] ?? null];
 }
 
-// El usuario de la sesión, o null. Si lo banearon o suspendieron mientras
-// tenía la sesión abierta, se le cierra.
+// Fecha de fin de una suspensión vigente, en hora de la Ciudad de México.
+const SQL_SUSPENDIDO_HASTA = "CASE WHEN suspendido_hasta > now()
+    THEN to_char(suspendido_hasta AT TIME ZONE 'America/Mexico_City', 'DD/MM/YYYY HH24:MI') END";
+
+// El usuario de la sesión, o null. Si lo banearon mientras tenía la sesión
+// abierta, se le cierra. Una suspensión NO cierra la sesión: el suspendido
+// sigue viendo y guardando su avance; solo no puede comentar ni reportar
+// (exigirQuePuedaComentar).
 function usuarioActual(): ?array
 {
     iniciarSesion();
     $id = $_SESSION['usuario'] ?? null;
     if ($id === null) { return null; }
     $st = db()->prepare(
-        'SELECT id, correo, alias, rol, carrera, baneado, suspendido_hasta > now() AS suspendido
+        'SELECT id, correo, alias, rol, carrera, baneado, ' . SQL_SUSPENDIDO_HASTA . ' AS suspendido_hasta
          FROM usuario WHERE id = ? AND verificado');
     $st->execute([$id]);
     $u = $st->fetch();
-    if (!$u || $u['baneado'] || $u['suspendido']) {
+    if (!$u || $u['baneado']) {
         unset($_SESSION['usuario']);
         return null;
     }
+    return $u;
+}
+
+function esModerador(?array $u): bool
+{
+    return $u !== null && ($u['rol'] === 'moderador' || $u['rol'] === 'admin');
+}
+
+// Para comentar o reportar: con sesión y sin suspensión vigente.
+function exigirQuePuedaComentar(): array
+{
+    $u = usuarioActual() ?? fallar(401, 'Inicia sesión para comentar.');
+    if ($u['suspendido_hasta']) {
+        fallar(403, "Tu cuenta está suspendida hasta el {$u['suspendido_hasta']}: mientras tanto no puedes comentar ni reportar.");
+    }
+    return $u;
+}
+
+function exigirModerador(): array
+{
+    $u = usuarioActual();
+    if (!esModerador($u)) { fallar(403, 'Solo moderadores y administradores.'); }
     return $u;
 }
 

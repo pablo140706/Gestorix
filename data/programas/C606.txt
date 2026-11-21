@@ -1,0 +1,68 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Statistical tools for data analytics
+SEMESTRE: VI
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Construye modelos estadísticos de síntesis de información a partir de herramientas estadísticas.
+CONTENIDOS:
+I. Estadística descriptiva e inferencial
+II. Regresión
+III. Procesos estocásticos aleatorios y series de tiempo
+IV. Patrones de puntos espaciales
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo b) Aprendizaje Basado en Problemas X
+c) Analógico X c) Aprendizaje Orientado a Proyectos
+d)Heurístico d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica Saberes Previamente Adquiridos
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Exposiciones
+Reportes de indagación X
+Otras evidencias a evaluar:
+Ejercicios resueltos
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Acevedo, M. 2013 Data analitics and statistics
+CRC Press/ 978-1-
+4665-9221-6
+Anderson, D.,
+Sweeney, D. &
+Williams, T.
+2008
+Estadística para administración y
+economía
+CENGAGE
+Learning/ 13-978-
+607-481-319-7
+Mendenhall, W.,
+Scheaffer, R. &
+Wackerly, D.
+2008
+Estadística Matemática con
+Aplicaciones
+CENGAGE
+Learning/ 978-607-
+481-399-9
+Sheldon, M. 2007 Introducción a la Estadística
+Reverté/ 978-84-
+291- 5039-1
+Spiegel, M. &
+Stephens, L.
+2020 Estadística
+Mc Graw Hill/ 978 -
+6071514639
+

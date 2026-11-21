@@ -1,0 +1,65 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA;
+(UPIIC), ESCUELA SUPERIOR DE COMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Redes neurales y aprendizaje profundo SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Evalúa modelos de redes neuronales con base en la aplicación, la arquitectura, el modo de aprendizaje y su
+desempeño.
+CONTENIDOS:
+I. Fundamentos de redes neurales
+II. El perceptrón
+III. Modelos supervisados
+IV. Modelos no supervisados
+V. Redes neuronales profundas
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d) Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial/ISBN
+Aggarwal, C. 2018
+Neural Networks and Deep Learning: a
+textbook.
+Springer /
+9783319944623
+Livshin, I. 2019
+Artificial Neural Networks with Java: tools
+for building neural network applications.
+Apress /
+9781484244203
+Michelucci, U. 2019
+Advanced Applied Deep Learning:
+convolutional neural networks and object
+detection.
+Apress /
+9781484249758
+Michelucci, U. 2018
+Applied Deep Learning: a case-based
+approach to understanding deep neural
+networks.
+Apress /
+9781484237892
+Soares, M. &
+Souza, F.
+2016 Neural Network Programming with Java.
+Packt Publishing /
+9781785880902
+

@@ -26,10 +26,10 @@
 
   // El orden importa: cada módulo usa lo que definieron los anteriores.
   const MODULOS = [
-    "lazy.js", "data.js", "core.js", "avance.js", "maestros.js", "horario.js",
+    "lazy.js", "data.js", "core.js", "materia-ui.js", "avance.js", "maestros.js", "horario.js",
     "optativas-ui.js", "auto.js", "export.js", "historial-ui.js", "calendario-ui.js",
     "carrera-ui.js", "tema.js", "buscador.js", "comparador.js", "compartir.js",
-    "atajos.js", "portada.js", "init.js", "cuenta.js",
+    "atajos.js", "portada.js", "init.js", "cuenta.js", "comentarios.js", "agenda.js",
   ];
 
   function pedir(url) {

@@ -51,7 +51,13 @@ CREATE TABLE materia (
     -- solo vale la del semestre que marca su PDF. Se guardan las dos; la
     -- otra lleva se_ofrece = false y la app no la muestra.
     se_ofrece    BOOLEAN       NOT NULL DEFAULT true,
-    descripcion  TEXT,                                 -- resumen generado a partir del PDF
+    -- Propósito y temas del programa sintético, tal cual el PDF: el
+    -- propósito, una línea en blanco y una línea por unidad ("I. …").
+    -- Lo llena importador/materias.php.
+    descripcion  TEXT,
+    -- NULL = salió del programa oficial (el PDF). Si no, de dónde se
+    -- investigó (el PDF es un escaneo sin texto): data/programas/investigadas.csv.
+    descripcion_fuente TEXT,
     pdf          TEXT,                                 -- ruta relativa: materias/C101.pdf
     -- El importador encuentra la materia por carrera + semestre + nombre de
     -- SAES (en IA y LCD el nombre se repite entre 6.º y 7.º).
@@ -117,13 +123,24 @@ CREATE TABLE profesor (
     id                  SERIAL        PRIMARY KEY,
     nombre              TEXT          NOT NULL,         -- como se muestra, con acentos
     nombre_norm         TEXT          NOT NULL UNIQUE,  -- MAYÚSCULAS sin acentos: llave para cruzar
-    cedula              VARCHAR(10),                    -- Registro Nacional de Profesionistas
-    titulo_profesional  TEXT,
     -- MisProfesores. NULL = sin dato. Nunca se promedian con los comentarios propios.
     mp_link             TEXT,
     mp_calidad          NUMERIC(3,1)  CHECK (mp_calidad     BETWEEN 0 AND 10),
     mp_recomiendan      NUMERIC(4,1)  CHECK (mp_recomiendan BETWEEN 0 AND 100),  -- %
     mp_dificultad       NUMERIC(3,1)  CHECK (mp_dificultad  BETWEEN 0 AND 10)    -- bajo = bueno
+);
+
+-- Cédulas profesionales (Registro Nacional de Profesionistas, SEP). Un
+-- profesor tiene varias: licenciatura o ingeniería, una o dos maestrías,
+-- doctorado, especialidad. Antes era un solo campo profesor.cedula; un
+-- atributo con varios valores va en su propia tabla (1FN). La carga
+-- importador/profesores.php desde la lista que captura el usuario.
+CREATE TABLE cedula (
+    profesor  INT          NOT NULL REFERENCES profesor ON DELETE CASCADE,
+    numero    VARCHAR(10)  NOT NULL CHECK (numero ~ '^[0-9]{5,9}$'),
+    nivel     VARCHAR(12)  NOT NULL CHECK (nivel IN
+                  ('licenciatura', 'ingenieria', 'especialidad', 'maestria', 'doctorado')),
+    PRIMARY KEY (profesor, numero)
 );
 
 -- Una oferta = grupo + materia + profesor en un periodo. Un mismo grupo
@@ -146,6 +163,10 @@ CREATE TABLE oferta (
     -- materia también cuentan como repetidas.
     UNIQUE NULLS NOT DISTINCT (periodo, grupo, materia, profesor)
 );
+
+-- Postgres no indexa solo las llaves foráneas. La ficha del maestro busca
+-- sus ofertas por profesor.
+CREATE INDEX oferta_profesor ON oferta (profesor);
 
 -- Rejilla fija: 9 bloques de 1:30, con recesos de 10:00–10:30 y 18:00–18:30.
 CREATE TABLE bloque (
@@ -251,11 +272,14 @@ CREATE TABLE horario (
 CREATE TABLE recordatorio (
     id          SERIAL        PRIMARY KEY,
     usuario     INT           NOT NULL REFERENCES usuario ON DELETE CASCADE,
-    fecha_hora  TIMESTAMP     NOT NULL,     -- hora de la Ciudad de México
-    titulo      VARCHAR(100)  NOT NULL,
+    fecha       DATE          NOT NULL,
+    hora        TIME,                       -- hora de la Ciudad de México; NULL = todo el día
+    titulo      VARCHAR(100)  NOT NULL CHECK (btrim(titulo) <> ''),
     materia     VARCHAR(5)    REFERENCES materia,   -- opcional
     nota        VARCHAR(500)
 );
+
+CREATE INDEX recordatorio_usuario ON recordatorio (usuario, fecha);
 
 
 -- ---------------------------------------------------------------------
@@ -281,6 +305,9 @@ CREATE TABLE comentario (
                 CHECK (estado IN ('visible', 'oculto'))
 );
 
+-- La ficha del maestro lista sus comentarios, del más nuevo al más viejo.
+CREATE INDEX comentario_profesor ON comentario (profesor, creado DESC);
+
 -- Cómo evalúa: examen 60 %, proyecto 40 %…
 CREATE TABLE rubrica (
     comentario  INT          REFERENCES comentario ON DELETE CASCADE,
@@ -299,6 +326,9 @@ CREATE TABLE reporte (
                   CHECK (estado IN ('pendiente', 'atendido', 'descartado')),
     resuelto_por  INT           REFERENCES usuario ON DELETE SET NULL
 );
+
+-- La ventana de moderación solo pide los pendientes.
+CREATE INDEX reporte_pendiente ON reporte (comentario) WHERE estado = 'pendiente';
 
 -- Todo lo que hacen moderadores y admins queda aquí.
 CREATE TABLE bitacora (

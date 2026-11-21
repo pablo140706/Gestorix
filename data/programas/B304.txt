@@ -1,0 +1,75 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA,
+ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Bases de datos SEMESTRE: III
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Construye modelos y bases de datos a partir de metodologías de diseño, sistemas gestores de bases de datos y
+el lenguaje SQL.
+CONTENIDOS:
+I. Sistemas de bases de datos
+II. Modelado de bases de datos
+III. Modelo relacional
+IV. Diseño de bases de datos relacionales y normalización
+V. Lenguaje SQL
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d) Analítico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reportes de prácticas X Otras evidencias a evaluar:
+Proyecto final
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Connolly, T. &
+Begg, C.
+2006
+Sistemas de bases de datos. Un enfoque
+práctico para diseño, implementación y
+gestión.
+Pearson /
+9788478290758
+Cuadra, D.,
+Moreno, L. De
+Pablo, C. et al.
+2019
+Desarrollo de bases de datos. Casos
+prácticos desde el análisis a la
+implementación
+Alfaomega, Ra-Ma /
+9786077076537
+Elmasri, R. &
+Navathe, S.B.
+2007
+Fundamentos de sistemas de bases de
+datos
+Pearson Educación
+/ 9788478290857
+Morris, S., Rob,
+P. & Coronel, C.
+2011
+Bases de datos, diseño, implementación y
+administración
+Cengage /
+9786074816181
+Silberschatz, A.,
+Korth, H. &
+Sudarshan, S.
+2014 Fundamentos de bases de datos
+McGraw Hill
+Interamericana /
+8448146441
+

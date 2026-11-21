@@ -1,0 +1,70 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Administración de servicios en red
+SEMESTRE: VII
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Implementa servicios de red de computadoras, con base en las mejores prácticas de administración y
+monitorización.
+CONTENIDOS:
+I. Fundamentos de los servicios de red
+II. Temas avanzados de conectividad
+III. SNMP, monitoreo y calidad
+IV. Implementación de los servicios de red
+V. Gestión de la seguridad y el desempeño
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d) Heurístico d) Aprendizaje basado en TIC
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación
+Otras evidencias a evaluar:
+Reporte de debate y ejercicios resueltos
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Harpreet, S. 2017
+Implementing Cisco Networking
+Solutions: Configure, implement, and
+manage complex network designs
+Packt Publishing/
+9781787121973
+LaCroix, J. 2015 Mastering Linux Network Administration
+Packt Publishing Ltd
+/1784390682
+Molina, F. 2014
+Servicios de Red e Internet (GRADO
+SUPERIOR)
+RA-MA/
+9788499643465
+Stallings, W. 2015
+Foundations of Modern Networking:
+Sdn, Nfv, Qoe, Iot, and Cloud
+Addison-Wesley
+Professional/
+9780134175393
+Thomas, A.
+Limoncelli,
+Christiana J.H. y
+Strata, R.
+2017
+The Practice of System and Network
+Administration
+Addison Wesley/
+9780321919168
+

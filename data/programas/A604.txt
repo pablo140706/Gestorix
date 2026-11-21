@@ -1,0 +1,62 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA CAMPUS COAHUILA
+(UPIIC), ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Análisis de series de tiempo SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Evalúa series de tiempo de datos con base en modelos estadísticos.
+CONTENIDOS:
+I. Características de series de tiempo
+II. Procesos lineales en tiempo discreto
+III. Análisis espectral y filtrado
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) Analítico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Reporte de seminarios
+Reportes de indagación X Otras evidencias a evaluar: conclusión de
+discusión
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Guerrero, G. V. 2003
+Análisis estadístico de series de
+tiempo económicas
+Thomson / 9706863265
+Hamilton, J.D. 2012 Time series analysis
+Princeton University
+Press / 9789380663432
+Hyndman, R & G.
+Athanasopoulos
+2018
+Forecasting: principles and
+practice
+OTexts / B07G6NRC3M
+Peña, D. 2010
+Análisis de series de tiempo
+temporales
+Alianza Editorial /
+9788420669458
+Shumway, R. H. &
+Stoffer D. S.
+2017
+Time Series Analysis and its
+Applications: With R Examples
+Springer / 978-
+3319524511
+* Bibliografía clásica
+

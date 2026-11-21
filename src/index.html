@@ -165,7 +165,7 @@
     <section class="tabpane" id="pane-maestros">
       <div class="pane-head">
         <h2 class="pane-title">Maestros</h2>
-        <p class="pane-sub"><b id="profCount">0</b> <span id="profCountTxt">maestros en total</span>. Métricas tomadas del registro oficial (solo lectura).</p>
+        <p class="pane-sub"><b id="profCount">0</b> <span id="profCountTxt">maestros en total</span>. Calificaciones de MisProfesores.</p>
         <div class="profs-toolbar">
           <input class="search" id="searchProf" type="text" placeholder="Buscar maestro o materia…" aria-label="Buscar maestro">
           <div class="turno-filter" id="turnoFilter" role="group" aria-label="Filtrar por turno">
@@ -176,8 +176,8 @@
           <label class="sort-wrap">Materias:
             <select id="matsProf" aria-label="Qué materias mostrar">
               <option value="todas">Todas</option>
-              <option value="imparte">Solo las que imparte</option>
-              <option value="yano">Solo las que ya no</option>
+              <option value="imparte">Solo las que imparte este periodo</option>
+              <option value="yano">Solo las que ya no imparte</option>
             </select>
           </label>
           <label class="sort-wrap">Ordenar por:
@@ -214,9 +214,9 @@
         </div>
         <p class="mats-leyenda">
           <span class="mtag on">Imparte</span>
-          <span class="mtag off">Ya no</span>
-          Es tu propia nota: pulsa una materia para cambiarla. Arranca con lo que dice el
-          registro oficial y se guarda solo en este navegador.
+          <span class="mtag off">Ya no <small>26/2</small></span>
+          Sale de los horarios de SAES: verde, la da este periodo; rojo, la dio antes
+          (con el último periodo en que la dio) y este periodo ya no.
         </p>
       </div>
       <div class="table-wrap" id="profsListWrap">
@@ -232,44 +232,37 @@
     <section class="tabpane" id="pane-horario">
       <div class="pane-head">
         <h2 class="pane-title">Generar horario</h2>
-        <p class="pane-sub">Agrega maestros desde tus materias pendientes o reprobadas en la pestaña <b>Mi avance</b>. Aquí se cuenta tu carga en <b>unidades de aprendizaje (UA)</b>: cada materia vale 1 y Trabajo Terminal, 2. Hasta la carga media no hay trámite; más, hasta 9, sí.</p>
+        <p class="pane-sub">Agrega materias desde <b>Mi avance</b> (botón Maestros) o con el automático. La carga va en UA: hasta la media sin trámite, máximo 9.</p>
       </div>
 
       <div id="horarioAviso"></div>
 
-      <div class="cred-summary" id="credSummary"></div>
+      <div id="credSummary"></div>
 
-      <!-- P17: Modo Manual vs Automático -->
-      <div class="auto-panel">
-        <div class="auto-tabs">
-          <button class="auto-tab active" data-mode="manual">✋ Manual</button>
-          <button class="auto-tab" data-mode="auto">⚡ Automático</button>
-        </div>
-        <div class="auto-config" data-mode="auto" hidden>
-          <div class="auto-row">
-            <label>Turno
-              <select id="autoTurno">
-                <option value="M">☀️ Matutino</option>
-                <option value="V">🌙 Vespertino</option>
-                <option value="ambos">Ambos</option>
-              </select>
-            </label>
-            <label>Hora entrada
-              <input type="time" id="autoEntrada" value="07:00" step="1800">
-            </label>
-            <label>Hora salida
-              <input type="time" id="autoSalida" value="15:00" step="1800">
-            </label>
-            <label>Máx materias
-              <input type="number" id="autoMax" min="1" max="9" value="7">
-            </label>
-            <button id="autoGenBtn" class="btn-primary">Generar horario automático</button>
-            <button id="autoOtraBtn" class="btn" hidden>🎲 Otra opción</button>
-          </div>
-          <div class="auto-hint"><b>Completa</b> lo que ya metiste a mano: conserva tus materias y agrega las que te <b>faltan</b>, empezando por el semestre más bajo con pendientes y subiendo. Las cuadra dentro de tu ventana de tiempo, <b>sin horas muertas</b> y de forma <b>aleatoria</b> (sin importar calidad del maestro). Créditos de materias <b>bloqueadas</b> reducen tu capacidad. Pulsa <b>🎲 Otra opción</b> para barajar.</div>
-          <div class="auto-result" id="autoResult"></div>
-        </div>
+      <!-- Automático en una sola barra (antes: pestañas Manual / Automático) -->
+      <div class="auto-bar">
+        <span class="auto-bar-tit">⚡ Automático</span>
+        <label>Turno
+          <select id="autoTurno">
+            <option value="M">☀️ Matutino</option>
+            <option value="V">🌙 Vespertino</option>
+            <option value="ambos">Ambos</option>
+          </select>
+        </label>
+        <label>De <input type="time" id="autoEntrada" value="07:00" step="1800"></label>
+        <label>a <input type="time" id="autoSalida" value="15:00" step="1800"></label>
+        <label>Máx. <input type="number" id="autoMax" min="1" max="9" value="7"></label>
+        <button id="autoGenBtn" class="btn-primary">Generar</button>
+        <button id="autoOtraBtn" class="btn" hidden title="Otra combinación igual de compacta">🎲 Otra</button>
+        <details class="auto-ayuda">
+          <summary title="¿Cómo funciona el automático?">?</summary>
+          <div>Completa lo que ya tienes: <b>conserva</b> tus materias (las que agregaste a mano y las que marques
+            con 📌 Mantener) y agrega las que te faltan, del semestre más bajo con pendientes hacia arriba, hasta tu
+            carga media. Las acomoda en tu horario de entrada y salida, <b>sin horas muertas</b> y al azar (no por
+            calidad del maestro). <b>🎲 Otra</b> baraja otra combinación; las que no mantengas se cambian.</div>
+        </details>
       </div>
+      <div id="autoResult"></div>
 
       <div class="horario-actions">
         <button id="exportJpgBtn" class="btn">📷 Exportar JPG</button>
@@ -296,6 +289,7 @@
         <h2 class="pane-title">Calendario académico</h2>
         <p class="pane-sub" id="calSub"></p>
       </div>
+      <div id="calAgenda" class="cal-agenda"></div>
       <div id="calPeriodos" class="cal-periodos"></div>
       <div id="calMeses" class="cal-meses"></div>
       <div id="calLeyenda" class="cal-leyenda"></div>
@@ -342,6 +336,28 @@
         <button class="iconbtn" id="cmpCerrar" aria-label="Cerrar">✕</button>
       </header>
       <div class="modal-body" id="cmpBody"></div>
+    </div>
+  </div>
+
+  <!-- ===== MATERIA: propósito, temas y PDF del programa — la llena materia-ui.js ===== -->
+  <div class="modal" id="materia" hidden>
+    <div class="modal-box modal-md" role="dialog" aria-modal="true" aria-labelledby="materiaTit">
+      <header class="modal-head">
+        <h2 id="materiaTit">Materia</h2>
+        <button class="iconbtn" id="materiaCerrar" aria-label="Cerrar">✕</button>
+      </header>
+      <div class="modal-body" id="materiaBody"></div>
+    </div>
+  </div>
+
+  <!-- ===== AGENDA: un recordatorio — la llena agenda.js ===== -->
+  <div class="modal" id="agenda" hidden>
+    <div class="modal-box modal-sm" role="dialog" aria-modal="true" aria-labelledby="agendaTit">
+      <header class="modal-head">
+        <h2 id="agendaTit">Recordatorio</h2>
+        <button class="iconbtn" id="agendaCerrar" aria-label="Cerrar">✕</button>
+      </header>
+      <div class="modal-body" id="agendaBody"></div>
     </div>
   </div>
 

@@ -1,0 +1,66 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA
+ESCUELA SUPERIOR DE CÓMPUTO
+UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Desarrollo de aplicaciones Web SEMESTRE: IV
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Desarrolla aplicaciones Web a partir del manejo de las diferentes arquitecturas, patrones de diseño y buenas
+prácticas.
+CONTENIDOS:
+I. Contextualización y arquitecturas de desarrollo Web.
+II. Sistemas y aplicaciones del lado del servidor.
+III. Sistemas y aplicaciones del lado del cliente.
+IV. Manejo y operación de servidores y servicios.
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje Basado en Problemas
+c) Analógico X c) Aprendizaje Orientado Proyectos X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Discusión dirigida, programas del lado servidor y
+programas del lado cliente
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Boada, M. &
+Gómez, G.
+2019 El gran libro de angular
+ALFAOMEGA /
+9786075383668
+Gauchat, J. 2017
+EL gran libro de HTML5, CSS3 &
+Javascript
+Marcombo /
+9788426724632
+Mardan, A. 2015
+Full Stack JavaScript: Learn
+Backbone.js, Node.js and MongoDB
+Apress /
+9781484217504
+Newman, S. 2015
+Building Microservices: Designing Fine-
+Grained Systems
+O'Reilly Media /
+9781491950357
+Casciaro, M. &
+Mammino, L.
+2016
+Node.js Design Patterns: Master best
+practices to build modular and scalable
+server-side web applications,
+Packt Publishing /
+9781785885587
+

@@ -1,0 +1,65 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA DE INGENIERÍA CAMPUS COAHUILA
+(UPIIC), ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Licenciatura en Ciencias de Datos
+UNIDAD DE APRENDIZAJE: Big data SEMESTRE: VII
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Maneja las capas de presentación de plataformas de grandes volúmenes de datos a partir de sus principios.
+CONTENIDOS:
+I. Principios de grandes volúmenes de datos
+II. Plataformas de grandes volúmenes de datos
+III. Capas de presentación
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) Analítico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Reporte de seminarios
+Reportes de indagación Otras evidencias a evaluar: Conclusión de
+discusión dirigida, ejercicios resueltos
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Balusamy B., Abirami N.,
+Kadry S. y Gandomi A
+2021
+Big Data: Concepts, Technology, and
+Architecture 1st Edition
+Wiley, 978-
+1119701828
+Chambers, B. y Zaharia,
+M.
+2018
+Spark: The Definitive Guide: Big Data
+Processing Made Simple 1st Edition
+O´Reily, 978-
+1491912218
+Franco Galeano, M. I. 2018
+Big Data Processing with Apache Spark:
+Efficiently tackle large datasets and big
+data analysis with Spark and Python
+Packt. 978-
+1789808810
+Ghavami, P. 2020 Big Data Management
+De Gruyter, 978-
+3110662917
+Trejo Medina, D. 2022
+Analíticos empresariales para
+ejecutivos.
+DIDAC, 979-8-
+7866-2653-8
+* Bibliografía clásica
+

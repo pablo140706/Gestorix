@@ -1,0 +1,76 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Aplicaciones para Comunicaciones en Red SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla aplicaciones de red, con base en interfaces de programación y arquitectura de comunicaciones, con alto
+nivel de calidad y eficiencia.
+CONTENIDOS:
+I. Sockets bloqueantes
+II. Arquitectura multihilos para servidores
+III. Sockets no bloqueantes
+IV. Protocolos de la capa de aplicación
+V. Invocación a métodos remotos
+VI. Aplicaciones P2P
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d) Heurístico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica Saberes Previamente Adquiridos
+Solución de casos Organizadores gráficos
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones X
+Reportes de indagación
+Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Dallal, A. H.,
+Derbala, A. S.,
+& Taher, M. F.
+2020
+Beej’s Guide to Network Programming.
+Using Internet Sockets
+Independently
+Published/
+1705309909
+Van Winkle, L. 2019
+Hands-On Network Programming with C:
+Learn socket programming in C and write
+secure and optimized network code
+Packt Publishing/
+1789349869
+Harold, E. R. 2013
+Java Network Programming: Developing
+Networked Applications
+O'Reilly Media;
+Ed/ 1449357679
+Joyce, P. 2021
+C and Python Applications: Embedding
+Python Code in C Programs, SQL
+Methods, and Python Sockets
+Apress/14842777
+32
+Ratan, A., Chou,
+E., Kathiravelu,
+P., & Sarker, M.
+F.
+2019
+Python Network Programming: Conquer
+all your networking challenges with the
+powerful Python language
+Packt Publishing;
+Edición/
+1788835468
+

@@ -1,0 +1,67 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Internet of things
+SEMESTRE: VII
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Implementa sistemas de sensores y actuadores a partir de estándares de red orientados al internet de las cosas.
+CONTENIDOS:
+I. Fundamentos teóricos del internet de las cosas
+II. Sensores, actuadores y conectividad
+III. Estándares de red orientados a Internet de las Cosas
+IV. Administración de servicios
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo a) Estudio de Casos
+b) Deductivo b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos X
+d)Heurístico X d) Aprendizaje Autónomo X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación
+Otras evidencias a evaluar:
+Ejercicios resueltos
+Rúbricas de evaluación
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Bertoleti, P. 2019 Proyectos com ESP32 y LoRa
+NCB Copyright By
+Instituto Newton C. Braga/
+9788595680661
+Muñoz, O.
+Q.
+2019 Internet de las Cosas (IoT)
+Ibukku LLC/
+978-1-64086-431-3
+Pizarro, J. 2020
+Internet de las cosas (IOT) con ESP.
+Manual práctico
+Paraninfo/
+978-84-283-4496-8
+Tamboli, A. 2019
+Build Your Own IoT Platform.
+Develop a Fully Flexible and
+Scalable Internet of Things Platform
+in 24 Hours
+Apress/
+978-1-4842-4497-5
+Xiao, P. 2018
+Designing embedded systems and
+the iternet of the things (IoT) with the
+ARM(R) MBED(TM)
+John Wiley & Sons/
+978-1-119-36399-6
+

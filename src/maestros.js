@@ -5,14 +5,14 @@ let profSort = { key: "name", dir: "asc" };
 let profTurno = "ambos";   // P16: ambos | M | V
 let profMats = "todas";    // qué materias enseñar: todas | imparte | yano
 
-// Las materias de un maestro se marcan verde o roja. Antes el único sitio donde
-// decía qué significaba cada color era el tooltip, y no se podía ni ordenar ni
-// filtrar por ello. Verde = "la imparte", rojo = "ya no la imparte"; arranca
-// con lo que dice el roster y de ahí es nota del usuario.
-const MAT_ESTADO = {
-  on:  { lbl: "Imparte", title: "La imparte — pulsa para marcar que ya no" },
-  off: { lbl: "Ya no",   title: "Ya no la imparte — pulsa para marcar que sí" },
-};
+// Las materias de un maestro se marcan verde o roja, y se puede filtrar y
+// ordenar por eso. Sale de la base (MATS_DE_PROF en core.js), no se edita:
+// verde = la da este periodo; rojo = la dio antes y este periodo ya no.
+function matTitulo(x) {
+  return x.active
+    ? "La imparte este periodo"
+    : `Ya no la imparte: la dio por última vez en ${x.periodo || "un periodo pasado"}`;
+}
 
 // Materias de un maestro visibles con el filtro actual
 function matsVisibles(name) {
@@ -83,8 +83,8 @@ function renderProfs() {
   const txt = document.getElementById("profCountTxt");
   if (txt) {
     txt.textContent =
-      profMats === "imparte" ? "maestros con materias que imparten"
-      : profMats === "yano" ? "maestros con materias que ya no dan"
+      profMats === "imparte" ? "maestros que dan clase este periodo"
+      : profMats === "yano" ? "maestros con materias que ya no imparten"
       : q || profTurno !== "ambos" ? "maestros que encajan" : "maestros en total";
   }
 
@@ -117,13 +117,11 @@ function renderProfs() {
   if (!rows.length) {
     // Decir por qué está vacío. "Solo las que ya no" sale vacío hasta que
     // marques tu primera materia en rojo, y eso hay que explicarlo.
-    const motivo =
-      profMats === "yano"
-        ? `Todavía no has marcado ninguna materia como <b>Ya no</b>. Pulsa una materia
-           verde en la lista para marcarla.`
-        : profMats === "imparte"
-        ? `Ningún maestro tiene materias marcadas como <b>Imparte</b>.`
-        : `Ningún maestro encaja con lo que buscaste.`;
+    const motivo = q || profTurno !== "ambos"
+      ? `Ningún maestro encaja con lo que buscaste.`
+      : profMats === "yano"
+      ? `Ningún maestro tiene materias que haya dejado de dar.`
+      : `No hay maestros para mostrar.`;
     profsBody.innerHTML = `<tr><td colspan="${PROF_COLS.length}">
         <div class="drop-empty big">${motivo}</div></td></tr>`;
     return;
@@ -143,62 +141,15 @@ function renderProfs() {
   profsBody.querySelectorAll(".prof-link").forEach((a) => {
     a.onclick = (e) => { e.preventDefault(); showProfDetail(a.dataset.prof); };
   });
-
-  // etiquetas de materia: clic = activa/inactiva (verde/rojo)
-  profsBody.querySelectorAll(".mtag").forEach((tag) => {
-    tag.onclick = (e) => {
-      if (e.target.classList.contains("mx")) {
-        removeMat(tag.dataset.name, tag.dataset.mat);
-      } else {
-        toggleMat(tag.dataset.name, tag.dataset.mat);
-      }
-    };
-  });
-
-  // agregar materia desde el menú desplegable
-  profsBody.querySelectorAll("select.addmat").forEach((sel) => {
-    // Las opciones se llenan al abrirlo, no al pintar la tabla: son ~140
-    // materias por maestro y hay 276 maestros. Ver llenarAddMat().
-    sel.addEventListener("mousedown", () => llenarAddMat(sel), { once: true });
-    sel.addEventListener("focus", () => llenarAddMat(sel), { once: true });
-    sel.onchange = () => {
-      if (sel.value) addMat(sel.dataset.name, sel.value);
-    };
-  });
 }
 
-// Llena un "+ Materia" la primera vez que lo tocas.
-//
-// Antes cada fila traía las ~140 opciones ya puestas: 276 maestros × 140 =
-// ~38,600 nodos de <option> que se volvían a construir en CADA repintado de la
-// tabla, o sea en cada letra que escribías en el buscador y en cada cambio de
-// orden. La pestaña pasó de ~40,000 nodos a ~1,500.
-function llenarAddMat(sel) {
-  if (sel.dataset.lleno === "1") return;
-  sel.dataset.lleno = "1";
-  const taken = new Set(teacherMaterias(sel.dataset.name).map((x) => x.mat));
-  const frag = document.createDocumentFragment();
-  ALL_MATERIAS.forEach((m) => {
-    if (taken.has(m)) return;
-    const o = document.createElement("option");
-    o.value = m;
-    o.textContent = titleCase(m);
-    frag.appendChild(o);
-  });
-  sel.appendChild(frag);
-}
-
-// Celda de materias: etiquetas verde (activa) / roja (inactiva) + menú "Agregar materia"
+// Celda de materias: etiquetas verde (la da este periodo) y roja (ya no; dice
+// el último periodo en que la dio). Solo informan: no se pueden cambiar.
 function matsCellHTML(name) {
-  const mats = matsVisibles(name);
-  const tags = mats.map((x) => {
-    const e = MAT_ESTADO[x.active ? "on" : "off"];
-    return `<span class="mtag ${x.active ? "on" : "off"}" data-name="${esc(name)}" data-mat="${esc(x.mat)}" title="${e.title}">${esc(titleCase(x.mat))}${x.added ? `<i class="mx" data-rm="1" title="Quitar">×</i>` : ""}</span>`;
-  }).join("");
-  // El <select> va vacío a propósito: se llena al abrirlo (llenarAddMat)
-  const sel = `<select class="addmat" data-name="${esc(name)}" aria-label="Agregar materia">
-      <option value="">+ Materia</option></select>`;
-  return `<div class="pmats">${tags}${sel}</div>`;
+  const tags = matsVisibles(name).map((x) =>
+    `<span class="mtag ${x.active ? "on" : "off"}" title="${esc(matTitulo(x))}">${esc(titleCase(x.mat))}${x.active ? "" : ` <small>${esc(x.periodo || "")}</small>`}</span>`
+  ).join("");
+  return `<div class="pmats">${tags}</div>`;
 }
 
 // P5: paleta de 6 colores aplicada a las 3 métricas
@@ -362,16 +313,20 @@ function showProfDetail(name) {
           ${link ? `· <a href="${esc(link)}" target="_blank" rel="noopener" class="pd-link">🔗 Fuente</a>` : ""}
           ${man ? `<span class="pd-tag manual" title="Calificaciones de MisProfesores, con link a su ficha">manual</span>` : `<span class="pd-tag oficial" title="Calificaciones de MisProfesores">oficial</span>`}
         </div>
+        <div class="pd-sub" id="pdCedula"></div>
       </div>
     </div>
 
+    <h3 class="pd-section">Calificaciones de MisProfesores</h3>
     <div class="pd-metrics">
       <div class="pd-m"><div class="pd-m-label">Calidad</div>${metricCell(m.calidad, "cal")}</div>
       <div class="pd-m"><div class="pd-m-label">Lo recomiendan</div>${metricCell(m.recomiendan, "rec")}</div>
       <div class="pd-m"><div class="pd-m-label">Dificultad</div>${metricCell(m.dificultad, "dif")}</div>
     </div>
 
-    <h3 class="pd-section">Materias por periodo (26/2 → 27/1) <span class="pd-solo">solo ISC</span></h3>
+    <div id="pdComentarios"></div>
+
+    <h3 class="pd-section">Materias por periodo (26/2 → 27/1) <span class="pd-solo">26/2 solo ISC</span></h3>
     ${periodoMatsHTML(name)}
 
     <h3 class="pd-section">Horario semanal</h3>
@@ -382,6 +337,8 @@ function showProfDetail(name) {
   `;
 
   document.getElementById("profBack").onclick = hideProfDetail;
+  // Cédula y comentarios: los trae comentarios.js de api/profesor.php.
+  if (typeof pintarComentarios === "function") pintarComentarios(name);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 

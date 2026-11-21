@@ -1,0 +1,73 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA
+(UPIIC), ESCUELA SUPERIOR DE COMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA (UPIIT)
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Cómputo en la nube SEMESTRE: VI, VII
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Implementa tecnologías de nube en sistemas informáticos a partir de sus tipos, configuración y criterios de
+seguridad.
+CONTENIDOS:
+I. Primer acercamiento al cómputo en la nube
+II. Configuración e implantación de una nube
+III. Seguridad en las nubes informáticas
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje basado en problemas
+c) Analógico X c) Aprendizaje orientado proyectos X
+d) d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos Exposiciones
+Reporte de proyectos X
+Reportes de indagación Otras evidencias a evaluar:
+Conclusiones de discusiones dirigidas
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+*Erl, T.,
+Puttini, R. &
+Mahmood, Z.
+2013
+Cloud Computing: Concepts,
+Technology & Architecture.
+Pearson /
+9780133387520
+*Kavis, M. 2014
+Architecting the Cloud: Design
+Decisions for Cloud Computing Service
+Models (SaaS, PaaS, and IaaS).
+Wiley / 9781118617618
+Orban. S. 2018
+Ahead in the Cloud: Best Practices for
+Navigating the Future of Enterprise IT.
+CreateSpace
+Independent
+Publishing Platform /
+9781981924318
+*Puttini, R.,
+Erl, T. &
+Mahmood, Z.
+2013
+Cloud Computing: Concepts,
+Technology & Architecture.
+S/E / 9780133387520
+Rafaels R. 2015
+Cloud Computing: From Beginning to
+End.
+CreateSpace
+Independent
+Publishing Platform
+/ 9781511404587
+* Bibliografía Clásica
+

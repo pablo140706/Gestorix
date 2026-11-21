@@ -1,0 +1,61 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA
+ESCUELA SUPERIOR DE CÓMPUTO
+UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Licenciatura en Ciencia de Datos
+UNIDAD DE APRENDIZAJE: Métodos numéricos SEMESTRE: III
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Resuelve problemas complejos con base en algoritmos de métodos numéricos de ecuaciones lineales, no
+lineales y diferenciales, de derivación e integración, de álgebra lineal, de interpolación y de aproximación.
+CONTENIDOS:
+I. Solución de ecuaciones de una variable
+II. Derivación e integración numérica
+III. Solución de ecuaciones diferenciales ordinarias
+IV. Álgebra lineal numérica
+V. Interpolación y aproximación
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico c) Aprendizaje Orientado a Proyectos
+d) Analítico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reportes de prácticas X Otras evidencias a evaluar:
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Burden, L. et. al. 2017 Análisis numérico.
+CENGAGE Learning /
+9786075264110
+Izar, J. 2018
+Métodos Numéricos con Simulaciones y
+Aplicaciones
+AlfaOmega /
+9786075380940
+Nakamura, S. 2016
+Foundation of Numerical Analysis:
+Implementation with GNU
+Octave/Matlab
+CreateSpace
+Independent Publishing
+Platform /
+9781530228027
+*Sauer, T. 2013 Análisis Numérico.
+Pearson /
+9786073220590
+Steven, C., Chapra,
+R. & Canale, P.
+2015 Métodos numéricos para ingenieros.
+Mc Graw Hill /
+9786071512949
+*Bibliografía clásica
+

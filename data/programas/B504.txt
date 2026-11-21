@@ -1,0 +1,66 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS COAHUILA, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Procesamiento de señales SEMESTRE: V
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Analizar señales y sistemas discretos con base en la transformada de Fourier, Z y Wavelet para su implementación
+computacional.
+CONTENIDOS:
+I. Señales y Sistemas discretos
+II. Análisis de Fourier en tiempo discreto
+III. Transformada Z
+IV. Filtros digitales
+V. Tópicos especiales
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) Analítico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios X
+Reporte de proyectos X Reporte de seminarios
+Reportes de investigación X Otras evidencias a evaluar:
+Conclusiones de discusión dirigida
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Abood, S.I. 2020
+Digital signal processing: a primer with
+MATLAB
+CRC Press /
+9780367444938
+Antoniou, A. 2018
+Digital filters: analysis, design, and signal
+processing applications
+Mc Graw Hill /
+9780071846042
+Mitra, S. K. 2009
+Procesamiento de señales digitales, un
+enfoque basado en computadora
+Mc Graw Hill /
+9780071244671
+Rao, K. D. &. Swamy,
+M.N.S
+2018
+Digital signal processing. Theory and
+practice
+Springer /
+9789811080807
+Tan, L. & Jiang, J 2018
+Digital signal processing: fundamentals and
+applications
+Academic Press /
+97801281507119
+

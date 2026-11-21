@@ -1,0 +1,55 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS COAHUILA
+PROGRAMA ACADÉMICO: Licenciatura en Ciencias de Datos
+UNIDAD DE APRENDIZAJE: Álgebra Lineal SEMESTRE: II
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Aplica los métodos de eliminación de Gauss-Jordan matricial a partir de las transformaciones lineales, los espacios
+vectoriales, valores y vectores propios.
+CONTENIDOS:
+I. Sistemas de Ecuaciones Lineales
+II. Espacios Vectoriales
+III. Transformaciones Lineales
+IV. Valores y Vectores Propios
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) Analítico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios
+Reporte de proyectos Reporte de seminarios
+Reportes de indagación Otras evidencias a evaluar:
+Reportes de prácticas
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Guzmán, F. 2011 Álgebra Lineal.
+Grupo Editorial Patri /
+9786074383447
+Kolman, B. 2012
+Álgebra Lineal: Fundamentos y
+Aplicaciones.
+Pearson Educación /
+9789586992251
+Nakos, G. 1999 Álgebra Lineal con aplicaciones.
+Internacional Thomson
+Editores / 9687529865
+Ron, L. 2015 Fundamentos de Álgebra Lineal.
+Cengage Learning /
+9786074810196
+Strang G. 2019
+Linear Algebra and Learning from
+Data.
+Wellesley-Cambridge
+Press / 0692196382
+

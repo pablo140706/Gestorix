@@ -1,0 +1,62 @@
+ISC
+- 2020
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+EN INGENIERÍA CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Fundamentos de programación SEMESTRE: I
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Programa aplicaciones a partir de sentencias de control, funciones, apuntadores y archivos.
+CONTENIDOS:
+I. Programación Estructurada.
+II. Apuntadores, tipos de Datos Estructurados y funciones.
+III. Manejo de Memoria Dinámica y Archivos.
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Deductivo a) Estudio de Casos
+b) Inductivo X b) Aprendizaje Basado en Problemas X
+c) Analógico X c) Aprendizaje Orientado a Proyectos
+d) Basado en la lógica de la
+disciplina
+d)
+e) Especializado e)
+f) Heurístico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos X Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos Reporte de seminarios
+Reportes de indagación Otras evidencias a evaluar:
+Discusión dirigida
+Programas de acuerdo a lo especificado
+Reportes de prácticas X
+Evaluaciones escritas
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Alvarado, I. et al 2017
+100 problemas resueltos de programación en
+lenguaje C para ingeniería
+Paraninfo. ISBN
+8428339694
+Joyanes, L. 2013 Fundamentos generales de programación
+Mc Graw Hill
+Interamericana. ISBN
+9786071508188
+Kernighan, B. &
+Ritchie, D.
+1991 El lenguaje de programación C
+Prentice-Hall. ISBN
+9688802050.
+Reese, R. 2013 Understanding and using C pointers
+O’Reilly. ISBN
+9781449344184
+Sznajdleder, P. 2017 Programación estructurada a fondo
+Alfaomega. ISBN
+9789873832284
+

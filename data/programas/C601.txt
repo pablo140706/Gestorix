@@ -1,0 +1,71 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA, CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Inteligencia artificial SEMESTRE: VI
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Desarrolla sistemas inteligentes a partir de algoritmos de aprendizaje, modelos de representación de conocimiento
+y el aprendizaje de máquina.
+CONTENIDOS:
+I. Inteligencia artificial
+II. Algoritmos de búsqueda
+III. Modelos de representación del conocimiento
+IV. Aprendizaje de máquina
+V. Algoritmos bioinspirados
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de Casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico X c) Aprendizaje Orientado a Proyectos X
+d) Heurístico X d)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación
+Otras evidencias a evaluar:
+Las que correspondan
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Bolón-Canedo, V.,
+Sánchez-Maroño, N., y
+Alonso-Betanzos, A.
+2015
+Feature Selection for High
+Dimensional Data
+Springer/ 9783319
+218571
+Russell, J. y Norvig, P. 2020
+Artificial intelligence A modern
+approach
+Pearson Education/
+9780134610993
+Sivanandam, N. y Deepa,
+N.
+2008
+Introduction to Genetic
+Algorithms
+Springer/
+978-540-73189-4
+Brachman, J. y Levesque,
+J.
+2004
+Knowledge representation and r
+easoning
+Elsevier/ 97815586
+09327
+Ertel, W. 2017
+Introduction to artificial
+Intelligence second edition
+Springer/
+9783319584867
+

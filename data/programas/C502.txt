@@ -1,0 +1,61 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS ZACATECAS
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Procesamiento Digital de Señales SEMESTRE: V
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE:
+Diseña aplicaciones eficientes en el procesamiento digital de señales en tiempo y frecuencia a partir de la teoría de
+análisis de señales y sistemas.
+CONTENIDOS:
+I. Señales y Sistemas
+II. Análisis de Fourier en tiempo discreto
+III. Transformada Z
+IV. Filtros Digitales
+V. Transformada Wavelets
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) Analítico X
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios X
+Reporte de proyectos X Reporte de seminarios
+Reportes de investigación X Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluación escrita X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Rao, K. D., & Swamy, M.
+N.
+2018 Digital Signal Processing Springer/978-981-10-
+8080-7
+Ingle, V. K., & Proakis, J.
+G.
+2017 Digital Signal Processing using MATLAB
+Cengage
+Learning/1337268534,9
+781337268530
+Sundararajan, D. 2021 Digital Signal Processing Springer/303062367,97
+83030623678
+McClellan, J. H.,
+Schafer, R., Yoder, M.
+2017
+Procesamiento de Señales Digitales,
+segunda edición
+Pearson/0134117328,9
+780134117324
+Tan, L., & Jiang, J. 2018
+Digital Signal Processing: Fundamentals
+and Applications.Third Edition
+Academic Press/978-0-
+12-815071-9
+

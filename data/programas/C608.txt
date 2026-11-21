@@ -1,0 +1,57 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO (ESCOM), UNIDAD PROFESIONAL
+INTERDISCIPLINARIA DE INGENIERÍA, CAMPUS ZACATECAS (UPIIZ)
+PROGRAMA ACADÉMICO: Ingeniería en Sistemas Computacionales
+UNIDAD DE APRENDIZAJE: Embedded systems
+SEMESTRE: VI
+PLAN DE ESTUDIOS: 2020
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Implementa aplicaciones de sistemas embebidos con base en sus periféricos y el sistema operativo Linux.
+CONTENIDOS:
+I. Fundamentos de sistemas embebidos
+II. Sistemas operativos basados en Linux para sistemas embebidos
+III. Programación de periféricos en sistemas embebidos basados en Linux
+IV. Sistema de arranque en sistemas operativos basados en Linux
+V. Personalización del sistema operativo basado en Linux
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo x a) Estudio de Casos
+b) Deductivo x b) Aprendizaje Basado en Problemas
+c) Analógico c) Aprendizaje Orientado a Proyectos x
+d) Heurístico x
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica x Saberes Previamente Adquiridos x
+Solución de casos Organizadores gráficos
+Problemas resueltos Problemarios
+Reporte de proyectos x Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Código y reporte de programas, de
+aplicaciones y de la configuración del sistema
+Imágenes generadas y ejecución de
+aplicaciones
+Reportes de prácticas x
+Evaluación escrita
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Gonzalez, A. 2018
+Embedded Linux Development
+Using Yocto Project
+Packt publishing/
+978178839921
+Lacamera, D. 2018 Embedded Systems Architecture
+Packt publishing/
+1788832507
+Marquez, F. 2004 Unix Programación Avanzada Ra-Ma/ 8478976035
+Upton, E. 2016 Raspberry Pi User Guide Wiley/ 1119264367
+Vasquez, F. 2021
+Mastering Embedded Linux
+Programming
+Packt publishing/
+1789530385
+

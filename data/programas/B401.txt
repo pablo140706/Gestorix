@@ -1,0 +1,69 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: UNIDAD PROFESIONAL INTERDISCIPLINARIA EN INGENIERÍA CAMPUS COAHUILA,
+ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+EN INGENIERÍA CAMPUS TLAXCALA
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Fundamentos de inteligencia artificial SEMESTRE: IV
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Diseña sistemas inteligentes a partir de algoritmos de aprendizaje, modelos de representación de conocimiento y
+aprendizaje de máquina.
+CONTENIDOS:
+I. Inteligencia artificial
+II. Algoritmos de búsqueda
+III. Modelos de representación del conocimiento
+IV. Aprendizaje de máquina
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo X b) Aprendizaje Basado en Problemas
+c) Analógico X c) Aprendizaje orientado proyectos X
+d) Heurístico X d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos X
+Problemas resueltos X Problemarios
+Reporte de proyectos X Exposiciones
+Reportes de indagación Otras evidencias a evaluar:
+Ejercicios resueltos
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial
+Bolón-Canedo, V.,
+Sánchez, N. y Alonso-
+Betanzo, A
+2015
+Feature Selection for High
+Dimensional Data
+Springer /
+9783319218571
+Brachman, R. y
+Levesque, H.*
+2004
+Knowledge representation and
+reasoning
+Elsevier /
+9781558609327
+Duda, R.; Hart, P. y
+Stork, D.*
+2012 Pattern Classification second edition
+Wiley /
+9780471056690
+Ertel, W. 2017
+Introduction to artificial Intelligence
+second edition
+Springer /
+9783319584867
+Russell, S. & Norvig, P. 2020
+Artificial intelligence A modern
+approach
+Pearson Education /
+9780134610993
+

@@ -1,0 +1,68 @@
+INSTITUTO POLITÉCNICO NACIONAL
+SECRETARÍA ACADÉMICA
+DIRECCIÓN DE EDUCACIÓN SUPERIOR
+PROGRAMA SINTÉTICO
+UNIDAD ACADÉMICA: ESCUELA SUPERIOR DE CÓMPUTO, UNIDAD PROFESIONAL INTERDISCIPLINARIA
+DE INGENIERÍA CAMPUS COAHUILA
+PROGRAMA ACADÉMICO: Ingeniería en Inteligencia Artificial
+UNIDAD DE APRENDIZAJE: Mecánica y electromagnetismo SEMESTRE: I
+PROPÓSITO DE LA UNIDAD DE APRENDIZAJE
+Aplica la mecánica y el electromagnetismo a problemas teóricos a partir de sus principios teóricos básicos.
+CONTENIDOS:
+I. Mecánica
+II. Electrostática
+III. Magnetismo
+ORIENTACIÓN
+DIDÁCTICA:
+Métodos de enseñanza Estrategias de aprendizaje
+a) Inductivo X a) Estudio de casos
+b) Deductivo b) Aprendizaje basado en problemas X
+c) Analógico c) Aprendizaje orientado proyectos
+d) d)
+e) e)
+EVALUACIÓN Y
+ACREDITACIÓN:
+Diagnóstica X Saberes Previamente Adquiridos X
+Solución de casos Organizadores gráficos
+Problemas resueltos X Problemarios X
+Reporte de proyectos Exposiciones
+Reportes de indagación
+Otras evidencias a evaluar:
+Reportes de prácticas X
+Evaluaciones escritas X
+BIBLIOGRAFÍA
+BÁSICA:
+Autor(es) Año Título del documento Editorial / ISBN
+Feynman, R., Leighton,
+R. & Sands, M.
+2018
+Lecciones de física de
+Feynman I. Mecánica,
+radiación y calor
+Fondo de Cultura
+Económica/ 9786071659736
+Resnick, R., Halliday D.
+& Krane, K.
+2002 Física Vol. 1 y 2
+Grupo Editorial Patria/
+9789702402572,
+9789702403265
+Serway, R. & Jewett, J. 2015
+Física para ciencias e
+ingeniería, Vol. 1 y 2
+Cengage Learning/
+9786075191980,
+9781133954149
+Tipler, P. & Mosca, G. 2010
+Física para la ciencia y la
+tecnología Vol. 1 y 2
+Reverté/
+9788429144291,
+978429144307
+Young, H. & Freedman,
+R.
+2008 Física universitaria Vol. 1 y 2
+Pearson/Addison Wesley/
+9786074422887, 978-
+6074423044
+
