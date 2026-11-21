@@ -16,8 +16,8 @@
 | 3 ✅ | Cuentas, avance y horario | 19–22 nov (hecha el 8; el correo real queda para el final) | Registro con verificación de correo, alias, avance (con recurse y ETS) y horario guardados; carga en UA (aviso arriba de la media, tope en 9); avisos de seriación y desfase |
 | 4 ✅ | Profesores y comentarios | 23–25 nov (hecha el 20) | Ficha única del profesor (MisProfesores + link, comentarios por materia, horario, cédula), comentarios con rúbrica, edición en 24 h, reportes, ocultar, suspender y banear |
 | 5 ✅ | Materias y agenda | 25–27 nov (hecha el 20) | PDF y descripción por materia; recordatorios con fecha y hora en el calendario |
-| 6 | Publicación | 27–29 nov | Sitio con dominio y HTTPS, contenedores en un servidor, aviso de privacidad publicado, respaldos con `pg_dump` y una restauración probada |
-| 7 | Cierre y margen | 30 nov – 4 dic | Fases documentadas en el repo, diagrama ER, capturas, demo y arreglos de último momento |
+| 6 ✅ | Publicación | 27–29 nov (hecha el 20–21) | **Cambió con el PDF del 2.º parcial:** la PC es el servidor (Docker) y ngrok la saca a internet con HTTPS y dominio fijo; correos reales por Gmail; seguridad del registro (límite de intentos, CSP, sin detalles internos) |
+| 7 | Cierre y margen | 30 nov – 4 dic | README con los enlaces que pide el PDF, capturas del registro, video de respaldo, demo y arreglos de último momento |
 
 **Si no da el tiempo, se recorta en este orden** (confirmado): agenda → PDFs y descripciones → cédula → rúbrica. **Mínimo para entregar:** fases 1, 2, 3 y 6.
 
@@ -187,6 +187,30 @@
 - Las 4 tarjetas de carga y promedios → una franja de una línea. Sin pestañas Manual / Automático: el automático es una sola barra (Turno · De · a · Máx. · Generar · 🎲 Otra · ?), con la explicación en el "?" y el resultado en una línea.
 - Cada materia del horario tiene **🔄 Cambiar** (los otros grupos y maestros de esa materia: primero los que no chocan y los de tu turno, con calidad, cupo y horario), **📌 Mantener** (el automático no la toca con 🎲 Otra) y **✕ Quitar**. Lo mismo al tocar la materia en la rejilla (menú corto).
 
+## Fase 6 — Publicación ✅ (2026-11-21)
+
+El PDF del 2.º parcial pide que el profesor se registre desde un link y que el registro aparezca
+en la base **de nuestra PC**. Eso cambia el plan original (servidor en la nube, dominio propio,
+Student Pack): ya no hacen falta.
+
+- **Túnel:** ngrok con dominio fijo gratis, `https://thwarting-earthling-evasive.ngrok-free.dev` →
+  `localhost:8080`. Se abre con `ngrok http --url=thwarting-earthling-evasive.ngrok-free.dev 8080`.
+  Se descartaron Supabase (la base quedaría en su nube, no en la PC) y Heroku (de pago, y tampoco
+  es la PC).
+- **Puertos:** la web y pgAdmin escuchan solo en `127.0.0.1`; Postgres no publica nada.
+- **Correo:** Gmail por SMTP (`lib/correo.php`, sin Composer) con contraseña de aplicación en
+  `.env`. Caen en spam (cuenta nueva + dominio de ngrok): se avisa al profe que revise ahí.
+- **Seguridad:** `lib/limite.php` (429 en registro, entrar, olvidé y recuperar),
+  `apache/seguridad.conf` (CSP, `nosniff`, `X-Frame-Options`, sin listado, `lib/` cerrada),
+  `expose_php` apagado, Apache sin versión. El script del tema salió de `index.html` a
+  `tema-inicial.js` para que la CSP no lo bloquee.
+- **Probado:** tres cuentas creadas desde celulares fuera de la red, con el correo recibido y
+  activadas.
+- **Para que el link funcione:** PC prendida, Docker Desktop y la ventana de ngrok abiertas.
+
+**Fase 7 (lo que falta):** capturas en `screenshots/` (las suben los compañeros), el video de
+respaldo (hecho) y lo del proyecto asignado y el artículo en `Catscoms`.
+
 ## Lo que queda incompleto o sin decidir (revisado el 2026-11-08)
 
 **Datos que vas a mandar o capturar**
@@ -205,7 +229,7 @@
 11. **Carga máxima de 9 UA:** falta confirmarla en el Art. 52 del Reglamento General de Estudios.
 
 **De la Fase 0, pospuesto al final** (ver arriba)
-12. Servicio de correo (sin él nadie puede activar su cuenta en el sitio publicado: hoy los correos solo salen en el log), Student Pack (Fase 6), datos del aviso de privacidad (responsable, contacto, proveedores y los plazos entre corchetes) y contraseñas fuertes antes de publicar.
+12. ~~Servicio de correo~~ ✅ Gmail (2026-11-20). ~~Student Pack~~ ya no hace falta (Fase 6 con ngrok). Quedan: datos del aviso de privacidad (responsable, contacto, proveedores y los plazos entre corchetes) y contraseñas fuertes antes de publicar.
 
 **Fase 3: lo que falta o hay que confirmar**
 16. ~~Borrar la cuenta~~ ✅ (2026-11-08) "Tu cuenta" → "Borrar mi cuenta". Pide la contraseña, borra correo, avance, horario, agenda y enlaces, y deja los comentarios como "usuario eliminado". Si eres el único admin, no te deja (primero nombra a otro).

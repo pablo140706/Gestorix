@@ -11,7 +11,7 @@ registros que se pueden enseñar: **crear una cuenta** (tabla `usuario`) y **gua
 
 ## 1. Crear una cuenta
 
-### En la app (`http://localhost:8080`)
+### En la app (<https://thwarting-earthling-evasive.ngrok-free.dev>, o `http://localhost:8080` en la PC)
 
 1. **Entrar** (arriba a la derecha) → **Crear cuenta**.
 2. Correo de prueba, por ejemplo `Prueba.Parcial2@example.com` (con mayúsculas a propósito),
@@ -43,14 +43,18 @@ WHERE correo = 'prueba.parcial2@example.com';
 
 ### Activar la cuenta
 
-Todavía no hay servicio de correo, así que el enlace sale en el log:
+Llega un correo de Gestorix (por Gmail; **puede caer en spam**) con el enlace de activación, que
+apunta a la dirección pública. Ábrelo (te regresa a la app con "¡Tu cuenta está activa!"), vuelve a
+correr el `SELECT` y `verificado` ya dice `true`.
+
+Si el correo no llega, el enlace también queda en el log del servidor:
 
 ```bash
-docker compose logs web | grep -o "http://localhost:8080/api/cuenta/verificar.php?t=[0-9a-f]*" | tail -1
+docker compose logs web | grep -o "https://[^ ]*/api/cuenta/verificar.php?t=[0-9a-f]*" | tail -1
 ```
 
-Abre ese enlace en el navegador (te regresa a la app con "¡Tu cuenta está activa!"), vuelve a
-correr el `SELECT` y `verificado` ya dice `true`. El enlace sirve una sola vez: en la base solo se
+Probado el 2026-11-20 con tres cuentas creadas desde celulares fuera de la red de la PC: llegó el
+correo, se activaron y aparecieron en pgAdmin. El enlace sirve una sola vez: en la base solo se
 guarda su sha256 (tabla `token`) y se borra al usarlo.
 
 📸 `screenshots/registro-3-verificado.png`.
@@ -116,6 +120,13 @@ cuenta.js                          api/cuenta/registro.php
   se pega dentro del SQL, así que no hay inyección de SQL.
 - **Protección CSRF:** `leerJson()` rechaza los POST que no son JSON o que vienen de otro sitio
   (cabecera `Origin`).
+- **Límite de intentos:** 5 registros por hora por IP y 8 contraseñas fallidas por correo cada
+  15 min (`lib/limite.php`); de ahí en adelante contesta 429 "Demasiados intentos".
+- **Contra HTML o JavaScript inyectado:** el front escapa lo que escribe el usuario (`esc()`) y
+  Apache manda una política CSP que solo deja correr JavaScript de los archivos del sitio
+  (`apache/seguridad.conf`).
+- **Por dónde entra la petición:** desde internet llega por el túnel de ngrok (HTTPS) a
+  `localhost:8080` de la PC. Postgres no publica ningún puerto: solo la web habla con él.
 - **Transacción:** guardar el avance (`api/mis-datos.php`) borra y vuelve a insertar todo el avance
   y el horario dentro de un `beginTransaction()` / `commit()`: si algo falla a la mitad, no queda
   nada a medias.

@@ -5,8 +5,10 @@
 // La respuesta es la misma exista o no el correo: así nadie puede usar
 // este formulario para averiguar quién tiene cuenta.
 require __DIR__ . '/../../lib/cuenta.php';
+require __DIR__ . '/../../lib/limite.php';
 
 $d = leerJson();
+limitar('registro', ipCliente(), 5, 3600);          // 5 registros por hora por IP
 $correo = validarCorreo($d['correo'] ?? '');
 $pass = validarContrasena($d['contrasena'] ?? '');
 $carrera = (string)($d['carrera'] ?? '');

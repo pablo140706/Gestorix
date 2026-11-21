@@ -9,7 +9,7 @@ Autor: Mora Acosta Pablo ([`pablo140706`](https://github.com/pablo140706)) · Ba
 
 | Entregable | Dónde |
 |---|---|
-| Aplicación web | Se ejecuta localmente: ver [Cómo levantarlo](#cómo-levantarlo). App en `http://localhost:8080` |
+| Aplicación web | **<https://thwarting-earthling-evasive.ngrok-free.dev>**. La PC del autor es el servidor: la base vive en su Docker y ngrok la saca a internet (ver [Publicación](#publicación-la-pc-como-servidor)). Funciona mientras esa PC esté prendida; si no responde, se levanta local con [Cómo levantarlo](#cómo-levantarlo) |
 | Esquema (creación) | [`sql/00-tablas.sql`](sql/00-tablas.sql) |
 | Modelo relacional, acciones referenciales y restricciones | [`docs/diagrama-er.md`](docs/diagrama-er.md) |
 | Scripts de carga | [`sql/01`–`09`](sql/) (carga inicial), [`sql/99-rol-app.sh`](sql/99-rol-app.sh) (usuario de mínimo privilegio) e [`importador/`](importador/) (HTML de SAES → base) |
@@ -46,8 +46,38 @@ Necesitas Docker Desktop.
    docker compose run --rm web php importador/profesores.php
    ```
 
-- App: <http://localhost:8080> (se usa sin cuenta; con cuenta, el avance y el horario se guardan en la base). Mientras no haya servicio de correo, el enlace para activar una cuenta sale en `docker compose logs web`.
+- App: <http://localhost:8080> (se usa sin cuenta; con cuenta, el avance y el horario se guardan en la base). Los correos de activación y de "olvidé mi contraseña" salen por Gmail si llenas `SMTP_USER` y `SMTP_PASSWORD` (una contraseña de aplicación de Google) en `.env`; si no, el enlace sale en `docker compose logs web`.
 - pgAdmin: <http://localhost:5051> (correo y contraseña de `PGADMIN_*` en `.env`; el servidor "Gestorix" ya viene registrado y pide la contraseña de `POSTGRES_PASSWORD`).
+
+## Publicación: la PC como servidor
+
+El profesor pidió que la base viva en nuestra computadora y que, a la vez, el sitio esté en línea.
+Por eso no se usa un hosting en la nube: Docker corre en la PC y [ngrok](https://ngrok.com) abre un
+túnel HTTPS desde internet hasta `localhost:8080`.
+
+```
+navegador ──HTTPS──▶ ngrok (nube) ──túnel──▶ ngrok en la PC ──▶ localhost:8080 (web) ──▶ db (Postgres)
+```
+
+1. `docker compose up -d`
+2. En `.env`, `APP_URL` con la dirección pública (los enlaces de los correos la usan).
+3. `ngrok http --url=thwarting-earthling-evasive.ngrok-free.dev 8080` (necesita `ngrok config add-authtoken …` una vez).
+
+Solo sale la web: Postgres no publica ningún puerto, pgAdmin escucha solo en `127.0.0.1` y la web
+también (`127.0.0.1:8080`), así que de fuera solo se llega por el túnel.
+
+**Seguridad del registro:**
+
+| Riesgo | Cómo se cubre |
+|---|---|
+| Inyección SQL | Consultas preparadas (`prepare` + `execute`) en toda la API |
+| HTML o JavaScript inyectado (XSS) | El front escapa todo lo que escribe el usuario (`esc()`), y además la política CSP de Apache ([`apache/seguridad.conf`](apache/seguridad.conf)) no deja correr JavaScript que no venga de un archivo del propio sitio |
+| Datos inválidos | Validación en PHP (correo, contraseña de 8–72, carrera existente) y `CHECK` / llaves foráneas en la base |
+| Probar contraseñas o mandar registros en masa | Límite de intentos por IP y por correo ([`src/lib/limite.php`](src/lib/limite.php)): responde 429 |
+| Contraseñas robadas de la base | Solo se guarda el hash bcrypt (`password_hash`) |
+| Peticiones desde otro sitio (CSRF) | Solo POST con JSON y `Origin` del mismo sitio; cookie `HttpOnly`, `SameSite=Lax` y `Secure` en HTTPS |
+| Mostrar detalles internos | `display_errors` y `expose_php` apagados, Apache sin versión, sin listado de carpetas y `lib/` cerrada |
+| Saber quién tiene cuenta | Registro y "olvidé mi contraseña" contestan lo mismo exista o no el correo |
 
 ## Estructura
 
@@ -58,6 +88,7 @@ Necesitas Docker Desktop.
 | `data/` | HTML de SAES por carrera |
 | `migraciones/` | Cambios de esquema cuando la base publicada ya tenga datos |
 | `src/` | Lo que sirve Apache: el front (JavaScript sin frameworks) y la API (`src/api/*.php`, regresa JSON) |
+| `apache/` | Encabezados de seguridad de Apache (CSP y demás), que copia el `Dockerfile` |
 | `docs/` | Aviso de privacidad, modelo relacional, normalización, álgebra relacional y evidencias |
 
 El avance por fases está en [`ROADMAP.md`](ROADMAP.md).

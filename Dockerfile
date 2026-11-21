@@ -9,7 +9,8 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
- && echo "date.timezone = America/Mexico_City" > "$PHP_INI_DIR/conf.d/zona-horaria.ini"
+ && echo "date.timezone = America/Mexico_City" > "$PHP_INI_DIR/conf.d/zona-horaria.ini" \
+ && printf 'display_errors = Off\nlog_errors = On\nexpose_php = Off\n' > "$PHP_INI_DIR/conf.d/seguridad.ini"
 
 RUN a2enmod rewrite headers
 
@@ -19,3 +20,10 @@ RUN a2enmod rewrite headers
 RUN printf '<Directory /var/www/html>\n    Header set Cache-Control "no-cache"\n</Directory>\n' \
       > /etc/apache2/conf-available/gestorix-cache.conf \
  && a2enconf gestorix-cache
+
+# Encabezados de seguridad, sin listado de carpetas y lib/ cerrada.
+COPY apache/seguridad.conf /etc/apache2/conf-available/gestorix-seguridad.conf
+# security.conf de Debian se carga después y volvería a poner la versión.
+RUN a2enconf gestorix-seguridad \
+ && sed -i -e 's/^ServerTokens .*/ServerTokens Prod/' -e 's/^ServerSignature .*/ServerSignature Off/' \
+      /etc/apache2/conf-available/security.conf

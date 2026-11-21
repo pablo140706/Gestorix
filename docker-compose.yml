@@ -7,7 +7,7 @@ services:
   web:
     build: .
     ports:
-      - "8080:80"                      # la app en http://localhost:8080
+      - "127.0.0.1:8080:80"            # la app en http://localhost:8080, solo desde esta PC; a internet sale por ngrok
     environment:
       DB_HOST: db
       DB_NAME: ${POSTGRES_DB}
@@ -15,6 +15,10 @@ services:
       DB_PASSWORD: ${APP_DB_PASSWORD}
       APP_URL: ${APP_URL:-http://localhost:8080}   # para los enlaces de los correos
       SMTP_HOST: ${SMTP_HOST:-}                    # vacío = los correos salen en el log
+      SMTP_PORT: ${SMTP_PORT:-465}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM_NAME: ${SMTP_FROM_NAME:-Gestorix}
     volumes:
       - ./src:/var/www/html            # lo que sirve Apache
       - ./importador:/var/www/importador:ro

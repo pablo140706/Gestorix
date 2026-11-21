@@ -122,6 +122,13 @@ gestorix/
 - **pgAdmin** es donde el usuario corrige los datos.
 - El prototipo en Node de la Fase 1 queda en el zip del usuario como referencia (§9); no entra al repo.
 
+**Publicación (Fase 6, 2026-11-21):**
+- **Manda el PDF del 2.º parcial** (`bdProyectoParcial2ISC_2027-1.pdf`): la **PC del usuario es el servidor** y la base vive en su Docker. A internet sale por **ngrok**: `ngrok http --url=thwarting-earthling-evasive.ngrok-free.dev 8080` (dominio fijo gratis; `APP_URL` en `.env` apunta ahí). Sin Supabase, Heroku, servidor en la nube ni Student Pack.
+- La web y pgAdmin escuchan solo en `127.0.0.1`; Postgres no publica puertos.
+- **Correo por Gmail** (`lib/correo.php`, SMTP propio sin Composer, puerto 465). `SMTP_USER` y `SMTP_PASSWORD` (contraseña de aplicación) van solo en `.env`. Si faltan o Gmail falla, el correo sale en `docker compose logs web`. Llegan a spam.
+- **Seguridad:** `lib/limite.php` (intentos por IP y por correo, en `/tmp` del contenedor; con ngrok la IP real es la última de `X-Forwarded-For`), `apache/seguridad.conf` (CSP sin scripts en línea, `nosniff`, `DENY`, sin listado, `lib/` cerrada) y `expose_php` apagado. **No escribir `<script>` ni `onclick=` dentro del HTML:** la CSP los bloquea.
+- El navegador integrado de Claude no registra *service workers*: ese error de consola no es de la app.
+
 **Los defectos de Seismic no se copian:**
 
 | Seismic | Gestorix |
@@ -277,7 +284,7 @@ gestorix/
 - Nadie más usa iscweb, así que **no hace falta importar avance** del navegador.
 - **Al crear cuenta o iniciar sesión** (usuario, 2026-11-08): si la cuenta está vacía, se sube lo que ese navegador tenía capturado (avance y horario); si la cuenta ya tiene datos, manda la cuenta.
 - **Borrar la cuenta** (`api/cuenta/borrar.php`, 2026-11-08): pide la contraseña otra vez. Las llaves foráneas hacen el resto: `CASCADE` en avance, horario, recordatorio y token; `SET NULL` en comentario (queda "usuario eliminado"), reporte y bitácora. El único admin no puede borrarse.
-- **Correos mientras no haya servicio** (usuario, 2026-11-08): no se manda nada; el texto y el enlace salen en `docker compose logs web`. Cuando se elija Brevo o Gmail, solo se llena el `.env`.
+- **Correos** (2026-11-20): salen por **Gmail** con una contraseña de aplicación en `.env` (ver §2, Publicación). Si no está configurado, el texto y el enlace salen en `docker compose logs web`.
 - Aviso de privacidad y reglas para comentar: `docs/aviso-de-privacidad.md` (borrador). El **correo de contacto** será uno que el usuario ya tiene; él lo escribe (no va en esta memoria). Faltan el nombre del responsable (por defecto, "Gestorix, proyecto escolar") y los proveedores de hosting y de correo.
 - **Ese mismo correo** sirve como remitente de los correos de verificación y recuperación. Su contraseña de aplicación o su clave SMTP van **solo en `.env`**, nunca en el repo.
 

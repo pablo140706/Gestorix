@@ -1,10 +1,17 @@
 <?php
 // POST api/cuenta/entrar.php   { correo, contrasena }  → { usuario }
 require __DIR__ . '/../../lib/cuenta.php';
+require __DIR__ . '/../../lib/limite.php';
 
 $d = leerJson();
 $correo = strtolower(trim((string)($d['correo'] ?? '')));
 $pass = (string)($d['contrasena'] ?? '');
+
+// Solo cuentan los intentos FALLIDOS: 20 por IP y 8 por correo cada 15 min.
+const VENTANA_ENTRAR = 900;
+$ip = ipCliente();
+exigirBajoLimite('entrar-ip', $ip, 20, VENTANA_ENTRAR);
+exigirBajoLimite('entrar-correo', $correo, 8, VENTANA_ENTRAR);
 
 $st = db()->prepare(
     'SELECT id, correo, alias, rol, carrera, hash, verificado, baneado, ' . SQL_SUSPENDIDO_HASTA . ' AS suspendido_hasta
@@ -13,6 +20,8 @@ $st->execute([$correo]);
 $u = $st->fetch();
 
 if (!$u || !password_verify($pass, $u['hash'])) {
+    anotarIntento('entrar-ip', $ip, VENTANA_ENTRAR);
+    anotarIntento('entrar-correo', $correo, VENTANA_ENTRAR);
     usleep(400000);   // frena a quien pruebe contraseñas al por mayor
     fallar(401, 'Correo o contraseña incorrectos.');
 }

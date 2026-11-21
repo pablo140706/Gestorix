@@ -3,8 +3,12 @@
 // Manda un enlace para poner otra contraseña. Misma respuesta exista o no
 // la cuenta, para no revelar quién está registrado.
 require __DIR__ . '/../../lib/cuenta.php';
+require __DIR__ . '/../../lib/limite.php';
 
-$correo = validarCorreo(leerJson()['correo'] ?? '');
+$d = leerJson();
+limitar('olvide-ip', ipCliente(), 5, 3600);          // 5 por hora por IP
+$correo = validarCorreo($d['correo'] ?? '');
+limitar('olvide-correo', $correo, 3, 3600);         // 3 correos por hora a la misma cuenta
 
 $st = db()->prepare('SELECT id FROM usuario WHERE correo = ? AND verificado AND NOT baneado');
 $st->execute([$correo]);

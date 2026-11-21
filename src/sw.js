@@ -16,7 +16,7 @@
 // La excepción son las fuentes de Google: esas sí van caché primero, porque
 // vienen con hash en la URL y no cambian nunca.
 
-const VERSION = "v3";
+const VERSION = "v4";
 const CACHE = "gestorix-" + VERSION;
 
 // El mínimo para pintar: los archivos de la app y los datos críticos de la
@@ -28,7 +28,7 @@ const SHELL = [
   "styles.css",
   "favicon.svg",
   "manifest.webmanifest",
-  "arranque.js",
+  "arranque.js", "tema-inicial.js",
   "api/planes.php", "api/horarios.php", "api/roster.php", "api/metricas.php",
   "api/calendario.php", "api/optativas.php",
   "lazy.js", "data.js", "core.js", "materia-ui.js", "avance.js", "maestros.js", "horario.js",
