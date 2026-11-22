@@ -24,7 +24,7 @@ function pintarCarrera() {
   const total = document.getElementById("totalCred");
   if (total) total.textContent = fmt(TOTAL);
 
-  document.title = "Mi avance — " + (CARRERA_NOMBRE[CARRERA] || CARRERA);
+  document.title = "Gestorix — " + (CARRERA_NOMBRE[CARRERA] || CARRERA);
 }
 
 function cambiarCarrera(nueva) {

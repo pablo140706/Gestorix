@@ -2,8 +2,13 @@
 // =====================================================================
 //  api/mis-datos.php: el avance y el horario del usuario con sesión.
 // =====================================================================
-//  GET  → { carrera, avance: [{ materia, veces, calif, calif_ets }], horario: [id de oferta…] }
-//  POST   { avance: [...], horario: [...] }  → guarda TODO (reemplaza lo anterior)
+//  GET  → { carrera, ingreso, avance: [{ materia, veces, calif, calif_ets, resultado, resultado_ets }],
+//           horario: [id de oferta…] }
+//  POST   { avance: [...], horario: [...], ingreso? }  → guarda TODO (reemplaza lo anterior)
+//
+//  resultado ('aprobada'/'reprobada') y resultado_ets ('aprobado'/'reprobado')
+//  son para quien no quiere dar el número: solo valen si la calificación va
+//  vacía. ingreso es el periodo en que entraste ("25/1"); si no viene, no se toca.
 //
 //  El front manda el estado completo cada vez que cambia algo (unos pocos
 //  KB), así no hay que llevar la cuenta de qué cambió. El horario es solo
@@ -19,17 +24,24 @@ $pdo = db();
 $vigente = periodoVigente();
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'GET') {
-    $st = $pdo->prepare('SELECT materia, veces, calif, calif_ets FROM avance WHERE usuario = ? ORDER BY materia');
+    $st = $pdo->prepare('SELECT materia, veces, calif, calif_ets, resultado, resultado_ets, periodo_reprobada FROM avance WHERE usuario = ? ORDER BY materia');
     $st->execute([$u['id']]);
     $avance = array_map(fn($r) => [
         'materia' => $r['materia'], 'veces' => (int)$r['veces'],
         'calif' => $r['calif'] === null ? null : (int)$r['calif'],
         'calif_ets' => $r['calif_ets'] === null ? null : (int)$r['calif_ets'],
+        'resultado' => $r['resultado'], 'resultado_ets' => $r['resultado_ets'],
+        'periodo_reprobada' => $r['periodo_reprobada'],
     ], $st->fetchAll());
+
+    $st = $pdo->prepare('SELECT ingreso FROM usuario WHERE id = ?');
+    $st->execute([$u['id']]);
+    $ingreso = $st->fetchColumn() ?: null;
 
     $st = $pdo->prepare('SELECT h.oferta FROM horario h JOIN oferta o ON o.id = h.oferta WHERE h.usuario = ? AND o.periodo = ? ORDER BY h.oferta');
     $st->execute([$u['id'], $vigente]);
-    responder(['carrera' => $u['carrera'], 'avance' => $avance, 'horario' => array_map('intval', $st->fetchAll(PDO::FETCH_COLUMN))]);
+    responder(['carrera' => $u['carrera'], 'ingreso' => $ingreso, 'avance' => $avance,
+               'horario' => array_map('intval', $st->fetchAll(PDO::FETCH_COLUMN))]);
     exit;
 }
 
@@ -58,8 +70,23 @@ foreach ($avance as $a) {
     if ($veces !== 1 && $veces !== 2) { fallar(400, 'Una materia se cursa 1 o 2 veces.'); }
     $calif = $entero($a['calif'] ?? null);
     $ets = $entero($a['calif_ets'] ?? null);
-    if ($ets !== null && ($calif === null || $calif >= 6)) { $ets = null; }   // solo hay ETS si reprobaste
-    $filas[$clave] = [$u['id'], $clave, $veces, $calif, $ets];
+    // Resultado sin número: solo si no hay número (si lo hay, el número manda).
+    $res = in_array($a['resultado'] ?? null, ['aprobada', 'reprobada'], true) && $calif === null ? $a['resultado'] : null;
+    $resEts = in_array($a['resultado_ets'] ?? null, ['aprobado', 'reprobado'], true) && $ets === null ? $a['resultado_ets'] : null;
+    // Solo hay ETS si reprobaste el curso.
+    $reprobo = ($calif !== null && $calif < 6) || $res === 'reprobada';
+    // Periodo en que la reprobaste ("26/1"), para el aviso de desfase.
+    $perRep = $a['periodo_reprobada'] ?? null;
+    if ($perRep !== null && (!is_string($perRep) || !preg_match('#^\d{2}/[12]$#', $perRep))) { $perRep = null; }
+    if (!$reprobo) { $ets = null; $resEts = null; $perRep = null; }
+    $filas[$clave] = [$u['id'], $clave, $veces, $calif, $ets, $res, $resEts, $perRep];
+}
+
+// Periodo de ingreso: "AA/1" o "AA/2". Si no viene en el JSON, no se toca.
+$cambiaIngreso = array_key_exists('ingreso', $d);
+$ingreso = $d['ingreso'] ?? null;
+if ($ingreso !== null && (!is_string($ingreso) || !preg_match('#^\d{2}/[12]$#', $ingreso))) {
+    fallar(400, 'El periodo de ingreso se escribe como 25/1.');
 }
 
 $ids = array_values(array_unique(array_map('intval', $horario)));
@@ -71,8 +98,11 @@ if ($ids) {
 
 $pdo->beginTransaction();
 $pdo->prepare('DELETE FROM avance WHERE usuario = ?')->execute([$u['id']]);
-$ins = $pdo->prepare('INSERT INTO avance (usuario, materia, veces, calif, calif_ets) VALUES (?, ?, ?, ?, ?)');
+$ins = $pdo->prepare('INSERT INTO avance (usuario, materia, veces, calif, calif_ets, resultado, resultado_ets, periodo_reprobada) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 foreach ($filas as $f) { $ins->execute($f); }
+if ($cambiaIngreso) {
+    $pdo->prepare('UPDATE usuario SET ingreso = ? WHERE id = ?')->execute([$ingreso, $u['id']]);
+}
 $pdo->prepare('DELETE FROM horario WHERE usuario = ? AND oferta IN (SELECT id FROM oferta WHERE periodo = ?)')->execute([$u['id'], $vigente]);
 $ins = $pdo->prepare('INSERT INTO horario (usuario, oferta) VALUES (?, ?)');
 foreach ($ids as $id) { $ins->execute([$u['id'], $id]); }

@@ -38,13 +38,6 @@ function alternarTema() {
 
 document.getElementById("temaBtn")?.addEventListener("click", alternarTema);
 
-// Seguir al sistema mientras el usuario no haya elegido a mano
-try {
-  if (!localStorage.getItem(TEMA_KEY)) {
-    matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-      if (!localStorage.getItem(TEMA_KEY)) aplicarTema(e.matches ? "oscuro" : "claro", false);
-    });
-  }
-} catch (e) { /* localStorage bloqueado: el botón sigue funcionando por sesión */ }
+// Ya no se sigue al sistema: por defecto es claro y el botón lo cambia (usuario, 2026-11-21).
 
 aplicarTema(temaActual(), false);

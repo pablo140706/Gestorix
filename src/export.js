@@ -136,7 +136,7 @@ function exportarHorarioJPG() {
       // cupo
       const c = cupoDe(h.grupo, h.matReal || h.materia);
       if (c) {
-        const tt = c.disp < 0 ? "Sobrecupo" : c.disp === 0 ? "Lleno" : c.disp + (c.disp === 1 ? " lugar" : " lugares");
+        const tt = `${c.ins}/${c.cupo} inscritos`;
         ctx.font = "700 9px Arial, sans-serif";
         ctx.fillStyle = c.disp <= 0 ? "#b91c1c" : (c.disp <= 5 ? "#b45309" : "#15803d");
         ctx.fillText(tt, cx + 10, y + rowH - 8);
@@ -249,10 +249,10 @@ function exportarHorarioXLSX() {
   filasDatos.sort((a, b) => (orden[a.s.dia] || 9) - (orden[b.s.dia] || 9) || a.s.ini.localeCompare(b.s.ini));
 
   const nombreDia = { Lun: "Lunes", Mar: "Martes", Mie: "Miércoles", Jue: "Jueves", Vie: "Viernes" };
-  const filas = [["Día", "Inicio", "Fin", "Materia", "Profesor", "Grupo", "Edificio", "Salón", "Créditos", "Disponibles"].map((v) => ({ v }))];
+  const filas = [["Día", "Inicio", "Fin", "Materia", "Profesor", "Grupo", "Edificio", "Salón", "Créditos", "Inscritos/cupo"].map((v) => ({ v }))];
   filasDatos.forEach(({ h, s }) => {
     const c = cupoDe(h.grupo, h.matReal || h.materia);
-    const disp = c ? (c.disp < 0 ? "Sobrecupo" : c.disp === 0 ? "Lleno" : c.disp) : "";
+    const disp = c ? `${c.ins}/${c.cupo}` : "";
     filas.push([
       { v: nombreDia[s.dia] || s.dia }, { v: s.ini }, { v: s.fin },
       { v: h.materia }, { v: h.maestro || "" }, { v: h.grupo || "" },

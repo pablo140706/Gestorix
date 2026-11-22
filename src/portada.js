@@ -91,6 +91,7 @@ function entrarApp() {
   portadaEl.hidden = true;
   appEl.hidden = false;
   document.body.style.overflow = "";
+  if (typeof revisarBienvenida === "function") revisarBienvenida();   // bienvenida.js
 }
 
 function mostrarPortada() {

@@ -214,7 +214,7 @@ respaldo (hecho) y lo del proyecto asignado y el artículo en `Catscoms`.
 ## Lo que queda incompleto o sin decidir (revisado el 2026-11-08)
 
 **Datos que vas a mandar o capturar**
-1. **`1CM6`** (lo mandas esta semana): el PDF le da 5 materias en el salón 1212, pero SAES no lo trae. Cuando llegue: pegarlo en `data/isc/` y correr los tres importadores.
+1. ~~**`1CM6`**~~ ✅ (2026-11-21) cargado: el usuario mandó el HTML de SAES con sus 5 materias (salón 1212); se agregó a `data/isc/horario-m.html`. Antes: el PDF le da 5 materias en el salón 1212, pero SAES no lo trae. Cuando llegue: pegarlo en `data/isc/` y correr los tres importadores.
 2. **Otros grupos que el PDF trae y SAES no:** `7BM2` (Formulación, Innovación, Reconocimiento de voz), `2CV2` Ética (1007) y `3BV2` Paradigmas. Mismo caso que `1CM6`: ¿existen?
 3. **Al revés, SAES los trae y el PDF no:** `4CM6` (Probabilidad, Matemáticas avanzadas), `5CV5` Procesamiento digital de señales, `3AV2` Bases de datos, `8AV1` Gestión empresarial, y 3 de las extra (`2CV1` Ética, `7CM1` y `7CM2` TT I). Se quedan, sin confirmar.
 4. **12 ofertas sin salón:** `1CM8` y `1CM9` Cálculo y `6CM5` Sistemas en chip (el PDF dice SA), `4CM6` (2) y los TT (`7CM1`, `7CM2`, `8BM1` ×3, `8BM2` ×2; en TT es normal).

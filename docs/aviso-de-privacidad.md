@@ -21,7 +21,8 @@ Solo lo necesario para que la app funcione:
 | Contraseña | Iniciar sesión. Se guarda cifrada con un *hash*; nadie puede leerla, ni los administradores |
 | Alias | Tu nombre público dentro de la app. Se genera al azar y puedes cambiarlo |
 | Carrera | Mostrarte tu plan de estudios |
-| Avance académico | Las calificaciones y el número de veces que capturas por materia, para calcular tu progreso |
+| Avance académico | Las calificaciones y el número de veces que capturas por materia, para calcular tu progreso. **El número es opcional**: puedes marcar solo "aprobada" o "reprobada" |
+| Periodo de ingreso (opcional) | El periodo en que entraste (por ejemplo 25/1), para calcular tu egreso esperado |
 | Horario | Las materias y grupos que eliges |
 | Recordatorios | Las notas que pongas en tu agenda |
 | Comentarios y calificaciones a profesores | Mostrarlos a otros alumnos |
@@ -50,7 +51,7 @@ Solo entregaríamos información a una autoridad que la solicite conforme a la l
 ## 5. Cuánto tiempo la guardamos
 
 - Mientras tu cuenta exista.
-- Si **borras tu cuenta**, se eliminan tu correo, tu avance, tu horario y tu agenda. Tus comentarios se quedan publicados como "usuario eliminado", sin forma de ligarlos a ti. Si quieres que se borren también, bórralos antes de borrar tu cuenta o pídelo al correo de contacto.
+- Si **borras tu cuenta**, se eliminan tu correo, tu avance, tu horario, tu agenda y tus comentarios. Durante 7 días se guarda una huella del correo (su sha256, de la que no se puede sacar el correo) solo para que no se registre otra vez enseguida; después se ignora. Con una suspensión vigente no se puede borrar la cuenta.
 - Los reportes y las acciones de moderación se conservan [6 meses] para poder atender reincidencias, y después se borran.
 
 ## 6. Tus derechos
@@ -67,6 +68,12 @@ Usamos **una sola cookie de sesión**, para mantenerte conectado. No usamos cook
 ## 8. Fuentes de los datos académicos
 
 Los horarios, grupos y planes de estudio provienen de la información publicada por la ESCOM en SAES. Las métricas de profesores provienen de **MisProfesores.com**, y cada ficha enlaza a su fuente. La cédula profesional proviene del **Registro Nacional de Profesionistas** de la SEP, que es información pública. Gestorix no garantiza que estos datos estén al día.
+
+**Importar de SAES.** Si quieres, puedes darle a Gestorix tu página de **Kárdex** o de **Estado
+General** de SAES para llenar tu avance de una vez. Esa página se lee **dentro de tu navegador**: no
+se manda a nuestro servidor ni a nadie más, y no se guarda. Solo se guarda el avance que resulta
+(materias, calificaciones o "aprobada / reprobada", y el periodo en que reprobaste), igual que si lo
+capturaras a mano. Nunca te pedimos tu contraseña de SAES.
 
 ## 9. Cambios a este aviso
 

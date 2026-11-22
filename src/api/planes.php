@@ -61,8 +61,22 @@ $st = $pdo->query(
 foreach ($st as $s) {
     $planes[$s['carrera']]['seriacion'][$s['materia']][] = $s['requisito'];
 }
+// Equivalencias entre carreras (tabla equivalencia, de SAES), en los dos
+// sentidos: equiv["C103"] = ["B104", "A104"] dentro del plan de ISC.
+foreach ($planes as &$p) { $p['equiv'] = []; }
+unset($p);
+$st = $pdo->query(
+    'SELECT m.carrera, e.materia AS mia, e.equivalente AS otra FROM equivalencia e JOIN materia m ON m.clave = e.materia
+     UNION
+     SELECT m.carrera, e.equivalente, e.materia FROM equivalencia e JOIN materia m ON m.clave = e.equivalente
+     ORDER BY 1, 2, 3');
+foreach ($st as $e) {
+    $planes[$e['carrera']]['equiv'][$e['mia']][] = $e['otra'];
+}
+
 foreach ($planes as &$p) {
     $p['seriacion'] = (object)$p['seriacion'];   // siempre objeto en JSON, aunque esté vacío
+    $p['equiv'] = (object)$p['equiv'];
 }
 unset($p);
 

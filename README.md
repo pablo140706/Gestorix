@@ -89,6 +89,8 @@ también (`127.0.0.1:8080`), así que de fuera solo se llega por el túnel.
 | `migraciones/` | Cambios de esquema cuando la base publicada ya tenga datos |
 | `src/` | Lo que sirve Apache: el front (JavaScript sin frameworks) y la API (`src/api/*.php`, regresa JSON) |
 | `apache/` | Encabezados de seguridad de Apache (CSP y demás), que copia el `Dockerfile` |
-| `docs/` | Aviso de privacidad, modelo relacional, normalización, álgebra relacional y evidencias |
+| `docs/` | Aviso de privacidad, modelo relacional, normalización, álgebra relacional, evidencias, reglas escolares, guion de la expo, respaldo y cómo cargar un periodo nuevo |
+| `migraciones/` | Cambios de esquema con la base ya en uso (desde el 2026-11-21) |
+| `pruebas/` | Pruebas de las reglas de negocio: `docker run --rm -v "${PWD}:/app" -w /app node:22-alpine node pruebas/reglas.test.js` |
 
 El avance por fases está en [`ROADMAP.md`](ROADMAP.md).

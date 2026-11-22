@@ -61,6 +61,13 @@ PLAN.forEach((blk, s) => {
     CLAVE_DE_ID[id] = mat.clave;
   });
 });
+
+// Equivalencias con las otras carreras (SAES; api/planes.php): EQUIV["C103"]
+// = ["A104", "B104"], y EQUIV_A_MIA["B104"] = "C103" para traducir de regreso
+// el grupo de otra carrera que inscribiste (usuario, 2026-11-21).
+const EQUIV = PLAN_ACTIVO.equiv || {};
+const EQUIV_A_MIA = {};
+Object.entries(EQUIV).forEach(([mia, otras]) => otras.forEach((o) => { if (!EQUIV_A_MIA[o]) EQUIV_A_MIA[o] = mia; }));
 function uaDe(id) { return UA_DE_ID[id] || 1; }
 
 // ============================================================

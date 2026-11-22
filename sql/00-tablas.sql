@@ -73,6 +73,15 @@ CREATE TABLE seriacion (
     CHECK (materia <> requisito)
 );
 
+-- Equivalencias entre carreras, de SAES (migraciones/2026-11-21; datos en
+-- sql/10-equivalencias.sql). Cada par una vez; se usa en los dos sentidos.
+CREATE TABLE equivalencia (
+    materia      VARCHAR(5)  REFERENCES materia,
+    equivalente  VARCHAR(5)  REFERENCES materia,
+    PRIMARY KEY (materia, equivalente),
+    CHECK (materia <> equivalente)
+);
+
 -- ISC: las 14 ramas. IA y LCD: solo las parejas obvias (CLAUDE.md §4.3).
 CREATE TABLE ruta_optativa (
     id       SERIAL      PRIMARY KEY,
@@ -228,6 +237,7 @@ CREATE TABLE usuario (
     carrera           VARCHAR(3)   NOT NULL REFERENCES carrera,  -- fija desde el registro
     creado            TIMESTAMPTZ  NOT NULL DEFAULT now(),
     suspendido_hasta  TIMESTAMPTZ,                     -- NULL = no está suspendido
+    ingreso           VARCHAR(4)   CHECK (ingreso ~ '^[0-9]{2}/[12]$'),  -- periodo en que entró ("25/1"); NULL = no lo dijo
     baneado           BOOLEAN      NOT NULL DEFAULT false
 );
 
@@ -241,6 +251,13 @@ CREATE TABLE token (
     usuario  INT          NOT NULL REFERENCES usuario ON DELETE CASCADE,
     tipo     VARCHAR(10)  NOT NULL CHECK (tipo IN ('verificar', 'recuperar')),
     expira   TIMESTAMPTZ  NOT NULL
+);
+
+-- Correos de cuentas borradas hace poco: no se pueden volver a registrar
+-- hasta "hasta" (7 días). Solo el sha256 del correo, no el correo.
+CREATE TABLE correo_borrado (
+    hash   CHAR(64)     PRIMARY KEY,
+    hasta  TIMESTAMPTZ  NOT NULL
 );
 
 
@@ -257,9 +274,20 @@ CREATE TABLE avance (
     veces      SMALLINT    NOT NULL DEFAULT 1 CHECK (veces IN (1, 2)),  -- 1 ordinario, 2 recurse
     calif      SMALLINT    CHECK (calif     BETWEEN 0 AND 10),  -- NULL = la estás cursando
     calif_ets  SMALLINT    CHECK (calif_ets BETWEEN 0 AND 10),  -- NULL = sin ETS
+    -- Resultado SIN número, para quien no quiere dar sus calificaciones
+    -- (migraciones/2026-11-21). Solo vale si no hay número. No entra al promedio.
+    resultado      VARCHAR(9)  CHECK (resultado     IN ('aprobada', 'reprobada')),
+    resultado_ets  VARCHAR(9)  CHECK (resultado_ets IN ('aprobado', 'reprobado')),
+    -- Periodo en que la reprobaste ("26/1"), para el aviso de desfase (migraciones/2026-11-21).
+    periodo_reprobada  VARCHAR(4)  CHECK (periodo_reprobada ~ '^[0-9]{2}/[12]$'),
     PRIMARY KEY (usuario, materia),
-    -- Solo hay ETS si reprobaste el curso.
-    CHECK (calif_ets IS NULL OR (calif IS NOT NULL AND calif < 6))
+    CONSTRAINT avance_periodo_solo_si_reprobo CHECK (
+        periodo_reprobada IS NULL OR calif < 6 OR resultado = 'reprobada'),
+    CONSTRAINT avance_resultado_sin_calif     CHECK (resultado     IS NULL OR calif     IS NULL),
+    CONSTRAINT avance_resultado_ets_sin_calif CHECK (resultado_ets IS NULL OR calif_ets IS NULL),
+    -- Solo hay ETS si reprobaste el curso (con número o sin él).
+    CONSTRAINT avance_ets_solo_si_reprobo CHECK (
+        (calif_ets IS NULL AND resultado_ets IS NULL) OR calif < 6 OR resultado = 'reprobada')
 );
 
 CREATE TABLE horario (
@@ -289,9 +317,9 @@ CREATE INDEX recordatorio_usuario ON recordatorio (usuario, fecha);
 -- Sin UNIQUE: cada usuario comenta las veces que quiera.
 CREATE TABLE comentario (
     id          SERIAL        PRIMARY KEY,
-    -- Si el autor borra su cuenta, el comentario se queda como
-    -- "usuario eliminado" (usuario = NULL).
-    usuario     INT           REFERENCES usuario ON DELETE SET NULL,
+    -- Si el autor borra su cuenta, sus comentarios se borran con ella
+    -- (migraciones/2026-11-21). Los NULL que haya son de antes de ese cambio.
+    usuario     INT           REFERENCES usuario ON DELETE CASCADE,
     profesor    INT           NOT NULL REFERENCES profesor,
     materia     VARCHAR(5)    NOT NULL REFERENCES materia,  -- etiqueta: una de las que da ese profesor
     -- Escalas de MisProfesores, por comentario: enteros de 0 a 10 y sí/no.
@@ -357,15 +385,18 @@ SELECT a.usuario,
        a.calif,
        a.calif_ets,
        CASE
-           WHEN a.calif_ets >= 6                 THEN 'aprobada por ETS'
-           WHEN a.calif >= 6                     THEN 'aprobada'
-           WHEN a.calif IS NULL AND a.veces = 1  THEN 'pendiente'
-           WHEN a.calif IS NULL                  THEN 'en recurse'
-           WHEN a.veces = 1                      THEN 'reprobada'
-           ELSE                                       'solo por ETS'
+           WHEN a.calif_ets >= 6 OR a.resultado_ets = 'aprobado'        THEN 'aprobada por ETS'
+           WHEN a.calif >= 6 OR a.resultado = 'aprobada'                THEN 'aprobada'
+           WHEN a.calif IS NULL AND a.resultado IS NULL AND a.veces = 1 THEN 'pendiente'
+           WHEN a.calif IS NULL AND a.resultado IS NULL                 THEN 'en recurse'
+           WHEN a.veces = 1                                             THEN 'reprobada'
+           ELSE                                                              'solo por ETS'
        END AS status,
+       -- Al promedio solo entra la calificación con NÚMERO con que se aprobó.
        CASE
            WHEN a.calif_ets >= 6 THEN a.calif_ets
            WHEN a.calif >= 6     THEN a.calif
-       END AS calif_final
+       END AS calif_final,
+       a.resultado,
+       a.resultado_ets
 FROM avance a;

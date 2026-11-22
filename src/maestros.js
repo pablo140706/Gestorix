@@ -34,14 +34,16 @@ function teachersActuales() {
 
 const PROF_COLS = [
   { key: "name", label: "Maestro", type: "text" },
-  { key: "calidad", label: "Calidad general", type: "num" },
-  { key: "recomiendan", label: "Lo recomiendan", type: "num" },
-  { key: "dificultad", label: "Nivel de dificultad", type: "num" },
+  { key: "calidad", label: "Calidad general", corto: "Calidad", type: "num" },
+  { key: "recomiendan", label: "Lo recomiendan", corto: "Recom.", type: "num" },
+  { key: "dificultad", label: "Nivel de dificultad", corto: "Dific.", type: "num" },
 ];
 
+// En el celular la columna es angosta: se muestra el título corto (styles.css).
 function renderProfsHead() {
-  profsHead.innerHTML = `<tr>${PROF_COLS.map(
-    (c) => `<th><div class="th-label">${c.label}</div></th>`
+  profsHead.innerHTML = `<tr>${PROF_COLS.map((c) => c.corto
+    ? `<th><div class="th-label" title="${c.label}"><span class="th-largo">${c.label}</span><span class="th-corto">${c.corto}</span></div></th>`
+    : `<th><div class="th-label">${c.label}</div></th>`
   ).join("")}</tr>`;
 }
 
@@ -389,7 +391,7 @@ function periodoMatsHTML(name) {
     const v = ant.get(k);
     chips.push(`<span class="permat off">${esc(titleCase(v.materia))}<span class="permat-grupos">${gruposConCupo(v, true)}</span></span>`);
   });
-  return `<div class="permat-legend"><span class="permat on">Imparte en 27/1 · cupo libre</span><span class="permat off">Ya no (26/2) · inscritos/cupo</span></div>
+  return `<div class="permat-legend"><span class="permat on">Imparte en 27/1 · inscritos/cupo</span><span class="permat off">Ya no (26/2) · inscritos/cupo</span></div>
     <div class="permats">${chips.join("")}</div>`;
 }
 

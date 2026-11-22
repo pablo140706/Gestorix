@@ -1,0 +1,94 @@
+-- =====================================================================
+--  Equivalencias de materias entre ISC, IA y LCD (plan 2020).
+-- =====================================================================
+--  Fuente: SAES → "Equivalencia de Materias" (tablas ISC↔IA, ISC↔LCD e
+--  IA↔LCD), que pegó el usuario el 2026-11-21. Un alumno puede inscribir el
+--  grupo de una materia EQUIVALENTE de otra carrera (usuario: "solo las
+--  equivalentes"). Cada par se guarda una vez; la API lo usa en los dos sentidos.
+--
+--  Se aplica con el usuario administrador:
+--    docker compose exec -T db sh -c 'psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB"' < migraciones/2026-11-21-equivalencias.sql
+-- =====================================================================
+
+BEGIN;
+
+CREATE TABLE equivalencia (
+    materia      VARCHAR(5)  REFERENCES materia,
+    equivalente  VARCHAR(5)  REFERENCES materia,
+    PRIMARY KEY (materia, equivalente),
+    CHECK (materia <> equivalente)
+);
+
+INSERT INTO equivalencia (materia, equivalente) VALUES
+    ('C101', 'B101'),
+    ('C102', 'B102'),
+    ('C103', 'B104'),
+    ('C105', 'B103'),
+    ('C201', 'B201'),
+    ('C202', 'B202'),
+    ('C204', 'B105'),
+    ('C205', 'B205'),
+    ('C206', 'B106'),
+    ('C301', 'B301'),
+    ('C302', 'B302'),
+    ('C303', 'B303'),
+    ('C304', 'B203'),
+    ('C306', 'B304'),
+    ('C307', 'B206'),
+    ('C401', 'B503'),
+    ('C404', 'B305'),
+    ('C502', 'B504'),
+    ('C505', 'B405'),
+    ('C506', 'B703'),
+    ('C601', 'B401'),
+    ('C618', 'B603'),
+    ('C701', 'B701'),
+    ('C705', 'B645'),
+    ('C802', 'B306'),
+    ('C803', 'B802'),
+    ('C805', 'B804'),
+    ('C101', 'A101'),
+    ('C102', 'A102'),
+    ('C103', 'A104'),
+    ('C105', 'A103'),
+    ('C201', 'A201'),
+    ('C202', 'A202'),
+    ('C205', 'A203'),
+    ('C206', 'A205'),
+    ('C301', 'A301'),
+    ('C306', 'A303'),
+    ('C307', 'A306'),
+    ('C701', 'A703'),
+    ('C703', 'A701'),
+    ('C705', 'A503'),
+    ('C710', 'A601'),
+    ('C802', 'A406'),
+    ('C803', 'A802'),
+    ('C805', 'A801'),
+    ('B101', 'A101'),
+    ('B102', 'A102'),
+    ('B103', 'A103'),
+    ('B104', 'A104'),
+    ('B106', 'A205'),
+    ('B201', 'A201'),
+    ('B202', 'A202'),
+    ('B204', 'A204'),
+    ('B205', 'A203'),
+    ('B206', 'A306'),
+    ('B301', 'A301'),
+    ('B304', 'A303'),
+    ('B306', 'A406'),
+    ('B402', 'A304'),
+    ('B402', 'A405'),
+    ('B506', 'A601'),
+    ('B604', 'A506'),
+    ('B645', 'A503'),
+    ('B646', 'A701'),
+    ('B701', 'A703'),
+    ('B703', 'A704'),
+    ('B745', 'A503'),
+    ('B746', 'A701'),
+    ('B802', 'A802'),
+    ('B804', 'A801');
+
+COMMIT;

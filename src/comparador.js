@@ -25,7 +25,7 @@ cmpEl?.addEventListener("click", (e) => { if (e.target === cmpEl) cerrarModal(cm
 // ---------- comparar a los que dan una materia del plan ----------
 function abrirComparador(s, i) {
   const nombre = subjectName(s, i);
-  const list = scheduleFor(s, i);
+  const list = scheduleFor(s, i, false);   // sin equivalentes de otras carreras
 
   cmpTit.textContent = titleCase(nombre);
 

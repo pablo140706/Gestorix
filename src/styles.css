@@ -41,22 +41,43 @@
   --accent: #8b8eff;
 }
 
-/* Los chips pastel (dificultad, cupo, turnos, calendario) son texto oscuro
-   sobre fondo claro. En oscuro se apagan en bloque en vez de reescribir 30
-   reglas: el fondo se funde con la tarjeta y el texto toma el color del chip. */
+/* Los chips pastel (dificultad, cupo, turnos, calendario) y las materias de la
+   rejilla son texto oscuro sobre fondo claro. En oscuro se voltea su claridad
+   en bloque, sin reescribir 30 reglas: invert + hue-rotate(180°) deja el mismo
+   tono pero con fondo oscuro y texto claro (antes un filtro de brillo apagaba
+   también el texto y quedaban turbios, casi sin contraste). */
 :root[data-tema="oscuro"] .diftag,
 :root[data-tema="oscuro"] .cupo-tag,
 :root[data-tema="oscuro"] .tchip,
 :root[data-tema="oscuro"] .tbadge,
-:root[data-tema="oscuro"] .status-badge,
 :root[data-tema="oscuro"] .pd-tag,
 :root[data-tema="oscuro"] .permat,
-:root[data-tema="oscuro"] .cd:not(.vacia) {
-  filter: brightness(.55) saturate(1.5);
+:root[data-tema="oscuro"] .sched-cell {
+  filter: invert(1) hue-rotate(180deg) saturate(1.2);
 }
-:root[data-tema="oscuro"] .cd-hoy { filter: none; }
-:root[data-tema="oscuro"] .sched-cell { filter: brightness(.62) saturate(1.3); }
-:root[data-tema="oscuro"] .sched-cell .cupo-tag { filter: none; }
+/* El calendario NO se voltea: mezcla pastel (inicio, fin, ETS) con colores
+   fuertes de texto blanco (reinscripción, ordinarios, IPN), y al voltearlos
+   unos quedaban brillantes y otros negros. Tiene sus propios colores abajo. */
+:root[data-tema="oscuro"] .cd.t-inicio   { background: #11392a; color: #6ee7a8; border-color: #2ecb8c; }
+:root[data-tema="oscuro"] .cd.t-fin      { background: #3d1d1b; color: #ff8a7d; border-color: #ff6b5c; }
+:root[data-tema="oscuro"] .cd.t-ord      { background: #6a3fc0; }
+:root[data-tema="oscuro"] .cd.t-ext      { background: #4d3e05; color: #f7d94b; }
+:root[data-tema="oscuro"] .cd.t-inscets  { background: #2c3c86; }
+:root[data-tema="oscuro"] .cd.t-ets      { background: #0d3c52; color: #9ad6f3; }
+:root[data-tema="oscuro"] .cd.t-saberes  { background: #4a2410; color: #fbcfae; }
+:root[data-tema="oscuro"] .cd.t-ipn      { background: #9c2148; }
+:root[data-tema="oscuro"] .cd.t-descanso { background: #3a3f52; color: #cfd3dd; }
+:root[data-tema="oscuro"] .cd.t-sindical { border-color: #5b9cf0; color: #8ab8ff; }
+:root[data-tema="oscuro"] .cd.t-vacas    { background: #23273a; color: #8a93ab; }
+:root[data-tema="oscuro"] .cd.t-plan     { border-color: #ff6b5c; color: #ff8a7d; }
+/* Un chip dentro de otro ya volteado: si se voltea otra vez regresa a claro. */
+:root[data-tema="oscuro"] .permat .cupo-tag { filter: none; }
+/* En la rejilla el cupo es rojo o ámbar sólido con texto blanco: se deja igual
+   que en claro (voltearlo dos veces lo regresa a como está). */
+:root[data-tema="oscuro"] .sched-cell .cupo-tag { filter: invert(1) hue-rotate(180deg); }
+:root[data-tema="oscuro"] #horarioTable .sched-cell[data-idx]:hover {
+  filter: invert(1) hue-rotate(180deg) saturate(1.2) brightness(1.15);
+}
 :root[data-tema="oscuro"] .horario-card { filter: brightness(.75) saturate(1.2); }
 :root[data-tema="oscuro"] .conflict-card { background: var(--bg-repr); }
 :root[data-tema="oscuro"] img,
@@ -144,7 +165,9 @@ h1 {
 .chip:active { transform: scale(0.97); }
 .chip .dot { width: 10px; height: 10px; border-radius: 50%; }
 .chip .n { font-family: var(--display); font-weight: 700; }
-.chip[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+/* Con el acento y no con --ink: en oscuro --ink es casi blanco y el texto blanco no se veía. */
+.chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: #fff; }
+.chip[aria-pressed="true"] .dot.todas { background: #fff; }
 .chip[aria-pressed="true"] .num { color: #fff; }
 .dot.pendiente { background: var(--c-pend); }
 .dot.aprobada  { background: var(--c-apro); }
@@ -287,6 +310,10 @@ select.st[data-st="reprobada"] { background-color: var(--bg-repr); color: var(--
 .status-badge[data-recurse="1"]    { background: #fdedcf; color: #b45309; }
 .status-badge[data-blocked="1"]    { background: #7f1d1d; color: #fff; }
 .status-badge[data-inscrita="1"]   { background: #dbeafe; color: #1e40af; }
+/* En oscuro: aprobada, reprobada y pendiente ya usan las variables del tema;
+   solo estas dos traen colores claros fijos. */
+:root[data-tema="oscuro"] .status-badge[data-recurse="1"]  { background: var(--bg-mid); color: var(--c-mid); }
+:root[data-tema="oscuro"] .status-badge[data-inscrita="1"] { background: #172554; color: #93c5fd; }
 
 /* Chip de turno en las tarjetas de oferta (dropdown de inscripción) */
 .tchip {
@@ -404,7 +431,7 @@ select.st[data-st="reprobada"] { background-color: var(--bg-repr); color: var(--
   border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px;
   background: var(--surface); min-width: 0;
 }
-.ruta-paso.active { border-color: var(--c-apro); background: #f0fff7; }
+.ruta-paso.active { border-color: var(--c-apro); background: var(--bg-apro); }
 .ruta-paso-tag {
   font-family: var(--display); font-size: 10.5px; font-weight: 700;
   color: var(--ink-soft); letter-spacing: 0.06em; margin-bottom: 4px;
@@ -511,6 +538,7 @@ select.st[data-st="reprobada"] { background-color: var(--bg-repr); color: var(--
 .profs-table th, .profs-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: middle; }
 .profs-table thead th { position: sticky; top: 0; background: var(--surface); z-index: 1; }
 .th-label { font-family: var(--display); font-weight: 700; font-size: 13px; margin-bottom: 6px; }
+.th-corto { display: none; }
 .th-sort { display: flex; gap: 4px; }
 .sortbtn {
   border: 1px solid var(--line); background: var(--card); border-radius: 6px;
@@ -698,7 +726,7 @@ select.st[data-st="reprobada"] { background-color: var(--bg-repr); color: var(--
 }
 .hcard.conflict {
   border-color: var(--c-repr);
-  background: #fff5f4;
+  background: var(--bg-repr);
 }
 .conflict-tag {
   background: var(--bg-repr);
@@ -869,7 +897,7 @@ footer { margin-top: 30px; font-size: 12px; color: var(--ink-soft); text-align: 
   color: inherit;
   transition: border-color .15s, background .15s, transform .05s;
 }
-.pd-fuente:hover { border-color: #2563eb; background: #eff6ff; }
+.pd-fuente:hover { border-color: var(--accent); background: var(--surface); }
 .pd-fuente:active { transform: translateY(1px); }
 .pd-fuente-ico { font-size: 20px; flex-shrink: 0; }
 .pd-fuente-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
@@ -915,6 +943,7 @@ footer { margin-top: 30px; font-size: 12px; color: var(--ink-soft); text-align: 
   font-size: 9px;
   padding: 1px 5px;
   margin-top: 2px;
+  align-self: flex-start;
   background: rgba(255,255,255,.85);
   color: #1e293b;
 }
@@ -983,9 +1012,12 @@ footer { margin-top: 30px; font-size: 12px; color: var(--ink-soft); text-align: 
   display: inline-block; margin-left: 5px; vertical-align: middle;
   font-family: var(--display); font-weight: 700; font-size: 9.5px; line-height: 1;
   letter-spacing: .04em; padding: 3px 5px; border-radius: 5px;
-  background: var(--surface-2); color: #5b6486; border: 1px solid transparent;
+  background: var(--surface-2); color: var(--ink-soft); border: 1px solid transparent;
 }
-.cbadge.propia { background: #e8e8fb; color: var(--accent); border-color: #c9c9f5; }
+.cbadge.propia {
+  background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
 
 /* ===== Franja del calendario académico ===== */
 .calfranja {
@@ -996,7 +1028,7 @@ footer { margin-top: 30px; font-size: 12px; color: var(--ink-soft); text-align: 
 .cf-periodo {
   font-family: var(--display); font-weight: 700; font-size: 13px;
   letter-spacing: .04em; color: var(--accent);
-  background: #eef0fd; border-radius: 7px; padding: 4px 9px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent); border-radius: 7px; padding: 4px 9px;
 }
 .cf-sem { font-weight: 500; }
 .cf-hito { margin-left: auto; color: var(--ink); }
@@ -1026,7 +1058,7 @@ th.ghd-hoy .ghd-fecha { color: var(--accent); font-weight: 700; }
 }
 .cp-chip {
   font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-  color: var(--accent); background: #eef0fd; border-radius: 6px; padding: 3px 7px;
+  color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); border-radius: 6px; padding: 3px 7px;
 }
 .cp-row { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; padding: 3px 0; }
 .cp-row span { color: var(--ink-soft); }
@@ -1586,3 +1618,124 @@ kbd {
 .pd-ced { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 1px 9px; font-size: 12px; }
 .pd-ced b { font-weight: 600; color: var(--ink); }
 .pd-cedula a { color: var(--accent); font-size: 12px; }
+
+/* ============================================================
+   CALIFICACIÓN SIN NÚMERO, BIENVENIDA Y FECHAS (bienvenida.js)
+   ============================================================ */
+/* La calificación ahora es una lista (número, o solo Aprobada/Reprobada). */
+select.calif { width: auto; min-width: 62px; padding: 6px 6px; text-align-last: center; cursor: pointer; }
+.meternota { font-size: 11px; color: var(--ink-soft); margin-top: 3px; max-width: 22ch; line-height: 1.3; }
+.meternota:empty { display: none; }
+
+.linkbtn {
+  font: inherit; font-weight: 600; color: var(--accent); background: none; border: 0;
+  padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
+}
+.fechas {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 22px;
+  margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink);
+}
+.fecha b { font-family: var(--display); font-weight: 600; color: var(--ink-soft); margin-right: 4px; }
+.fecha small { color: var(--ink-soft); margin-left: 2px; }
+.fechas-acc { display: flex; gap: 14px; margin-left: auto; font-size: 12.5px; }
+
+.bv-intro { font-size: 14px; line-height: 1.55; margin-bottom: 14px; }
+.bv-ok { font-weight: 600; font-size: 13.5px; color: var(--c-apro); background: var(--bg-apro); border-radius: 10px; padding: 9px 12px; margin-bottom: 12px; }
+.bv-nota { font-size: 12.5px; line-height: 1.5; color: var(--ink-soft); margin: 12px 0; }
+.bv-pregunta { font-weight: 600; font-size: 13px; margin: 16px 0 8px; }
+.bv-opciones { display: grid; gap: 10px; }
+.bv-op {
+  display: flex; flex-direction: column; gap: 4px; text-align: left; cursor: pointer;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: 14px 16px;
+  font: inherit; color: var(--ink);
+}
+.bv-op b { font-family: var(--display); font-size: 15px; }
+.bv-op span { font-size: 12.5px; color: var(--ink-soft); }
+.bv-op:hover { border-color: var(--accent); }
+.bv-grupos { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; }
+.bv-grupo {
+  display: flex; flex-direction: column; gap: 2px; align-items: center; cursor: pointer;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 9px 6px;
+  font: inherit; color: var(--ink);
+}
+.bv-grupo b { font-family: var(--display); font-size: 15px; }
+.bv-grupo span { font-size: 11px; color: var(--ink-soft); }
+.bv-grupo:hover { border-color: var(--accent); }
+.bv-grupo.elegido { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.bv-pie { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; }
+.bv-pie .btn:only-child, .bv-pie .btn:first-child:last-child { margin-left: auto; }
+#bienvenidaBody .campo { margin-bottom: 12px; }
+.btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Ventana de una materia reprobada */
+.sit-grupo { border: 0; padding: 0; margin: 0 0 14px; display: flex; flex-direction: column; gap: 7px; }
+.sit-grupo legend { font-weight: 600; font-size: 13px; margin-bottom: 8px; }
+.sit-grupo label { display: flex; align-items: center; gap: 8px; font-size: 13.5px; cursor: pointer; }
+.sit-grupo .sit-num { margin-top: 4px; gap: 10px; }
+.sit-grupo select { border: 1.5px solid var(--line); border-radius: 8px; padding: 5px 8px; background: var(--surface); color: var(--ink); }
+.sit-aviso { font-size: 13px; line-height: 1.55; border-radius: 10px; padding: 11px 13px; border: 1px solid; }
+.sit-aviso[data-nivel="ok"]    { background: var(--bg-apro); color: var(--c-apro); border-color: var(--c-apro); }
+.sit-aviso[data-nivel="aviso"] { background: var(--bg-mid);  color: var(--c-mid);  border-color: var(--c-mid); }
+.sit-aviso[data-nivel="grave"] { background: var(--bg-repr); color: var(--c-repr); border-color: var(--c-repr); }
+.sit-nota { font-size: 11.5px; color: var(--ink-soft); }
+.sit-periodo { margin-bottom: 14px; }
+
+/* Importar de SAES */
+.campo textarea { font-family: ui-monospace, monospace; font-size: 12px; background: var(--surface); color: var(--ink); border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 10px; resize: vertical; }
+.saes-lista { margin: 0 0 6px 18px; font-size: 13px; line-height: 1.6; }
+.saes-lista small, .bv-pregunta small { font-weight: 400; color: var(--ink-soft); }
+.saes-aprob { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 4px 12px; font-size: 13px; }
+.saes-aprob label { display: flex; gap: 6px; align-items: center; cursor: pointer; }
+
+.drop-nota { font-size: 12px; color: var(--ink-soft); margin: 0 0 10px; line-height: 1.5; }
+.drop-nota summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+
+.auto-recurse { font-size: 12.5px; color: var(--ink-soft); margin-top: 6px; line-height: 1.5; }
+
+.auto-eq { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+.eqBtn { font: inherit; font-size: 12px; font-weight: 600; color: var(--accent); background: none; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; cursor: pointer; }
+.eqBtn:hover { border-color: var(--accent); }
+.eq-tag { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 999px; color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+
+/* Desfase y dictamen */
+.status-badge[data-desfase="carta24"] { background: var(--c-repr); color: #fff; }
+.status-badge[data-desfase="dictamen"] { background: #7f1d1d; color: #fff; }
+.aviso-escolar { display: flex; flex-direction: column; gap: 8px; margin: 0 0 16px; }
+.aviso-escolar p { font-size: 13px; line-height: 1.55; border-radius: 10px; padding: 10px 13px; border: 1px solid; }
+.aviso-escolar p[data-nivel="grave"] { background: var(--bg-repr); color: var(--c-repr); border-color: var(--c-repr); }
+.aviso-escolar p[data-nivel="aviso"] { background: var(--bg-mid); color: var(--c-mid); border-color: var(--c-mid); }
+.aviso-escolar p[data-nivel="info"]  { background: var(--surface); color: var(--ink-soft); border-color: var(--line); }
+.aviso-escolar .linkbtn { color: inherit; }
+
+/* ============================================================
+   CELULAR (2026-11-21)
+   ============================================================ */
+@media (max-width: 620px) {
+  /* Pestañas en un solo renglón que se desliza de lado, no en tres. */
+  .tabs {
+    flex-wrap: nowrap; gap: 0; overflow-x: auto; scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; margin-left: -4px; margin-right: -4px;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex-shrink: 0; white-space: nowrap; padding: 10px 12px; font-size: 14px; }
+
+  /* Rejilla del horario (la tuya y la del maestro): se desliza de lado con la
+     hora fija, en vez de apretar 5–6 días en 375 px hasta cortar los nombres. */
+  div:has(> .sched-table) { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .sched-table { min-width: 560px; }
+  .sched-table .sched-hora { position: sticky; left: 0; z-index: 2; }
+  .sched-cell { padding: 7px 8px; }
+  .sched-cell .cupo-tag { font-size: 9.5px; }
+
+  /* Tabla de maestros: cabe a lo ancho en vez de esconder las calificaciones. */
+  .profs-table { min-width: 0; table-layout: fixed; }
+  .profs-table th, .profs-table td { padding: 10px 6px; }
+  .profs-table th:first-child, .profs-table td:first-child { padding-left: 10px; }
+  .profs-table th:not(:first-child), .profs-table td:not(:first-child) { width: 54px; text-align: center; }
+  .profs-table td:first-child { overflow-wrap: anywhere; }
+  .th-label { font-size: 11px; line-height: 1.2; }
+  .th-largo { display: none; }
+  .th-corto { display: inline; }
+  .mtag small { white-space: nowrap; }
+  .th-sort { flex-wrap: wrap; justify-content: center; }
+}

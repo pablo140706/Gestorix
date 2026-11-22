@@ -79,11 +79,10 @@ PLAN.forEach((blk, s) => {
             <option value="1">1ª vez</option>
             <option value="2">2ª (recurse)</option>
           </select>
-          <input class="calif" type="number" min="0" max="10" step="1" placeholder="Cal"
-                 value="${esc(rec.calif)}" aria-label="Calificación de ${esc(name)}">
-          <input class="calif ets" type="number" min="0" max="10" step="1" placeholder="ETS"
-                 value="${esc(rec.calif_ets)}" aria-label="Calificación del ETS de ${esc(name)}"
-                 title="Calificación del ETS (examen a título de suficiencia)">
+          <select class="calif" aria-label="Calificación de ${esc(name)}"
+                  title="Calificación. Si no quieres dar el número, elige Aprobada o Reprobada">${opcionesCalif("curso")}</select>
+          <select class="calif ets" aria-label="Calificación del ETS de ${esc(name)}"
+                  title="ETS (examen a título de suficiencia). Puedes poner el número o solo si lo aprobaste">${opcionesCalif("ets")}</select>
           <span class="status-badge" data-st="${rec.status}" data-blocked="${rec.soloEts ? "1" : "0"}" data-recurse="${esEnRecurse(rec) ? "1" : "0"}" data-inscrita="${rec.status === "pendiente" && estaInscrita(id) ? "1" : "0"}">${statusBadgeText(rec, estaInscrita(id))}</span>
           <button class="profsBtn" type="button">Maestros <span class="caret">▾</span></button>
         </div>
@@ -98,14 +97,17 @@ PLAN.forEach((blk, s) => {
     const drop = subj.querySelector(".drop");
 
     vecesSel.value = String(rec.veces);
+    calif.value = valorCalif(rec, "curso");
+    ets.value = valorCalif(rec, "ets");
     applyRowMode(subj, rec);
 
     // Después de cualquier cambio: recalcular el estado, y si la materia ya
     // no se puede inscribir (aprobada, o solo por ETS) sacarla del horario.
     const tras = () => {
       Object.assign(rec, getSub(id, name));
-      calif.value = rec.calif;
-      ets.value = rec.calif_ets;
+      vecesSel.value = String(rec.veces);
+      calif.value = valorCalif(rec, "curso");
+      ets.value = valorCalif(rec, "ets");
       applyRowMode(subj, rec);
       if (!canInscribir(rec)) {
         const antes = state.horario.length;
@@ -115,41 +117,30 @@ PLAN.forEach((blk, s) => {
       }
       render();
     };
-
-    // Entero de 0 a 10, o "" (vacío). null = no es válido.
-    const leerCalif = (input, anterior) => {
-      const raw = input.value.trim();
-      if (raw === "") return "";
-      const n = Number(raw);
-      if (!Number.isInteger(n) || n < 0 || n > 10) {
-        alert("La calificación debe ser un entero del 0 al 10.");
-        input.value = anterior;
-        return null;
-      }
-      return String(n);
-    };
+    subj._tras = tras;   // bienvenida.js la usa al terminar la ventana de reprobadas
 
     // Cambiar de 1.ª a 2.ª vez (o al revés) es otro curso: el ETS que se
     // haya presentado era del curso anterior y se borra.
     vecesSel.onchange = () => {
-      setSub(id, { veces: Number(vecesSel.value), calif_ets: "" });
+      setSub(id, { veces: Number(vecesSel.value), calif_ets: "", res_ets: "" });
       tras();
     };
 
     calif.onchange = () => {
-      const v = leerCalif(calif, rec.calif);
-      if (v === null) return;
+      const antes = rec.reproboCurso;
+      const patch = patchCalif(calif.value, "curso");
       // Solo hay ETS si reprobaste el curso.
-      const patch = { calif: v };
-      if (v === "" || Number(v) >= 6) patch.calif_ets = "";
+      if (!(patch.res === "reprobada" || (patch.calif !== "" && Number(patch.calif) < 6))) {
+        patch.calif_ets = ""; patch.res_ets = "";
+      }
       setSub(id, patch);
       tras();
+      // Recién reprobada: que diga en qué situación quedó (bienvenida.js).
+      if (rec.reproboCurso && !antes && typeof abrirSituacion === "function") abrirSituacion(id, rec.name);
     };
 
     ets.onchange = () => {
-      const v = leerCalif(ets, rec.calif_ets);
-      if (v === null) return;
-      setSub(id, { calif_ets: v });
+      setSub(id, patchCalif(ets.value, "ets"));
       tras();
     };
 
@@ -171,6 +162,51 @@ PLAN.forEach((blk, s) => {
   planEl.appendChild(sec);
 });
 
+// ---- Calificación: número del 0 al 10, o solo "aprobada"/"reprobada" ----
+// Para quien no quiere dar sus calificaciones (privacidad): sin número la
+// materia cuenta para créditos y avance, pero no para el promedio.
+// En la lista: "" = sin calificar · "A" = aprobada · "R" = reprobada · "0"–"10".
+function opcionesCalif(tipo) {
+  const ets = tipo === "ets";
+  const nums = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].map((n) => `<option value="${n}">${n}</option>`).join("");
+  return `<option value="">${ets ? "ETS" : "Cal"}</option>
+    <optgroup label="Sin número"><option value="A">${ets ? "Aprobado" : "Aprobada"}</option><option value="R">${ets ? "Reprobado" : "Reprobada"}</option></optgroup>
+    <optgroup label="Calificación">${nums}</optgroup>`;
+}
+function valorCalif(rec, tipo) {
+  const num = tipo === "ets" ? rec.calif_ets : rec.calif;
+  if (num !== "") return String(num);
+  const res = tipo === "ets" ? rec.res_ets : rec.res;
+  return res ? res[0].toUpperCase() : "";
+}
+function patchCalif(valor, tipo) {
+  const ets = tipo === "ets";
+  const num = ets ? "calif_ets" : "calif", res = ets ? "res_ets" : "res";
+  if (valor === "A") return { [num]: "", [res]: ets ? "aprobado" : "aprobada" };
+  if (valor === "R") return { [num]: "", [res]: ets ? "reprobado" : "reprobada" };
+  return { [num]: valor, [res]: "" };
+}
+
+// Pone en cada fila lo que hay en `state` (tras marcar varias de golpe).
+function sincronizarFilas() {
+  planEl.querySelectorAll(".subject").forEach((subj) => {
+    const m = subj.dataset.id.match(/^s(\d+)-(\d+)$/);
+    if (!m) return;
+    const id = subj.dataset.id;
+    const def = PLAN[+m[1]].materias[+m[2]][0];
+    const rec = getSub(id, def);
+    // Un lugar de optativa que ya tiene optativa (p. ej. importada del Kárdex) muestra su nombre.
+    if (OPT_SLOTS[id] && state.subjects[id] && state.subjects[id].clave) {
+      subj.querySelector(".name").innerHTML = esc(rec.name) + `<span class="opttag">${OPT_SLOTS[id].label}</span>` +
+        difBadge(def) + botonMateria(state.subjects[id].clave);
+    }
+    subj.querySelector("select.veces").value = String(rec.veces);
+    subj.querySelector("select.calif:not(.ets)").value = valorCalif(rec, "curso");
+    subj.querySelector("select.ets").value = valorCalif(rec, "ets");
+  });
+  render();
+}
+
 // Muestra calif (aprobada/reprobada) u oculta; el botón Maestros aparece en pendiente y reprobada
 function applyRowMode(subj, rec) {
   const id = subj.dataset.id;
@@ -181,9 +217,12 @@ function applyRowMode(subj, rec) {
   badge.dataset.blocked = rec.soloEts ? "1" : "0";
   // El campo de ETS solo aparece si reprobaste el curso (ordinario o recurse).
   const ets = subj.querySelector(".ets");
-  if (ets) ets.hidden = !(rec.calif !== "" && Number(rec.calif) < 6);
+  if (ets) ets.hidden = !rec.reproboCurso;
   badge.dataset.recurse = esEnRecurse(rec) ? "1" : "0";
   badge.dataset.inscrita = inscrita ? "1" : "0";
+  badge.dataset.desfase = rec.desfase || "";
+  badge.title = rec.desfase ? `Reprobada en ${rec.per_rep}. ${TEXTO_DESFASE[rec.desfase]}`
+    : rec.per_rep ? `Reprobada en ${rec.per_rep}` : "";
   badge.textContent = statusBadgeText(rec, inscrita);
   // Profes solo visible si se puede inscribir
   const inscribible = canInscribir(rec);
@@ -198,20 +237,31 @@ function applyRowMode(subj, rec) {
 // Despliega la lista de ofertas reales (SCHEDULE) con días/horas, salón y métricas
 function renderDrop(drop, s, i) {
   const id = idOf(s, i);
-  const list = scheduleFor(s, i);
+  // Los grupos de materias equivalentes de otras carreras van escondidos;
+  // "Mostrar equivalencias" los agrega (usuario, 2026-11-21).
+  const propias = scheduleFor(s, i, false);
+  const equivalentes = scheduleFor(s, i).filter((e) => e.carrera !== CARRERA);
+  const conEq = drop.dataset.eq === "1";
+  const list = conEq ? propias.concat(equivalentes) : propias;
   const cred = PLAN[s].materias[i][1];
   const isOpt = !!OPT_SLOTS[id];
+  const eqBtn = equivalentes.length
+    ? `<button class="eqBtn" type="button" title="Grupos de la materia equivalente en otras carreras; cuentan como esta">${conEq ? "Ocultar" : "Mostrar"} equivalencias (${equivalentes.length})</button>`
+    : "";
 
   if (list.length === 0) {
-    drop.innerHTML = `<div class="drop-empty">No hay grupos abiertos este semestre para esta materia.</div>`;
+    drop.innerHTML = `<div class="drop-empty">No hay grupos abiertos de tu carrera este semestre para esta materia. ${eqBtn}</div>`;
+    drop.querySelector(".eqBtn")?.addEventListener("click", () => { drop.dataset.eq = conEq ? "" : "1"; renderDrop(drop, s, i); });
     return;
   }
 
   drop.innerHTML = `
     <div class="drop-head">
       <span>${list.length} ofert${list.length === 1 ? "a" : "as"} este semestre · elige una para sumarla a tu horario</span>
+      ${eqBtn}
       ${list.length > 1 ? `<button class="cmpBtn" data-cmp="${s}-${i}">⚖️ Comparar maestros</button>` : ""}
     </div>
+    <details class="drop-nota"><summary>¿Cómo funciona el cupo y el sobrecupo?</summary>${esc(NOTA_CUPO)}</details>
     <div class="drop-list">
       ${list.map((e, k) => {
         const m = getMetric(e.profesor);
@@ -226,7 +276,7 @@ function renderDrop(drop, s, i) {
         return `
         <div class="tcard">
           <div class="tcard-main">
-            <div class="tcard-name"><a href="#" class="prof-link" data-prof="${esc(e.profesor)}">${esc(e.profesor)}</a> ${turnoChip}</div>
+            <div class="tcard-name"><a href="#" class="prof-link" data-prof="${esc(e.profesor)}">${esc(e.profesor)}</a> ${turnoChip}${e.carrera !== CARRERA ? ` <span class="eq-tag" title="Materia equivalente de ${esc(e.carrera)} (${esc(e.clave)}): cuenta como tu ${esc(PLAN[s].materias[i][0])}">Equivalente · ${esc(e.carrera)}</span>` : ""}</div>
             <div class="tcard-grupo">${esc(e.grupo)} · Ed. ${esc(e.edificio)} · Salón ${esc(e.salon)}${rama ? ` · <b>${esc(titleCase(rama))}</b>` : ""} ${cupoBadge(e.grupo, e.materia)}</div>
             <div class="tcard-sesiones">${esc(sesionesText(e.sesiones))}</div>
             ${miniMetrics(m)}
@@ -243,6 +293,7 @@ function renderDrop(drop, s, i) {
   });
 
   drop.querySelector(".cmpBtn")?.addEventListener("click", () => abrirComparador(s, i));
+  drop.querySelector(".eqBtn")?.addEventListener("click", () => { drop.dataset.eq = conEq ? "" : "1"; renderDrop(drop, s, i); });
 
   drop.querySelectorAll(".addBtn").forEach((btn) => {
     btn.onclick = () => {
@@ -321,6 +372,13 @@ function toggleHorario(item, btn) {
       alert(`Ya tienes "${dup.materia}" en tu horario (con ${dup.maestro}, ${dup.grupo}). Solo puedes inscribir una vez la misma materia.`);
       return;
     }
+    // Ventana de 3 semestres desde lo más bajo que debes: no se permite salirse.
+    const v = ventanaInscripcion();
+    const sem = Number(item.sid.match(/^s(\d+)-/)[1]) + 1;
+    if (v && sem > v.hi) {
+      alert(`No puedes inscribir ${item.materia} (${sem}.º): debes materias de ${v.lo}.º, así que solo puedes inscribir de ${v.lo}.º a ${v.hi}.º semestre.`);
+      return;
+    }
     if (!cabeEnCarga(item.sid)) return;          // más de la carga máxima no se permite
     state.horario.push(item);
     if (btn) { btn.classList.add("added"); btn.textContent = "✓ En horario"; }
@@ -344,7 +402,7 @@ const ribbon = document.getElementById("ribbon");
 function render() {
   const counts = { todas: 0, pendiente: 0, aprobada: 0, reprobada: 0 };
   let creditosOk = 0;
-  let sumCalif = 0, nCalif = 0;
+  let sumCalif = 0, nCalif = 0, nAprob = 0, nAprobSinNum = 0;
   ribbon.innerHTML = "";
 
   PLAN.forEach((blk, s) => {
@@ -354,10 +412,11 @@ function render() {
       const id = idOf(s, i);
       const rec = getSub(id, name);
       counts[rec.status]++; counts.todas++;
-      if (rec.status === "aprobada") { creditosOk += cred; semOk++; }
-      // Promedio: solo la calificación con que se aprobó (curso o ETS).
-      const fin = califFinal(rec);
+      if (rec.status === "aprobada") { creditosOk += cred; semOk++; nAprob++; }
+      // Promedio como el Kárdex: la última calificación de cada materia, aprobada o reprobada.
+      const fin = califParaPromedio(rec);
       if (fin !== null) { sumCalif += fin; nCalif++; }
+      else if (rec.status === "aprobada") nAprobSinNum++;
     });
     sec.querySelector(".semOk").textContent = semOk;
     sec.querySelector(".semFill").style.width = (semOk / blk.materias.length) * 100 + "%";
@@ -382,6 +441,15 @@ function render() {
   document.getElementById("creditosOk").textContent = creditosOk % 1 ? creditosOk.toFixed(1) : creditosOk;
   document.getElementById("pctOk").textContent = Math.round((creditosOk / TOTAL) * 100);
   document.getElementById("promedio").textContent = nCalif ? (sumCalif / nCalif).toFixed(2) : "—";
+  // De cuántas materias sale, y cuántas aprobadas no tienen número.
+  const nota = document.getElementById("promedioNota");
+  if (nota) {
+    const sinNum = nAprobSinNum ? ` · ${nAprobSinNum} aprobada${nAprobSinNum === 1 ? "" : "s"} sin número no cuenta${nAprobSinNum === 1 ? "" : "n"}` : "";
+    nota.textContent = nCalif
+      ? `De ${nCalif} materia${nCalif === 1 ? "" : "s"} con calificación, aprobadas y reprobadas, como tu Kárdex${sinNum}`
+      : nAprob ? "Tus aprobadas no tienen número" : "";
+  }
+  if (typeof pintarFechas === "function") pintarFechas();
 
   Object.keys(counts).forEach((k) => {
     const el = document.querySelector(`.num[data-c="${k}"]`);

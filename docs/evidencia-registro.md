@@ -93,7 +93,8 @@ Resultado de la prueba (2026-11-19):
 | C103 | Cálculo | 1 | 8 | | aprobada | 8 |
 | C101 | Fundamentos de programación | 1 | 5 | | reprobada | |
 
-La reprobada no tiene `calif_final`: el promedio solo cuenta las aprobadas.
+La reprobada no tiene `calif_final` (es la calificación con que se aprobó). El promedio de la app, en cambio,
+se saca como el del Kárdex de SAES: con la última calificación de cada materia, aprobada o reprobada.
 
 ---
 

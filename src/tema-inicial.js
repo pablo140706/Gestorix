@@ -5,7 +5,7 @@
 (function () {
   try {
     var t = localStorage.getItem("escom_tema");
-    if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "oscuro" : "claro";
+    if (!t) t = "claro";   // por defecto CLARO (usuario, 2026-11-21); el botón lo cambia y se recuerda
     document.documentElement.dataset.tema = t;
   } catch (e) { document.documentElement.dataset.tema = "claro"; }
 })();

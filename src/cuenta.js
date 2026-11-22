@@ -48,11 +48,20 @@ function estadoAFilas() {
     const calif = vacio(r.calif) ? null : Number(r.calif);
     const ets = vacio(r.calif_ets) ? null : Number(r.calif_ets);
     const veces = Number(r.veces || 1);
+    // Aprobada / reprobada sin número (para quien no quiere dar calificaciones).
+    const resultado = calif === null && r.res ? r.res : null;
+    const resultado_ets = ets === null && r.res_ets ? r.res_ets : null;
     // Una obligatoria sin nada capturado es igual a no tener fila.
-    if (!OPT_SLOTS[id] && veces === 1 && calif === null && ets === null) return;
-    filas.push({ materia: clave, veces, calif, calif_ets: ets });
+    if (!OPT_SLOTS[id] && veces === 1 && calif === null && ets === null && !resultado && !resultado_ets) return;
+    const periodo_reprobada = r.per_rep || null;   // para el aviso de desfase
+    filas.push({ materia: clave, veces, calif, calif_ets: ets, resultado, resultado_ets, periodo_reprobada });
   });
   return filas;
+}
+
+// Lo que se sube a mis-datos.php.
+function datosParaSubir() {
+  return { avance: estadoAFilas(), horario: horarioAIds(), ingreso: state.ingreso || null };
 }
 
 // Ids de oferta del horario. Si un renglón viejo no trae id, se busca su
@@ -81,17 +90,27 @@ function aplicarDatos(d) {
 
   state.subjects = {};
   d.avance.forEach((f) => {
-    const rec = { veces: f.veces, calif: vacio(f.calif) ? "" : String(f.calif), calif_ets: vacio(f.calif_ets) ? "" : String(f.calif_ets) };
+    const rec = {
+      veces: f.veces,
+      calif: vacio(f.calif) ? "" : String(f.calif),
+      calif_ets: vacio(f.calif_ets) ? "" : String(f.calif_ets),
+      res: f.resultado || "",
+      res_ets: f.resultado_ets || "",
+      per_rep: f.periodo_reprobada || "",
+    };
     const id = ID_DE_CLAVE[f.materia] || slotPara(f.materia);
     if (id) state.subjects[id] = Object.assign(state.subjects[id] || {}, rec);
   });
 
+  state.ingreso = d.ingreso || "";
+
   state.horario = [];
-  const porId = new Map(schedActual().map((e) => [e.id, e]));
+  // Todas las carreras: tu horario puede traer grupos de materias equivalentes.
+  const porId = new Map((typeof SCHEDULE !== "undefined" ? SCHEDULE : []).map((e) => [e.id, e]));
   d.horario.forEach((ofId) => {
     const o = porId.get(ofId);
     if (!o) return;
-    const id = ID_DE_CLAVE[o.clave] || slotPara(o.clave);
+    const id = ID_DE_CLAVE[o.clave] || ID_DE_CLAVE[EQUIV_A_MIA[o.clave]] || slotPara(o.clave);
     if (!id) return;
     const [s, i] = id.slice(1).split("-").map(Number);
     state.horario.push(armarItemHorario(o, s, i));
@@ -111,18 +130,28 @@ save = function () {               // core.js y los demás módulos siguen llama
 async function subir() {
   _subida = null;
   try {
-    await apiCuenta("mis-datos.php", { avance: estadoAFilas(), horario: horarioAIds() });
+    await apiCuenta("mis-datos.php", datosParaSubir());
     avisoGuardado("Guardado en tu cuenta (" + USUARIO.alias + ").");
   } catch (e) {
     avisoGuardado("No se pudo guardar en tu cuenta: " + e.message, true);
   }
 }
 
+// Sube YA lo que hay (sin esperar los 700 ms). Lo usan Reiniciar y Cargar
+// respaldo antes de recargar: si no, al recargar se baja lo viejo de la cuenta
+// ("la cuenta manda") antes de que llegue el cambio, y los datos regresan.
+async function guardarEnCuentaYa() {
+  if (!USUARIO) return;
+  clearTimeout(_subida);
+  _subida = null;
+  await apiCuenta("mis-datos.php", datosParaSubir());
+}
+
 // Si cierras la pestaña con un cambio aún sin subir, se manda de una vez.
 addEventListener("pagehide", () => {
   if (!_subida || !USUARIO) return;
   clearTimeout(_subida);
-  const cuerpo = JSON.stringify({ avance: estadoAFilas(), horario: horarioAIds() });
+  const cuerpo = JSON.stringify(datosParaSubir());
   navigator.sendBeacon("api/mis-datos.php", new Blob([cuerpo], { type: "application/json" }));
 });
 
@@ -141,6 +170,7 @@ async function alEntrar(usuario) {
   // La carrera de la cuenta manda: si estás viendo otra, se cambia.
   if (usuario.carrera !== CARRERA) {
     try { localStorage.setItem(CARRERA_KEY, usuario.carrera); } catch (e) { /* sin localStorage */ }
+    window.__recargando = true;   // que la bienvenida no se asome antes de recargar
     location.reload();
     return;
   }
@@ -149,8 +179,8 @@ async function alEntrar(usuario) {
   if (typeof cargarAgenda === "function") cargarAgenda();                   // tus recordatorios en el calendario
   try {
     const d = await apiCuenta("mis-datos.php");
-    const cuentaVacia = d.avance.length === 0 && d.horario.length === 0;
-    const hayLocal = estadoAFilas().length > 0 || state.horario.length > 0;
+    const cuentaVacia = d.avance.length === 0 && d.horario.length === 0 && !d.ingreso;
+    const hayLocal = estadoAFilas().length > 0 || state.horario.length > 0 || !!state.ingreso;
     if (cuentaVacia && hayLocal) {
       await subir();               // cuenta nueva: se queda con lo de este navegador
       return;
@@ -160,14 +190,16 @@ async function alEntrar(usuario) {
     // navegador se guarda y se recarga una vez (como "Cargar respaldo"). Si
     // es lo mismo, no se toca nada y no hay recarga (ni ciclo).
     const antes = firmaDelEstado();
-    const respaldo = { subjects: state.subjects, horario: state.horario };
+    const respaldo = { subjects: state.subjects, horario: state.horario, ingreso: state.ingreso };
     aplicarDatos(d);
     if (firmaDelEstado() === antes) {
       state.subjects = respaldo.subjects;
       state.horario = respaldo.horario;
+      state.ingreso = respaldo.ingreso;
       avisoGuardado("Tu avance se guarda en tu cuenta (" + usuario.alias + ").");
     } else {
       _saveLocal();
+      window.__recargando = true;
       location.reload();
     }
   } catch (e) {
@@ -178,8 +210,8 @@ async function alEntrar(usuario) {
 // Lo que importa del estado, sin depender del orden ni de qué lugar de
 // optativa ocupa cada una.
 function firmaDelEstado() {
-  const filas = estadoAFilas().map((f) => [f.materia, f.veces, f.calif, f.calif_ets]).sort();
-  return JSON.stringify([filas, horarioAIds().sort((a, b) => a - b)]);
+  const filas = estadoAFilas().map((f) => [f.materia, f.veces, f.calif, f.calif_ets, f.resultado, f.resultado_ets, f.periodo_reprobada]).sort();
+  return JSON.stringify([filas, horarioAIds().sort((a, b) => a - b), state.ingreso || null]);
 }
 
 async function salir() {
@@ -275,9 +307,8 @@ const VISTAS = {
   borrar: () => ["Borrar mi cuenta", `
     <form class="cuenta-form" data-accion="borrar">
       <p class="cuenta-nota"><b>Esto no se puede deshacer.</b> Se borran tu correo, tu contraseña,
-        tu avance, tu horario y tu agenda. Si dejaste comentarios, se quedan publicados como
-        <b>«usuario eliminado»</b>, sin forma de ligarlos a ti; si quieres que también se borren,
-        pídelo al correo de contacto del aviso de privacidad.</p>
+        tu avance, tu horario, tu agenda y <b>todos tus comentarios</b>. Ese correo no se podrá
+        volver a registrar durante 7 días.</p>
       <label class="campo">Escribe tu contraseña para confirmar
         <input name="contrasena" type="password" autocomplete="current-password" required></label>
       <div class="cuenta-msg" role="status"></div>
@@ -326,6 +357,7 @@ cuentaBodyEl.addEventListener("submit", async (e) => {
         const r = await apiCuenta("cuenta/entrar.php", { correo: v.correo, contrasena: v.contrasena });
         cerrarModal(cuentaEl);
         await alEntrar(r.usuario);
+        if (typeof revisarBienvenida === "function") revisarBienvenida();   // cuenta todavía vacía
         break;
       }
       case "registro": {
@@ -387,9 +419,18 @@ cuentaBodyEl.addEventListener("submit", async (e) => {
       if (r.usuario) await alEntrar(r.usuario);
       else pintarBotonCuenta();
       if (token) abrirCuenta("recuperar", token);
-      else if (llegada === "activada" && USUARIO) abrirCuenta("miCuenta", null, "¡Tu cuenta está activa! Ya puedes guardar tu avance.");
+      else if (llegada === "activada" && USUARIO) {
+        // Recién creada y vacía: la bienvenida, para capturar de una vez tu avance.
+        const abrio = typeof revisarBienvenida === "function" && revisarBienvenida("¡Tu cuenta está activa!");
+        if (!abrio) abrirCuenta("miCuenta", null, "¡Tu cuenta está activa! Ya puedes guardar tu avance.");
+      }
       else if (llegada === "enlace-vencido") abrirCuenta("entrar", null, "Ese enlace ya se usó o venció. Si no has activado tu cuenta, regístrate otra vez para que te llegue otro.", true);
       else if (llegada === "borrada") abrirCuenta("entrar", null, "Tu cuenta se borró. Puedes seguir usando la app sin cuenta.");
+      // Ya se sabe si hay sesión y se bajó tu avance: si sigue vacío, la bienvenida.
+      if (!token && !llegada && typeof revisarBienvenida === "function") revisarBienvenida();
     })
-    .catch(() => pintarBotonCuenta());   // sin conexión: la app sigue funcionando sin cuenta
+    .catch(() => {                       // sin conexión: la app sigue funcionando sin cuenta
+      pintarBotonCuenta();
+      if (typeof revisarBienvenida === "function") revisarBienvenida();
+    });
 })();

@@ -18,8 +18,9 @@ let memFallback = null;
 
 // teacherMats ya no se usa (las materias de cada maestro salen de la base,
 // ver MATS_DE_PROF); se conserva para no romper respaldos viejos.
+// ingreso: periodo en que entraste ("25/1"); "" = no lo has dicho (bienvenida.js).
 function blankState() {
-  return { subjects: {}, horario: [], teacherMats: {} };
+  return { subjects: {}, horario: [], teacherMats: {}, ingreso: "" };
 }
 
 function load() {
@@ -30,6 +31,7 @@ function load() {
       subjects: raw.subjects || {},
       horario: raw.horario || [],
       teacherMats: raw.teacherMats || {},
+      ingreso: raw.ingreso || "",
     };
   } catch (e) {
     return memFallback || blankState();
@@ -98,18 +100,25 @@ function cupoHistTag(c) {
   const level = c.disp < 0 ? "full" : c.disp === 0 ? "full" : c.disp <= 5 ? "low" : "ok";
   return `<span class="cupo-tag" data-cupo="${level}" title="${c.ins} inscritos de ${c.cupo} · ${c.disp} disponibles">${c.ins}/${c.cupo}</span>`;
 }
-// Etiqueta "X lugares" / "Lleno" / "Sobrecupo" con color por disponibilidad.
+// Texto de disponibilidad: "12 lugares" / "1 lugar" / "Lleno" / "Sobrecupo".
+function cupoDispTexto(d) {
+  return d < 0 ? "Sobrecupo" : d === 0 ? "Lleno" : d + (d === 1 ? " lugar" : " lugares");
+}
+// Etiqueta "inscritos/cupo" (p. ej. "34/40") del periodo vigente, igual que la
+// del historial, con color por disponibilidad y el detalle al pasar el mouse.
 function cupoBadge(grupo, materia) {
   const c = cupoDe(grupo, materia);
   if (!c) return "";
   const d = c.disp;
-  let level, text;
-  if (d < 0)        { level = "full"; text = "Sobrecupo"; }
-  else if (d === 0) { level = "full"; text = "Lleno"; }
-  else if (d <= 5)  { level = "low";  text = d + (d === 1 ? " lugar" : " lugares"); }
-  else              { level = "ok";   text = d + " lugares"; }
-  return `<span class="cupo-tag" data-cupo="${level}" title="${c.ins}/${c.cupo} inscritos · ${d} disponibles">${text}</span>`;
+  const level = d <= 0 ? "full" : d <= 5 ? "low" : "ok";
+  const sobre = d <= 0 ? " · Sobrecupo: de 2 a 4 lugares más, en persona, con permiso del profe y de subdirección" : "";
+  return `<span class="cupo-tag" data-cupo="${level}" title="${c.ins} inscritos de ${c.cupo} · ${cupoDispTexto(d)}${sobre}">${c.ins}/${c.cupo}</span>`;
 }
+
+// Cómo se reparten los lugares (docs/reglas-escolares.md).
+const NOTA_CUPO = "Cupo = inscritos/lugares. Cada grupo abre 36: 30 para regulares, +4 para irregulares sin desfase " +
+  "y +2 para quien trae desfase, dictamen o regresa de baja. Ya lleno, el sobrecupo da de 2 a 4 lugares más: " +
+  "en persona, al regresar a clases (llega temprano a Gestión Escolar), con permiso del profe y de subdirección.";
 
 // Status se DERIVA de calif (no se setea manualmente).
 // pendiente = sin calif · aprobada = calif >= 6 · reprobada = calif < 6
@@ -120,33 +129,103 @@ function deriveStatus(calif) {
   return n >= 6 ? "aprobada" : "reprobada";
 }
 
+// ---------- periodos ----------
+// "27/1" = ago–dic 2026 y "27/2" = ene–jun 2027. Para sumar se cuentan como
+// números seguidos: 27/1 → 54, 27/2 → 55, 28/1 → 56…
+function perANum(p) {
+  const m = /^(\d{2})\/([12])$/.exec(p || "");
+  return m ? Number(m[1]) * 2 + Number(m[2]) - 1 : null;
+}
+function numAPer(n) { return String(Math.floor(n / 2)).padStart(2, "0") + "/" + (n % 2 + 1); }
+function perInicio(p) { const [a, n] = p.split("/").map(Number); return n === 1 ? "ago " + (2000 + a - 1) : "ene " + (2000 + a); }
+function perFin(p) { const [a, n] = p.split("/").map(Number); return n === 1 ? "dic " + (2000 + a - 1) : "jun " + (2000 + a); }
+
+// El periodo en curso según el calendario del IPN (o el que sigue, si estás
+// entre periodos). Antes de que cargue calendario-ui.js, o sin calendario, se
+// deduce de la fecha.
+let _periodoActual = null;
+function periodoActual() {
+  if (_periodoActual) return _periodoActual;
+  const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+  if (typeof calPeriodoDe === "function") {
+    try {
+      const p = calPeriodoDe(hoy) || calProximoPeriodo(hoy);
+      if (p && perANum(p.id) !== null) return (_periodoActual = p.id);
+    } catch (e) { /* sin calendario */ }
+  }
+  const yy = hoy.getFullYear() % 100, mes = hoy.getMonth();
+  if (mes >= 7) return numAPer((yy + 1) * 2);   // ago–dic: AA+1/1
+  if (mes === 0) return numAPer(yy * 2);        // enero: todavía es AA/1
+  return numAPer(yy * 2 + 1);                   // feb–jul: AA/2
+}
+
+// Desfase (docs/reglas-escolares.md; usuario, 2026-11-21). Se cuenta desde el
+// periodo P en que reprobaste el ORDINARIO (1.ª vez), aunque luego recursaras:
+//   P+1      → a tiempo (recurse o ETS)
+//   P+2      → "ultimo": el 3.er semestre, ahí debes pasarla (por ETS si ya
+//              reprobaste el recurse)
+//   P+3      → "carta24": desfasada; te reinscribes con carta de 24 créditos
+//   P+4 o más→ "dictamen": 4 semestres sin pasarla; solo tienes derecho a ETS
+//              y no puedes inscribir nada hasta pasarlo
+function desfaseDe(perRep) {
+  const p = perANum(perRep);
+  if (p === null) return "";
+  const d = perANum(periodoActual()) - p;
+  return d >= 4 ? "dictamen" : d === 3 ? "carta24" : d === 2 ? "ultimo" : "";
+}
+function esDesfasada(desf) { return desf === "carta24" || desf === "dictamen"; }
+
+// Textos de cada nivel, para la fila, los avisos y la ventana de reprobadas.
+const TEXTO_DESFASE = {
+  ultimo: "Este es tu 3.er semestre desde que la reprobaste: tienes que pasarla ahora (por ETS si ya reprobaste el recurse); si no, se desfasa.",
+  carta24: "Desfasada: no la pasaste en 3 semestres. Te reinscribes con carta de 24 créditos (menos materias) y te comprometes a pasarla por ETS.",
+  dictamen: "Dictamen: 4 semestres sin pasarla. Solo tienes derecho a ETS y no puedes inscribir nada hasta pasarlo.",
+};
+
 // Estado de una materia (CLAUDE.md §4.2). `status` es uno de los tres de
 // siempre (pendiente / aprobada / reprobada); el ETS se marca aparte:
 //   porEts  → reprobó el curso pero aprobó el ETS: cuenta como aprobada
 //   soloEts → reprobó el recurse: ya no se puede cursar, solo presentar ETS
+// Sin número (privacidad, 2026-11-21): `res` ("aprobada"/"reprobada") vale
+// cuando no hay calificación, y `res_ets` ("aprobado"/"reprobado") cuando no
+// hay calificación de ETS. Cuentan para el estado, no para el promedio.
 function getSub(id, defName) {
   const r = state.subjects[id] || {};
   const calif = r.calif || "";
   const calif_ets = r.calif_ets || "";
+  const res = calif === "" ? (r.res || "") : "";
+  const res_ets = calif_ets === "" ? (r.res_ets || "") : "";
   const veces = Number(r.veces || 1);
-  const delCurso = deriveStatus(calif);
-  const porEts = delCurso === "reprobada" && calif_ets !== "" && Number(calif_ets) >= 6;
+  const delCurso = calif !== "" ? deriveStatus(calif) : (res || "pendiente");
+  const etsAprobado = calif_ets !== "" ? Number(calif_ets) >= 6 : res_ets === "aprobado";
+  const porEts = delCurso === "reprobada" && etsAprobado;
+  // Periodo en que la reprobaste y desfase: solo mientras la debas.
+  const per_rep = delCurso === "reprobada" ? (r.per_rep || "") : "";
   return {
     calif,
     calif_ets,
+    res,
+    res_ets,
+    per_rep,
     veces,
     status: porEts ? "aprobada" : delCurso,
+    reproboCurso: delCurso === "reprobada",
     porEts,
     soloEts: delCurso === "reprobada" && !porEts && veces >= 2,
+    desfase: delCurso === "reprobada" && !porEts ? desfaseDe(per_rep) : "",
     name: r.name || defName,
   };
 }
 
-// La calificación que entra al promedio: la aprobatoria (del curso o del
-// ETS). Las reprobadas no entran (decisión del usuario, CLAUDE.md §4.2).
-function califFinal(rec) {
-  if (rec.porEts) return Number(rec.calif_ets);
-  return rec.status === "aprobada" ? Number(rec.calif) : null;
+// La calificación que entra al promedio, como en el Kárdex de SAES (usuario,
+// 2026-11-21; antes solo contaban las aprobadas): la ÚLTIMA que tienes en cada
+// materia —la del ETS si lo presentaste, si no la del curso—, aprobada o
+// reprobada. Sin número (privacidad) no entra: no hay número que promediar.
+function califParaPromedio(rec) {
+  if (rec.calif_ets !== "") return Number(rec.calif_ets);
+  if (rec.res_ets) return null;                  // presentó ETS, pero sin número
+  if (rec.calif !== "") return Number(rec.calif);
+  return null;
 }
 
 function setSub(id, patch) {
@@ -163,18 +242,53 @@ function canInscribir(rec) {
   return true;
 }
 
-// Las materias que ya solo pueden ir por ETS cuentan en la carga aunque no
-// estén en el horario (decisión del usuario, CLAUDE.md §4.1).
+// TODAS las reprobadas (1.ª vez o recurse, también las de solo por ETS)
+// ocupan carga hasta que las apruebes, aunque no estén en el horario (usuario,
+// 2026-11-21; antes solo las de solo por ETS). Si ya está en el horario, ahí
+// se cuenta y aquí no, para no contarla dos veces.
 function materiasSoloEts() {
   const res = [];
   for (let s = 0; s < PLAN.length; s++) {
     PLAN[s].materias.forEach(([name, cred], i) => {
       const id = idOf(s, i);
       const rec = getSub(id, name);
-      if (rec.soloEts) res.push({ id, name: rec.name, cred, ua: uaDe(id), sem: s + 1 });
+      if (rec.status === "reprobada" && !estaInscrita(id)) res.push({ id, name: rec.name, cred, ua: uaDe(id), sem: s + 1 });
     });
   }
   return res;
+}
+
+// Regular: no debes nada de semestres anteriores (ni reprobadas ni materias
+// sin cursar por debajo de lo más alto que ya aprobaste). Solo los regulares
+// pueden meter la carga máxima; los irregulares, hasta la media (usuario,
+// 2026-11-21). Los lugares de optativa no cuentan (pueden no estar elegidos).
+function esRegular() {
+  let maxAprob = 0;
+  PLAN.forEach((blk, s) => blk.materias.forEach(([name], i) => {
+    if (getSub(idOf(s, i), name).status === "aprobada") maxAprob = Math.max(maxAprob, s + 1);
+  }));
+  for (let s = 0; s < PLAN.length; s++) {
+    for (let i = 0; i < PLAN[s].materias.length; i++) {
+      const id = idOf(s, i);
+      const r = getSub(id, PLAN[s].materias[i][0]);
+      if (r.status === "reprobada") return false;
+      if (s + 1 < maxAprob && r.status !== "aprobada" && !OPT_SLOTS[id]) return false;
+    }
+  }
+  return true;
+}
+function cargaMaxPermitida() { return esRegular() ? CARGA.max : CARGA.media; }
+
+// Ventana de inscripción (regla fundamental, usuario 2026-11-21): solo puedes
+// inscribir materias de 3 semestres seguidos, contando desde el más bajo en el
+// que debes algo. Debes de 1.º → de 1.º a 3.º; lo más bajo que debes es de
+// 2.º → de 2.º a 4.º. null = ya no debes nada.
+function ventanaInscripcion() {
+  for (let s = 0; s < PLAN.length; s++) {
+    const debe = PLAN[s].materias.some(([name], i) => getSub(idOf(s, i), name).status !== "aprobada");
+    if (debe) return { lo: s + 1, hi: Math.min(PLAN.length, s + 3) };
+  }
+  return null;
 }
 function creditosBloqueados() { return materiasSoloEts().reduce((a, m) => a + m.cred, 0); }
 function uaBloqueadas() { return materiasSoloEts().reduce((a, m) => a + m.ua, 0); }
@@ -185,7 +299,11 @@ function statusBadgeText(rec, inscrita) {
     if (rec.porEts) return "Aprobada por ETS";
     return rec.veces === 2 ? "Aprobada (recurse)" : "Aprobada";
   }
-  if (rec.status === "reprobada") return rec.soloEts ? "🔒 Solo por ETS" : "Reprobada · recurse o ETS";
+  if (rec.status === "reprobada") {
+    if (rec.desfase === "dictamen") return "⛔ Dictamen · solo ETS";
+    if (rec.desfase === "carta24") return rec.soloEts ? "⚠️ Desfasada · carta 24 cr · ETS" : "⚠️ Desfasada · carta 24 cr";
+    return rec.soloEts ? "🔒 Solo por ETS" : "Reprobada · recurse o ETS";
+  }
   // pendiente: si ya está en el horario, mostrar "Inscrita"
   if (inscrita) return rec.veces >= 2 ? "🔁 Inscrita (recurse)" : "Inscrita";
   // pendiente sin inscribir: distingue 1ª vez de recurse en curso (2ª vez sin calif)
@@ -261,8 +379,17 @@ function subjectName(s, i) {
   return def;
 }
 
-// Ofertas reales (SCHEDULE) que aplican a un slot del plan
-function scheduleFor(s, i) {
+// Ofertas reales (SCHEDULE) que aplican a un slot del plan. Con conEquiv
+// (por omisión), también los grupos de su materia EQUIVALENTE en IA o LCD
+// (o ISC): se pueden inscribir, pero solo a mano (el automático no los usa).
+function scheduleFor(s, i, conEquiv = true) {
+  const propias = scheduleForPropias(s, i);
+  const clave = CLAVE_DE_ID[idOf(s, i)];
+  if (!conEquiv || !clave || !EQUIV[clave] || typeof SCHEDULE === "undefined") return propias;
+  const otras = new Set(EQUIV[clave]);
+  return propias.concat(SCHEDULE.filter((e) => e.carrera !== CARRERA && otras.has(e.clave)));
+}
+function scheduleForPropias(s, i) {
   const id = idOf(s, i);
   const slot = OPT_SLOTS[id];
   const sched = schedActual();
@@ -412,6 +539,14 @@ function turnoDeGrupo(g) {
 // (CLAUDE.md §9) y hay que usar ese. Esto solo sirve para datos viejos que
 // todavía no lo tengan.
 const LETRA_CARRERA = { C: "ISC", B: "IA", A: "LCD" };
+
+// Grupos de recurse (irregulares), solo en 1.er semestre (usuario, 2026-11-21):
+// en la mañana del 7 en adelante (1CM1–6 son regulares) y en la tarde del 6 en
+// adelante (1CV1–5 son regulares). En los demás semestres no hay.
+function esGrupoRecurse(g) {
+  const m = /^1[ABC]([MV])(\d+)$/.exec(g || "");
+  return !!m && Number(m[2]) >= (m[1] === "V" ? 6 : 7);
+}
 function carreraDeGrupo(g) {
   const m = String(g).trim().match(/^[1-8]([A-Z])[MV]/);
   return m ? (LETRA_CARRERA[m[1]] || null) : null;

@@ -1,7 +1,7 @@
 # Migraciones
 
-Aquí van los cambios de esquema **una vez que la base publicada tenga datos de usuarios**. Hoy la
-carpeta está vacía a propósito: todavía no hay base en producción (eso llega en la Fase 6).
+Aquí van los cambios de esquema **una vez que la base publicada tenga datos de usuarios**, que es
+el caso desde el 2026-11-21 (Fase 6): la primera es `2026-11-21-comentarios-se-borran-con-la-cuenta.sql`.
 
 ## Los tres tipos de scripts del proyecto
 
@@ -12,7 +12,7 @@ carpeta está vacía a propósito: todavía no hay base en producción (eso lleg
 | **Carga repetible** | [`importador/`](../importador/): `horarios.php`, `cupos.php` y `salones.php` | Cada vez que hay HTML nuevo de SAES. Se pueden repetir sin duplicar (`ON CONFLICT`) y cada una corre en una transacción |
 | **Migración** | `migraciones/` (aquí) | A mano, sobre una base que ya tiene datos que no se pueden perder |
 
-## Por qué todavía no hay migraciones
+## Por qué antes no había migraciones
 
 Mientras la base solo existe en la PC de desarrollo, cambiar el esquema es barato: se corrige
 `sql/00-tablas.sql` y se aplica el mismo cambio a la base local, o se vuelve a sembrar desde cero

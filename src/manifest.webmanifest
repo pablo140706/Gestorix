@@ -1,7 +1,8 @@
 {
-  "name": "Avance ESCOM — plan, maestros y horario",
-  "short_name": "Avance ESCOM",
+  "name": "Gestorix — tu avance, maestros y horario en ESCOM",
+  "short_name": "Gestorix",
   "description": "Tu avance del plan de estudios de ESCOM-IPN, las calificaciones de los maestros y tu horario de reinscripción sin choques.",
+  "id": "./",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -10,6 +11,9 @@
   "lang": "es-MX",
   "categories": ["education", "productivity"],
   "icons": [
+    { "src": "icono-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icono-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icono-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
     { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
   ]
 }

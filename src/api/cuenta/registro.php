@@ -22,7 +22,20 @@ $st = $pdo->prepare('SELECT id, verificado FROM usuario WHERE correo = ?');
 $st->execute([$correo]);
 $u = $st->fetch();
 
-if (!$u) {
+// ¿Ese correo borró su cuenta hace poco? (api/cuenta/borrar.php)
+$st = $pdo->prepare("SELECT to_char(hasta AT TIME ZONE 'America/Mexico_City', 'DD/MM/YYYY HH24:MI')
+                     FROM correo_borrado WHERE hash = ? AND hasta > now()");
+$st->execute([hash('sha256', $correo)]);
+$bloqueadoHasta = $st->fetchColumn();
+
+if ($bloqueadoHasta !== false) {
+    // Se avisa por correo y no en pantalla, como los demás casos: así el
+    // formulario no revela qué correos tuvieron cuenta.
+    enviarCorreo($correo, 'No se pudo crear tu cuenta de Gestorix',
+        "¡Hola!\n\nAlguien intentó crear una cuenta con este correo, pero una cuenta con él se borró hace poco.\n"
+      . "Podrás registrarlo otra vez a partir del $bloqueadoHasta.\n\n"
+      . "Si no fuiste tú, ignora este correo.");
+} elseif (!$u) {
     $st = $pdo->prepare('INSERT INTO usuario (correo, hash, alias, carrera) VALUES (?, ?, ?, ?) RETURNING id');
     $st->execute([$correo, password_hash($pass, PASSWORD_DEFAULT), aliasAlAzar(), $carrera]);
     mandarVerificacion((int)$st->fetchColumn(), $correo);

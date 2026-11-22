@@ -5,7 +5,7 @@ const horarioListEl = document.getElementById("horarioList");
 const credSummaryEl = document.getElementById("credSummary");
 
 // ---------- carga académica en UA (CLAUDE.md §4.1) ----------
-// Lo que inscribes + lo que ya solo puede ir por ETS (cuenta aunque no esté
+// Lo que inscribes + las reprobadas que no están en el horario (cuentan aunque no estén
 // en el horario). TT I y TT II valen 2 UA; las demás, 1.
 function cargaActual() {
   const enHorario = state.horario.reduce((a, h) => a + uaDe(h.sid), 0);
@@ -20,8 +20,11 @@ function semDeId(id) { return Number(id.match(/^s(\d+)-/)[1]) + 1; }
 function avisosDelHorario() {
   const av = [];
   const c = cargaActual();
-  if (c.total > CARGA.max) {
-    av.push(`Llevas ${c.total} UA y el máximo es ${CARGA.max}. Quita ${c.total - CARGA.max}.`);
+  const max = cargaMaxPermitida();
+  if (c.total > max) {
+    av.push(max < CARGA.max
+      ? `Llevas ${c.total} UA. Como debes materias (irregular), tu máximo es la carga media: ${max}. Quita ${c.total - max}. Solo los regulares llegan a ${CARGA.max}.`
+      : `Llevas ${c.total} UA y el máximo es ${max}. Quita ${c.total - max}.`);
   } else if (c.total > CARGA.media) {
     av.push(`Llevas ${c.total} UA, arriba de la carga media (${CARGA.media}). Inscribir más de la media requiere un trámite ante la Unidad Académica.`);
   } else if (state.horario.length && c.total < CARGA.min) {
@@ -53,14 +56,56 @@ function avisosDelHorario() {
       av.push(`Art. 98: adeudas ${viejas.join(", ")}, de más de 2 semestres antes del ${hi}.º que inscribes.`);
     }
   }
+
+  // ISC: la optativa de 7.º debe ser de la misma rama (trayectoria) que una de
+  // las de 6.º; el procedimiento da de baja las de fuera. Solo avisa (usuario, 2026-11-21).
+  const fuera = optativasFueraDeTrayectoria();
+  if (fuera.length) {
+    av.push(`Trayectoria: ${fuera.map((f) => `${f.nombre} (7.º, rama ${f.rama})`).join(", ")} no ${fuera.length === 1 ? "es" : "son"} de la rama de tus optativas de 6.º (${fuera[0].ramas6.join(", ")}). El procedimiento da de baja las optativas fuera de tu trayectoria.`);
+  }
+
+  // Desfase y dictamen (docs/reglas-escolares.md).
+  const carta = [], dictamen = [];
+  PLAN.forEach((blk, s) => blk.materias.forEach(([name], i) => {
+    const rec = getSub(idOf(s, i), name);
+    if (rec.desfase === "carta24") carta.push(rec.name);
+    if (rec.desfase === "dictamen") dictamen.push(rec.name);
+  }));
+  if (dictamen.length && state.horario.length) {
+    av.push(`Dictamen: ${dictamen.join(", ")} lleva${dictamen.length === 1 ? "" : "n"} 4 semestres sin pasar. Solo tienes derecho a ETS y no puedes inscribir nada hasta pasarlo.`);
+  } else if (carta.length) {
+    av.push(`Desfase: ${carta.join(", ")}. Te reinscribes con carta de 24 créditos y te comprometes a pasarla${carta.length === 1 ? "" : "s"} por ETS.`);
+    const cred = state.horario.reduce((a, h) => a + (h.cred || 0), 0);
+    if (cred > 24) av.push(`Con carta de 24 créditos tu horario no puede pasar de 24; lleva ${cred % 1 ? cred.toFixed(1) : cred}.`);
+  }
   return av;
 }
 
-// ¿Cabe una materia más? Pasar de la carga máxima no se permite.
+// Optativas de 7.º cuya rama no es la de ninguna de tus optativas de 6.º (solo
+// ISC, que es la que tiene trayectorias; datos de api/optativas.php).
+function optativasFueraDeTrayectoria() {
+  if (CARRERA !== "ISC" || typeof ESPECIALIZACIONES === "undefined" || !ESPECIALIZACIONES.length) return [];
+  const ramaDe = {};
+  ESPECIALIZACIONES.forEach((r) => r.materias.forEach((m) => { ramaDe[m.clave] = r.nombre; }));
+  const elegidas = (sem) => Object.entries(OPT_SLOTS)
+    .filter(([id, sl]) => sl.sem === sem && state.subjects[id] && state.subjects[id].clave)
+    .map(([id]) => ({ clave: state.subjects[id].clave, nombre: getSub(id, "").name }));
+  const ramas6 = [...new Set(elegidas(6).map((o) => ramaDe[o.clave]).filter(Boolean))];
+  if (!ramas6.length) return [];
+  return elegidas(7)
+    .filter((o) => ramaDe[o.clave] && !ramas6.includes(ramaDe[o.clave]))
+    .map((o) => ({ nombre: o.nombre, rama: ramaDe[o.clave], ramas6 }));
+}
+
+// ¿Cabe una materia más? Pasar de la carga máxima no se permite; si eres
+// irregular, tu máxima es la media (cargaMaxPermitida, core.js).
 function cabeEnCarga(sid) {
   const despues = cargaActual().total + uaDe(sid);
-  if (despues <= CARGA.max) return true;
-  alert(`No cabe: llevarías ${despues} UA y la carga máxima es ${CARGA.max}.`);
+  const max = cargaMaxPermitida();
+  if (despues <= max) return true;
+  alert(max < CARGA.max
+    ? `No cabe: llevarías ${despues} UA. Como debes materias (irregular), tu máximo es la carga media: ${max} UA. Solo los regulares pueden llegar a ${CARGA.max}.`
+    : `No cabe: llevarías ${despues} UA y la carga máxima es ${max}.`);
   return false;
 }
 
@@ -78,7 +123,8 @@ function renderHorario() {
   const carga = cargaActual();
   const inscritos = state.horario.reduce((a, h) => a + h.cred, 0);
   const nMaterias = state.horario.length;
-  const nivel = carga.total > CARGA.max ? "danger" : carga.total > CARGA.media ? "warn" : "";
+  const maxPermitida = cargaMaxPermitida();
+  const nivel = carga.total > maxPermitida ? "danger" : carga.total > CARGA.media ? "warn" : "";
 
   // P12: promedios de calidad y dificultad (simples, sin ponderar)
   let sumCal = 0, sumDif = 0, nCal = 0, nDif = 0;
@@ -94,8 +140,8 @@ function renderHorario() {
   const prom = (v, kind) => v == null ? "—" : `<b class="cs-val color-${metricColor(v.toFixed(1), kind)}">${v.toFixed(1)}</b>`;
   credSummaryEl.innerHTML = `
     <div class="cs-strip ${nivel}">
-      <span title="Carga media ${CARGA.media} UA, máxima ${CARGA.max}"><b>${carga.total}</b>/${CARGA.media} UA
-        <small>(máx. ${CARGA.max})</small>${carga.soloEts ? ` <span class="cs-bloq">${carga.soloEts} solo por ETS</span>` : ""}</span>
+      <span title="Carga media ${CARGA.media} UA, máxima ${maxPermitida}${maxPermitida < CARGA.max ? " (eres irregular: solo los regulares llegan a " + CARGA.max + ")" : ""}"><b>${carga.total}</b>/${CARGA.media} UA
+        <small>(máx. ${maxPermitida})</small>${carga.soloEts ? ` <span class="cs-bloq" title="Las reprobadas ocupan carga hasta que las apruebes, aunque no estén en tu horario">${carga.soloEts} de reprobadas</span>` : ""}</span>
       <span><b>${nMaterias}</b> materia${nMaterias === 1 ? "" : "s"} · ${fmt(inscritos)} cr</span>
       <span title="Promedio de MisProfesores de tus maestros">Calidad ${prom(promCal, "cal")}</span>
       <span title="Promedio de MisProfesores de tus maestros (bajo = más fácil)">Dificultad ${prom(promDif, "dif")}</span>
@@ -209,7 +255,7 @@ function alternativasDe(idx) {
   const otras = state.horario.filter((_, k) => k !== idx);
   const mat = norm(h.matReal || h.materia);
   const turno = turnoDeGrupo(h.grupo);
-  return scheduleFor(s, i)
+  return scheduleFor(s, i, false)   // sin equivalentes de otras carreras
     .filter((e) => norm(e.materia) === mat && !(e.grupo === h.grupo && norm(e.profesor) === norm(h.maestro)))
     .map((e) => {
       const item = armarItemHorario(e, s, i);
