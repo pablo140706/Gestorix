@@ -14,7 +14,7 @@ exigirBajoLimite('entrar-ip', $ip, 20, VENTANA_ENTRAR);
 exigirBajoLimite('entrar-correo', $correo, 8, VENTANA_ENTRAR);
 
 $st = db()->prepare(
-    'SELECT id, correo, alias, rol, carrera, hash, verificado, baneado, ' . SQL_SUSPENDIDO_HASTA . ' AS suspendido_hasta
+    'SELECT id, correo, alias, alias_cambios, rol, carrera, hash, verificado, baneado, ' . SQL_SUSPENDIDO_HASTA . ' AS suspendido_hasta
      FROM usuario WHERE correo = ?');
 $st->execute([$correo]);
 $u = $st->fetch();

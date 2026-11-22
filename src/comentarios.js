@@ -100,7 +100,10 @@ function formularioOEntrada(d) {
 
 function comentarioHTML(c) {
   const yo = FICHA.yo;
-  const autor = c.autor ? esc(c.autor) : `<i>Usuario eliminado</i>`;
+  // Anónimo: su nombre al azar, marcado. Los moderadores ven también quién es.
+  const autor = !c.autor ? `<i>Usuario eliminado</i>`
+    : c.anonimo ? `${esc(c.autor)} <span class="com-anon">anónimo</span>${c.autor_real ? ` <small>(${esc(c.autor_real)})</small>` : ""}`
+    : esc(c.autor);
   const rub = c.rubrica.length
     ? `<div class="com-rubrica">${c.rubrica.map((x) => `<span>${esc(x.concepto)} <b>${x.porcentaje} %</b></span>`).join("")}</div>`
     : "";
@@ -184,6 +187,8 @@ function formComentarioHTML(c) {
           <span class="com-rub-suma"></span>
         </div>
       </div>
+      <label class="com-anonimo"><input type="checkbox" name="anonimo"${c && c.anonimo ? " checked" : ""}>
+        Publicar como <b>anónimo</b> <small>(sale un nombre al azar en vez de tu alias)</small></label>
       <p class="com-nota">Habla de la clase, sin ataques ni datos personales.
         Puedes editarlo o borrarlo en las primeras 24 horas.</p>
       <div class="cuenta-msg" role="status"></div>
@@ -319,6 +324,7 @@ profDetailEl.addEventListener("submit", async (e) => {
   try {
     if (form.classList.contains("com-form")) {
       const datos = leerFormulario(form);
+      datos.anonimo = !!form.querySelector("[name=anonimo]")?.checked;
       if (form.dataset.id) datos.id = Number(form.dataset.id);
       await apiCuenta("comentarios/guardar.php", datos);
       refrescarComentarios();

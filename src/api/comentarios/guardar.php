@@ -22,15 +22,22 @@ if (isset($d['id'])) {
 $v = leerComentario($d, $profesor);
 $campos = [$v['materia'], $v['calidad'], $v['recomienda'] ? 'true' : 'false', $v['dificultad'], $v['texto']];
 
+// ¿Publicar como anónimo? Se muestra un nombre de letras y números al azar
+// (10 caracteres; la columna acepta hasta 15) en vez de tu alias. Al editar
+// se conserva el que ya tenía; si lo quitas, vuelve a salir tu alias.
+$quiereAnonimo = !empty($d['anonimo']);
+$anonimoActual = isset($c) ? ($c['anonimo'] ?? null) : null;
+$anonimo = $quiereAnonimo ? ($anonimoActual ?: substr(str_replace(['+', '/', '='], '', base64_encode(random_bytes(12))), 0, 10)) : null;
+
 $pdo->beginTransaction();
 if (isset($c)) {
     $id = (int)$c['id'];
-    $pdo->prepare('UPDATE comentario SET materia = ?, calidad = ?, recomienda = ?, dificultad = ?, texto = ?, editado = now()
-                   WHERE id = ?')->execute([...$campos, $id]);
+    $pdo->prepare('UPDATE comentario SET materia = ?, calidad = ?, recomienda = ?, dificultad = ?, texto = ?, anonimo = ?, editado = now()
+                   WHERE id = ?')->execute([...$campos, $anonimo, $id]);
 } else {
-    $st = $pdo->prepare('INSERT INTO comentario (usuario, profesor, materia, calidad, recomienda, dificultad, texto)
-                         VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id');
-    $st->execute([$u['id'], $profesor, ...$campos]);
+    $st = $pdo->prepare('INSERT INTO comentario (usuario, profesor, materia, calidad, recomienda, dificultad, texto, anonimo)
+                         VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING id');
+    $st->execute([$u['id'], $profesor, ...$campos, $anonimo]);
     $id = (int)$st->fetchColumn();
 }
 guardarRubrica($id, $v['rubrica']);

@@ -103,7 +103,7 @@ function guardarRubrica(int $comentario, array $rubrica): void
 function exigirComentarioPropio(int $id, array $u): array
 {
     $st = db()->prepare(
-        'SELECT id, profesor, estado, creado > now() - make_interval(hours => ?) AS a_tiempo
+        'SELECT id, profesor, estado, anonimo, creado > now() - make_interval(hours => ?) AS a_tiempo
          FROM comentario WHERE id = ? AND usuario = ?');
     $st->execute([HORAS_PARA_EDITAR, $id, $u['id']]);
     $c = $st->fetch() ?: fallar(404, 'Ese comentario no existe o no es tuyo.');
@@ -120,7 +120,7 @@ function comentariosDe(int $profesor, ?array $u): array
     $mod = esModerador($u);
 
     $st = $pdo->prepare(
-        "SELECT c.id, c.usuario, us.alias, us.rol AS autor_rol, c.materia, m.nombre AS materia_nombre,
+        "SELECT c.id, c.usuario, us.alias, c.anonimo, us.rol AS autor_rol, c.materia, m.nombre AS materia_nombre,
                 c.calidad, c.recomienda, c.dificultad, c.texto, c.estado,
                 to_char(c.creado  AT TIME ZONE 'America/Mexico_City', 'DD/MM/YYYY HH24:MI') AS creado,
                 to_char(c.editado AT TIME ZONE 'America/Mexico_City', 'DD/MM/YYYY HH24:MI') AS editado,
@@ -152,7 +152,9 @@ function comentariosDe(int $profesor, ?array $u): array
         $mio = $yo && (int)$c['usuario'] === $yo;
         $fila = [
             'id'         => (int)$c['id'],
-            'autor'      => $c['alias'],                       // null = usuario eliminado
+            // Anónimo: su nombre al azar en vez del alias (el dueño sigue siendo c.usuario).
+            'autor'      => $c['anonimo'] ?? $c['alias'],      // null = usuario eliminado
+            'anonimo'    => $c['anonimo'] !== null,
             'materia'    => ['clave' => $c['materia'], 'nombre' => $c['materia_nombre']],
             'calidad'    => (int)$c['calidad'],
             'recomienda' => (bool)$c['recomienda'],
@@ -169,6 +171,7 @@ function comentariosDe(int $profesor, ?array $u): array
         if ($mod) {                                            // para moderar, no para mostrar
             $fila['autor_id'] = $c['usuario'] === null ? null : (int)$c['usuario'];
             $fila['autor_rol'] = $c['autor_rol'];
+            if ($c['anonimo'] !== null) { $fila['autor_real'] = $c['alias']; }   // quién es el anónimo
             $fila['reportes'] = (int)$c['reportes'];
         }
         return $fila;

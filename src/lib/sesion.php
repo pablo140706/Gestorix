@@ -70,7 +70,9 @@ function leerJson(): array
 function perfil(array $u): array
 {
     return ['alias' => $u['alias'], 'correo' => $u['correo'], 'carrera' => $u['carrera'], 'rol' => $u['rol'],
-            'suspendido_hasta' => $u['suspendido_hasta'] ?? null];
+            'suspendido_hasta' => $u['suspendido_hasta'] ?? null,
+            // Cambios de alias que le quedan (máximo 2 en toda la vida de la cuenta).
+            'alias_cambios_restantes' => max(0, 2 - (int)($u['alias_cambios'] ?? 0))];
 }
 
 // Fecha de fin de una suspensión vigente, en hora de la Ciudad de México.
@@ -87,7 +89,7 @@ function usuarioActual(): ?array
     $id = $_SESSION['usuario'] ?? null;
     if ($id === null) { return null; }
     $st = db()->prepare(
-        'SELECT id, correo, alias, rol, carrera, baneado, ' . SQL_SUSPENDIDO_HASTA . ' AS suspendido_hasta
+        'SELECT id, correo, alias, alias_cambios, rol, carrera, baneado, ' . SQL_SUSPENDIDO_HASTA . ' AS suspendido_hasta
          FROM usuario WHERE id = ? AND verificado');
     $st->execute([$id]);
     $u = $st->fetch();

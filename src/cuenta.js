@@ -254,7 +254,7 @@ const VISTAS = {
     <form class="cuenta-form" data-accion="registro">
       <p class="cuenta-nota">Con cuenta, tu avance y tu horario se guardan y los ves desde cualquier
         navegador. Solo pedimos tu correo: nada de boleta, nombre ni teléfono. Tu nombre público es un
-        alias al azar que puedes cambiar.</p>
+        alias al azar que puedes cambiar hasta 2 veces, y en cada reseña eliges si sale o si publicas como anónimo.</p>
       <label class="campo">Correo<input name="correo" type="email" autocomplete="email" required></label>
       <label class="campo">Contraseña <small>(mínimo 8 caracteres)</small>
         <input name="contrasena" type="password" autocomplete="new-password" minlength="8" maxlength="72" required></label>
@@ -284,10 +284,14 @@ const VISTAS = {
 
   miCuenta: () => ["Tu cuenta", `
     <form class="cuenta-form" data-accion="alias">
-      <label class="campo">Alias <small>(tu nombre público)</small>
-        <input name="alias" value="${esc(USUARIO.alias)}" minlength="3" maxlength="30" required></label>
+      <label class="campo">Alias <small>(tu nombre público; sale en tus reseñas)</small>
+        <input name="alias" value="${esc(USUARIO.alias)}" minlength="3" maxlength="30" required
+               ${USUARIO.alias_cambios_restantes > 0 ? "" : "disabled"}></label>
+      <p class="cuenta-nota">${USUARIO.alias_cambios_restantes > 0
+        ? `Puedes cambiarlo <b>${USUARIO.alias_cambios_restantes} ${USUARIO.alias_cambios_restantes === 1 ? "vez" : "veces"} más</b>; después queda fijo.`
+        : "Ya usaste tus 2 cambios: tu alias queda fijo."}</p>
       <div class="cuenta-msg" role="status"></div>
-      <button class="btn" type="submit">Cambiar alias</button>
+      ${USUARIO.alias_cambios_restantes > 0 ? `<button class="btn" type="submit">Cambiar alias</button>` : ""}
     </form>
     <dl class="cuenta-datos">
       <dt>Correo</dt><dd>${esc(USUARIO.correo)} <small>(solo lo ves tú)</small></dd>

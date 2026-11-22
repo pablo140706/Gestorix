@@ -16,7 +16,7 @@
 // La excepción son las fuentes de Google: esas sí van caché primero, porque
 // vienen con hash en la URL y no cambian nunca.
 
-const VERSION = "v19";
+const VERSION = "v21";
 const CACHE = "gestorix-" + VERSION;
 
 // El mínimo para pintar: los archivos de la app y los datos críticos de la

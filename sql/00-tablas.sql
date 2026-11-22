@@ -238,7 +238,8 @@ CREATE TABLE usuario (
     creado            TIMESTAMPTZ  NOT NULL DEFAULT now(),
     suspendido_hasta  TIMESTAMPTZ,                     -- NULL = no está suspendido
     ingreso           VARCHAR(4)   CHECK (ingreso ~ '^[0-9]{2}/[12]$'),  -- periodo en que entró ("25/1"); NULL = no lo dijo
-    baneado           BOOLEAN      NOT NULL DEFAULT false
+    baneado           BOOLEAN      NOT NULL DEFAULT false,
+    alias_cambios     SMALLINT     NOT NULL DEFAULT 0 CHECK (alias_cambios BETWEEN 0 AND 2)  -- máximo 2 cambios de alias (migraciones/2026-11-21)
 );
 
 -- "Pablo" y "pablo" son el mismo alias.
@@ -327,6 +328,7 @@ CREATE TABLE comentario (
     recomienda  BOOLEAN       NOT NULL,     -- la ficha muestra el % de "sí"
     dificultad  SMALLINT      NOT NULL CHECK (dificultad BETWEEN 0 AND 10),
     texto       VARCHAR(500)  NOT NULL,
+    anonimo     VARCHAR(15)   CHECK (anonimo ~ '^[A-Za-z0-9]{6,15}$'),  -- publicado como anónimo: nombre al azar; NULL = con el alias
     creado      TIMESTAMPTZ   NOT NULL DEFAULT now(),  -- editar o borrar: solo en 24 h
     editado     TIMESTAMPTZ,
     estado      VARCHAR(7)    NOT NULL DEFAULT 'visible'

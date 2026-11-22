@@ -22,6 +22,13 @@
   --body: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+/* Los controles nativos (listas, casillas, fechas) siguen el tema de la APP,
+   no el del sistema: con Windows en oscuro y la app en claro, el navegador
+   pintaba el texto de las listas en blanco sobre blanco (2026-11-21). */
+:root { color-scheme: light; }
+:root[data-tema="oscuro"] { color-scheme: dark; }
+select, input, textarea { color: var(--ink); }
+
 /* ========== TEMA OSCURO ========== */
 /* Lo pone el <script> del <head> antes del primer pintado (data-tema), así que
    no parpadea. Sin preferencia guardada se sigue al sistema. */
@@ -958,7 +965,7 @@ footer { margin-top: 30px; font-size: 12px; color: var(--ink-soft); text-align: 
 }
 .hist-toolbar select {
   font: inherit; padding: 7px 10px; border-radius: 8px;
-  border: 1px solid var(--line); background: var(--card); min-width: 110px;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink); min-width: 110px;
 }
 .hist-head-row { margin: 6px 0 10px; }
 .hist-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
@@ -1696,6 +1703,10 @@ select.calif { width: auto; min-width: 62px; padding: 6px 6px; text-align-last: 
 .eqBtn { font: inherit; font-size: 12px; font-weight: 600; color: var(--accent); background: none; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; cursor: pointer; }
 .eqBtn:hover { border-color: var(--accent); }
 .eq-tag { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 999px; color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+
+.com-anonimo { display: flex; align-items: center; gap: 7px; font-size: 13px; margin: 10px 0 4px; cursor: pointer; }
+.com-anonimo small { color: var(--ink-soft); }
+.com-anon { font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: var(--surface-2); color: var(--ink-soft); }
 
 /* Desfase y dictamen */
 .status-badge[data-desfase="carta24"] { background: var(--c-repr); color: #fff; }

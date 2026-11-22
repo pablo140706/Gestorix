@@ -132,6 +132,7 @@ gestorix/
 **Cupo, tema y celular (2026-11-21):**
 - El cupo se muestra en todos lados como **`inscritos/cupo`** (`cupoBadge()` en `core.js`), con color por disponibilidad y el detalle al pasar el mouse. Igual en el JPG y el XLSX.
 - **Tema oscuro:** los chips pastel y las materias de la rejilla se voltean con `filter: invert(1) hue-rotate(180deg)` (mismo tono, fondo oscuro, texto claro). **El calendario no:** mezcla pastel con colores fuertes, así que cada tipo de día (`.cd.t-*`) tiene su color propio en oscuro, al inicio de `styles.css`. Nada de fondos claros fijos (`#fff…`): usar las variables (`--bg-repr`, `--bg-apro`, `color-mix` con `--accent`). El usuario pidió **mantener el botón de tema**.
+- **Controles nativos** (listas, casillas): `color-scheme` sigue el tema de la APP, no el del sistema (con Windows en oscuro y la app en clara, las listas del Historial salían blanco sobre blanco; 2026-11-21).
 - **Celular (≤ 620 px, bloque al final de `styles.css`):** pestañas en un renglón deslizable; rejilla del horario deslizable de lado con la hora fija; tabla de maestros a lo ancho con títulos cortos (`corto` en `PROF_COLS`).
 
 **Pruebas, docs y app instalable (2026-11-21):**
@@ -332,6 +333,7 @@ gestorix/
 - Reportar: motivo de una lista (`MOTIVOS_REPORTE`) + detalle opcional; uno pendiente por persona y comentario; no se reporta lo propio.
 - Los comentarios **se leen sin cuenta** y solo muestran el **alias**. El correo sigue solo en pgAdmin.
 - **Admin y moderadores se nombran en pgAdmin** (`UPDATE usuario SET rol = …`). No hay pantalla para eso.
+- **Alias y anónimos** (usuario, 2026-11-21, por un reporte de un compañero; migración `2026-11-21-alias-y-comentario-anonimo.sql`): el alias se cambia **máximo 2 veces** en la vida de la cuenta (`usuario.alias_cambios`; "Tu cuenta" dice cuántas quedan). Al publicar, la casilla **"Publicar como anónimo"** guarda en `comentario.anonimo` un nombre al azar de 10 caracteres (la columna acepta 6–15) que se muestra en vez del alias, marcado "anónimo"; al editar se conserva. Los moderadores ven también el alias real (`autor_real`). Sin verificación con Kárdex (basta el correo) y **sin importar el horario de SAES** por ahora (usuario, 2026-11-21).
 - La ficha pide todo a `api/profesor.php?nombre=…` (por `profesor.nombre` exacto, que es el mismo que usa el front). El *service worker* no guarda en caché `api/profesor.php`, `api/comentarios/*` ni `api/moderacion/*`.
 - El resumen de comentarios propios va **en su propio bloque**, bajo el de MisProfesores, nunca promediado con él.
 
