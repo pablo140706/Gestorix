@@ -164,7 +164,7 @@
 
 **Probado:** con `curl` (40 casos: validaciones, CSRF, sin sesión, 24 h, ocultos, jerarquía de roles, suspensión, baneo y bitácora) y en el navegador, también a 375 px. Las 3 cuentas de prueba y todo lo que crearon se borraron.
 
-**Para usarlo:** nadie es moderador todavía. Regístrate y en pgAdmin: `UPDATE usuario SET rol = 'admin' WHERE correo = '…';` (lo mismo con `'moderador'` para nombrar moderadores).
+**Para usarlo:** el admin se nombra en pgAdmin: `UPDATE usuario SET rol = 'admin' WHERE correo = '…';`. Los moderadores, desde 2026-11-22, en la pestaña **Admin → Usuarios → Rol** (con las carreras que moderan).
 
 **También (2026-11-20):** en la pestaña Maestros, "Imparte / Ya no" dejó de ser una nota manual: sale de la base (ver el pendiente 20).
 
@@ -210,6 +210,15 @@ Student Pack): ya no hacen falta.
 
 **Fase 7 (lo que falta):** capturas en `screenshots/` (las suben los compañeros), el video de
 respaldo (hecho) y lo del proyecto asignado y el artículo en `Catscoms`.
+
+**Admin y seguridad (2026-11-22) ✅:** pestaña Admin (tablero y estado del sistema, reportes,
+todos los comentarios con filtros, bitácora, usuarios solo para el admin), moderadores por carrera
+(`moderador_carrera`), contraseña otra vez para lo delicado, correo al llegar un reporte, respaldo
+descargable, filtro de groserías, 5 intentos de entrada y 15 min de espera, alias 3 veces al año.
+Ya no hace falta pgAdmin para nombrar moderadores (los admins, sí).
+
+**Después de la expo:** subir el HTML de SAES desde la app, botón de periodo nuevo y editar profes y
+ofertas desde la app.
 
 ## Lo que queda incompleto o sin decidir (revisado el 2026-11-08)
 

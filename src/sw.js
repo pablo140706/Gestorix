@@ -16,7 +16,7 @@
 // La excepción son las fuentes de Google: esas sí van caché primero, porque
 // vienen con hash en la URL y no cambian nunca.
 
-const VERSION = "v21";
+const VERSION = "v22";
 const CACHE = "gestorix-" + VERSION;
 
 // El mínimo para pintar: los archivos de la app y los datos críticos de la
@@ -66,7 +66,7 @@ self.addEventListener("fetch", (e) => {
   // Lo de tu cuenta (quién eres, tu avance, tu agenda) nunca se guarda en la
   // caché: en una compu compartida lo vería el siguiente. La ficha del
   // profesor tampoco: trae tus comentarios ocultos y lo que ya reportaste.
-  if (propio && /\/api\/(cuenta\/|mis-datos|agenda|profesor|comentarios\/|moderacion\/)/.test(url.pathname)) return;
+  if (propio && /\/api\/(cuenta\/|mis-datos|agenda|profesor|comentarios\/|moderacion\/|admin\/)/.test(url.pathname)) return;
 
   // Fuentes de Google: caché primero, no cambian nunca
   if (fuentes) {

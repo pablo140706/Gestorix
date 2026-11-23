@@ -1,26 +1,18 @@
 <?php
 // POST api/cuenta/alias.php   { alias }  → { usuario }
-// El alias es único sin importar mayúsculas ("Pablo" = "pablo").
-// Se puede cambiar como máximo 2 veces en la vida de la cuenta (usuario,
-// 2026-11-21): el alias sale en tus reseñas, y cambiarlo sin límite dejaría
-// que alguien "se escondiera" detrás de otro nombre.
+// El alias es único sin importar mayúsculas ("Pablo" = "pablo") y no puede
+// llevar groserías. Se puede cambiar 3 veces al año (usuario, 2026-11-22): el
+// alias sale en tus reseñas, y cambiarlo sin límite dejaría que alguien "se
+// escondiera". Cada cambio queda en la tabla alias_cambio.
 require __DIR__ . '/../../lib/cuenta.php';
-
-const MAX_CAMBIOS_ALIAS = 2;
 
 $u = exigirUsuario();
 $alias = validarAlias(leerJson()['alias'] ?? '');
 
 if ($alias === $u['alias']) { responder(['usuario' => perfil($u)]); exit; }   // no es un cambio
-if ((int)$u['alias_cambios'] >= MAX_CAMBIOS_ALIAS) {
-    fallar(403, 'Ya cambiaste tu alias ' . MAX_CAMBIOS_ALIAS . ' veces: ya no se puede cambiar.');
+if (aliasCambiosRestantes((int)$u['id']) <= 0) {
+    fallar(403, 'Ya cambiaste tu alias ' . MAX_CAMBIOS_ALIAS_ANIO . ' veces en el último año: espera para volver a cambiarlo.');
 }
-
-$st = db()->prepare('SELECT 1 FROM usuario WHERE lower(alias) = lower(?) AND id <> ?');
-$st->execute([$alias, $u['id']]);
-if ($st->fetch()) { fallar(409, 'Ese alias ya lo tiene alguien más.'); }
-
-db()->prepare('UPDATE usuario SET alias = ?, alias_cambios = alias_cambios + 1 WHERE id = ?')->execute([$alias, $u['id']]);
+cambiarAlias((int)$u['id'], $u['alias'], $alias, (int)$u['id']);
 $u['alias'] = $alias;
-$u['alias_cambios'] = (int)$u['alias_cambios'] + 1;
 responder(['usuario' => perfil($u)]);

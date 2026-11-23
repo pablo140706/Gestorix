@@ -38,7 +38,20 @@ FROM usuario WHERE correo = 'correo-del-profe';
 - "La PC es el servidor: Docker corre la base y ngrok saca solo la web a internet. Postgres no
   publica ningún puerto."
 - **Seguridad**, con la tabla del README: inyección SQL, XSS (CSP y `esc()`), límite de intentos
-  (429), CSRF, contraseñas con bcrypt.
+  (5 fallidos y 15 minutos de espera, 429), CSRF, contraseñas con bcrypt, groserías bloqueadas.
+- **Entrada falsa desde la consola** (lo que pidió el profe; con una cuenta de alumno, F12 →
+  Consola). "Esconder un botón no protege nada: cada petición se revisa en el servidor."
+
+```js
+fetch('api/admin/usuarios.php').then(r => r.json())
+// {error: "Solo el administrador."}  → no se ven los usuarios ni sus correos
+fetch('api/moderacion/accion.php', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ accion: 'banear', usuario: 1, motivo: 'hackeo' }) }).then(r => r.json())
+// {error: "Solo moderadores y administradores."}
+```
+
+- **Pestaña Admin** (con tu cuenta): tablero, reportes, bitácora y usuarios. Ver correos pide tu
+  contraseña otra vez y queda en la bitácora; cada moderador solo ve su carrera.
 
 ## 2:30 – 4:00 · Esquema e integridad
 

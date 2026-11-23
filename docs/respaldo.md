@@ -3,7 +3,24 @@
 El respaldo trae **todo**: cuentas (con correos), avance, horarios, comentarios y los datos de
 ESCOM. Por eso **nunca va al repo** (es público): guárdalo fuera, por ejemplo en `Documentos`.
 
-## Sacar un respaldo (PowerShell, en la carpeta del proyecto)
+## Lo más fácil: desde la app (2026-11-22)
+
+Pestaña **Admin → Tablero → 💾 Descargar respaldo de datos** (solo el admin; pide tu contraseña otra
+vez). Baja `gestorix-datos-AAAA-MM-DD-HHMM.sql` con los **datos** de todas las tablas. El esquema no
+viene: ya está en `sql/00-tablas.sql` y `migraciones/`. Queda anotado en la bitácora y el tablero dice
+cuándo fue el último.
+
+Para restaurarlo (**borra lo que haya en esas tablas** y pone lo del archivo):
+
+```powershell
+Get-Content -Raw "RUTA\gestorix-datos-AAAA-MM-DD-HHMM.sql" | docker compose exec -T db sh -c 'psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
+```
+
+No usa `pg_dump` porque el del contenedor web es el 15 y la base es Postgres 17: lo arma PHP con
+`COPY`, tabla por tabla en el orden de las llaves foráneas. Se probó restaurándolo en un Postgres 17
+vacío con `sql/00-tablas.sql`: quedan las mismas filas.
+
+## Con pg_dump (PowerShell, en la carpeta del proyecto)
 
 ```powershell
 docker compose exec db sh -c 'pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" --clean --if-exists -f /tmp/gestorix.sql'

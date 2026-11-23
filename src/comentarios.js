@@ -117,7 +117,7 @@ function comentarioHTML(c) {
       ? `<span class="com-acc hecho">Reportado ✓</span>`
       : `<button class="com-acc" data-com="reportar" data-id="${c.id}">Reportar</button>`);
   }
-  if (yo.moderador && !c.mio) {
+  if (c.moderable && !c.mio) {
     acciones.push(c.estado === "visible"
       ? `<button class="com-acc mod" data-com="mod" data-accion="ocultar" data-id="${c.id}">Ocultar</button>`
       : `<button class="com-acc mod" data-com="mod" data-accion="mostrar" data-id="${c.id}">Mostrar</button>`);
@@ -136,7 +136,7 @@ function comentarioHTML(c) {
         <span class="com-mat">${esc(c.materia.nombre)}</span>
         <span class="com-fecha">${esc(c.creado)}${c.editado ? ` · editado ${esc(c.editado)}` : ""}</span>
         ${c.estado === "oculto" ? `<span class="com-oculto">Oculto por moderación</span>` : ""}
-        ${yo.moderador && c.reportes ? `<span class="com-reportes">${c.reportes} ${c.reportes === 1 ? "reporte" : "reportes"}</span>` : ""}
+        ${c.moderable && c.reportes ? `<span class="com-reportes">${c.reportes} ${c.reportes === 1 ? "reporte" : "reportes"}</span>` : ""}
       </header>
       <div class="com-escalas">
         <span>Calidad ${metricCell(c.calidad, "cal")}</span>

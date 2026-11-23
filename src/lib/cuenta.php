@@ -5,6 +5,7 @@
 
 require_once __DIR__ . '/sesion.php';
 require_once __DIR__ . '/correo.php';
+require_once __DIR__ . '/groserias.php';
 
 const CONTRASENA_MIN = 8;
 const CONTRASENA_MAX = 72;          // password_hash (bcrypt) ignora lo que pase de 72 bytes
@@ -52,6 +53,7 @@ function validarAlias($alias): string
     $a = trim(preg_replace('/\s+/u', ' ', (string)$alias));
     if (mb_strlen($a) < 3 || mb_strlen($a) > 30) { fallar(400, 'El alias debe tener de 3 a 30 caracteres.'); }
     if (!preg_match('/^[\p{L}\p{N} ._-]+$/u', $a)) { fallar(400, 'El alias solo puede llevar letras, números, espacios, punto, guion y guion bajo.'); }
+    exigirSinGroserias($a, 'Tu alias');
     return $a;
 }
 
@@ -88,4 +90,19 @@ function mandarVerificacion(int $usuario, string $correo): void
     enviarCorreo($correo, 'Activa tu cuenta de Gestorix',
         "¡Hola!\n\nPara activar tu cuenta de Gestorix abre este enlace (sirve 48 horas):\n\n$enlace\n\n"
       . "Si tú no creaste la cuenta, ignora este correo.");
+}
+
+// Cambia el alias de $usuario y lo anota en alias_cambio. $por es quién lo
+// cambió: el mismo usuario (cuenta para su límite de 3 al año) o un admin.
+function cambiarAlias(int $usuario, string $anterior, string $nuevo, int $por): void
+{
+    $pdo = db();
+    $st = $pdo->prepare('SELECT 1 FROM usuario WHERE lower(alias) = lower(?) AND id <> ?');
+    $st->execute([$nuevo, $usuario]);
+    if ($st->fetch()) { fallar(409, 'Ese alias ya lo tiene alguien más.'); }
+    $pdo->beginTransaction();
+    $pdo->prepare('UPDATE usuario SET alias = ? WHERE id = ?')->execute([$nuevo, $usuario]);
+    $pdo->prepare('INSERT INTO alias_cambio (usuario, alias_anterior, alias_nuevo, por) VALUES (?, ?, ?, ?)')
+        ->execute([$usuario, $anterior, $nuevo, $por]);
+    $pdo->commit();
 }

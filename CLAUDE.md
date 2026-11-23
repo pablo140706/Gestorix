@@ -126,7 +126,7 @@ gestorix/
 - **Manda el PDF del 2.º parcial** (`bdProyectoParcial2ISC_2027-1.pdf`): la **PC del usuario es el servidor** y la base vive en su Docker. A internet sale por **ngrok**: `ngrok http --url=thwarting-earthling-evasive.ngrok-free.dev 8080` (dominio fijo gratis; `APP_URL` en `.env` apunta ahí). Sin Supabase, Heroku, servidor en la nube ni Student Pack.
 - La web y pgAdmin escuchan solo en `127.0.0.1`; Postgres no publica puertos.
 - **Correo por Gmail** (`lib/correo.php`, SMTP propio sin Composer, puerto 465). `SMTP_USER` y `SMTP_PASSWORD` (contraseña de aplicación) van solo en `.env`. Si faltan o Gmail falla, el correo sale en `docker compose logs web`. Llegan a spam.
-- **Seguridad:** `lib/limite.php` (intentos por IP y por correo, en `/tmp` del contenedor; con ngrok la IP real es la última de `X-Forwarded-For`), `apache/seguridad.conf` (CSP sin scripts en línea, `nosniff`, `DENY`, sin listado, `lib/` cerrada) y `expose_php` apagado. **No escribir `<script>` ni `onclick=` dentro del HTML:** la CSP los bloquea.
+- **Seguridad:** `lib/limite.php` (intentos por IP y por correo, en `/tmp` del contenedor, una carpeta por usuario del sistema: `/tmp/gestorix-limites-33` es la de Apache. **Las pruebas a mano con `docker compose exec` corren como root**; si una carpeta queda de root, Apache no puede escribir y el login da 500 (pasó el 2026-11-22). Entrar: 5 fallidos por correo y 20 por IP → 15 min; con ngrok la IP real es la última de `X-Forwarded-For`), `apache/seguridad.conf` (CSP sin scripts en línea, `nosniff`, `DENY`, sin listado, `lib/` cerrada) y `expose_php` apagado. **No escribir `<script>` ni `onclick=` dentro del HTML:** la CSP los bloquea.
 - El navegador integrado de Claude no registra *service workers*: ese error de consola no es de la app.
 
 **Cupo, tema y celular (2026-11-21):**
@@ -333,11 +333,22 @@ gestorix/
 - Reportar: motivo de una lista (`MOTIVOS_REPORTE`) + detalle opcional; uno pendiente por persona y comentario; no se reporta lo propio.
 - Los comentarios **se leen sin cuenta** y solo muestran el **alias**. El correo sigue solo en pgAdmin.
 - **Admin y moderadores se nombran en pgAdmin** (`UPDATE usuario SET rol = …`). No hay pantalla para eso.
-- **Alias y anónimos** (usuario, 2026-11-21, por un reporte de un compañero; migración `2026-11-21-alias-y-comentario-anonimo.sql`): el alias se cambia **máximo 2 veces** en la vida de la cuenta (`usuario.alias_cambios`; "Tu cuenta" dice cuántas quedan). Al publicar, la casilla **"Publicar como anónimo"** guarda en `comentario.anonimo` un nombre al azar de 10 caracteres (la columna acepta 6–15) que se muestra en vez del alias, marcado "anónimo"; al editar se conserva. Los moderadores ven también el alias real (`autor_real`). Sin verificación con Kárdex (basta el correo) y **sin importar el horario de SAES** por ahora (usuario, 2026-11-21).
+- **Alias y anónimos** (usuario, 2026-11-21, por un reporte de un compañero; migración `2026-11-21-alias-y-comentario-anonimo.sql`): ~~el alias se cambia máximo 2 veces en la vida de la cuenta~~ → **3 veces al año** (usuario, 2026-11-22; tabla `alias_cambio`, `aliasCambiosRestantes()`; `usuario.alias_cambios` ya no se usa). "Tu cuenta" dice cuántos quedan; los cambios que hace el admin no cuentan. Al publicar, la casilla **"Publicar como anónimo"** guarda en `comentario.anonimo` un nombre al azar de 10 caracteres (la columna acepta 6–15) que se muestra en vez del alias, marcado "anónimo"; al editar se conserva. Los moderadores ven también el alias real (`autor_real`). Sin verificación con Kárdex (basta el correo) y **sin importar el horario de SAES** por ahora (usuario, 2026-11-21).
 - La ficha pide todo a `api/profesor.php?nombre=…` (por `profesor.nombre` exacto, que es el mismo que usa el front). El *service worker* no guarda en caché `api/profesor.php`, `api/comentarios/*` ni `api/moderacion/*`.
 - El resumen de comentarios propios va **en su propio bloque**, bajo el de MisProfesores, nunca promediado con él.
 
 ---
+
+**Pestaña Admin y seguridad (usuario, 2026-11-22; 27 respuestas):**
+- **Pestaña "🛡️ Admin"** (`admin.js`, `api/admin/*.php`, `lib/admin.php`): solo la ven moderadores y admin, y `admin.js` solo se descarga para ellos (`mostrarPestanaAdmin()` en `cuenta.js`). La seguridad es del servidor: cada endpoint revisa sesión, rol y carrera. Secciones: **Tablero** (números; al admin, además, estado del sistema: base, sitio público por `APP_URL`, correo, último respaldo; botones **probar correo** y **descargar respaldo**), **Reportes**, **Comentarios** (todos, con filtros), **Bitácora** y **Usuarios** (solo admin: correo, rol, carreras que modera, cambiar alias). `?admin=reportes` abre esa sección (lo trae el correo de reporte).
+- **Moderadores por carrera** (tabla `moderador_carrera`, migración `2026-11-22-moderadores-por-carrera.sql`): `carrerasQueModera()` en `lib/sesion.php`. La carrera de un comentario es la de su materia. Se aplica en la ficha (`moderable` por comentario), `moderacion/accion.php`, `moderacion/reportes.php` y la bitácora. El admin modera todas. Los admins se siguen nombrando solo en pgAdmin.
+- **Contraseña otra vez** para lo delicado (usuarios/correos, rol, alias ajeno, respaldo): `api/admin/confirmar.php` deja `confirmado_hasta` en la sesión por **10 min** (`exigirConfirmado()`); 5 intentos fallidos → 15 min. Ver la lista de usuarios anota `ver_correo` en la bitácora, una vez por confirmación.
+- **Bitácora** acepta además `carreras_moderador`, `cambiar_alias`, `respaldo`, `probar_correo`.
+- **Correo al llegar un reporte**: al admin y a los moderadores de esa carrera, solo con el **primer** reporte pendiente del comentario; máximo 10 reportes por hora por cuenta.
+- **Groserías** (`lib/groserias.php`): bloquea texto, rúbrica y alias en el servidor; deshace acentos, leetspeak, letras repetidas y separadas. "vergüenza", "computadora" y "disputa" pasan. Para agregar una palabra: lista `GROSERIAS`.
+- **Respaldo desde la app** (`api/admin/respaldo.php`): solo datos, con `COPY` en orden de llaves foráneas (el `pg_dump` del contenedor es 15 y la base 17). Probado restaurándolo en un Postgres 17 vacío. Ver `docs/respaldo.md`.
+- **Después de la expo** (pedidos, no hechos): subir el HTML de SAES desde la app, botón de periodo nuevo y editar profes/ofertas desde la app. Por ahora todo eso sigue en el importador y pgAdmin.
+- Sin reenviar activación, sin vista de logs del servidor; la demo de borrar cuentas, en pgAdmin.
 
 ## 7. Agenda
 

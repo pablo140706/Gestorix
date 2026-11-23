@@ -71,8 +71,8 @@ function perfil(array $u): array
 {
     return ['alias' => $u['alias'], 'correo' => $u['correo'], 'carrera' => $u['carrera'], 'rol' => $u['rol'],
             'suspendido_hasta' => $u['suspendido_hasta'] ?? null,
-            // Cambios de alias que le quedan (máximo 2 en toda la vida de la cuenta).
-            'alias_cambios_restantes' => max(0, 2 - (int)($u['alias_cambios'] ?? 0))];
+            // Cambios de alias que le quedan este año (3 al año; ver api/cuenta/alias.php).
+            'alias_cambios_restantes' => aliasCambiosRestantes((int)$u['id'])];
 }
 
 // Fecha de fin de una suspensión vigente, en hora de la Ciudad de México.
@@ -134,4 +134,69 @@ function entrarComo(int $id): void
     iniciarSesion();
     session_regenerate_id(true);
     $_SESSION['usuario'] = $id;
+    unset($_SESSION["confirmado_hasta"]);   // la confirmación de contraseña es de cada entrada
+}
+
+// Cambios de alias: 3 por año (usuario, 2026-11-22). Solo cuentan los que hizo
+// el propio usuario; los de un admin (alias ofensivo) no.
+const MAX_CAMBIOS_ALIAS_ANIO = 3;
+function aliasCambiosRestantes(int $usuario): int
+{
+    $st = db()->prepare("SELECT count(*) FROM alias_cambio
+                         WHERE usuario = ? AND por = usuario AND cuando > now() - interval '1 year'");
+    $st->execute([$usuario]);
+    return max(0, MAX_CAMBIOS_ALIAS_ANIO - (int)$st->fetchColumn());
+}
+
+// ---------------------------------------------------------------------
+//  Moderadores por carrera (usuario, 2026-11-22)
+// ---------------------------------------------------------------------
+//  El admin modera todas las carreras. Cada moderador, solo las que el
+//  admin le asignó en la tabla moderador_carrera. La carrera de un
+//  comentario es la de su materia. Un alumno no modera nada.
+function carrerasQueModera(?array $u): array
+{
+    if (!esModerador($u)) { return []; }
+    if ($u['rol'] === 'admin') {
+        return db()->query('SELECT codigo FROM carrera ORDER BY ' . sprintf(ORDEN_CARRERAS, 'codigo'))->fetchAll(PDO::FETCH_COLUMN);
+    }
+    $st = db()->prepare('SELECT carrera FROM moderador_carrera WHERE usuario = ? ORDER BY ' . sprintf(ORDEN_CARRERAS, 'carrera'));
+    $st->execute([$u['id']]);
+    return $st->fetchAll(PDO::FETCH_COLUMN);
+}
+
+// Para pasar la lista a SQL:  ... = ANY (?::text[])
+function arregloPg(array $valores): string
+{
+    return '{' . implode(',', array_map(fn($v) => '"' . addcslashes((string)$v, '"\\') . '"', $valores)) . '}';
+}
+
+function exigirAdmin(): array
+{
+    $u = usuarioActual();
+    if (!$u || $u['rol'] !== 'admin') { fallar(403, 'Solo el administrador.'); }
+    return $u;
+}
+
+// ---------------------------------------------------------------------
+//  "Escribe otra vez tu contraseña" para lo delicado (usuario, 2026-11-22)
+// ---------------------------------------------------------------------
+//  Ver correos, cambiar roles o alias ajenos y bajar el respaldo piden la
+//  contraseña otra vez. Vale 10 minutos (api/admin/confirmar.php la anota
+//  en la sesión, del lado del servidor). Si alguien deja la sesión abierta
+//  en otra compu, no puede hacer eso sin saber la contraseña.
+const MINUTOS_CONFIRMADO = 10;
+
+function confirmadoHace(): bool
+{
+    iniciarSesion();
+    return ($_SESSION['confirmado_hasta'] ?? 0) > time();
+}
+
+function exigirConfirmado(): void
+{
+    if (confirmadoHace()) { return; }
+    http_response_code(403);
+    responder(['error' => 'Escribe otra vez tu contraseña para continuar.', 'confirmar' => true]);
+    exit;
 }

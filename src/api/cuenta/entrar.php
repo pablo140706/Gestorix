@@ -7,11 +7,12 @@ $d = leerJson();
 $correo = strtolower(trim((string)($d['correo'] ?? '')));
 $pass = (string)($d['contrasena'] ?? '');
 
-// Solo cuentan los intentos FALLIDOS: 20 por IP y 8 por correo cada 15 min.
+// Solo cuentan los intentos FALLIDOS: 5 por correo (usuario, 2026-11-22) y 20 por IP,
+// y luego hay que esperar 15 minutos.
 const VENTANA_ENTRAR = 900;
 $ip = ipCliente();
 exigirBajoLimite('entrar-ip', $ip, 20, VENTANA_ENTRAR);
-exigirBajoLimite('entrar-correo', $correo, 8, VENTANA_ENTRAR);
+exigirBajoLimite('entrar-correo', $correo, 5, VENTANA_ENTRAR);
 
 $st = db()->prepare(
     'SELECT id, correo, alias, alias_cambios, rol, carrera, hash, verificado, baneado, ' . SQL_SUSPENDIDO_HASTA . ' AS suspendido_hasta

@@ -221,12 +221,31 @@ async function salir() {
 }
 
 function pintarBotonCuenta() {
+  mostrarPestanaAdmin();
   cuentaBtnEl.textContent = USUARIO ? "👤 " + USUARIO.alias : "Entrar";
   cuentaBtnEl.title = USUARIO ? "Tu cuenta" : "Entrar o crear cuenta";
   const sel = document.getElementById("carreraSel");
   if (sel) {
     sel.disabled = !!USUARIO;
     sel.title = USUARIO ? "Con sesión iniciada se usa la carrera de tu cuenta" : "";
+  }
+}
+
+// La pestaña Admin solo aparece para moderadores y admin, y su código
+// (admin.js) solo se descarga para ellos. Esconderla NO es la seguridad: cada
+// endpoint de api/admin/ revisa en el servidor quién eres.
+function mostrarPestanaAdmin() {
+  const tab = document.getElementById("tabAdmin");
+  const puede = !!USUARIO && USUARIO.rol !== "alumno";
+  if (tab) tab.hidden = !puede;
+  if (!puede) {
+    if (tab && tab.classList.contains("active")) irAPestana("plan");
+    return;
+  }
+  if (!document.querySelector('script[src="admin.js"]')) {
+    const s = document.createElement("script");
+    s.src = "admin.js";
+    document.body.appendChild(s);
   }
 }
 
@@ -254,7 +273,7 @@ const VISTAS = {
     <form class="cuenta-form" data-accion="registro">
       <p class="cuenta-nota">Con cuenta, tu avance y tu horario se guardan y los ves desde cualquier
         navegador. Solo pedimos tu correo: nada de boleta, nombre ni teléfono. Tu nombre público es un
-        alias al azar que puedes cambiar hasta 2 veces, y en cada reseña eliges si sale o si publicas como anónimo.</p>
+        alias al azar que puedes cambiar hasta 3 veces al año, y en cada reseña eliges si sale o si publicas como anónimo.</p>
       <label class="campo">Correo<input name="correo" type="email" autocomplete="email" required></label>
       <label class="campo">Contraseña <small>(mínimo 8 caracteres)</small>
         <input name="contrasena" type="password" autocomplete="new-password" minlength="8" maxlength="72" required></label>
@@ -288,8 +307,8 @@ const VISTAS = {
         <input name="alias" value="${esc(USUARIO.alias)}" minlength="3" maxlength="30" required
                ${USUARIO.alias_cambios_restantes > 0 ? "" : "disabled"}></label>
       <p class="cuenta-nota">${USUARIO.alias_cambios_restantes > 0
-        ? `Puedes cambiarlo <b>${USUARIO.alias_cambios_restantes} ${USUARIO.alias_cambios_restantes === 1 ? "vez" : "veces"} más</b>; después queda fijo.`
-        : "Ya usaste tus 2 cambios: tu alias queda fijo."}</p>
+        ? `Puedes cambiarlo <b>${USUARIO.alias_cambios_restantes} ${USUARIO.alias_cambios_restantes === 1 ? "vez" : "veces"} más</b> este año (3 al año).`
+        : "Ya usaste tus 3 cambios de este año: podrás cambiarlo cuando se cumpla un año del primero."}</p>
       <div class="cuenta-msg" role="status"></div>
       ${USUARIO.alias_cambios_restantes > 0 ? `<button class="btn" type="submit">Cambiar alias</button>` : ""}
     </form>
@@ -300,7 +319,7 @@ const VISTAS = {
     </dl>
     ${USUARIO.suspendido_hasta ? `<p class="cuenta-msg" data-tipo="error">Tu cuenta está suspendida hasta el
       ${esc(USUARIO.suspendido_hasta)}: puedes usar la app y guardar tu avance, pero no comentar ni reportar.</p>` : ""}
-    ${USUARIO.rol !== "alumno" ? `<p><a href="#" class="btn" data-vista="reportes">🚩 Reportes pendientes</a></p>` : ""}
+    ${USUARIO.rol !== "alumno" ? `<p><a href="#" class="btn" data-ir-admin="reportes">🛡️ Abrir la pestaña Admin</a></p>` : ""}
     <p class="cuenta-nota">Tu avance y tu horario se guardan en tu cuenta. Al salir se borran de
       este navegador.</p>
     <div class="cuenta-acciones">

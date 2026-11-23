@@ -31,9 +31,19 @@ function ipCliente(): string
 // Abre el archivo de una llave y regresa [manejador, intentos vigentes].
 function abrirLimite(string $accion, string $llave, int $segundos): array
 {
-    $dir = sys_get_temp_dir() . '/gestorix-limites';
+    // Una carpeta por usuario del sistema (Apache corre como www-data; una
+    // prueba a mano con `docker compose exec` corre como root). Si los dos
+    // compartieran carpeta, el que la creara primero dejaría fuera al otro
+    // (pasó el 2026-11-22 y tumbó el login unos minutos).
+    $uid = function_exists('posix_geteuid') ? posix_geteuid() : 'x';
+    $dir = sys_get_temp_dir() . '/gestorix-limites-' . $uid;
     if (!is_dir($dir)) { @mkdir($dir, 0700, true); }
-    $f = fopen($dir . '/' . hash('sha256', "$accion|$llave"), 'c+');
+    $f = @fopen($dir . '/' . hash('sha256', "$accion|$llave"), 'c+');
+    if ($f === false) {
+        // Mejor dejar pasar que tumbar la app: queda anotado en el log.
+        error_log("LIMITE: no se pudo abrir $dir; el límite de '$accion' no se está contando.");
+        $f = fopen('php://memory', 'w+');
+    }
     flock($f, LOCK_EX);
     $intentos = json_decode(stream_get_contents($f) ?: '[]', true) ?: [];
     $desde = time() - $segundos;

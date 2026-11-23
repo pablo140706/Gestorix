@@ -245,6 +245,26 @@ CREATE TABLE usuario (
 -- "Pablo" y "pablo" son el mismo alias.
 CREATE UNIQUE INDEX usuario_alias_unico ON usuario (lower(alias));
 
+-- Cambios de alias (migraciones/2026-11-22): el alumno puede cambiarlo 3 veces
+-- al año; los que hace un admin (por alias ofensivo) no cuentan.
+CREATE TABLE alias_cambio (
+    id               SERIAL        PRIMARY KEY,
+    usuario          INT           NOT NULL REFERENCES usuario ON DELETE CASCADE,
+    alias_anterior   VARCHAR(30)   NOT NULL,
+    alias_nuevo      VARCHAR(30)   NOT NULL,
+    por              INT           REFERENCES usuario ON DELETE SET NULL,
+    cuando           TIMESTAMPTZ   NOT NULL DEFAULT now()
+);
+CREATE INDEX alias_cambio_usuario ON alias_cambio (usuario, cuando);
+
+-- Qué carreras modera cada moderador (migraciones/2026-11-22). La carrera de
+-- un comentario es la de su materia. El admin modera todas sin estar aquí.
+CREATE TABLE moderador_carrera (
+    usuario  INT         NOT NULL REFERENCES usuario ON DELETE CASCADE,
+    carrera  VARCHAR(3)  NOT NULL REFERENCES carrera,
+    PRIMARY KEY (usuario, carrera)
+);
+
 -- Enlaces de verificación y de "olvidé mi contraseña". Se guarda el hash
 -- del token, no el token. Al usarlo, se borra la fila.
 CREATE TABLE token (
@@ -366,7 +386,8 @@ CREATE TABLE bitacora (
     actor                INT           REFERENCES usuario ON DELETE SET NULL,
     accion               VARCHAR(20)   NOT NULL CHECK (accion IN (
                              'ocultar', 'mostrar', 'suspender', 'banear', 'desbanear',
-                             'nombrar_moderador', 'quitar_moderador', 'ver_correo')),
+                             'nombrar_moderador', 'quitar_moderador', 'ver_correo',
+                             'carreras_moderador', 'cambiar_alias', 'respaldo', 'probar_correo')),
     objetivo_usuario     INT           REFERENCES usuario    ON DELETE SET NULL,
     objetivo_comentario  INT           REFERENCES comentario ON DELETE SET NULL,
     motivo               VARCHAR(500),

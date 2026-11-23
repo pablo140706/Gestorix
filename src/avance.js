@@ -17,6 +17,7 @@ function irAPestana(tab) {
   if (tab === "optativas") renderOptativas();
   if (tab === "historial") renderHistorial();
   if (tab === "calendario") renderCalendario();
+  if (tab === "admin" && typeof renderAdmin === "function") renderAdmin();
 }
 
 tabsEl.querySelectorAll(".tab").forEach((btn) => {

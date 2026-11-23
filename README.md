@@ -13,7 +13,7 @@ Autor: Mora Acosta Pablo ([`pablo140706`](https://github.com/pablo140706)) · Ba
 | Esquema (creación) | [`sql/00-tablas.sql`](sql/00-tablas.sql) |
 | Modelo relacional, acciones referenciales y restricciones | [`docs/diagrama-er.md`](docs/diagrama-er.md) |
 | Scripts de carga | [`sql/01`–`09`](sql/) (carga inicial), [`sql/99-rol-app.sh`](sql/99-rol-app.sh) (usuario de mínimo privilegio) e [`importador/`](importador/) (HTML de SAES → base) |
-| Migraciones | [`migraciones/`](migraciones/README.md) (qué va ahí y por qué todavía está vacía) |
+| Migraciones | [`migraciones/`](migraciones/README.md): cambios de esquema con la base ya en uso (7 al 2026-11-22) |
 | Evidencia del registro | [`docs/evidencia-registro.md`](docs/evidencia-registro.md): formulario → `SELECT` en pgAdmin, y cómo viajan los datos a la base |
 | Normalización (práctica 6–8) | [`docs/normalizacion.md`](docs/normalizacion.md) |
 | Álgebra relacional y SQL (práctica 6–8) | [`docs/algebra.md`](docs/algebra.md): 13 ejercicios con su SQL, comparados en RelaX |
@@ -78,6 +78,10 @@ también (`127.0.0.1:8080`), así que de fuera solo se llega por el túnel.
 | Peticiones desde otro sitio (CSRF) | Solo POST con JSON y `Origin` del mismo sitio; cookie `HttpOnly`, `SameSite=Lax` y `Secure` en HTTPS |
 | Mostrar detalles internos | `display_errors` y `expose_php` apagados, Apache sin versión, sin listado de carpetas y `lib/` cerrada |
 | Saber quién tiene cuenta | Registro y "olvidé mi contraseña" contestan lo mismo exista o no el correo |
+| Adivinar la contraseña de alguien | 5 intentos fallidos por correo (20 por IP) y hay que esperar 15 minutos |
+| Peticiones falsas desde la consola del navegador | Cada endpoint revisa en el servidor la sesión, el rol y la carrera que modera; esconder un botón no es la seguridad. La pestaña Admin ni se descarga para un alumno |
+| Ver los usuarios, sus correos o la bitácora | Solo el admin ve correos, y tiene que escribir otra vez su contraseña (vale 10 minutos); cada vez queda en la `bitacora`. Los moderadores solo ven lo de sus carreras (`moderador_carrera`) |
+| Groserías e insultos | Filtro en el servidor para comentarios, rúbrica y alias ([`src/lib/groserias.php`](src/lib/groserias.php)); deshace trucos como `p3nd3jo` o `p.e.n.d.e.j.o` |
 
 ## Estructura
 

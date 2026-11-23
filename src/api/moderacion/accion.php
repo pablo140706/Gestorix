@@ -25,6 +25,7 @@ $mod = exigirModerador();
 $d = leerJson();
 $pdo = db();
 $accion = (string)($d['accion'] ?? '');
+$carreras = carrerasQueModera($mod);    // un moderador solo modera sus carreras (usuario, 2026-11-22)
 
 if (!in_array($accion, ['ocultar', 'mostrar', 'descartar', 'suspender', 'banear', 'desbanear'], true)) {
     fallar(400, 'Acción desconocida.');
@@ -37,16 +38,24 @@ if (mb_strlen($motivo) > 500) { fallar(400, 'El motivo es de máximo 500 caracte
 // El comentario (si viene) y la cuenta sobre la que se actúa.
 $comentario = null;
 if (isset($d['comentario'])) {
-    $st = $pdo->prepare('SELECT id, usuario, estado FROM comentario WHERE id = ?');
+    $st = $pdo->prepare('SELECT c.id, c.usuario, c.estado, m.carrera FROM comentario c JOIN materia m ON m.clave = c.materia WHERE c.id = ?');
     $st->execute([(int)$d['comentario']]);
     $comentario = $st->fetch() ?: fallar(404, 'Ese comentario ya no existe.');
+    if (!in_array($comentario['carrera'], $carreras, true)) {
+        fallar(403, "No moderas los comentarios de {$comentario['carrera']}: pídeselo al administrador.");
+    }
 }
 $objetivo = null;
 if (in_array($accion, ['suspender', 'banear', 'desbanear'], true)) {
-    $uid = isset($d['usuario']) ? (int)$d['usuario'] : (int)($comentario['usuario'] ?? 0);
-    $st = $pdo->prepare('SELECT id, alias, rol, baneado FROM usuario WHERE id = ?');
+    // Con comentario se actúa sobre SU autor (no sobre otra cuenta que venga en la petición).
+    $uid = $comentario !== null ? (int)($comentario['usuario'] ?? 0) : (int)($d['usuario'] ?? 0);
+    $st = $pdo->prepare('SELECT id, alias, rol, carrera, baneado FROM usuario WHERE id = ?');
     $st->execute([$uid]);
     $objetivo = $st->fetch() ?: fallar(404, 'Esa cuenta ya no existe.');
+    // Sin comentario de por medio, la cuenta tiene que ser de una carrera que moderas.
+    if ($comentario === null && !in_array($objetivo['carrera'], $carreras, true)) {
+        fallar(403, "No moderas cuentas de {$objetivo['carrera']}.");
+    }
 } elseif ($comentario === null) {
     fallar(400, 'Falta el comentario.');
 } elseif ($comentario['usuario'] !== null) {

@@ -13,6 +13,7 @@
 // =====================================================================
 
 require_once __DIR__ . '/sesion.php';
+require_once __DIR__ . '/groserias.php';
 
 const TEXTO_MAX = 500;
 const RUBRICA_MAX = 6;
@@ -58,6 +59,7 @@ function leerComentario(array $d, int $profesor): array
     $texto = limpiarTexto($d['texto'] ?? '');
     if ($texto === '') { fallar(400, 'Escribe tu comentario.'); }
     if (mb_strlen($texto) > TEXTO_MAX) { fallar(400, 'El comentario es de máximo ' . TEXTO_MAX . ' caracteres.'); }
+    exigirSinGroserias($texto, 'Tu comentario');
 
     if (!is_bool($d['recomienda'] ?? null)) { fallar(400, 'Di si lo recomiendas o no.'); }
 
@@ -73,6 +75,7 @@ function leerComentario(array $d, int $profesor): array
         if ($concepto === '' || mb_strlen($concepto) > CONCEPTO_MAX) {
             fallar(400, 'Cada concepto de la rúbrica lleva de 1 a ' . CONCEPTO_MAX . ' caracteres.');
         }
+        exigirSinGroserias($concepto, 'La rúbrica');
         $llave = mb_strtolower($concepto);
         if (isset($filas[$llave])) { fallar(400, "«{$concepto}» está repetido en la rúbrica."); }
         $pct = enteroEntre($r['porcentaje'] ?? null, 1, 100, "El porcentaje de «{$concepto}»");
@@ -117,7 +120,8 @@ function comentariosDe(int $profesor, ?array $u): array
 {
     $pdo = db();
     $yo = $u['id'] ?? 0;
-    $mod = esModerador($u);
+    // Un moderador solo ve ocultos y datos para moderar en las carreras que modera.
+    $carreras = arregloPg(carrerasQueModera($u));
 
     $st = $pdo->prepare(
         "SELECT c.id, c.usuario, us.alias, c.anonimo, us.rol AS autor_rol, c.materia, m.nombre AS materia_nombre,
@@ -127,16 +131,17 @@ function comentariosDe(int $profesor, ?array $u): array
                 c.creado > now() - make_interval(hours => :horas) AS a_tiempo,
                 EXISTS (SELECT 1 FROM reporte r WHERE r.comentario = c.id AND r.reportante = :yo1
                                                   AND r.estado = 'pendiente') AS ya_reportado,
-                (SELECT count(*) FROM reporte r WHERE r.comentario = c.id AND r.estado = 'pendiente') AS reportes
+                (SELECT count(*) FROM reporte r WHERE r.comentario = c.id AND r.estado = 'pendiente') AS reportes,
+                m.carrera = ANY (CAST(:carreras AS text[])) AS moderable
          FROM comentario c
          JOIN materia m ON m.clave = c.materia
          LEFT JOIN usuario us ON us.id = c.usuario
          WHERE c.profesor = :profesor
-           AND (c.estado = 'visible' OR c.usuario = :yo2 OR CAST(:mod AS boolean))
+           AND (c.estado = 'visible' OR c.usuario = :yo2 OR m.carrera = ANY (CAST(:carreras2 AS text[])))
          ORDER BY c.creado DESC, c.id DESC");
     // PDO no deja repetir un parámetro con nombre: por eso :yo1 y :yo2.
     $st->execute(['horas' => HORAS_PARA_EDITAR, 'yo1' => $yo, 'yo2' => $yo,
-                  'mod' => $mod ? 'true' : 'false', 'profesor' => $profesor]);
+                  'carreras' => $carreras, 'carreras2' => $carreras, 'profesor' => $profesor]);
     $filas = $st->fetchAll();
 
     $rub = [];
@@ -148,7 +153,8 @@ function comentariosDe(int $profesor, ?array $u): array
         foreach ($sr as $r) { $rub[$r['comentario']][] = ['concepto' => $r['concepto'], 'porcentaje' => (int)$r['porcentaje']]; }
     }
 
-    return array_map(function ($c) use ($yo, $mod, $rub) {
+    return array_map(function ($c) use ($yo, $rub) {
+        $mod = (bool)$c['moderable'];
         $mio = $yo && (int)$c['usuario'] === $yo;
         $fila = [
             'id'         => (int)$c['id'],
@@ -167,6 +173,7 @@ function comentariosDe(int $profesor, ?array $u): array
             'mio'        => $mio,
             'editable'   => $mio && $c['a_tiempo'] && $c['estado'] === 'visible',
             'reportado'  => (bool)$c['ya_reportado'],
+            'moderable'  => $mod,                           // ¿quién pregunta puede moderar este?
         ];
         if ($mod) {                                            // para moderar, no para mostrar
             $fila['autor_id'] = $c['usuario'] === null ? null : (int)$c['usuario'];

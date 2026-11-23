@@ -18,14 +18,20 @@
 //  una conexión cifrada (SSL, puerto 465).
 // =====================================================================
 
-function enviarCorreo(string $para, string $asunto, string $texto): void
+function correoConfigurado(): bool
 {
-    $listo = (getenv('SMTP_HOST') ?: '') !== '' && (getenv('SMTP_USER') ?: '') !== ''
-          && (getenv('SMTP_PASSWORD') ?: '') !== '';
+    return (getenv('SMTP_HOST') ?: '') !== '' && (getenv('SMTP_USER') ?: '') !== ''
+        && (getenv('SMTP_PASSWORD') ?: '') !== '';
+}
+
+// true si Gmail lo aceptó; false si salió solo en el log.
+function enviarCorreo(string $para, string $asunto, string $texto): bool
+{
+    $listo = correoConfigurado();
     if ($listo) {
         try {
             enviarPorSmtp($para, $asunto, $texto);
-            return;
+            return true;
         } catch (Throwable $e) {
             error_log('CORREO no enviado: ' . $e->getMessage());
         }
@@ -33,6 +39,7 @@ function enviarCorreo(string $para, string $asunto, string $texto): void
     $sep = str_repeat('=', 60);
     $nota = $listo ? 'falló el envío; ver arriba' : 'no se manda; falta configurar SMTP en el .env';
     error_log("\n$sep\nCORREO ($nota)\nPara:   $para\nAsunto: $asunto\n\n$texto\n$sep");
+    return false;
 }
 
 function enviarPorSmtp(string $para, string $asunto, string $texto): void
