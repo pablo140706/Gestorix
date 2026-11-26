@@ -3,3 +3,12 @@
 
 # Páginas de SAES con datos personales (boleta, nombre, calificaciones): nunca a git
 SAES.BROMA.html
+
+# Material de la expo (.env real, respaldos con correos de usuarios, video): nunca a git
+expo-laptop/
+
+# Respaldo de la base (correos de usuarios) y el .env real: nunca a git
+/gestorix-completo-*.sql
+/gestorix.sql
+/env-de-la-pc-*.txt
+/env.txt

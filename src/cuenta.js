@@ -51,10 +51,14 @@ function estadoAFilas() {
     // Aprobada / reprobada sin número (para quien no quiere dar calificaciones).
     const resultado = calif === null && r.res ? r.res : null;
     const resultado_ets = ets === null && r.res_ets ? r.res_ets : null;
+    // Proyecto (TT I, TT II, Estancia) que marcó que está llevando.
+    const proyecto_en_curso = !!r.proy && esProyecto(id);
     // Una obligatoria sin nada capturado es igual a no tener fila.
-    if (!OPT_SLOTS[id] && veces === 1 && calif === null && ets === null && !resultado && !resultado_ets) return;
-    const periodo_reprobada = r.per_rep || null;   // para el aviso de desfase
-    filas.push({ materia: clave, veces, calif, calif_ets: ets, resultado, resultado_ets, periodo_reprobada });
+    if (!OPT_SLOTS[id] && veces === 1 && calif === null && ets === null && !resultado && !resultado_ets
+        && !proyecto_en_curso) return;
+    // Para el aviso de desfase, nunca antes del ingreso (lo exige la API).
+    const periodo_reprobada = perDesdeIngreso(r.per_rep || "", state.ingreso) || null;
+    filas.push({ materia: clave, veces, calif, calif_ets: ets, resultado, resultado_ets, periodo_reprobada, proyecto_en_curso });
   });
   return filas;
 }
@@ -97,6 +101,7 @@ function aplicarDatos(d) {
       res: f.resultado || "",
       res_ets: f.resultado_ets || "",
       per_rep: f.periodo_reprobada || "",
+      proy: !!f.proyecto_en_curso,
     };
     const id = ID_DE_CLAVE[f.materia] || slotPara(f.materia);
     if (id) state.subjects[id] = Object.assign(state.subjects[id] || {}, rec);
@@ -210,7 +215,7 @@ async function alEntrar(usuario) {
 // Lo que importa del estado, sin depender del orden ni de qué lugar de
 // optativa ocupa cada una.
 function firmaDelEstado() {
-  const filas = estadoAFilas().map((f) => [f.materia, f.veces, f.calif, f.calif_ets, f.resultado, f.resultado_ets, f.periodo_reprobada]).sort();
+  const filas = estadoAFilas().map((f) => [f.materia, f.veces, f.calif, f.calif_ets, f.resultado, f.resultado_ets, f.periodo_reprobada, f.proyecto_en_curso]).sort();
   return JSON.stringify([filas, horarioAIds().sort((a, b) => a - b), state.ingreso || null]);
 }
 

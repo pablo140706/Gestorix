@@ -32,12 +32,14 @@ foreach ($pdo->query('SELECT codigo, letra, nombre, carga_min_ua, carga_media_ua
 // clave del semestre que marca el PDF). El orden importa: el front numera
 // las materias por su posición dentro del semestre.
 $st = $pdo->query(
-    "SELECT clave, carrera, nombre, nombre_saes, tipo, semestre, creditos, ua, horas_t, horas_p
+    "SELECT clave, carrera, nombre, nombre_saes, tipo, semestre, creditos, ua, horas_t, horas_p, sin_clase
      FROM materia WHERE tipo = 'OBL' OR se_ofrece
      ORDER BY carrera, semestre, orden");
 foreach ($st as $m) {
     $base = ['clave' => $m['clave'], 'nom' => $m['nombre'], 'saes' => $m['nombre_saes'],
              'sem' => (int)$m['semestre'], 'cr' => (float)$m['creditos'], 'ua' => (int)$m['ua']];
+    // TT I, TT II y Estancia: proyectos sin clase, solo calificación.
+    if ($m['sin_clase']) { $base['proy'] = true; }
     if ($m['tipo'] === 'OBL') {
         $planes[$m['carrera']]['materias'][] = $base + [
             'ht' => $m['horas_t'] === null ? null : (float)$m['horas_t'],

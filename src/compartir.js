@@ -32,8 +32,9 @@ function horarioAEnlace() {
     c: CARRERA,
     h: state.horario.map((h) => [h.sid, h.grupo || "", h.maestro || "", h.matReal || h.materia]),
   };
-  const base = location.origin + location.pathname;
-  return base + "#h=" + b64url(JSON.stringify(datos));
+  // Siempre desde la raíz: si lo compartes estando en /maestro/<nombre>, el
+  // enlace debe abrir el horario, no esa ficha (usuario, 2026-11-26).
+  return location.origin + "/#h=" + b64url(JSON.stringify(datos));
 }
 
 function hayHorarioEnURL() {

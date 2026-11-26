@@ -19,6 +19,7 @@ const MOTIVOS_REPORTE = [
   "Odio o amenaza", "Spam o no habla de la clase", "Otro",
 ];
 const TEXTO_MAX = 500;
+const RESPUESTA_MAX = 300;      // una respuesta es más corta que un comentario
 const RUBRICA_MAX = 6;
 
 let FICHA = null;          // lo último que respondió api/profesor.php
@@ -147,8 +148,100 @@ function comentarioHTML(c) {
       ${rub}
       ${acciones.length ? `<div class="com-acciones">${acciones.join("")}</div>` : ""}
       <div class="com-panel" id="comPanel-${c.id}"></div>
+      ${respuestasHTML(c)}
     </article>`;
 }
+
+// ---------- respuestas: solo texto, un nivel (usuario, 2026-11-26) ----------
+// No llevan calificación, así que no tocan las métricas del profesor ni el
+// conteo de comentarios: se cuentan aparte.
+function respuestasHTML(c) {
+  const yo = FICHA.yo;
+  const lista = c.respuestas || [];
+  const puede = yo.puede_comentar && c.estado === "visible";
+  const cabeza = lista.length
+    ? `<div class="com-resp-tit">${lista.length} ${lista.length === 1 ? "respuesta" : "respuestas"}</div>`
+    : "";
+  const boton = puede
+    ? `<button class="com-acc" data-com="responder" data-id="${c.id}">Responder</button>`
+    : "";
+  if (!lista.length && !boton) return "";
+  return `
+    <div class="com-respuestas">
+      ${cabeza}
+      ${lista.map(respuestaHTML).join("")}
+      <div class="com-resp-nueva">${boton}</div>
+      <div class="com-panel" id="comRespForm-${c.id}"></div>
+    </div>`;
+}
+
+function respuestaHTML(r) {
+  const yo = FICHA.yo;
+  const autor = !r.autor ? `<i>Usuario eliminado</i>`
+    : r.anonimo ? `${esc(r.autor)} <span class="com-anon">anónimo</span>${r.autor_real ? ` <small>(${esc(r.autor_real)})</small>` : ""}`
+    : esc(r.autor);
+  const acc = [];
+  if (r.editable) {
+    acc.push(`<button class="com-acc" data-resp="editar" data-id="${r.id}">Editar</button>`,
+             `<button class="com-acc peligro" data-resp="borrar" data-id="${r.id}">Borrar</button>`);
+  }
+  if (!r.mio && yo.puede_comentar && r.estado === "visible") {
+    acc.push(r.reportado
+      ? `<span class="com-acc hecho">Reportado ✓</span>`
+      : `<button class="com-acc" data-resp="reportar" data-id="${r.id}">Reportar</button>`);
+  }
+  if (r.moderable && !r.mio) {
+    acc.push(r.estado === "visible"
+      ? `<button class="com-acc mod" data-resp="mod" data-accion="ocultar" data-id="${r.id}">Ocultar</button>`
+      : `<button class="com-acc mod" data-resp="mod" data-accion="mostrar" data-id="${r.id}">Mostrar</button>`);
+    if (r.reportes > 0) {
+      acc.push(`<button class="com-acc mod" data-resp="mod" data-accion="descartar" data-id="${r.id}">Descartar reportes</button>`);
+    }
+    if (r.autor_id && r.autor_rol !== "admin") {
+      acc.push(`<button class="com-acc mod" data-resp="mod" data-accion="suspender" data-id="${r.id}">Suspender autor</button>`,
+               `<button class="com-acc mod peligro" data-resp="mod" data-accion="banear" data-id="${r.id}">Banear autor</button>`);
+    }
+  }
+  return `
+    <article class="com-resp${r.estado === "oculto" ? " oculto" : ""}" id="resp-${r.id}">
+      <header class="com-head">
+        <b class="com-autor">${autor}</b>
+        <span class="com-fecha">${esc(r.creado)}${r.editado ? ` · editado ${esc(r.editado)}` : ""}</span>
+        ${r.estado === "oculto" ? `<span class="com-oculto">Oculta por moderación</span>` : ""}
+        ${r.moderable && r.reportes ? `<span class="com-reportes">${r.reportes} ${r.reportes === 1 ? "reporte" : "reportes"}</span>` : ""}
+      </header>
+      <p class="com-texto">${esc(r.texto)}</p>
+      ${acc.length ? `<div class="com-acciones">${acc.join("")}</div>` : ""}
+      <div class="com-panel" id="respPanel-${r.id}"></div>
+    </article>`;
+}
+
+// Formulario de respuesta: texto y nada más (ni materia, ni escalas).
+function formRespuestaHTML(r) {
+  return `
+    <form class="com-resp-form"${r ? ` data-id="${r.id}"` : ""}>
+      <label class="campo">${r ? "Edita tu respuesta" : "Tu respuesta"}
+        <small>· solo texto, máximo ${RESPUESTA_MAX} caracteres</small>
+        <textarea name="texto" rows="3" maxlength="${RESPUESTA_MAX}" required
+                  placeholder="Matiza, corrige un dato o cuenta cómo te fue a ti.">${r ? esc(r.texto) : ""}</textarea></label>
+      <label class="com-check"><input type="checkbox" name="anonimo"${r && r.anonimo ? " checked" : ""}>
+        Responder como anónimo</label>
+      <div class="cuenta-msg" role="status"></div>
+      <div class="com-form-botones">
+        <button class="btn btn-primary" type="submit">${r ? "Guardar" : "Responder"}</button>
+        <button class="btn" type="button" data-com="cerrar-panel">Cancelar</button>
+      </div>
+    </form>`;
+}
+
+const respById = (id) => {
+  if (!FICHA) return null;
+  for (const c of FICHA.comentarios) {
+    const r = (c.respuestas || []).find((x) => x.id === Number(id));
+    if (r) return r;
+  }
+  return null;
+};
 
 // ---------- formulario de comentario (nuevo o editar) ----------
 function opciones(desde, hasta, sel) {
@@ -243,10 +336,11 @@ function abrirFormulario(hueco, c) {
 }
 
 // ---------- panel corto: reportar o moderar ----------
-function panelHTML(tipo, accion) {
+function panelHTML(tipo, accion, que) {
+  const esResp = que === "respuesta";
   if (tipo === "reportar") {
     return `<form class="com-mini" data-tipo="reportar">
-        <label class="campo">¿Por qué lo reportas?
+        <label class="campo">¿Por qué ${esResp ? "la" : "lo"} reportas?
           <select name="motivo" required><option value="">Elige…</option>
             ${MOTIVOS_REPORTE.map((m) => `<option>${esc(m)}</option>`).join("")}</select></label>
         <label class="campo">Detalle <small>(opcional)</small><input name="detalle" maxlength="300"></label>
@@ -257,8 +351,13 @@ function panelHTML(tipo, accion) {
         </div>
       </form>`;
   }
-  const titulos = {
-    ocultar: "Ocultar este comentario", mostrar: "Volver a mostrar este comentario",
+  const titulos = esResp ? {
+    ocultar: "Ocultar esta respuesta", mostrar: "Volver a mostrar esta respuesta",
+    descartar: "Descartar los reportes (la respuesta se queda)",
+    suspender: "Suspender a quien respondió: no podrá comentar ni reportar",
+    banear: "Banear a quien respondió: no podrá entrar y se ocultan todos sus comentarios y respuestas",
+  } : {
+    ocultar: "Ocultar este comentario (y sus respuestas)", mostrar: "Volver a mostrar este comentario (y sus respuestas)",
     descartar: "Descartar los reportes (el comentario se queda)",
     suspender: "Suspender al autor: no podrá comentar ni reportar", banear: "Banear al autor: no podrá entrar y se ocultan todos sus comentarios",
   };
@@ -302,9 +401,40 @@ profDetailEl.addEventListener("click", async (e) => {
     return;
   }
   if (que === "cerrar-panel") { b.closest(".com-panel").innerHTML = ""; return; }
+  if (que === "responder") {
+    const hueco = document.getElementById("comRespForm-" + b.dataset.id);
+    document.querySelectorAll(".com-resp-form").forEach((f) => f.remove());   // una a la vez
+    hueco.innerHTML = formRespuestaHTML(null);
+    hueco.querySelector("textarea").focus();
+    return;
+  }
   if (que === "borrar") {
-    if (!confirm("¿Borrar tu comentario? No se puede deshacer.")) return;
+    if (!confirm("¿Borrar tu comentario? Se van también sus respuestas, y no se puede deshacer.")) return;
     try { await apiCuenta("comentarios/borrar.php", { id: Number(b.dataset.id) }); refrescarComentarios(); }
+    catch (err) { alert(err.message); }
+  }
+});
+
+// Acciones de una respuesta: editar, borrar, reportar y moderar.
+profDetailEl.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-resp]");
+  if (!b) return;
+  const que = b.dataset.resp;
+  const panel = document.getElementById("respPanel-" + b.dataset.id);
+  if (que === "editar") {
+    document.querySelectorAll(".com-resp-form").forEach((f) => f.remove());
+    panel.innerHTML = formRespuestaHTML(respById(b.dataset.id));
+    panel.querySelector("textarea").focus();
+    return;
+  }
+  if (que === "reportar" || que === "mod") {
+    panel.innerHTML = panelHTML(que, b.dataset.accion, "respuesta");
+    panel.querySelector("select, input").focus();
+    return;
+  }
+  if (que === "borrar") {
+    if (!confirm("¿Borrar tu respuesta? No se puede deshacer.")) return;
+    try { await apiCuenta("comentarios/borrar.php", { respuesta: Number(b.dataset.id) }); refrescarComentarios(); }
     catch (err) { alert(err.message); }
   }
 });
@@ -315,7 +445,7 @@ profDetailEl.addEventListener("input", (e) => {
 });
 
 profDetailEl.addEventListener("submit", async (e) => {
-  const form = e.target.closest(".com-form, .com-mini");
+  const form = e.target.closest(".com-form, .com-mini, .com-resp-form");
   if (!form) return;
   e.preventDefault();
   const msg = form.querySelector(".cuenta-msg");
@@ -330,15 +460,29 @@ profDetailEl.addEventListener("submit", async (e) => {
       refrescarComentarios();
       return;
     }
-    const id = Number(form.closest(".com").id.replace("com-", ""));
+    if (form.classList.contains("com-resp-form")) {
+      const texto = form.querySelector("[name=texto]").value;
+      const anonimo = !!form.querySelector("[name=anonimo]").checked;
+      const datos = form.dataset.id
+        ? { id: Number(form.dataset.id), texto, anonimo }
+        : { comentario: Number(form.closest(".com").id.replace("com-", "")), texto, anonimo };
+      await apiCuenta("comentarios/responder.php", datos);
+      refrescarComentarios();
+      return;
+    }
+    // Reportar o moderar: puede ser un comentario o una respuesta. La
+    // respuesta vive dentro del comentario, así que se revisa primero.
+    const resp = form.closest(".com-resp");
+    const id = Number((resp || form.closest(".com")).id.replace(/^(com|resp)-/, ""));
+    const destino = resp ? { respuesta: id } : { comentario: id };
     const v = Object.fromEntries(new FormData(form));
     if (form.dataset.tipo === "reportar") {
-      await apiCuenta("comentarios/reportar.php", { id, motivo: v.motivo, detalle: v.detalle });
+      await apiCuenta("comentarios/reportar.php", { ...(resp ? { respuesta: id } : { id }), motivo: v.motivo, detalle: v.detalle });
       mostrarMsg(msg, "Gracias: un moderador lo va a revisar.");
       setTimeout(refrescarComentarios, 1200);
     } else {
       const r = await apiCuenta("moderacion/accion.php",
-        { accion: form.dataset.accion, comentario: id, motivo: v.motivo || "", dias: v.dias ? Number(v.dias) : undefined });
+        { accion: form.dataset.accion, ...destino, motivo: v.motivo || "", dias: v.dias ? Number(v.dias) : undefined });
       mostrarMsg(msg, r.mensaje);
       setTimeout(refrescarComentarios, 1200);
     }
@@ -363,11 +507,12 @@ async function cargarReportes() {
         <div class="cuenta-links"><a href="#" data-vista="miCuenta">Volver a tu cuenta</a></div>`;
       return;
     }
-    caja.innerHTML = `<p class="cuenta-nota">${lista.length} ${lista.length === 1 ? "comentario reportado" : "comentarios reportados"}.
+    caja.innerHTML = `<p class="cuenta-nota">${lista.length} ${lista.length === 1 ? "reporte pendiente" : "reportes pendientes"}.
         Abre la ficha del maestro para ocultar, descartar o sancionar.</p>` +
       lista.map(({ comentario: c, reportes }) => `
         <div class="mod-item">
-          <div class="mod-cab"><b>${esc(c.profesor)}</b> · ${esc(c.materia)}</div>
+          <div class="mod-cab"><b>${esc(c.profesor)}</b> · ${esc(c.materia)}
+            ${c.tipo === "respuesta" ? `<span class="com-anon">respuesta</span>` : ""}</div>
           <div class="mod-autor">${c.autor ? esc(c.autor) : "<i>Usuario eliminado</i>"} · ${esc(c.creado)}
             ${c.estado === "oculto" ? `<span class="com-oculto">Oculto</span>` : ""}
             ${c.autor_baneado ? `<span class="com-oculto">Autor baneado</span>` : c.autor_suspendido ? `<span class="com-oculto">Suspendido hasta ${esc(c.autor_suspendido)}</span>` : ""}</div>

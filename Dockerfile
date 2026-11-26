@@ -21,6 +21,14 @@ RUN printf '<Directory /var/www/html>\n    Header set Cache-Control "no-cache"\n
       > /etc/apache2/conf-available/gestorix-cache.conf \
  && a2enconf gestorix-cache
 
+# Las direcciones de la app (/maestro/<nombre>, /historial…) las sirve index.html.
+COPY apache/rutas.conf /etc/apache2/conf-available/gestorix-rutas.conf
+RUN a2enconf gestorix-rutas
+
+# Comprimir también el JSON de la API (la lista de Debian no lo trae).
+COPY apache/rendimiento.conf /etc/apache2/conf-available/gestorix-rendimiento.conf
+RUN a2enconf gestorix-rendimiento
+
 # Encabezados de seguridad, sin listado de carpetas y lib/ cerrada.
 COPY apache/seguridad.conf /etc/apache2/conf-available/gestorix-seguridad.conf
 # security.conf de Debian se carga después y volvería a poner la versión.

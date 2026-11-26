@@ -290,6 +290,8 @@ function showProfDetail(name) {
   if (profsListWrap) profsListWrap.hidden = true;
   profDetailEl.hidden = false;
   currentProfDetail = name;
+  // La ficha tiene dirección propia: /maestro/<nombre> (rutas.js).
+  if (typeof rutaDeFicha === "function") rutaDeFicha(name);
 
   const m = getMetric(name);
   const man = manualMetricFor(name);
@@ -338,7 +340,9 @@ function showProfDetail(name) {
     ${fuentesHTML(link)}
   `;
 
-  document.getElementById("profBack").onclick = hideProfDetail;
+  // Volver también regresa la dirección a /maestros (rutas.js).
+  document.getElementById("profBack").onclick = () =>
+    (typeof volverAListaDeMaestros === "function" ? volverAListaDeMaestros() : hideProfDetail());
   // Cédula y comentarios: los trae comentarios.js de api/profesor.php.
   if (typeof pintarComentarios === "function") pintarComentarios(name);
   window.scrollTo({ top: 0, behavior: "smooth" });

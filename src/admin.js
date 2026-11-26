@@ -13,6 +13,7 @@
 //   Comentarios  todos, con filtros (carrera, estado, reportados, búsqueda)
 //   Bitácora     lo que han hecho moderadores y admin
 //   Usuarios     (solo admin) correos, nombrar moderadores, cambiar alias
+//   Horarios     (solo admin) subir el HTML de SAES y crear el periodo
 // ============================================================
 
 (function () {
@@ -22,13 +23,15 @@
   const esAdmin = () => !!USUARIO && USUARIO.rol === "admin";
   const SECCIONES = [
     ["tablero", "📊 Tablero"], ["reportes", "🚩 Reportes"], ["comentarios", "💬 Comentarios"],
-    ["bitacora", "📜 Bitácora"], ["usuarios", "👥 Usuarios", true],
+    ["bitacora", "📜 Bitácora"], ["usuarios", "👥 Usuarios", true], ["horarios", "🗓️ Horarios", true],
   ];
+  const CARRERAS_SAES = ["ISC", "IA", "LCD"];
   const NOMBRE_ACCION = {
     ocultar: "Ocultó", mostrar: "Mostró", suspender: "Suspendió", banear: "Baneó", desbanear: "Desbaneó",
     nombrar_moderador: "Nombró moderador", quitar_moderador: "Quitó moderador",
     carreras_moderador: "Cambió carreras de moderador", cambiar_alias: "Cambió alias",
     ver_correo: "Vio correos", respaldo: "Bajó respaldo", probar_correo: "Probó el correo",
+    importar_horarios: "Cargó horarios de SAES", periodo_nuevo: "Creó un periodo",
   };
 
   let seccion = "tablero";
@@ -128,6 +131,7 @@
       else if (seccion === "comentarios") await pintarComentarios();
       else if (seccion === "bitacora") await pintarBitacora();
       else if (seccion === "usuarios") await pintarUsuarios();
+      else if (seccion === "horarios") await pintarHorarios();
     } catch (e) { fallo(e); }
   }
 
@@ -208,7 +212,7 @@
                     ["suspender-30", "Suspender al autor 30 días"], ["banear", "Banear al autor"]);
     }
     return `
-      <form class="adm-accion" data-com-id="${c.id}">
+      <form class="adm-accion" data-com-id="${c.id}"${c.respuesta_id ? ` data-resp-id="${c.respuesta_id}"` : ""}>
         <select name="accion" aria-label="Acción">${opciones.map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}</select>
         <input name="motivo" maxlength="500" placeholder="Motivo (queda en la bitácora)" aria-label="Motivo">
         <button class="btn" type="submit">Aplicar</button>
@@ -228,10 +232,11 @@
   async function pintarReportes() {
     const lista = await api("moderacion/reportes.php");
     if (!lista.length) { cuerpo().innerHTML = `<div class="drop-empty big">No hay reportes pendientes. 🎉</div>`; return; }
-    cuerpo().innerHTML = `<p class="cuenta-nota">${lista.length} ${lista.length === 1 ? "comentario reportado" : "comentarios reportados"}.</p>` +
+    cuerpo().innerHTML = `<p class="cuenta-nota">${lista.length} ${lista.length === 1 ? "reporte pendiente" : "reportes pendientes"}.</p>` +
       lista.map(({ comentario: c, reportes }) => `
         <div class="mod-item">
-          <div class="mod-cab"><span class="adm-car">${esc(c.carrera)}</span> <b>${esc(c.profesor)}</b> · ${esc(c.materia)}</div>
+          <div class="mod-cab"><span class="adm-car">${esc(c.carrera)}</span> <b>${esc(c.profesor)}</b> · ${esc(c.materia)}
+            ${c.tipo === "respuesta" ? `<span class="com-anon">respuesta</span>` : ""}</div>
           <div class="mod-autor">${autorDe(c)} · ${esc(c.creado)}
             ${c.estado === "oculto" ? `<span class="com-oculto">Oculto</span>` : ""}
             ${c.autor_baneado ? `<span class="com-oculto">Autor baneado</span>` : c.autor_suspendido ? `<span class="com-oculto">Suspendido hasta ${esc(c.autor_suspendido)}</span>` : ""}</div>
@@ -367,6 +372,123 @@
     fila.querySelector("input[name=motivo]").focus();
   }
 
+  // ---------- Horarios: subir el HTML de SAES (solo admin) ----------
+  // De SAES salen tres páginas por carrera: el horario de grupos de cada
+  // turno y la ocupabilidad (los cupos). El archivo NO se guarda en el
+  // servidor: se lee aquí, se manda como texto y la base se actualiza.
+  // Lo que no subas, no se toca.
+  async function pintarHorarios() {
+    const p = await api("admin/periodos.php");
+    const opcion = (x) => {
+      const fechas = x.inicio ? `${x.inicio}${x.fin ? " a " + x.fin : ""}` : "sin fechas";
+      return `<option value="${esc(x.codigo)}"${x.codigo === p.vigente ? " selected" : ""}>${esc(x.codigo)} · ${num(x.ofertas)} ofertas, ${num(x.cupos)} cupos · ${esc(fechas)}</option>`;
+    };
+    const archivo = (car, que) => `<td><input type="file" accept=".html,.htm,.txt" data-arch="${car}|${que}"
+      aria-label="${car} ${que === "m" ? "horario matutino" : que === "v" ? "horario vespertino" : "cupos"}"></td>`;
+    const fila = (car) => `<tr><th scope="row">${car}</th>${archivo(car, "m")}${archivo(car, "v")}${archivo(car, "c")}</tr>`;
+
+    cuerpo().innerHTML = `
+      <h3 class="adm-tit">Subir los horarios de SAES</h3>
+      <p class="cuenta-nota">En SAES: <b>Horario de grupos</b> de cada turno y <b>Ocupabilidad</b> para los
+        cupos. Guarda cada página con Ctrl+S («página web, solo HTML») o pega su código en un archivo de
+        texto, y súbelas aquí. El archivo no se guarda en el servidor: se lee, se carga a la base y se
+        descarta; si quieres conservarlo, déjalo tú en <code>data/&lt;carrera&gt;/</code> como siempre.</p>
+      <form class="adm-horarios" data-horarios="1">
+        <label class="campo">Periodo al que se cargan
+          <select name="periodo">${p.periodos.map(opcion).join("")}</select></label>
+        <p class="cuenta-nota">⚠️ El periodo vigente es el más nuevo que tenga ofertas, hoy
+          <b>${esc(p.vigente)}</b>. Si cargas ofertas a uno posterior, la app cambia de periodo para
+          <b>todos los alumnos</b> y el horario que ya armaron para ${esc(p.vigente)} deja de verse. Súbelo
+          cuando de verdad empiece la reinscripción.</p>
+        <div class="table-wrap"><table class="adm-tabla adm-subir">
+          <thead><tr><th>Carrera</th><th>Horario matutino</th><th>Horario vespertino</th><th>Cupos</th></tr></thead>
+          <tbody>${CARRERAS_SAES.map(fila).join("")}</tbody>
+        </table></div>
+        <p class="cuenta-nota">Los horarios solo <b>agregan</b>: lo que ya está en la base no se duplica ni se
+          pisa, así no se pierde lo que hayas corregido en pgAdmin. Los cupos <b>sí se reemplazan</b>, porque
+          los inscritos cambian todo el tiempo.</p>
+        <button class="btn btn-primary" type="submit">Cargar a la base</button>
+        <div class="cuenta-msg" role="status"></div>
+      </form>
+      <div id="admReporte"></div>
+
+      <h3 class="adm-tit">Periodos</h3>
+      <p class="cuenta-nota">Para subir los horarios de un periodo nuevo, créalo primero. Las fechas pueden ir
+        vacías si todavía no las publica el IPN. Un periodo no se borra desde aquí: si ya tiene ofertas, eso se
+        hace a mano en pgAdmin.</p>
+      <form class="adm-periodo" data-periodo="1">
+        <label class="campo">Periodo <input name="codigo" maxlength="4" placeholder="27/2" pattern="[0-9]{2}/[12]" required></label>
+        <label class="campo">Inicio <input name="inicio" type="date"></label>
+        <label class="campo">Fin <input name="fin" type="date"></label>
+        <button class="btn" type="submit">Crear o ajustar</button>
+        <div class="cuenta-msg" role="status"></div>
+      </form>
+      <ul class="adm-salud-lista">${p.periodos.map((x) => `
+        <li class="adm-salud" data-ok="${x.ofertas > 0}"><span>${x.ofertas ? "✅" : "🕓"}</span>
+          <b>${esc(x.codigo)}${x.codigo === p.vigente ? " · vigente" : ""}</b>
+          <small>${num(x.ofertas)} ofertas · ${num(x.cupos)} cupos · ${x.inicio ? esc(x.inicio) + (x.fin ? " a " + esc(x.fin) : "") : "sin fechas"}</small></li>`).join("")}</ul>`;
+  }
+
+  // El reporte de la carga, con lo mismo que imprime el importador en la
+  // terminal. Las listas largas van colapsadas para no tapar los números.
+  function reporteHTML(r) {
+    const lista = (titulo, arr) => {
+      const xs = Array.isArray(arr) ? arr : Object.entries(arr || {}).map(([k, v]) => `${k}: ${v}`);
+      return xs.length ? `<details class="adm-rep"><summary>${titulo} (${xs.length})</summary>
+        <ul>${xs.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></details>` : "";
+    };
+    let html = "";
+    if (r.horarios) {
+      const h = r.horarios;
+      html += `<h3 class="adm-tit">Horarios cargados a ${esc(h.periodo)}</h3>
+        <div class="adm-stats">
+          ${CARRERAS_SAES.map((c) => stat(h.nuevas[c], `ofertas nuevas de ${c}`)).join("")}
+          ${stat(h.sesiones, "sesiones nuevas")}${stat(h.yaEstaban, "ya estaban")}
+          ${stat(h.profesNuevos.length, "profes nuevos")}
+          ${stat(h.base.ofertas, "ofertas en el periodo")}${stat(h.base.sinProfesor, "sin profesor", h.base.sinProfesor ? "alerta" : "")}
+          ${stat(h.base.profesConClase, "profes con clase")}
+        </div>
+        ${lista("Filas que NO se cargaron: la materia no cruza", h.sinCruzar)}
+        ${lista("¿Mismo profe? revísalos en pgAdmin", h.parecidos)}
+        ${lista("Profes nuevos", h.profesNuevos)}
+        ${lista("No se cargaron por data/excluir.csv", h.saltadas)}
+        ${lista("Avisos", h.avisos)}`;
+    }
+    if (r.cupos) {
+      const c = r.cupos;
+      html += `<h3 class="adm-tit">Cupos cargados a ${esc(c.periodo)}</h3>
+        <div class="adm-stats">
+          ${stat(c.nuevos, "cupos nuevos")}${stat(c.cambiaron, "cambiaron")}${stat(c.iguales, "sin cambio")}
+          ${stat(c.base.cupos, "cupos en el periodo")}${stat(c.base.sobrecupo, "con sobrecupo", c.base.sobrecupo ? "alerta" : "")}
+        </div>
+        ${lista("Cupos sin oferta: grupo y materia que no vienen en los horarios", c.sinOferta)}
+        ${lista("Ofertas sin cupo", c.sinCupo)}
+        ${lista("No se cargaron por data/excluir.csv", c.saltadas)}
+        ${lista("Avisos", c.avisos)}`;
+    }
+    return html + `<p class="cuenta-nota">Recarga la página para ver los cambios en Generar horario y en Maestros.</p>`;
+  }
+
+  // Lee los archivos que haya en la tabla y los manda como texto.
+  async function subirHorarios(form, msg) {
+    const periodo = form.querySelector("select[name=periodo]").value;
+    const datos = { periodo, horarios: {}, cupos: {} };
+    let cuantos = 0;
+    for (const inp of form.querySelectorAll("input[type=file]")) {
+      const f = inp.files[0];
+      if (!f) continue;
+      const [car, que] = inp.dataset.arch.split("|");
+      const texto = await f.text();
+      if (que === "c") { datos.cupos[car] = texto; } else { (datos.horarios[car] ??= {})[que] = texto; }
+      cuantos++;
+    }
+    if (!cuantos) { mostrarMsg(msg, "Primero elige al menos un archivo.", true); return; }
+    mostrarMsg(msg, `Cargando ${cuantos} ${cuantos === 1 ? "archivo" : "archivos"} a ${periodo}…`);
+    const r = await api("admin/horarios.php", datos);
+    mostrarMsg(msg, "Listo. " + r.resumen);
+    document.getElementById("admReporte").innerHTML = reporteHTML(r);
+  }
+
   // ---------- descargar el respaldo ----------
   async function bajarRespaldo(msg) {
     mostrarMsg(msg, "Armando el respaldo…");
@@ -428,12 +550,25 @@
     const boton = form.querySelector("button[type=submit]");
     boton.disabled = true;
     try {
-      if (form.classList.contains("adm-accion")) {     // acción sobre un comentario
+      if (form.dataset.horarios) {                     // subir el HTML de SAES
+        await subirHorarios(form, msg);
+        boton.disabled = false;
+      } else if (form.dataset.periodo) {               // crear o ajustar un periodo
+        const v = Object.fromEntries(new FormData(form));
+        const r = await api("admin/periodos.php", { codigo: v.codigo, inicio: v.inicio, fin: v.fin });
+        mostrarMsg(msg, r.mensaje);
+        setTimeout(pintarSeccion, 1200);
+      } else if (form.classList.contains("adm-accion")) {     // acción sobre un comentario
         const v = Object.fromEntries(new FormData(form));
         const [accion, dias] = v.accion.split("-");
         if (accion === "banear" && !confirm("¿Banear a esta cuenta? Se ocultan todos sus comentarios.")) { boton.disabled = false; return; }
+        // Si el reporte es de una respuesta, se actúa sobre ella; si no,
+        // sobre el comentario (api/moderacion/accion.php).
+        const destino = form.dataset.respId
+          ? { respuesta: Number(form.dataset.respId) }
+          : { comentario: Number(form.dataset.comId) };
         const r = await api("moderacion/accion.php",
-          { accion, comentario: Number(form.dataset.comId), motivo: v.motivo, dias: dias ? Number(dias) : undefined });
+          { accion, ...destino, motivo: v.motivo, dias: dias ? Number(dias) : undefined });
         mostrarMsg(msg, r.mensaje);
         setTimeout(pintarSeccion, 1200);
       } else if (form.classList.contains("adm-usuario")) {   // rol o alias

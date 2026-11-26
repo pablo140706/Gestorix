@@ -718,6 +718,10 @@ select.st[data-st="reprobada"] { background-color: var(--bg-repr); color: var(--
 .tipo-tag { font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em; }
 .tipo-tag.nueva { background: var(--bg-apro); color: var(--c-apro); }
 .tipo-tag.recurse { background: var(--bg-repr); color: var(--c-repr); }
+/* Proyectos sin clase: TT I, TT II y Estancia profesional */
+.tipo-tag.proyecto { background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent); }
+.hcard.proyecto { border-style: dashed; }
+.drop-nota-chica { display: block; margin-top: 6px; font-size: 12px; color: var(--ink-soft); }
 .hcard-prof { font-size: 13px; color: var(--ink); margin-bottom: 6px; }
 .hcard-grupo { color: var(--ink-soft); }
 .hcard-ses {
@@ -1423,10 +1427,25 @@ kbd {
 .com-panel:empty { display: none; }
 .com-panel { margin-top: 10px; }
 
-.com-form, .com-mini {
+/* Respuestas: solo texto, colgando del comentario (usuario, 2026-11-26) */
+.com-respuestas { margin: 12px 0 0 14px; padding-left: 12px; border-left: 2px solid var(--line); }
+.com-resp-tit { font-family: var(--display); font-size: 12.5px; color: var(--ink-soft); margin-bottom: 8px; }
+.com-resp { padding: 9px 0; }
+.com-resp + .com-resp { border-top: 1px dashed var(--line); }
+.com-resp.oculto { opacity: .65; }
+.com-resp .com-texto { margin: 4px 0 0; }
+.com-resp-nueva { margin-top: 8px; }
+.com-check { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; cursor: pointer; }
+
+.com-form, .com-mini, .com-resp-form {
   display: flex; flex-direction: column; gap: 12px; padding: 14px;
   border-radius: 12px; background: var(--surface); border: 1px solid var(--line); margin-bottom: 14px;
 }
+.com-resp-form textarea {
+  font-family: var(--body); font-size: 14px; color: var(--ink); background: var(--card);
+  border: 1.5px solid var(--line); border-radius: 10px; padding: 9px 11px; resize: vertical;
+}
+.com-resp-form textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .com-mini-tit { font-weight: 600; font-size: 13.5px; }
 .com-form-fila { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; }
 .com-form textarea, .com-rub-fila input, .com-mini input {
@@ -1794,9 +1813,19 @@ select.calif { width: auto; min-width: 62px; padding: 6px 6px; text-align-last: 
 .adm-fila-form td { background: var(--surface); }
 .adm-paginas { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 16px 0; font-size: 13.5px; }
 .adm-paginas .btn:disabled { opacity: .45; cursor: default; }
+/* Subir el HTML de SAES: Admin → Horarios */
+.adm-horarios, .adm-periodo { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-bottom: 14px; }
+.adm-horarios .table-wrap, .adm-horarios .cuenta-nota, .adm-horarios .cuenta-msg, .adm-periodo .cuenta-msg { flex-basis: 100%; }
+.adm-subir { min-width: 520px; }
+.adm-subir input[type=file] { font-size: 12.5px; max-width: 210px; }
+.adm-rep { margin: 8px 0; font-size: 13.5px; }
+.adm-rep summary { cursor: pointer; font-family: var(--display); }
+.adm-rep ul { margin: 6px 0 0; padding-left: 22px; color: var(--ink-soft); }
+.adm-rep li { overflow-wrap: anywhere; }
 @media (max-width: 620px) {
   .adm-salud { grid-template-columns: 24px 1fr; }
   .adm-salud small { grid-column: 2; }
   .adm-stats { grid-template-columns: repeat(2, 1fr); }
   .adm-filtros .search { flex-basis: 100%; }
+  .adm-subir { min-width: 420px; }
 }

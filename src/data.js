@@ -51,11 +51,13 @@ PLAN.forEach((blk, s) => {
 const ID_DE_CLAVE = {};
 const CLAVE_DE_ID = {};
 const UA_DE_ID = {};          // unidades de aprendizaje: 1, o 2 en Trabajo Terminal I y II
+const PROY_DE_ID = {};        // TT I, TT II y Estancia: proyectos, no llevan clase
 PLAN.forEach((blk, s) => {
   blk.materias.forEach((m, i) => {
     const mat = PLAN_ACTIVO.materias.find((x) => x.sem === s + 1 && x.nom === m[0]);
     const id = "s" + s + "-" + i;
     UA_DE_ID[id] = (mat && mat.ua) || 1;   // los lugares de optativa valen 1
+    PROY_DE_ID[id] = !!(mat && mat.proy);
     if (!mat) return; // los slots de optativa no tienen clave fija
     ID_DE_CLAVE[mat.clave] = id;
     CLAVE_DE_ID[id] = mat.clave;
@@ -69,6 +71,9 @@ const EQUIV = PLAN_ACTIVO.equiv || {};
 const EQUIV_A_MIA = {};
 Object.entries(EQUIV).forEach(([mia, otras]) => otras.forEach((o) => { if (!EQUIV_A_MIA[o]) EQUIV_A_MIA[o] = mia; }));
 function uaDe(id) { return UA_DE_ID[id] || 1; }
+// ¿Es un proyecto (TT I, TT II, Estancia profesional)? No lleva clase: no tiene
+// grupo, ni maestro, ni horas; solo calificación (usuario, 2026-11-25).
+function esProyecto(id) { return !!PROY_DE_ID[id]; }
 
 // ============================================================
 //  DIFICULTAD POR MATERIA (promedio real de profes M+V, escala 0–6 → 1–10)

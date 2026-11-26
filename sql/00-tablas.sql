@@ -51,6 +51,10 @@ CREATE TABLE materia (
     -- solo vale la del semestre que marca su PDF. Se guardan las dos; la
     -- otra lleva se_ofrece = false y la app no la muestra.
     se_ofrece    BOOLEAN       NOT NULL DEFAULT true,
+    -- TT I, TT II y la Estancia profesional NO llevan clase: son proyectos y
+    -- solo tienen calificación (usuario, 2026-11-25). No tienen oferta ni
+    -- grupo ni horario; en SAES son los grupos X, con cupo sin límite.
+    sin_clase    BOOLEAN       NOT NULL DEFAULT false,
     -- Propósito y temas del programa sintético, tal cual el PDF: el
     -- propósito, una línea en blanco y una línea por unidad ("I. …").
     -- Lo llena importador/materias.php.
@@ -301,6 +305,11 @@ CREATE TABLE avance (
     resultado_ets  VARCHAR(9)  CHECK (resultado_ets IN ('aprobado', 'reprobado')),
     -- Periodo en que la reprobaste ("26/1"), para el aviso de desfase (migraciones/2026-11-21).
     periodo_reprobada  VARCHAR(4)  CHECK (periodo_reprobada ~ '^[0-9]{2}/[12]$'),
+    -- Solo para las materias sin clase (TT I, TT II, Estancia): el alumno marcó
+    -- que lo está llevando, para que ocupe su carga (migraciones/2026-11-25).
+    -- No va en `horario` porque ahí cada renglón es una oferta y un proyecto no
+    -- tiene. Deja de contar solo, al capturar la calificación.
+    proyecto_en_curso  BOOLEAN     NOT NULL DEFAULT false,
     PRIMARY KEY (usuario, materia),
     CONSTRAINT avance_periodo_solo_si_reprobo CHECK (
         periodo_reprobada IS NULL OR calif < 6 OR resultado = 'reprobada'),
@@ -366,9 +375,32 @@ CREATE TABLE rubrica (
     PRIMARY KEY (comentario, concepto)
 );
 
+-- Respuestas a un comentario: solo texto, sin calificaciones, un solo nivel
+-- (usuario, 2026-11-26; migraciones/2026-11-26-respuestas.sql). No entran a
+-- ninguna métrica. Se ocultan junto con el comentario que contestan.
+CREATE TABLE respuesta (
+    id          SERIAL        PRIMARY KEY,
+    comentario  INT           NOT NULL REFERENCES comentario ON DELETE CASCADE,
+    usuario     INT           REFERENCES usuario ON DELETE CASCADE,
+    texto       VARCHAR(300)  NOT NULL,
+    anonimo     VARCHAR(15)   CHECK (anonimo ~ '^[A-Za-z0-9]{6,15}$'),
+    creado      TIMESTAMPTZ   NOT NULL DEFAULT now(),   -- editar o borrar: solo en 24 h
+    editado     TIMESTAMPTZ,
+    estado      VARCHAR(7)    NOT NULL DEFAULT 'visible'
+                CHECK (estado IN ('visible', 'oculto')),
+    -- Se ocultó con su comentario, no por sí misma: al mostrar el comentario
+    -- regresan estas y no las que un moderador ocultó aparte.
+    oculta_con_padre  BOOLEAN NOT NULL DEFAULT false
+);
+
+CREATE INDEX respuesta_comentario ON respuesta (comentario, creado);
+
+-- Un reporte es de un comentario O de una respuesta, nunca de los dos.
 CREATE TABLE reporte (
     id            SERIAL        PRIMARY KEY,
-    comentario    INT           NOT NULL REFERENCES comentario ON DELETE CASCADE,
+    comentario    INT           REFERENCES comentario ON DELETE CASCADE,
+    respuesta     INT           REFERENCES respuesta  ON DELETE CASCADE,
+    CONSTRAINT reporte_comentario_o_respuesta CHECK ((comentario IS NULL) <> (respuesta IS NULL)),
     reportante    INT           REFERENCES usuario ON DELETE SET NULL,
     motivo        VARCHAR(500)  NOT NULL,
     creado        TIMESTAMPTZ   NOT NULL DEFAULT now(),
@@ -379,6 +411,7 @@ CREATE TABLE reporte (
 
 -- La ventana de moderación solo pide los pendientes.
 CREATE INDEX reporte_pendiente ON reporte (comentario) WHERE estado = 'pendiente';
+CREATE INDEX reporte_pendiente_respuesta ON reporte (respuesta) WHERE estado = 'pendiente';
 
 -- Todo lo que hacen moderadores y admins queda aquí.
 CREATE TABLE bitacora (

@@ -138,6 +138,7 @@ function generarHorarioAuto() {
     PLAN[s].materias.forEach(([name, cred], i) => {
       const id = idOf(s, i);
       if (OPT_SLOTS[id]) return;
+      if (esProyecto(id)) return;   // TT y Estancia no tienen oferta que colocar
       const rec = getSub(id, name);
       const aRecursar = rec.status === "reprobada" && canInscribir(rec);   // no "solo por ETS"
       if ((rec.status === "pendiente" || aRecursar) && canInscribir(rec) && !base.some((h) => h.sid === id)) {
@@ -149,7 +150,9 @@ function generarHorarioAuto() {
   // Las reprobadas que el automático puede meter ya vienen dentro de uaBloq:
   // se quitan de ahí para que, al colocarlas, cuenten una sola vez.
   const uaReprobColocables = pendientes.filter((f) => f.reprobada).reduce((a, f) => a + f.ua, 0);
-  const uaFijas = uaBloq - uaReprobColocables;
+  // Los proyectos marcados (TT, Estancia) ocupan carga y no se pueden colocar:
+  // se descuentan igual que las reprobadas fijas (usuario, 2026-11-25).
+  const uaFijas = uaBloq - uaReprobColocables + uaProyectos();
   const uaDisponibles = CARGA.media - uaFijas - uaBase;
 
   if (pendientes.length === 0) {
@@ -187,7 +190,7 @@ function generarHorarioAuto() {
   if (uaDisponibles <= 0) {
     autoPool = []; if (otraBtn) otraBtn.hidden = true;
     resultEl.innerHTML = `<div class="auto-warn">Ya llegaste a la carga media: ${uaBase} UA inscritas` +
-      (uaFijas ? ` + ${uaFijas} de reprobadas` : "") + ` = ${uaBase + uaFijas} de ${CARGA.media}. ` +
+      (uaFijas ? ` + ${uaFijas} de reprobadas y proyectos` : "") + ` = ${uaBase + uaFijas} de ${CARGA.media}. ` +
       (esRegular() ? `Para pasar de la media (hasta ${CARGA.max}, con trámite) agrega materias a mano.` : `Como debes materias, tu máximo es la media.`) + `</div>`;
     return;
   }

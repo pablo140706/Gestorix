@@ -5,7 +5,15 @@ const tabsEl = document.getElementById("tabs");
 
 // Abre una pestaña por su nombre. Está suelto (y no dentro del onclick) porque
 // el buscador global y los atajos de teclado también necesitan saltar de pestaña.
+// Además deja la dirección en la barra (rutas.js), para que abrir en otra
+// ventana o darle Atrás caiga donde debe. Quien solo quiera pintar sin tocar
+// el historial —el propio enrutador— usa pintarPestana().
 function irAPestana(tab) {
+  pintarPestana(tab);
+  if (typeof rutaDePestana === "function") rutaDePestana(tab);
+}
+
+function pintarPestana(tab) {
   tabsEl.querySelectorAll(".tab").forEach((b) => b.classList.toggle("active", b.dataset.tab === tab));
   document.querySelectorAll(".tabpane").forEach((p) => {
     p.classList.toggle("active", p.id === "pane-" + tab);
@@ -85,7 +93,7 @@ PLAN.forEach((blk, s) => {
           <select class="calif ets" aria-label="Calificación del ETS de ${esc(name)}"
                   title="ETS (examen a título de suficiencia). Puedes poner el número o solo si lo aprobaste">${opcionesCalif("ets")}</select>
           <span class="status-badge" data-st="${rec.status}" data-blocked="${rec.soloEts ? "1" : "0"}" data-recurse="${esEnRecurse(rec) ? "1" : "0"}" data-inscrita="${rec.status === "pendiente" && estaInscrita(id) ? "1" : "0"}">${statusBadgeText(rec, estaInscrita(id))}</span>
-          <button class="profsBtn" type="button">Maestros <span class="caret">▾</span></button>
+          <button class="profsBtn" type="button">${esProyecto(id) ? "Proyecto" : "Maestros"} <span class="caret">▾</span></button>
         </div>
       </div>
       <div class="drop"></div>`;
@@ -238,6 +246,31 @@ function applyRowMode(subj, rec) {
 // Despliega la lista de ofertas reales (SCHEDULE) con días/horas, salón y métricas
 function renderDrop(drop, s, i) {
   const id = idOf(s, i);
+
+  // TT I, TT II y la Estancia profesional no son clases sino proyectos: no
+  // tienen grupo, maestro ni horario, solo calificación (usuario, 2026-11-25).
+  // Lo único que se puede hacer es decir que lo estás llevando, para que ocupe
+  // su carga; al capturar la calificación se desmarca solo.
+  if (esProyecto(id)) {
+    const rec = getSub(id, PLAN[s].materias[i][0]);
+    drop.innerHTML = `
+      <div class="drop-empty">
+        <b>${esc(rec.name)}</b> no lleva clase: es un proyecto y solo tiene calificación, así que no hay
+        grupos ni maestros que elegir. Dirás con quién lo haces en la Unidad Académica.
+        <button class="addBtn proyBtn ${rec.proy ? "added" : ""}" type="button">
+          ${rec.proy ? "✓ Lo estoy llevando" : "Lo estoy llevando"}
+        </button>
+        <small class="drop-nota-chica">Marcarlo le suma ${uaDe(id)} UA a tu carga del periodo, aunque no ocupe
+          ninguna hora de tu horario.</small>
+      </div>`;
+    drop.querySelector(".proyBtn").onclick = () => {
+      setSub(id, { proy: !rec.proy });
+      renderDrop(drop, s, i);
+      render();
+      renderHorario();
+    };
+    return;
+  }
   // Los grupos de materias equivalentes de otras carreras van escondidos;
   // "Mostrar equivalencias" los agrega (usuario, 2026-11-21).
   const propias = scheduleFor(s, i, false);

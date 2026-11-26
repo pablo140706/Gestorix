@@ -341,7 +341,8 @@ function leerKardex(html) {
       if (c.some((x) => /^calif/i.test(x))) {               // fila de títulos
         const busca = (re) => c.findIndex((x) => re.test(x));
         idx = { clave: busca(/^clave/i), nombre: busca(/materia|unidad|asignatura|descrip/i),
-                periodo: busca(/periodo/i), forma: busca(/forma|eval|tipo/i), calif: busca(/^calif/i) };
+                periodo: busca(/periodo/i), forma: busca(/forma|eval|tipo/i), calif: busca(/^calif/i),
+                fecha: busca(/fecha/i) };
         return;
       }
       const col = (k) => (idx && idx[k] >= 0 ? c[idx[k]] : undefined);
@@ -356,10 +357,16 @@ function leerKardex(html) {
         calif: Math.round(n),
         forma: col("forma") || c.find((x) => /^(ORD|EXT|ETS|REC|T[IÍ]TULO)/i.test(x)) || "",
         periodo: periodoDeSaes(col("periodo") || c.find((x) => periodoDeSaes(x))),
+        // La fecha del acta sirve para el periodo cuando no viene la columna, y
+        // la más antigua de todas es tu ingreso (usuario, 2026-11-25).
+        fecha: col("fecha") || c.find((x) => fechaDeSaes(x)) || "",
       };
-      // Si sale dos veces (reprobó y luego aprobó), se queda la aprobatoria.
-      const ya = porClave.get(clave);
-      if (!ya || f.calif >= 6 || ya.calif < 6) porClave.set(clave, f);
+      // El curso y el ETS son renglones distintos y se guardan por separado: un
+      // ETS reprobado ya no borra la del ordinario (usuario, 2026-11-25).
+      // Dentro de cada uno, si sale repetido se queda la calificación más alta.
+      const k = clave + (/ETS|T[IÍ]TULO/i.test(f.forma) ? "|ETS" : "");
+      const ya = porClave.get(k);
+      if (!ya || f.calif > ya.calif) porClave.set(k, f);
     });
   });
   return porClave.size ? { tipo: "kardex", filas: [...porClave.values()] } : null;
@@ -486,25 +493,52 @@ bvBody.addEventListener("change", (e) => {
   lector.readAsText(e.target.files[0]);
 });
 
-// Kárdex: cada calificación queda con su número (entra al promedio). Aprobada
-// por ETS → curso reprobado + ETS con su número. Si dice recurse, 2.ª vez.
+// Kárdex: cada calificación queda con su número (al promedio entra la más
+// alta). El curso (ordinario o recurse) y el ETS van en campos distintos, así
+// que un ETS reprobado no borra la del ordinario. Si dice recurse, 2.ª vez.
 function aplicarKardex() {
-  let n = 0;
+  // Tu ingreso es el periodo más antiguo del Kárdex: ahí empezaste a cursar
+  // (usuario, 2026-11-25; un acta del 19 de enero de 2026 cae en 26/1). Solo
+  // se mueve hacia atrás: el Kárdex manda sobre el ingreso que hayas dicho.
+  const perDe = (f) => f.periodo || periodoDeFecha(fechaDeSaes(f.fecha));
+  const masAntiguo = saesLeido.filas.reduce((a, f) => perMasAntiguo(a, perDe(f)), "");
+  if (masAntiguo && perMasAntiguo(masAntiguo, state.ingreso) === masAntiguo) state.ingreso = masAntiguo;
+
+  // Una misma materia puede traer dos renglones: el del curso y el del ETS.
+  const porId = new Map();
   saesLeido.filas.forEach((f) => {
     const id = ID_DE_CLAVE[f.clave] || slotDeOptativa(f.clave, true);
     if (!id) return;
+    const g = porId.get(id) || { curso: null, ets: null, rec: false, perOrd: "" };
+    if (/ETS|T[IÍ]TULO/i.test(f.forma)) {
+      if (!g.ets || f.calif > g.ets.calif) g.ets = f;
+    } else {
+      if (!g.curso || f.calif > g.curso.calif) g.curso = f;
+      // El desfase se cuenta desde el ORDINARIO. Si el renglón es del recurse,
+      // el ordinario fue a más tardar el periodo anterior.
+      const per = perDe(f);
+      if (per) g.perOrd = perMasAntiguo(g.perOrd, /REC/i.test(f.forma) ? numAPer(perANum(per) - 1) : per);
+      if (/REC/i.test(f.forma)) g.rec = true;
+    }
+    porId.set(id, g);
+  });
+
+  let n = 0;
+  porId.forEach((g, id) => {
     const cur = state.subjects[id] || {};
-    const porEts = /ETS|T[IÍ]TULO/i.test(f.forma);
-    const rec = /REC/i.test(f.forma);
-    // El desfase se cuenta desde el ORDINARIO. Si lo reprobado es el recurse,
-    // el ordinario fue a más tardar el periodo anterior (o el que ya se sabía, si es más antiguo).
-    let perOrd = f.periodo && rec ? numAPer(perANum(f.periodo) - 1) : f.periodo;
-    if (cur.per_rep && (!perOrd || perANum(cur.per_rep) < perANum(perOrd))) perOrd = cur.per_rep;
-    const datos = porEts && f.calif >= 6
-      ? { calif: "", res: "reprobada", calif_ets: String(f.calif), res_ets: "" }
-      : { calif: String(f.calif), res: "", calif_ets: "", res_ets: "", per_rep: f.calif < 6 ? (perOrd || "") : "" };
-    if (/REC/i.test(f.forma)) datos.veces = 2;
-    state.subjects[id] = Object.assign({}, cur, datos);
+    const calif = g.curso ? String(g.curso.calif) : "";
+    // Si solo aparece el ETS, el curso se reprobó aunque el Kárdex no diga con cuánto.
+    const res = calif === "" && g.ets ? "reprobada" : "";
+    const reproboCurso = calif !== "" ? Number(calif) < 6 : res === "reprobada";
+    state.subjects[id] = Object.assign({}, cur, {
+      calif,
+      res,
+      // El ETS solo existe si reprobaste el curso (lo exige la base).
+      calif_ets: g.ets && reproboCurso ? String(g.ets.calif) : "",
+      res_ets: "",
+      veces: g.rec ? 2 : Number(cur.veces || 1),
+      per_rep: reproboCurso ? perDesdeIngreso(perMasAntiguo(g.perOrd, cur.per_rep), state.ingreso) : "",
+    });
     if (!canInscribir(getSub(id, ""))) state.horario = state.horario.filter((h) => h.sid !== id);
     n++;
   });
@@ -527,14 +561,15 @@ function aplicarSaes() {
   r.rep.forEach((f) => {
     const cur = state.subjects[ID_DE_CLAVE[f.clave]] || {};
     const conNumero = cur.calif !== undefined && cur.calif !== "" && Number(cur.calif) < 6;
-    const per = cur.per_rep && (perANum(cur.per_rep) || 99) < (perANum(f.periodo) || 99) ? cur.per_rep : (f.periodo || cur.per_rep || "");
+    const per = perDesdeIngreso(perMasAntiguo(cur.per_rep, f.periodo), state.ingreso);
     poner(f.clave, conNumero
       ? { veces: Math.max(f.veces, Number(cur.veces || 1)), per_rep: per }
       : { calif: "", res: "reprobada", veces: f.veces, calif_ets: "", res_ets: "", per_rep: per });
   });
-  // Desfasada sin periodo: se pone uno de hace 3 periodos para que salga como tal.
+  // Desfasada sin periodo: se pone uno de hace 3 periodos para que salga como
+  // tal, pero nunca antes de tu ingreso.
   r.des.forEach((f) => poner(f.clave, { calif: "", res: "reprobada", veces: f.veces, calif_ets: "", res_ets: "",
-    per_rep: esDesfasada(desfaseDe(f.periodo)) ? f.periodo : numAPer(perANum(periodoActual()) - 3) }));
+    per_rep: perDesdeIngreso(esDesfasada(desfaseDe(f.periodo)) ? f.periodo : numAPer(perANum(periodoActual()) - 3), state.ingreso) }));
   r.noc.forEach((f) => poner(f.clave, { calif: "", res: "", veces: 1, calif_ets: "", res_ets: "", per_rep: "" }));
   bvBody.querySelectorAll("[data-aprob]:checked").forEach((c) => {
     const id = c.dataset.aprob;
@@ -682,13 +717,17 @@ function abrirSituacion(id, nombre) {
   abrirModal(sitEl);
 }
 
-// Periodos para "¿cuándo la reprobaste?": del actual hacia atrás, 4 años. Si
-// no lo ha dicho, se propone el anterior al actual.
+// Periodos para "¿cuándo la reprobaste?": del actual hacia atrás, 4 años, pero
+// nunca antes de tu ingreso: si entraste en 26/2 no pudiste reprobar en 26/1,
+// porque no estabas inscrito (usuario, 2026-11-25). Si no lo ha dicho, se
+// propone el anterior al actual.
 function opcionesPeriodoReprobada(elegido) {
   const hoy = perANum(periodoActual());
-  const sel = elegido || numAPer(hoy - 1);
+  const ing = perANum(state.ingreso);
+  const desde = Math.min(hoy, ing === null ? hoy - 8 : Math.max(hoy - 8, ing));
+  const sel = perDesdeIngreso(elegido || numAPer(Math.max(desde, hoy - 1)), numAPer(desde));
   let html = "";
-  for (let n = hoy; n >= hoy - 8; n--) {
+  for (let n = hoy; n >= desde; n--) {
     const p = numAPer(n);
     html += `<option value="${p}"${p === sel ? " selected" : ""}>${p} · ${perInicio(p)}–${perFin(p)}</option>`;
   }

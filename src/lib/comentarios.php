@@ -16,6 +16,7 @@ require_once __DIR__ . '/sesion.php';
 require_once __DIR__ . '/groserias.php';
 
 const TEXTO_MAX = 500;
+const RESPUESTA_MAX = 300;      // una respuesta es más corta que un comentario
 const RUBRICA_MAX = 6;
 const CONCEPTO_MAX = 40;
 const HORAS_PARA_EDITAR = 24;
@@ -102,6 +103,101 @@ function guardarRubrica(int $comentario, array $rubrica): void
     foreach ($rubrica as [$concepto, $pct]) { $ins->execute([$comentario, $concepto, $pct]); }
 }
 
+// ---------------------------------------------------------------------
+//  Respuestas (usuario, 2026-11-26): solo texto, sin calificaciones.
+// ---------------------------------------------------------------------
+//  Un solo nivel: se responde a un comentario, nunca a otra respuesta.
+//  Heredan la materia del padre, no entran a ninguna métrica y se ocultan
+//  junto con él.
+
+// El texto de una respuesta, ya limpio, o un error.
+function leerRespuesta(array $d): string
+{
+    $texto = limpiarTexto($d['texto'] ?? '');
+    if ($texto === '') { fallar(400, 'Escribe tu respuesta.'); }
+    if (mb_strlen($texto) > RESPUESTA_MAX) { fallar(400, 'La respuesta es de máximo ' . RESPUESTA_MAX . ' caracteres.'); }
+    exigirSinGroserias($texto, 'Tu respuesta');
+    return $texto;
+}
+
+// Un comentario que existe y al que todavía se le puede responder.
+function exigirComentarioAbierto(int $id): array
+{
+    $st = db()->prepare(
+        "SELECT c.id, c.usuario, c.estado, m.carrera
+           FROM comentario c JOIN materia m ON m.clave = c.materia
+          WHERE c.id = ?");
+    $st->execute([$id]);
+    $c = $st->fetch() ?: fallar(404, 'Ese comentario ya no está.');
+    if ($c['estado'] !== 'visible') { fallar(403, 'Un moderador ocultó ese comentario: ya no se puede responder.'); }
+    return $c;
+}
+
+// Una respuesta propia que todavía se puede editar o borrar, o un error.
+function exigirRespuestaPropia(int $id, array $u): array
+{
+    $st = db()->prepare(
+        'SELECT id, comentario, estado, anonimo, creado > now() - make_interval(hours => ?) AS a_tiempo
+           FROM respuesta WHERE id = ? AND usuario = ?');
+    $st->execute([HORAS_PARA_EDITAR, $id, $u['id']]);
+    $r = $st->fetch() ?: fallar(404, 'Esa respuesta no existe o no es tuya.');
+    if ($r['estado'] !== 'visible') { fallar(403, 'Un moderador ocultó esta respuesta: ya no se puede cambiar.'); }
+    if (!$r['a_tiempo']) { fallar(403, 'Solo puedes editar o borrar tu respuesta en las primeras ' . HORAS_PARA_EDITAR . ' horas.'); }
+    return $r;
+}
+
+// Las respuestas de unos comentarios, agrupadas por comentario. Mismas
+// reglas de visibilidad que ellos: una oculta solo la ven su autor y los
+// moderadores de esa carrera.
+function respuestasDe(array $idsComentario, ?array $u, array $moderables): array
+{
+    if (!$idsComentario) { return []; }
+    $yo = $u['id'] ?? 0;
+    $st = db()->prepare(
+        "SELECT r.id, r.comentario, r.usuario, us.alias, r.anonimo, us.rol AS autor_rol, r.texto, r.estado,
+                to_char(r.creado  AT TIME ZONE 'America/Mexico_City', 'DD/MM/YYYY HH24:MI') AS creado,
+                to_char(r.editado AT TIME ZONE 'America/Mexico_City', 'DD/MM/YYYY HH24:MI') AS editado,
+                r.creado > now() - make_interval(hours => :horas) AS a_tiempo,
+                EXISTS (SELECT 1 FROM reporte x WHERE x.respuesta = r.id AND x.reportante = :yo1
+                                                  AND x.estado = 'pendiente') AS ya_reportado,
+                (SELECT count(*) FROM reporte x WHERE x.respuesta = r.id AND x.estado = 'pendiente') AS reportes
+           FROM respuesta r
+           LEFT JOIN usuario us ON us.id = r.usuario
+          WHERE r.comentario = ANY (CAST(:ids AS int[]))
+          ORDER BY r.comentario, r.creado, r.id");
+    $st->execute(['horas' => HORAS_PARA_EDITAR, 'yo1' => $yo,
+                  'ids' => '{' . implode(',', $idsComentario) . '}']);
+
+    $por = [];
+    foreach ($st as $r) {
+        $cid = (int)$r['comentario'];
+        $mod = !empty($moderables[$cid]);
+        $mio = $yo && (int)$r['usuario'] === $yo;
+        if ($r['estado'] !== 'visible' && !$mio && !$mod) { continue; }
+        $fila = [
+            'id'        => (int)$r['id'],
+            'autor'     => $r['anonimo'] ?? $r['alias'],       // null = cuenta eliminada
+            'anonimo'   => $r['anonimo'] !== null,
+            'texto'     => $r['texto'],
+            'creado'    => $r['creado'],
+            'editado'   => $r['editado'],
+            'estado'    => $r['estado'],
+            'mio'       => $mio,
+            'editable'  => $mio && $r['a_tiempo'] && $r['estado'] === 'visible',
+            'reportado' => (bool)$r['ya_reportado'],
+            'moderable' => $mod,
+        ];
+        if ($mod) {
+            $fila['autor_id'] = $r['usuario'] === null ? null : (int)$r['usuario'];
+            $fila['autor_rol'] = $r['autor_rol'];
+            if ($r['anonimo'] !== null) { $fila['autor_real'] = $r['alias']; }
+            $fila['reportes'] = (int)$r['reportes'];
+        }
+        $por[$cid][] = $fila;
+    }
+    return $por;
+}
+
 // Un comentario propio que todavía se puede editar o borrar, o un error.
 function exigirComentarioPropio(int $id, array $u): array
 {
@@ -153,7 +249,12 @@ function comentariosDe(int $profesor, ?array $u): array
         foreach ($sr as $r) { $rub[$r['comentario']][] = ['concepto' => $r['concepto'], 'porcentaje' => (int)$r['porcentaje']]; }
     }
 
-    return array_map(function ($c) use ($yo, $rub) {
+    // Las respuestas de todos estos comentarios, en una sola consulta.
+    $moderables = [];
+    foreach ($filas as $c) { $moderables[(int)$c['id']] = (bool)$c['moderable']; }
+    $resp = respuestasDe(array_column($filas, 'id'), $u, $moderables);
+
+    return array_map(function ($c) use ($yo, $rub, $resp) {
         $mod = (bool)$c['moderable'];
         $mio = $yo && (int)$c['usuario'] === $yo;
         $fila = [
@@ -167,6 +268,8 @@ function comentariosDe(int $profesor, ?array $u): array
             'dificultad' => (int)$c['dificultad'],
             'texto'      => $c['texto'],
             'rubrica'    => $rub[$c['id']] ?? [],
+            // Solo texto, sin calificaciones: no tocan ninguna métrica.
+            'respuestas' => $resp[(int)$c['id']] ?? [],
             'creado'     => $c['creado'],
             'editado'    => $c['editado'],
             'estado'     => $c['estado'],

@@ -90,12 +90,14 @@ function entrarApp() {
   marcarVista();
   portadaEl.hidden = true;
   appEl.hidden = false;
+  if (typeof rutaEntrar === "function") rutaEntrar();   // el título pasa a ser el de la vista
   document.body.style.overflow = "";
   if (typeof revisarBienvenida === "function") revisarBienvenida();   // bienvenida.js
 }
 
 function mostrarPortada() {
   renderPortada();
+  if (typeof rutaPortada === "function") rutaPortada();   // la barra vuelve a la raíz
   portadaEl.hidden = false;
   appEl.hidden = true;
   document.body.style.overflow = "hidden";
@@ -120,10 +122,14 @@ document.getElementById("ptEntrar")?.addEventListener("click", entrarApp);
 document.getElementById("inicioBtn")?.addEventListener("click", mostrarPortada);
 
 // ---------- arranque ----------
-// Si llega un horario compartido por URL, la portada estorba: se salta.
+// Si llega un horario compartido por URL, la portada estorba: se salta. Igual
+// si la dirección pide una vista concreta (/maestro/…, /historial): quien
+// abre ese enlace viene a eso, no a la presentación (usuario, 2026-11-26).
 let vista = true;
 try { vista = localStorage.getItem(PORTADA_KEY) === "1"; } catch (e) { vista = false; }
-if (vista || (typeof hayHorarioEnURL === "function" && hayHorarioEnURL())) {
+if (vista
+    || (typeof hayHorarioEnURL === "function" && hayHorarioEnURL())
+    || (typeof hayRutaEnURL === "function" && hayRutaEnURL())) {
   appEl.hidden = false;
 } else {
   mostrarPortada();

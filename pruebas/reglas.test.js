@@ -71,15 +71,31 @@ const kardex = {
   C104: { veces: 1, calif: "5", per_rep: "26/1" }, C105: { veces: 1, calif: "7" }, C205: { veces: 1, calif: "10" },
 };
 
-console.log("\n— Promedio (como el Kárdex: última calificación, aprobada o reprobada) —");
+console.log("\n— Promedio (la calificación MÁS ALTA de cada materia, aprobada o reprobada) —");
 con(kardex);
 prueba("el Kárdex de ejemplo: (7 + 5 + 5 + 7 + 10) / 5 = 6.80", promedio(), "6.80");
 con({ C104: { calif: "5", calif_ets: "8" }, C105: { calif: "7" } });
 prueba("aprobada por ETS cuenta la del ETS (8), no la del curso (5)", promedio(), "7.50");
+con({ C104: { calif: "5", calif_ets: "4" }, C105: { calif: "7" } });
+prueba("ETS reprobado más bajo (4) no baja la del ordinario (5)", promedio(), "6.00");
+con({ C104: { calif: "5", res_ets: "reprobado" }, C105: { calif: "7" } });
+prueba("ETS sin número no borra la del ordinario (5)", promedio(), "6.00");
 con({ C104: { res: "aprobada" }, C105: { calif: "9" } });
 prueba("aprobada sin número no entra al promedio", promedio(), "9.00");
 con({ C104: { res: "aprobada" } });
 prueba("sin ningún número, el promedio es —", promedio(), "—");
+
+console.log("\n— Fecha del Kárdex → periodo, y periodos acotados al ingreso —");
+const perFecha = (t) => js(`periodoDeFecha(fechaDeSaes(${JSON.stringify(t)}))`);
+prueba("19/01/2026 es del periodo 26/1 (en enero se cierran actas)", perFecha("19/01/2026"), "26/1");
+prueba("19 de enero de 2026 se entiende igual", perFecha("19 de enero de 2026"), "26/1");
+prueba("15-ago-2025 abre el 26/1", perFecha("15-ago-2025"), "26/1");
+prueba("10/06/2026 es del 26/2", perFecha("10/06/2026"), "26/2");
+prueba("una fecha que no se entiende no da periodo", perFecha("no es fecha"), "");
+prueba("vacío no da el periodo de 1970", perFecha(""), "");
+prueba("reprobada en 26/1 con ingreso en 26/2 se acota al ingreso", js(`perDesdeIngreso("26/1", "26/2")`), "26/2");
+prueba("reprobada en 27/1 con ingreso en 26/2 se queda igual", js(`perDesdeIngreso("27/1", "26/2")`), "27/1");
+prueba("sin ingreso no se acota nada", js(`perDesdeIngreso("26/1", "")`), "26/1");
 
 console.log("\n— Estado de cada materia —");
 con(kardex);
@@ -109,6 +125,19 @@ con(kardex);
 prueba("Cálculo y Análisis vectorial ocupan 2 UA sin estar en el horario", js(`uaBloqueadas()`), 2);
 con(kardex, ["C104"]);
 prueba("si Análisis vectorial está en el horario, no se cuenta doble", js(`uaBloqueadas()`), 1);
+
+console.log("\n— Proyectos sin clase: TT I, TT II y Estancia profesional —");
+con({});
+prueba("Trabajo terminal I es proyecto; Cálculo no", [js(`esProyecto(ID_DE_CLAVE["C701"])`), js(`esProyecto(ID_DE_CLAVE["C103"])`)], [true, false]);
+con({ C701: { proy: true } });
+prueba("marcado, TT I ocupa sus 2 UA sin estar en el horario", js(`uaProyectos()`), 2);
+prueba("con su badge propio", js(`statusBadgeText(getSub(ID_DE_CLAVE["C701"], ""), false)`), "🧩 Lo estás llevando");
+con({ C801: { proy: true }, C804: { proy: true } });
+prueba("TT II (2 UA) y Estancia (1 UA) suman 3", js(`uaProyectos()`), 3);
+con({ C701: { proy: true, calif: "9" } });
+prueba("al aprobarlo deja de contar solo", [js(`uaProyectos()`), js(`getSub(ID_DE_CLAVE["C701"], "").status`)], [0, "aprobada"]);
+con({ C103: { proy: true } });
+prueba("la marca no vale en una materia que sí lleva clase", js(`uaProyectos()`), 0);
 
 console.log("\n— Regulares e irregulares —");
 con({});

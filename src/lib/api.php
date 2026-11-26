@@ -23,10 +23,34 @@ set_exception_handler(function (Throwable $e): void {
     echo json_encode(['error' => 'No se pudieron leer los datos.']);
 });
 
+// Manda el JSON con ETag, para que una visita repetida no vuelva a bajar lo
+// mismo (medido el 2026-11-26: eran ~267 KB en cada carga solo para pintar).
+// Apache manda Cache-Control: no-cache para todo src/, así que el navegador
+// SIEMPRE pregunta; con ETag esa pregunta se contesta con un 304 vacío cuando
+// los datos no cambiaron, y con el JSON completo cuando sí.
+//
+// Ojo con mod_deflate: al comprimir le pega "-gzip" al ETag, y el navegador
+// devuelve esa versión. Por eso se compara sin el sufijo; si no, nunca
+// coincidiría y siempre se mandaría todo.
 function responder($datos): void
 {
+    $cuerpo = json_encode($datos, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+    $etag = '"' . md5($cuerpo) . '"';
+
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($datos, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+    header('ETag: ' . $etag);
+
+    $recibido = $_SERVER['HTTP_IF_NONE_MATCH'] ?? '';
+    foreach (explode(',', $recibido) as $candidato) {
+        $candidato = trim($candidato);
+        $candidato = preg_replace('/^W\//', '', $candidato);          // ETag débil
+        $candidato = preg_replace('/-(gzip|br)"$/', '"', $candidato); // el sufijo de mod_deflate
+        if ($candidato === $etag) {
+            http_response_code(304);
+            return;
+        }
+    }
+    echo $cuerpo;
 }
 
 // El periodo vigente es el más reciente que tiene ofertas. Los códigos

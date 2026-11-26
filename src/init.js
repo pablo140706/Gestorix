@@ -12,10 +12,15 @@ try {
 render();
 
 // Si el enlace trae un horario compartido, aterriza en la pestaña Horario con
-// el aviso arriba en vez de en Mi avance, que no es lo que vino a ver.
+// el aviso arriba en vez de en Mi avance, que no es lo que vino a ver. Si no,
+// manda la dirección: /maestro/<nombre>, /historial, etc. (rutas.js).
 if (hayHorarioEnURL()) {
-  irAPestana("horario");
+  // pintarPestana y no irAPestana: aquí la dirección ES el #h= del horario
+  // compartido, y empujar /horario lo borraría antes de leerlo (rutas.js).
+  pintarPestana("horario");
   avisoHorarioCompartido();
+} else {
+  aplicarRutaInicial();
 }
 
 // Datos que usan casi todas las pestañas pero que no hacen falta para el primer

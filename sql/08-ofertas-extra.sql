@@ -1,10 +1,11 @@
 -- =====================================================================
 --  Gestorix · 08-ofertas-extra.sql · carga inicial (initdb)
 -- =====================================================================
---  5 ofertas de 27/1 que NO vienen en el HTML de SAES, pero que iscweb
+--  Ofertas de 27/1 que NO vienen en el HTML de SAES, pero que iscweb
 --  conservaba a mano (lista $EXTRA de build-data.ps1, commit 2419470) y que
---  el usuario confirmó el 2026-11-08. Con ellas, 27/1 cuadra en 665 ofertas
---  y 2,024 sesiones; sin ellas, el HTML de SAES da 660 y 2,015.
+--  el usuario confirmó el 2026-11-08. Eran 5 y quedan 3: las dos de Trabajo
+--  terminal I se quitaron el 2026-11-25, porque TT no es una clase. Con las
+--  tres, 27/1 cuadra en 663 ofertas; sin ellas, el HTML de SAES da 660.
 --
 --  Corre antes que importador/horarios.php, así que primero se aseguran
 --  los profes (si el importador los vuelve a ver, ya existen y no duplica).
@@ -30,11 +31,11 @@ VALUES ('27/1', '6CM5', 'C602', (SELECT id FROM profesor WHERE nombre_norm = 'AG
   RETURNING id)
 INSERT INTO sesion (oferta, dia, bloque) SELECT o.id, s.dia, s.bloque FROM o, (VALUES (1, 3), (2, 2), (4, 3)) AS s(dia, bloque);
 
--- 7CM1 y 7CM2 · Trabajo terminal I · sin horario fijo
-INSERT INTO oferta (periodo, grupo, materia, profesor, edificio, salon)
-VALUES ('27/1', '7CM1', 'C701', (SELECT id FROM profesor WHERE nombre_norm = 'SANCHEZ MORENO ADRIANA DE LA P'), NULL, NULL);
-INSERT INTO oferta (periodo, grupo, materia, profesor, edificio, salon)
-VALUES ('27/1', '7CM2', 'C701', (SELECT id FROM profesor WHERE nombre_norm = 'RIVERA DE LA ROSA MONICA'), NULL, NULL);
+-- 7CM1 y 7CM2 · Trabajo terminal I: YA NO SE CARGAN (usuario, 2026-11-25).
+-- TT I no es una clase sino un proyecto, así que no tiene oferta ni grupo ni
+-- maestro que elegir: `materia.sin_clase` lo marca y el alumno solo dice que lo
+-- está llevando (migraciones/2026-11-25-proyectos-sin-clase.sql). Las dos
+-- profesoras sí se quedan arriba: son reales y pueden tener comentarios.
 
 -- 8CM3 · Gestión empresarial · lun 10:30, mar 08:30, jue 10:30
 WITH o AS (INSERT INTO oferta (periodo, grupo, materia, profesor, edificio, salon)

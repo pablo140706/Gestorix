@@ -1,0 +1,13 @@
+# Gestorix no quiere salir en buscadores (usuario, 2026-11-26).
+#
+# Desde que cada vista tiene su dirección, la ficha de un maestro es un
+# enlace que se puede mandar por WhatsApp. Eso está bien; lo que no
+# queremos es que al buscar el nombre de un profesor en Google aparezca
+# lo que escriben de él aquí.
+#
+# Ojo: esto no esconde nada de quien ya tiene el enlace. Solo pide a los
+# buscadores que no lo recorran ni lo guarden. index.html además lleva
+# <meta name="robots" content="noindex, nofollow">.
+
+User-agent: *
+Disallow: /

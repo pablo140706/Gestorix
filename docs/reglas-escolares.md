@@ -38,6 +38,11 @@ créditos ni dictamen.
 - **Solo los regulares** (no deben nada de semestres anteriores) pueden meter la carga máxima; los
   irregulares, hasta la media.
 - **Todas las reprobadas ocupan carga** hasta que las apruebes, aunque no estén en tu horario.
+- **Trabajo terminal I, Trabajo terminal II y la Estancia profesional no llevan clase**: son
+  proyectos, no tienen grupo ni maestro ni horario, y solo tienen calificación. En SAES son los
+  grupos X (`7CX1`, `8CX2`…), con cupo sin límite. En la app los marcas con **"Lo estoy llevando"**
+  en Mi avance: no ocupan ninguna hora de tu horario, pero sí tu carga (TT I y TT II valen 2 UA
+  cada uno; la Estancia, 1). Al capturar su calificación dejan de contar solos.
 - **Grupos de recurse**, solo en 1.er semestre: mañana del 7 en adelante (1CM1–1CM6 regulares) y
   tarde del 6 en adelante (1CV1–1CV5 regulares). El automático mete primero las reprobadas que aún
   se pueden recursar; en 1.º, solo en grupos de recurse.
@@ -79,10 +84,17 @@ acreditaste. El mismo botón "Importar de SAES" lo reconoce: busca en cada tabla
 forma de los datos (clave `C101`, número de 0 a 10).
 
 - Cada calificación queda **con número** y entra al promedio; reemplaza lo capturado en esa materia.
+  Al promedio entra la **más alta** de cada materia: si reprobaste el ordinario con 5 y el ETS con 4,
+  cuenta el 5.
 - Si la forma de evaluación dice **ETS** (o título de suficiencia), queda **aprobada por ETS**.
 - Si dice **recurse**, queda como 2.ª vez.
 - Las **optativas** se acomodan solas en su lugar de optativa de su semestre.
-- Si una materia sale dos veces, se queda la aprobatoria.
+- El renglón del curso y el del ETS se guardan **por separado**, así que el del ETS no borra el del
+  ordinario. Si el mismo renglón sale dos veces, se queda la calificación más alta.
+- El **periodo más antiguo** del Kárdex es tu **ingreso**. Si no viene la columna de periodo, se saca
+  de la **fecha** del acta: en enero se cierran las actas del periodo que empezó en agosto, así que
+  una del 19 de enero de 2026 es del periodo 26/1.
+- Ningún periodo puede quedar **antes de tu ingreso**: si entraste en 26/2, no pudiste cursar en 26/1.
 
 Probado con un Kárdex real (2026-11-21): tablas por semestre con "Clave, Materia, Fecha, Periodo,
 Forma Eval., Calificacion"; la forma `REC` es el recurse.

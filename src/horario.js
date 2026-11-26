@@ -6,11 +6,13 @@ const credSummaryEl = document.getElementById("credSummary");
 
 // ---------- carga académica en UA (CLAUDE.md §4.1) ----------
 // Lo que inscribes + las reprobadas que no están en el horario (cuentan aunque no estén
-// en el horario). TT I y TT II valen 2 UA; las demás, 1.
+// en el horario) + los proyectos que marcaste (TT I, TT II, Estancia: no llevan
+// clase, pero ocupan carga). TT I y TT II valen 2 UA; las demás, 1.
 function cargaActual() {
   const enHorario = state.horario.reduce((a, h) => a + uaDe(h.sid), 0);
   const soloEts = uaBloqueadas();
-  return { enHorario, soloEts, total: enHorario + soloEts };
+  const proyectos = uaProyectos();
+  return { enHorario, soloEts, proyectos, total: enHorario + soloEts + proyectos };
 }
 
 function semDeId(id) { return Number(id.match(/^s(\d+)-/)[1]) + 1; }
@@ -121,8 +123,11 @@ function confirmarBaja(item) {
 
 function renderHorario() {
   const carga = cargaActual();
-  const inscritos = state.horario.reduce((a, h) => a + h.cred, 0);
-  const nMaterias = state.horario.length;
+  // Los proyectos (TT I, TT II, Estancia) no están en state.horario: no tienen
+  // oferta ni hora. Se listan aparte, pero cuentan en la carga y en créditos.
+  const proyectos = proyectosEnCurso();
+  const inscritos = state.horario.reduce((a, h) => a + h.cred, 0) + proyectos.reduce((a, p) => a + p.cred, 0);
+  const nMaterias = state.horario.length + proyectos.length;
   const maxPermitida = cargaMaxPermitida();
   const nivel = carga.total > maxPermitida ? "danger" : carga.total > CARGA.media ? "warn" : "";
 
@@ -141,7 +146,7 @@ function renderHorario() {
   credSummaryEl.innerHTML = `
     <div class="cs-strip ${nivel}">
       <span title="Carga media ${CARGA.media} UA, máxima ${maxPermitida}${maxPermitida < CARGA.max ? " (eres irregular: solo los regulares llegan a " + CARGA.max + ")" : ""}"><b>${carga.total}</b>/${CARGA.media} UA
-        <small>(máx. ${maxPermitida})</small>${carga.soloEts ? ` <span class="cs-bloq" title="Las reprobadas ocupan carga hasta que las apruebes, aunque no estén en tu horario">${carga.soloEts} de reprobadas</span>` : ""}</span>
+        <small>(máx. ${maxPermitida})</small>${carga.soloEts ? ` <span class="cs-bloq" title="Las reprobadas ocupan carga hasta que las apruebes, aunque no estén en tu horario">${carga.soloEts} de reprobadas</span>` : ""}${carga.proyectos ? ` <span class="cs-bloq" title="Trabajo terminal y Estancia no llevan clase, pero sí ocupan carga">${carga.proyectos} de proyectos</span>` : ""}</span>
       <span><b>${nMaterias}</b> materia${nMaterias === 1 ? "" : "s"} · ${fmt(inscritos)} cr</span>
       <span title="Promedio de MisProfesores de tus maestros">Calidad ${prom(promCal, "cal")}</span>
       <span title="Promedio de MisProfesores de tus maestros (bajo = más fácil)">Dificultad ${prom(promDif, "dif")}</span>
@@ -158,7 +163,7 @@ function renderHorario() {
   // Rejilla semanal
   document.getElementById("horarioTable").innerHTML = renderHorarioTable();
 
-  if (state.horario.length === 0) {
+  if (state.horario.length === 0 && proyectos.length === 0) {
     horarioListEl.innerHTML = `<div class="drop-empty big">Tu horario está vacío.<br>Ve a <b>Mi avance</b>, abre <b>Maestros</b> en una materia pendiente o reprobada y pulsa <b>+ Horario</b>.</div>`;
     return;
   }
@@ -207,7 +212,22 @@ function renderHorario() {
         <button class="hacc peligro" data-hacc="quitar" data-idx="${idx}" title="Quitar del horario">✕ Quitar</button>
       </div>
     </div>`;
-  }).join("");
+  }).join("") + proyectos.map((p) => `
+    <div class="hcard proyecto">
+      <div class="hcard-info">
+        <div class="hcard-top">
+          <span class="hcard-mat">${esc(p.name)}</span>
+          <span class="tipo-tag proyecto">Proyecto</span>
+          <span class="hcard-cred">${fmt(p.cred)} cr</span>
+        </div>
+        <div class="hcard-prof">No lleva clase: no tiene grupo, maestro ni horario, solo calificación.
+          Ocupa ${p.ua} UA de tu carga mientras lo llevas.</div>
+      </div>
+      <div class="hcard-acc">
+        <button class="hacc peligro" data-hacc="quitar-proyecto" data-pid="${p.id}"
+          title="Ya no lo estoy llevando">✕ Quitar</button>
+      </div>
+    </div>`).join("");
 
   horarioListEl.querySelectorAll(".prof-link").forEach((a) => {
     a.onclick = (e) => { e.preventDefault(); showProfDetail(a.dataset.prof); };
@@ -307,6 +327,8 @@ horarioListEl.addEventListener("click", (e) => {
     mantener: () => alternarMantener(idx),
     quitar: () => quitarDelHorario(idx),
     elegir: () => elegirAlternativa(idx, Number(b.dataset.alt)),
+    // Un proyecto no se "quita del horario": se desmarca en el avance.
+    "quitar-proyecto": () => { setSub(b.dataset.pid, { proy: false }); trasCambioManual(); render(); },
   })[b.dataset.hacc]?.();
 });
 

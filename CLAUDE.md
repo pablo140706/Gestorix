@@ -22,7 +22,7 @@ App web para que un alumno de ESCOM (ISC, IA o LCD) lleve su avance, arme su hor
 |---|---|
 | Máquina | La **PC** del usuario, con Windows. La laptop no se usa |
 | Terminal | MSYS2 **UCRT64** (bash); a veces PowerShell |
-| Este proyecto | `C:\db\repos\proyectos\gestorix` (`/c/db/repos/proyectos/gestorix`) |
+| Este proyecto | `C:\Users\P\Documents\base_de_datos\Gestorix` (`/c/Users/P/Documents/base_de_datos/Gestorix`) |
 | iscweb (fuente del front y de los datos) | `C:\db\repos\iscweb-inicio`, rama `feat/multi-carrera-ia-lcd` |
 | HTML de SAES y PDFs oficiales | `C:\db\repos\iscweb-inicio\data\{isc,ia,lcd}\` (`mp.html`, `horario-m.html`, `horario-v.html`, `opta.html`, mapas curriculares y de optativas) |
 | Calendario del IPN | `C:\db\repos\iscweb-inicio\calendario.csv` y `data\calendarioipn-escolarizada.pdf` |
@@ -61,13 +61,18 @@ gestorix/
 ├── sql/                     00-tablas.sql, 01-…  carga inicial numerada (initdb)
 ├── migraciones/             cambios de esquema con la base ya en uso
 ├── importador/              scripts PHP de línea de comandos: HTML de SAES → base
+│   └── carga.php            el HTML (ya leído) → base; lo usan la terminal y Admin → Horarios
 ├── data/isc|ia|lcd/         HTML pegado de SAES
 ├── src/                     lo que sirve Apache
 │   ├── index.html, *.js, styles.css     front vanilla de iscweb
 │   ├── arranque.js                      pide los datos a la API y luego carga los módulos
+│   ├── rutas.js                         cada vista con su dirección (/maestro/<nombre>…)
+│   ├── robots.txt                       los buscadores no entran
 │   ├── api/*.php                        endpoints que regresan JSON
 │   ├── api/cuenta/*.php                 registro, verificar, entrar, salir, yo, alias, olvide, recuperar, borrar
 │   ├── api/mis-datos.php                avance y horario del usuario con sesión
+│   ├── api/admin/*.php                  tablero, usuarios, comentarios, bitácora, respaldo,
+│   │                                    horarios (sube el HTML de SAES) y periodos
 │   ├── cuenta.js                        ventana de la cuenta y sincronización con la base
 │   ├── lib/db.php                       una sola conexión PDO, con getenv
 │   ├── lib/api.php                      lo común de los endpoints
@@ -94,7 +99,7 @@ gestorix/
 - `cuenta.js` envuelve `save()`: con sesión, cada guardado local programa una subida a `mis-datos.php` (POST con todo el estado). Al cerrar la pestaña, `sendBeacon`.
 - El plan se dibuja una sola vez al cargar. Si la cuenta trae datos distintos a los del navegador, se guardan y se **recarga una vez**; `firmaDelEstado()` evita el ciclo.
 - No se entra sin activar la cuenta. Al **salir** se borra la llave de `localStorage` de esa carrera. El *service worker* no guarda en caché `api/cuenta/*` ni `api/mis-datos.php`.
-- Estados con ETS en `getSub()`: `status` sigue siendo pendiente/aprobada/reprobada, más `porEts` y `soloEts`. `califFinal()` alimenta el promedio.
+- Estados con ETS en `getSub()`: `status` sigue siendo pendiente/aprobada/reprobada, más `porEts` y `soloEts`. `califParaPromedio()` alimenta el promedio (la más alta con número; ver §4.2).
 - Carga en UA: `cargaActual()`, `cabeEnCarga()` (no deja pasar de la máxima), `avisosDelHorario()` y `confirmarBaja()` en `horario.js`. El automático llena hasta la **media**.
 - **Art. 98 como lo interpreta la app** (falta confirmarlo): avisa si el horario abarca más de 3 semestres seguidos, o si adeudas materias de más de 2 semestres antes del más alto que inscribes.
 - Apache manda `Cache-Control: no-cache` para todo `src/` (`Dockerfile`): el navegador revalida (304) y nadie se queda con archivos viejos.
@@ -105,8 +110,8 @@ gestorix/
 | Para | Comando |
 |---|---|
 | Levantar todo | `docker compose up -d` → app en `localhost:8080`, pgAdmin en `localhost:5051` |
-| 1. Cargar horarios de SAES | `docker compose run --rm web php importador/horarios.php 27/1` (repetible: no duplica ni pisa lo corregido en pgAdmin) |
-| 2. Cargar cupos de SAES | `docker compose run --rm web php importador/cupos.php 27/1` (aquí SAES **sí pisa**: deja la tabla `cupo` igual que el HTML) |
+| 1. Cargar horarios de SAES | `docker compose run --rm web php importador/horarios.php 27/1` (repetible: no duplica ni pisa lo corregido en pgAdmin). **O sin terminal:** Admin → 🗓️ Horarios |
+| 2. Cargar cupos de SAES | `docker compose run --rm web php importador/cupos.php 27/1` (aquí SAES **sí pisa**: deja la tabla `cupo` igual que el HTML). **O sin terminal:** Admin → 🗓️ Horarios |
 | 3. Corregir salones con el PDF oficial | En Git Bash: `pdftotext -table -enc UTF-8 data/salones/27-1.pdf data/salones/27-1.txt` y luego `docker compose run --rm web php importador/salones.php 27/1` |
 | 4. Propósito, temas y PDF de cada materia | `docker compose run --rm web php importador/materias.php` (lee `src/materias/*.pdf`, `data/programas/*.txt` e `investigadas.csv`; repetible). Si hay PDFs nuevos: `mapa.csv` + `sh importador/programas/copiar.sh "…/Planes de estudio"` en Git Bash |
 | 5. Links de MisProfesores y cédulas | `docker compose run --rm web php importador/profesores.php` (lee `data/profesores/links-cedulas.csv`; `--prueba` solo reporta; repetible: no pisa links y reemplaza las cédulas de quien venga en el CSV) |
@@ -128,6 +133,24 @@ gestorix/
 - **Correo por Gmail** (`lib/correo.php`, SMTP propio sin Composer, puerto 465). `SMTP_USER` y `SMTP_PASSWORD` (contraseña de aplicación) van solo en `.env`. Si faltan o Gmail falla, el correo sale en `docker compose logs web`. Llegan a spam.
 - **Seguridad:** `lib/limite.php` (intentos por IP y por correo, en `/tmp` del contenedor, una carpeta por usuario del sistema: `/tmp/gestorix-limites-33` es la de Apache. **Las pruebas a mano con `docker compose exec` corren como root**; si una carpeta queda de root, Apache no puede escribir y el login da 500 (pasó el 2026-11-22). Entrar: 5 fallidos por correo y 20 por IP → 15 min; con ngrok la IP real es la última de `X-Forwarded-For`), `apache/seguridad.conf` (CSP sin scripts en línea, `nosniff`, `DENY`, sin listado, `lib/` cerrada) y `expose_php` apagado. **No escribir `<script>` ni `onclick=` dentro del HTML:** la CSP los bloquea.
 - El navegador integrado de Claude no registra *service workers*: ese error de consola no es de la app.
+
+**Peso de la app (medido el 2026-11-26, con las herramientas del navegador):**
+- **El JSON de la API no se comprimía.** La lista de `mod_deflate` que trae Debian no incluye `application/json`, así que el CSS y los `.js` sí viajaban comprimidos y los datos no. Una visita bajaba **374 KB** solo de API. Con `apache/rendimiento.conf` (añade `application/json`, `image/svg+xml` y el manifiesto) son **52 KB**: horarios 204→18 KB, historial 336→29 KB, cupos 86→9 KB, planes 27→6 KB.
+- **`responder()` manda `ETag`** (`lib/api.php`): como Apache pone `Cache-Control: no-cache` en todo `src/`, el navegador siempre pregunta; con ETag esa pregunta se contesta con un **304 vacío** mientras los datos no cambien. Cuidado al tocarlo: mod_deflate le pega `-gzip` al ETag y el navegador lo devuelve así, por eso la comparación quita ese sufijo (si no, nunca coincide y siempre se manda todo).
+- Lo que sigue pesando y **no** se tocó: **27 archivos .js** que se piden por separado en cada carga (112 KB comprimidos). Con HTTP/2 son baratos porque van multiplexados; en HTTP/1.1 son 27 idas y vueltas. Antes de juntarlos en un solo archivo (que obligaría a un paso de build, hoy no hay ninguno), conviene asegurarse de que el hospedaje dé HTTP/2.
+- Las fuentes vienen de Google Fonts: 2 conexiones extra y 80 KB. Servirlas desde el propio sitio ahorraría los dos *handshakes* y dejaría quitar esos dominios de la CSP.
+- Los endpoints tardan ~20 ms del lado del servidor con 667 ofertas; opcache está encendido. **El cuello de botella es la red, no la base.**
+
+**Rutas: cada vista con su dirección (usuario, 2026-11-26; `src/rutas.js`):**
+- Antes todo vivía en `/` y cambiar de pestaña no tocaba la URL, así que abrir en otra ventana siempre caía en el inicio. Ahora: `/` (Mi avance y la portada), `/maestros`, `/maestro/<nombre>`, `/horario`, `/optativas`, `/historial` y `/calendario`. **Admin no tiene dirección, a propósito.**
+- El nombre del maestro va en texto plano con el mismo `norm()` de siempre: `SÁNCHEZ MORENO ADRIANA DE LA P` → `/maestro/sanchez-moreno-adriana-de-la-p`. El mapa `MAESTRO_DE_SLUG` se arma de `TEACHERS` (que trae **objetos** `{name,…}`, no cadenas) y desempata con `-2`, `-3` si dos nombres dieran el mismo texto.
+- **Apache: `apache/rutas.conf` con `FallbackResource /index.html`**, y `FallbackResource disabled` en `api/`, para que un endpoint mal escrito siga dando 404 de verdad. **No sirve `RewriteRule` en este archivo:** se carga en contexto de servidor y mod_rewrite **no hereda** sus reglas dentro de los VirtualHost (el `000-default` de Debian). Se probó: con RewriteRule, `/historial` seguía dando 404.
+- **`index.html` lleva `<base href="/">`.** Sin eso, en `/maestro/x` el navegador pide `/maestro/styles.css` y `/maestro/api/…`. Va permitido por la CSP (`base-uri 'self'`).
+- `irAPestana()` pinta **y** deja la dirección; `pintarPestana()` solo pinta (lo usa el enrutador y el aterrizaje de un horario compartido). El botón Atrás recorre lo visitado, incluidas las fichas de maestro.
+- **El `#h=` de los horarios compartidos no se toca** y sigue mandando sobre la ruta: al aterrizar uno se usa `pintarPestana`, porque empujar `/horario` borraría el hash antes de leerlo. Al moverte a otra vista el hash se va a propósito (si no, quedarían enlaces `/maestros#h=…`).
+- Direcciones raras: mayúsculas y diagonal final se corrigen solas (`/HISTORIAL/` → `/historial`), `/avance` → `/`, y lo que no existe cae en Mi avance sin dejar el historial roto.
+- **El *service worker* trata las navegaciones aparte:** red primero y, sin conexión, `index.html` de la caché, para que `/maestro/x` abra igual. No guarda una copia por cada dirección.
+- **Buscadores bloqueados** (usuario): `src/robots.txt` y `<meta name="robots" content="noindex, nofollow">`. No esconde nada de quien ya tiene el enlace: solo evita que al buscar el nombre de un profesor salga lo que escriben de él aquí.
 
 **Cupo, tema y celular (2026-11-21):**
 - El cupo se muestra en todos lados como **`inscritos/cupo`** (`cupoBadge()` en `core.js`), con color por disponibilidad y el detalle al pasar el mouse. Igual en el JPG y el XLSX.
@@ -188,9 +211,14 @@ gestorix/
 | LCD 20 | 4 | 6 | 9 |
 
 - La mínima y la media salen del Procedimiento de Reinscripción 27/1. **La máxima de 9 la dio el usuario**; el procedimiento remite al Art. 52 del Reglamento General de Estudios. Está pendiente confirmarla ahí.
+- **Trabajo terminal I, Trabajo terminal II y la Estancia profesional NO llevan clase** (usuario, 2026-11-25): son proyectos, no tienen grupo, maestro ni horario, y solo tienen calificación. Coincide con SAES, donde son grupos X (`7CX1`, `8CX2`…) con cupo 250/255, o sea sin límite, y sin horario. En la base los marca `materia.sin_clase` (9 materias: las tres de cada carrera) y en el front `esProyecto(id)` (`data.js`, desde el campo `proy` de `api/planes.php`).
+  - **No van en `state.horario` ni en la tabla `horario`,** porque ahí cada renglón es una oferta. El alumno marca **"Lo estoy llevando"** en el desplegable de Mi avance (que dice *Proyecto*, no *Maestros*) y eso vive en `avance.proyecto_en_curso` (migración `2026-11-25-proyectos-sin-clase.sql`).
+  - **Sí ocupan carga:** TT I y TT II valen 2 UA y la Estancia 1 (`uaProyectos()` en `core.js`, sumado en `cargaActual()`). El automático no intenta colocarlos y descuenta sus UA del presupuesto (`auto.js`).
+  - **Se desmarcan solos** al capturar la calificación: ya aprobada, el proyecto deja de contar y la tarjeta desaparece. La tarjeta de Generar horario sale con borde punteado y un ✕ para decir que ya no lo llevas.
+  - Las dos ofertas de TT I que estaban a mano (`7CM1`, `7CM2`, de `sql/08-ofertas-extra.sql`) **se borraron**; sus dos profesoras se quedan en la tabla `profesor`.
 - **En la app:** hasta la media, sin aviso. Entre la media y 9, se permite con un aviso de que requiere trámite. **Solo los regulares** (no deben nada de semestres anteriores) llegan a 9; **los irregulares, hasta la media** (usuario, 2026-11-21; `esRegular()`/`cargaMaxPermitida()` en `core.js`). Más de lo permitido no se deja agregar.
-- ~~No se modela la situación escolar~~ → **Desfase y dictamen sí se avisan** (usuario, 2026-11-21; reglas en `docs/reglas-escolares.md`, mostradas **como regla oficial**, aunque salen de alumnos en Facebook). **Se cuenta desde el ordinario** (P = periodo en que reprobaste la 1.ª vez): P+2 "último" (3.er semestre); P+3 **desfasada → carta de 24 créditos**; P+4 o más **dictamen** (solo ETS, no puede inscribir nada). `desfaseDe()`/`TEXTO_DESFASE` en `core.js`. Avisa en Mi avance, la fila y el horario. El periodo (`avance.periodo_reprobada`, migración `2026-11-21-periodo-reprobada.sql`) se pregunta en la ventana de "Reprobaste…" o sale del Estado General de SAES. Solo avisa, nunca bloquea. Baja temporal no se modela (si la diste de baja, vuelve a ser 1.ª vez).
-- **Importar de SAES:** en la bienvenida y bajo el avance, **"Importar de SAES"** lee el **Estado General** (archivo o código pegado; tablas `mainCopy_GV_Reprobadas/Adeudadas/Desfasadas`) con `DOMParser`, en el navegador. Reprobadas → sin número con sus veces y periodo (`20261` → `26/1`); no cursadas → pendientes; lo demás hasta el semestre más alto listado → aprobada sin número, con palomitas para quitar. **También lee el Kárdex** (`kardex.aspx`: tablas `bottomBorder` por semestre con "Clave, Materia, Fecha, Periodo, Forma Eval., Calificacion"; `REC` = recurse): calificaciones con número, ETS → aprobada por ETS, recurse → 2.ª vez, reprobadas con su periodo, optativas a su lugar (`slotDeOptativa`). Probado con el Kárdex real del usuario (2026-11-21). El Estado General se reconoce **solo por los ids de sus tablas** (el menú de SAES también dice "materias reprobadas"), y al importarlo después del Kárdex no pisa números y se queda el periodo más reciente.
+- ~~No se modela la situación escolar~~ → **Desfase y dictamen sí se avisan** (usuario, 2026-11-21; reglas en `docs/reglas-escolares.md`, mostradas **como regla oficial**, aunque salen de alumnos en Facebook). **Se cuenta desde el ordinario** (P = periodo en que reprobaste la 1.ª vez): P+2 "último" (3.er semestre); P+3 **desfasada → carta de 24 créditos**; P+4 o más **dictamen** (solo ETS, no puede inscribir nada). `desfaseDe()`/`TEXTO_DESFASE` en `core.js`. Avisa en Mi avance, la fila y el horario. El periodo (`avance.periodo_reprobada`, migración `2026-11-21-periodo-reprobada.sql`) se pregunta en la ventana de "Reprobaste…" o sale del Estado General de SAES. Solo avisa, nunca bloquea. **Ningún periodo puede ser anterior a tu ingreso** (usuario, 2026-11-25): si entraste en 26/2 no pudiste cursar en 26/1. El desplegable de la ventana arranca en tu ingreso (`opcionesPeriodoReprobada()`), lo que se importa o viene de antes se acota con `perDesdeIngreso()` (`core.js`, aplicado en `getSub()` y al subir en `estadoAFilas()`) y `api/mis-datos.php` rechaza con 400 la fila que llegue antes del ingreso. No hay trigger: un CHECK no puede mirar la tabla `usuario`. Las filas que ya estaban mal (5 de 55 el 2026-11-25) las corrige la migración `2026-11-25-periodo-no-antes-del-ingreso.sql`. Baja temporal no se modela (si la diste de baja, vuelve a ser 1.ª vez).
+- **Importar de SAES:** en la bienvenida y bajo el avance, **"Importar de SAES"** lee el **Estado General** (archivo o código pegado; tablas `mainCopy_GV_Reprobadas/Adeudadas/Desfasadas`) con `DOMParser`, en el navegador. Reprobadas → sin número con sus veces y periodo (`20261` → `26/1`); no cursadas → pendientes; lo demás hasta el semestre más alto listado → aprobada sin número, con palomitas para quitar. **También lee el Kárdex** (`kardex.aspx`: tablas `bottomBorder` por semestre con "Clave, Materia, Fecha, Periodo, Forma Eval., Calificacion"; `REC` = recurse): calificaciones con número, ETS → aprobada por ETS, recurse → 2.ª vez, reprobadas con su periodo, optativas a su lugar (`slotDeOptativa`). Probado con el Kárdex real del usuario (2026-11-21). **El curso y el ETS son renglones distintos y ya no se pisan** (usuario, 2026-11-25): el del curso va a `calif` y el del ETS a `calif_ets`, y si uno sale repetido se queda la calificación más alta; antes el ETS reprobado sobrescribía la del ordinario y la perdía. **El ingreso sale del propio Kárdex:** el periodo más antiguo que aparezca (de la columna Periodo o, si no viene, de la **Fecha** del acta con `fechaDeSaes()` + `periodoDeFecha()`; "19 ene 2026" cae en 26/1) y solo se mueve hacia atrás, porque el Kárdex manda sobre el ingreso declarado. El Estado General se reconoce **solo por los ids de sus tablas** (el menú de SAES también dice "materias reprobadas"), y al importarlo después del Kárdex no pisa números y se queda el periodo más reciente.
 - **Reiniciar y Cargar respaldo con sesión** primero suben a la cuenta (`guardarEnCuentaYa()`, `cuenta.js`) y luego recargan; si no, al recargar se bajaba lo viejo de la cuenta y los datos regresaban.
 - **TT I y TT II valen 2 UA cada una.** Las demás, 1.
 - **Las UA adeudadas cuentan** en la carga. **Cuáles** (usuario, 2026-11-21; antes solo las de "solo por ETS"): **todas las reprobadas** (1.ª vez o recurse) ocupan sus UA hasta que las apruebes, aunque no estén en el horario; si están en el horario se cuentan ahí, una sola vez (`materiasSoloEts()`/`uaBloqueadas()` en `core.js`). El automático descuenta las reprobadas que él mismo coloca para no contarlas doble.
@@ -204,7 +232,7 @@ gestorix/
 - **El ETS no cuenta como curso.** Flujo:
   - Reprobaste el **ordinario** → puedes recursar **o** presentar ETS.
   - Reprobaste el **recurse** → el ETS es **obligatorio**: ya no se puede volver a cursar.
-- **Aprobar por ETS cuenta como aprobada y entra al promedio.** ~~El promedio es solo de aprobadas (2026-11-08)~~ → **El promedio es como el del Kárdex de SAES** (usuario, 2026-11-21): la **última calificación con número de cada materia** —la del ETS si lo presentó, si no la del curso—, **aprobada o reprobada**. Las que no tienen número no cuentan. `califParaPromedio()` en `core.js`. La vista `avance_status.calif_final` sigue siendo la calificación con que se **aprobó** (no es el promedio).
+- **Aprobar por ETS cuenta como aprobada y entra al promedio.** ~~El promedio es solo de aprobadas (2026-11-08)~~ ~~El promedio es como el del Kárdex de SAES: la última calificación con número (2026-11-21)~~ → **Al promedio entra la calificación MÁS ALTA con número de cada materia** (usuario, 2026-11-25), **aprobada o reprobada**: para el promedio siempre se agarra la más alta, así que un **ETS reprobado más bajo que el ordinario ya no baja el promedio** (5 en ordinario y 4 en ETS → cuenta 5), y un ETS marcado **sin número no borra** la del curso. Las materias sin ningún número no cuentan. `califParaPromedio()` en `core.js`. Como el ETS solo existe si reprobaste el curso (CHECK de la base), el único caso que cambió respecto a 2026-11-21 es el del ETS reprobado con número. La vista `avance_status.calif_final` sigue siendo la calificación con que se **aprobó** (no es el promedio).
 - La calificación es un **entero de 0 a 10**. Aprobada con ≥ 6.
 - Status derivado:
 
@@ -267,7 +295,7 @@ gestorix/
 - **La dificultad no es de 0 a 6**, como suponía iscweb: MisProfesores muestra valores reales de 6.4 (JURADO JIMÉNEZ) y 6.1 (JUÁREZ LEÓN), confirmados por el usuario. El `CHECK` va de **0 a 10**. Los colores de iscweb siguen igual (≥ 5 es rojo fuerte).
 - Las métricas son **globales por profesor**, no por carrera.
 - **Cédula:** la busca el usuario en el Registro Nacional de Profesionistas (SEP) y la captura en `data/profesores/links-cedulas.csv` (columnas: link, licenciatura o ingeniería con "-L"/"-I", maestría, doctorado y **especialidad = numC-T**, usuario 2026-11-20). `importador/profesores.php` la carga en la **tabla `cedula`** (profesor, número, nivel; varias por profe), que reemplazó a `profesor.cedula` y `titulo_profesional`. En 6 profes la especialidad repetía el número del doctorado: se guarda una vez, como doctorado.
-- **Cifras en la base (2026-11-08):** 27/1 tiene **669 ofertas** (664 del HTML de SAES, con `1CM6` agregado el 2026-11-21, + 5 extra; se quitó `6CM5` C611), 2,037 sesiones, 663 cupos y **260 profes con clase**. La tabla `profesor` tiene **274** (los 260 + 14 que solo dieron clase en 26/2), sin duplicados. El "276 maestros" del prototipo no cuadra con ningún conteo consistente; manda el de la base.
+- **Cifras en la base (2026-11-25):** 27/1 tiene **667 ofertas** (eran 669 hasta que se quitaron las dos de Trabajo terminal I, que no es una clase; 664 del HTML de SAES, con `1CM6` agregado el 2026-11-21, + 3 extra; se quitó `6CM5` C611), 2,037 sesiones, 663 cupos y **260 profes con clase**. La tabla `profesor` tiene **274** (los 260 + 14 que solo dieron clase en 26/2), sin duplicados. El "276 maestros" del prototipo no cuadra con ningún conteo consistente; manda el de la base.
 - **Correcciones de captura** que se aplican al cargar: BARRALES recomiendan 1.4 → 14; TELLEZ BARRERA rec/dif invertidos; LUNA BENOSO dificultad 44 → 4.4; MÁRQUEZ ARREGUÍN 33 → 3.3; OLALDE MOGOLLÁN calidad 83 → 8.3; **LEVARIO MEDINA dificultad 6.4 → 3.5** (confirmado en MisProfesores por el usuario). Su calidad 6.1 y recomiendan 47 % coinciden con los de JURADO JIMÉNEZ, pero el usuario confirmó que son correctos.
 - Los nombres se cruzan siempre normalizados (sin acentos) y se muestra el acentuado.
 
@@ -323,6 +351,15 @@ gestorix/
 - **Editar o borrar el propio comentario solo en las primeras 24 h.**
 - Los usuarios **reportan**. Moderadores y admins pueden **ocultar** el comentario, **suspender** la cuenta un tiempo o **banearla**. Cada acción queda en una bitácora.
 
+**Respuestas a un comentario (usuario, 2026-11-26; tabla `respuesta`, migración `2026-11-26-respuestas.sql`):**
+- **Solo texto, sin calificaciones**: no tocan calidad, dificultad, recomienda ni el promedio del profesor. Por eso van en su **propia tabla** y no como un `padre` en `comentario`, donde esas tres columnas son NOT NULL y deben seguir siéndolo.
+- **Un solo nivel**: se responde al comentario, nunca a otra respuesta. **300 caracteres** (el comentario son 500). Heredan la materia del padre. Filtro de groserías igual que los comentarios.
+- **Cualquiera con cuenta activa**, incluido el propio autor del comentario (sirve para corregirse sin tocar lo que ya leyeron). Anónimo opcional, con el mismo nombre al azar. **Editar o borrar en 24 h**, como los comentarios. Tope de **10 al día por cuenta** (`lib/limite.php`).
+- **No cuentan en el "X comentarios"** de la ficha ni en ninguna métrica: se cuentan aparte ("3 respuestas").
+- **Se ocultan y se muestran con su comentario.** Para que al mostrarlo regresen las que se fueron con él —y **no** las que un moderador ocultó aparte—, `respuesta.oculta_con_padre` marca cuáles cayeron por arrastre. Banear a alguien oculta sus comentarios (con sus respuestas) y también sus respuestas en los hilos de otros.
+- **Se reportan igual.** `reporte` ahora apunta a un comentario **o** a una respuesta, nunca a los dos (CHECK `reporte_comentario_o_respuesta`), y `api/moderacion/reportes.php` devuelve `tipo` y `respuesta_id` para que el panel sepa sobre qué actuar. En la bitácora quedan con el id de su **comentario** y «Respuesta #N» en el motivo, porque `bitacora.objetivo_comentario` apunta a `comentario`.
+- Endpoints: `api/comentarios/responder.php` (crear y editar); `borrar.php` y `reportar.php` aceptan `{ respuesta }` además de `{ id }`; `api/moderacion/accion.php` acepta `{ respuesta }` en todas sus acciones.
+
 **Decisiones al construirla (Fase 4, 2026-11-20):**
 - **Suspendido:** entra, ve y guarda su avance y horario; **no comenta ni reporta** (`exigirQuePuedaComentar()` en `lib/sesion.php`). El baneado no entra.
 - **Rúbrica opcional**; si se llena, máximo 6 conceptos que suman **exactamente 100 %**.
@@ -340,14 +377,19 @@ gestorix/
 ---
 
 **Pestaña Admin y seguridad (usuario, 2026-11-22; 27 respuestas):**
-- **Pestaña "🛡️ Admin"** (`admin.js`, `api/admin/*.php`, `lib/admin.php`): solo la ven moderadores y admin, y `admin.js` solo se descarga para ellos (`mostrarPestanaAdmin()` en `cuenta.js`). La seguridad es del servidor: cada endpoint revisa sesión, rol y carrera. Secciones: **Tablero** (números; al admin, además, estado del sistema: base, sitio público por `APP_URL`, correo, último respaldo; botones **probar correo** y **descargar respaldo**), **Reportes**, **Comentarios** (todos, con filtros), **Bitácora** y **Usuarios** (solo admin: correo, rol, carreras que modera, cambiar alias). `?admin=reportes` abre esa sección (lo trae el correo de reporte).
+- **Pestaña "🛡️ Admin"** (`admin.js`, `api/admin/*.php`, `lib/admin.php`): solo la ven moderadores y admin, y `admin.js` solo se descarga para ellos (`mostrarPestanaAdmin()` en `cuenta.js`). La seguridad es del servidor: cada endpoint revisa sesión, rol y carrera. Secciones: **Tablero** (números; al admin, además, estado del sistema: base, sitio público por `APP_URL`, correo, último respaldo; botones **probar correo** y **descargar respaldo**), **Reportes**, **Comentarios** (todos, con filtros), **Bitácora**, **Usuarios** (solo admin: correo, rol, carreras que modera, cambiar alias) y **Horarios** (solo admin: subir el HTML de SAES y crear el periodo; ver abajo). `?admin=reportes` abre esa sección (lo trae el correo de reporte).
 - **Moderadores por carrera** (tabla `moderador_carrera`, migración `2026-11-22-moderadores-por-carrera.sql`): `carrerasQueModera()` en `lib/sesion.php`. La carrera de un comentario es la de su materia. Se aplica en la ficha (`moderable` por comentario), `moderacion/accion.php`, `moderacion/reportes.php` y la bitácora. El admin modera todas. Los admins se siguen nombrando solo en pgAdmin.
 - **Contraseña otra vez** para lo delicado (usuarios/correos, rol, alias ajeno, respaldo): `api/admin/confirmar.php` deja `confirmado_hasta` en la sesión por **10 min** (`exigirConfirmado()`); 5 intentos fallidos → 15 min. Ver la lista de usuarios anota `ver_correo` en la bitácora, una vez por confirmación.
 - **Bitácora** acepta además `carreras_moderador`, `cambiar_alias`, `respaldo`, `probar_correo`.
 - **Correo al llegar un reporte**: al admin y a los moderadores de esa carrera, solo con el **primer** reporte pendiente del comentario; máximo 10 reportes por hora por cuenta.
 - **Groserías** (`lib/groserias.php`): bloquea texto, rúbrica y alias en el servidor; deshace acentos, leetspeak, letras repetidas y separadas. "vergüenza", "computadora" y "disputa" pasan. Para agregar una palabra: lista `GROSERIAS`.
 - **Respaldo desde la app** (`api/admin/respaldo.php`): solo datos, con `COPY` en orden de llaves foráneas (el `pg_dump` del contenedor es 15 y la base 17). Probado restaurándolo en un Postgres 17 vacío. Ver `docs/respaldo.md`.
-- **Después de la expo** (pedidos, no hechos): subir el HTML de SAES desde la app, botón de periodo nuevo y editar profes/ofertas desde la app. Por ahora todo eso sigue en el importador y pgAdmin.
+- **Subir los horarios desde la app** (`api/admin/horarios.php` + `api/admin/periodos.php`, sección **🗓️ Horarios**; usuario, 2026-11-25): el admin sube el HTML de SAES (horario matutino, vespertino y ocupabilidad, por carrera), elige el periodo y ve el mismo reporte que imprime el importador. **Solo admin y con la contraseña confirmada**, y queda en la bitácora como `importar_horarios` (migración `2026-11-25-bitacora-horarios.sql`, que también agrega `periodo_nuevo`).
+  - **El HTML no se guarda en disco** (decisión del usuario): llega, se parsea y se carga. Por eso `./data` sigue montada `:ro` y no hay archivos subidos que cuidar; el respaldo del HTML lo sigue guardando el usuario a mano en `data/<carrera>/`.
+  - **Un solo código para los dos caminos:** `importador/carga.php` (`cargarHorarios()`, `cargarCupos()`, `filasDeHorario()`, `filasDeCupos()`, `exigirPeriodo()`) recibe el HTML **ya leído** y devuelve el reporte como arreglo. `importador/horarios.php` y `cupos.php` quedaron como envoltorios de terminal que leen los archivos e imprimen; el endpoint llama a lo mismo y lo manda como JSON. Si un archivo no trae filas de SAES, el endpoint responde 400 **antes** de escribir.
+  - **Crear el periodo** ya no necesita pgAdmin: `api/admin/periodos.php` (GET lista con sus ofertas y cupos; POST crea o ajusta fechas). No borra periodos: si ya tiene ofertas, eso sigue siendo a mano.
+  - **Ojo al cargar un periodo nuevo:** el vigente es `max(periodo)` de `oferta`, así que la primera oferta de 27/2 cambia el periodo para **todos los alumnos** y el horario que armaron para 27/1 deja de verse (`mis-datos.php` solo trae el del vigente). El panel lo avisa arriba del selector.
+- **Después de la expo** (pedidos, no hechos): editar profes y ofertas desde la app. Los importadores de materias, programas y profesores siguen en la terminal, porque dependen de PDFs y CSV en disco.
 - Sin reenviar activación, sin vista de logs del servidor; la demo de borrar cuentas, en pgAdmin.
 
 ## 7. Agenda
@@ -398,13 +440,14 @@ cupo             periodo · grupo · materia · cupo · inscritos   PK (periodo,
 usuario          id · correo UNIQUE (minúsculas) · hash · verificado · alias (único sin importar
                  mayúsculas) · rol · carrera · creado · suspendido_hasta · baneado
 token            hash PK (sha256) · usuario · tipo · expira          (se borra al usarlo)
-avance           usuario · materia · veces · calif · calif_ets       PK (usuario, materia)
+respuesta        id · comentario · usuario · texto (300) · anonimo · estado · oculta_con_padre
+avance           usuario · materia · veces · calif · calif_ets · proyecto_en_curso   PK (usuario, materia)
 horario          usuario · oferta
 recordatorio     id · usuario · fecha_hora · titulo · materia · nota
 comentario       id · usuario (NULL = eliminado) · profesor · materia · calidad · recomienda (sí/no)
                  · dificultad · texto VARCHAR(500) · creado · editado · estado
 rubrica          comentario · concepto · porcentaje
-reporte          id · comentario · reportante · motivo · creado · estado · resuelto_por
+reporte          id · comentario O respuesta · reportante · motivo · creado · estado · resuelto_por
 bitacora         id · actor · accion · objetivo_usuario · objetivo_comentario · motivo · cuando
 vista avance_status   status (pendiente / en recurse / aprobada / reprobada / solo por ETS /
                       aprobada por ETS) y calif_final, derivados de veces + calif + calif_ets

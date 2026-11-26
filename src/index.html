@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Cada vista tiene su dirección (/maestro/<nombre>, /historial…; rutas.js) y
+       Apache las sirve todas con este archivo. Sin <base> el navegador buscaría
+       styles.css y api/ colgando de /maestro/, y no existen ahí. -->
+  <base href="/">
+  <!-- Las fichas de los maestros son enlazables, pero no salen en buscadores
+       (usuario, 2026-11-26). También está robots.txt. -->
+  <meta name="robots" content="noindex, nofollow">
   <title>Gestorix — avance, maestros y horario de ESCOM</title>
   <meta name="description" content="Gestorix: lleva tu avance del plan de estudios de ESCOM-IPN, consulta las calificaciones de los maestros y arma tu horario de reinscripción sin choques. Sistemas Computacionales, Inteligencia Artificial y Ciencia de Datos.">
   <meta name="theme-color" content="#f3f4fb" media="(prefers-color-scheme: light)">

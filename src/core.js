@@ -140,6 +140,43 @@ function numAPer(n) { return String(Math.floor(n / 2)).padStart(2, "0") + "/" + 
 function perInicio(p) { const [a, n] = p.split("/").map(Number); return n === 1 ? "ago " + (2000 + a - 1) : "ene " + (2000 + a); }
 function perFin(p) { const [a, n] = p.split("/").map(Number); return n === 1 ? "dic " + (2000 + a - 1) : "jun " + (2000 + a); }
 
+// El periodo del IPN al que pertenece una fecha: ago–dic abre el /1 del año
+// siguiente, enero todavía cuenta como ese /1 (ahí se cierran las actas, así
+// que una calificación del 19 de enero de 2026 es del periodo 26/1) y feb–jul
+// es el /2. Con el calendario cargado (calendario-ui.js) se usa el real.
+function periodoDeFecha(f) {
+  const d = f instanceof Date ? f : (f ? new Date(f) : null);   // new Date(null) sería 1970
+  if (!d || isNaN(d.getTime())) return "";
+  if (typeof calPeriodoDe === "function") {
+    try {
+      const p = calPeriodoDe(d);
+      if (p && perANum(p.id) !== null) return p.id;
+    } catch (e) { /* sin calendario */ }
+  }
+  const yy = d.getFullYear() % 100, mes = d.getMonth();
+  if (mes >= 7) return numAPer((yy + 1) * 2);   // ago–dic: AA+1/1
+  if (mes === 0) return numAPer(yy * 2);        // enero: todavía es AA/1
+  return numAPer(yy * 2 + 1);                   // feb–jul: AA/2
+}
+
+// La fecha como la escribe SAES en el Kárdex: "19/01/2026", "19-ene-2026",
+// "19 de enero de 2026". Devuelve Date, o null si no se entiende.
+const MESES_ES = { ene: 0, feb: 1, mar: 2, abr: 3, may: 4, jun: 5, jul: 6, ago: 7, sep: 8, set: 8, oct: 9, nov: 10, dic: 11 };
+function fechaDeSaes(txt) {
+  const s = String(txt || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/\bde\b/g, " ").replace(/\s+/g, " ").trim();
+  const armar = (dia, mes, anio) => {
+    const a = Number(anio) < 100 ? 2000 + Number(anio) : Number(anio);
+    const d = new Date(a, mes, Number(dia));
+    return isNaN(d.getTime()) || d.getMonth() !== mes ? null : d;
+  };
+  let m = /^(\d{1,2})[\/\-. ]+(\d{1,2})[\/\-. ]+(\d{2}|\d{4})$/.exec(s);
+  if (m) return armar(m[1], Number(m[2]) - 1, m[3]);
+  m = /^(\d{1,2})[\/\-. ]+([a-z]{3,})[\/\-. ]+(\d{2}|\d{4})$/.exec(s);
+  if (m && MESES_ES[m[2].slice(0, 3)] !== undefined) return armar(m[1], MESES_ES[m[2].slice(0, 3)], m[3]);
+  return null;
+}
+
 // El periodo en curso según el calendario del IPN (o el que sigue, si estás
 // entre periodos). Antes de que cargue calendario-ui.js, o sin calendario, se
 // deduce de la fecha.
@@ -153,10 +190,23 @@ function periodoActual() {
       if (p && perANum(p.id) !== null) return (_periodoActual = p.id);
     } catch (e) { /* sin calendario */ }
   }
-  const yy = hoy.getFullYear() % 100, mes = hoy.getMonth();
-  if (mes >= 7) return numAPer((yy + 1) * 2);   // ago–dic: AA+1/1
-  if (mes === 0) return numAPer(yy * 2);        // enero: todavía es AA/1
-  return numAPer(yy * 2 + 1);                   // feb–jul: AA/2
+  return periodoDeFecha(hoy);
+}
+
+// El más antiguo de dos periodos ("26/1" gana a "26/2"); ignora los vacíos.
+function perMasAntiguo(a, b) {
+  const na = perANum(a), nb = perANum(b);
+  if (na === null) return nb === null ? "" : b;
+  if (nb === null) return a;
+  return na <= nb ? a : b;
+}
+
+// Un periodo nunca puede ser anterior a tu ingreso: si no estabas inscrito, no
+// pudiste cursar nada (usuario, 2026-11-25). Devuelve el periodo acotado.
+function perDesdeIngreso(p, ingreso) {
+  const n = perANum(p), ing = perANum(ingreso);
+  if (n === null || ing === null) return p || "";
+  return n < ing ? ingreso : p;
 }
 
 // Desfase (docs/reglas-escolares.md; usuario, 2026-11-21). Se cuenta desde el
@@ -199,14 +249,20 @@ function getSub(id, defName) {
   const delCurso = calif !== "" ? deriveStatus(calif) : (res || "pendiente");
   const etsAprobado = calif_ets !== "" ? Number(calif_ets) >= 6 : res_ets === "aprobado";
   const porEts = delCurso === "reprobada" && etsAprobado;
-  // Periodo en que la reprobaste y desfase: solo mientras la debas.
-  const per_rep = delCurso === "reprobada" ? (r.per_rep || "") : "";
+  // Periodo en que la reprobaste y desfase: solo mientras la debas. Si lo
+  // guardado quedó antes de tu ingreso (datos de antes de la regla, o un
+  // ingreso corregido después), se acota a tu ingreso.
+  const per_rep = delCurso === "reprobada" ? perDesdeIngreso(r.per_rep || "", state.ingreso) : "";
+  // Proyecto (TT I, TT II, Estancia) que el alumno marcó que está llevando.
+  // Al aprobarlo deja de contar solo, sin que tenga que desmarcarlo.
+  const proy = esProyecto(id) && delCurso !== "aprobada" && !porEts && !!r.proy;
   return {
     calif,
     calif_ets,
     res,
     res_ets,
     per_rep,
+    proy,
     veces,
     status: porEts ? "aprobada" : delCurso,
     reproboCurso: delCurso === "reprobada",
@@ -217,15 +273,17 @@ function getSub(id, defName) {
   };
 }
 
-// La calificación que entra al promedio, como en el Kárdex de SAES (usuario,
-// 2026-11-21; antes solo contaban las aprobadas): la ÚLTIMA que tienes en cada
-// materia —la del ETS si lo presentaste, si no la del curso—, aprobada o
-// reprobada. Sin número (privacidad) no entra: no hay número que promediar.
+// La calificación que entra al promedio: la MÁS ALTA con número de cada
+// materia, aprobada o reprobada (usuario, 2026-11-25; antes la última, es
+// decir la del ETS si lo presentaste —2026-11-21—, y antes de eso solo las
+// aprobadas). Un ETS reprobado más bajo que el ordinario ya no baja tu
+// promedio, y si el ETS se marcó sin número tampoco borra la del curso.
+// Sin ningún número (privacidad) no entra: no hay número que promediar.
 function califParaPromedio(rec) {
-  if (rec.calif_ets !== "") return Number(rec.calif_ets);
-  if (rec.res_ets) return null;                  // presentó ETS, pero sin número
-  if (rec.calif !== "") return Number(rec.calif);
-  return null;
+  let alta = null;
+  if (rec.calif !== "") alta = Number(rec.calif);
+  if (rec.calif_ets !== "") alta = alta === null ? Number(rec.calif_ets) : Math.max(alta, Number(rec.calif_ets));
+  return alta;
 }
 
 function setSub(id, patch) {
@@ -293,6 +351,23 @@ function ventanaInscripcion() {
 function creditosBloqueados() { return materiasSoloEts().reduce((a, m) => a + m.cred, 0); }
 function uaBloqueadas() { return materiasSoloEts().reduce((a, m) => a + m.ua, 0); }
 
+// Los proyectos que marcaste que estás llevando (TT I, TT II, Estancia). No
+// están en el horario —no tienen oferta ni hora— pero sí ocupan carga: TT vale
+// 2 UA y la Estancia 1 (usuario, 2026-11-25).
+function proyectosEnCurso() {
+  const res = [];
+  PLAN.forEach((blk, s) => {
+    blk.materias.forEach(([name, cred], i) => {
+      const id = idOf(s, i);
+      if (!esProyecto(id)) return;
+      const rec = getSub(id, name);
+      if (rec.proy) res.push({ id, name: rec.name || name, cred, ua: uaDe(id), sem: s + 1 });
+    });
+  });
+  return res;
+}
+function uaProyectos() { return proyectosEnCurso().reduce((a, p) => a + p.ua, 0); }
+
 // Texto del badge de estado
 function statusBadgeText(rec, inscrita) {
   if (rec.status === "aprobada") {
@@ -305,6 +380,7 @@ function statusBadgeText(rec, inscrita) {
     return rec.soloEts ? "🔒 Solo por ETS" : "Reprobada · recurse o ETS";
   }
   // pendiente: si ya está en el horario, mostrar "Inscrita"
+  if (rec.proy) return "🧩 Lo estás llevando";          // proyecto: no va en el horario
   if (inscrita) return rec.veces >= 2 ? "🔁 Inscrita (recurse)" : "Inscrita";
   // pendiente sin inscribir: distingue 1ª vez de recurse en curso (2ª vez sin calif)
   return rec.veces >= 2 ? "🔁 En recurse" : "Pendiente";

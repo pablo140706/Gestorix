@@ -16,7 +16,7 @@
 // La excepción son las fuentes de Google: esas sí van caché primero, porque
 // vienen con hash en la URL y no cambian nunca.
 
-const VERSION = "v22";
+const VERSION = "v23";
 const CACHE = "gestorix-" + VERSION;
 
 // El mínimo para pintar: los archivos de la app y los datos críticos de la
@@ -34,7 +34,7 @@ const SHELL = [
   "lazy.js", "data.js", "core.js", "materia-ui.js", "avance.js", "maestros.js", "horario.js",
   "optativas-ui.js", "auto.js", "export.js", "historial-ui.js", "calendario-ui.js",
   "carrera-ui.js", "tema.js", "buscador.js", "comparador.js", "compartir.js",
-  "atajos.js", "portada.js", "init.js", "bienvenida.js", "cuenta.js", "comentarios.js", "agenda.js",
+  "rutas.js", "atajos.js", "portada.js", "init.js", "bienvenida.js", "cuenta.js", "comentarios.js", "agenda.js",
 ];
 
 self.addEventListener("install", (e) => {
@@ -79,6 +79,16 @@ self.addEventListener("fetch", (e) => {
     return;
   }
 
+  // Las direcciones de la app (/maestro/<nombre>, /historial…) no son archivos:
+  // online las sirve Apache con index.html, y guardar una copia por cada una
+  // llenaría la caché de lo mismo. Se piden a la red y, sin conexión, se
+  // contesta con el index.html guardado: el enrutador del navegador pinta la
+  // vista que toca (usuario, 2026-11-26).
+  if (req.mode === "navigate") {
+    e.respondWith(fetch(req).catch(() => caches.match("index.html")));
+    return;
+  }
+
   // Lo propio: red primero; si no hay conexión, lo último que se guardó
   e.respondWith(
     fetch(req)
@@ -89,7 +99,6 @@ self.addEventListener("fetch", (e) => {
         }
         return r;
       })
-      .catch(() => caches.match(req).then((hit) =>
-        hit || (req.mode === "navigate" ? caches.match("index.html") : undefined)))
+      .catch(() => caches.match(req))
   );
 });
