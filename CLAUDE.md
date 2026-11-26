@@ -62,7 +62,7 @@ gestorix/
 ├── migraciones/             cambios de esquema con la base ya en uso
 ├── importador/              scripts PHP de línea de comandos: HTML de SAES → base
 │   └── carga.php            el HTML (ya leído) → base; lo usan la terminal y Admin → Horarios
-├── data/isc|ia|lcd/         HTML pegado de SAES
+├── data/isc|ia|lcd/         donde pegas el HTML de SAES (no va a git; .gitignore)
 ├── src/                     lo que sirve Apache
 │   ├── index.html, *.js, styles.css     front vanilla de iscweb
 │   ├── arranque.js                      pide los datos a la API y luego carga los módulos
@@ -385,7 +385,8 @@ gestorix/
 - **Groserías** (`lib/groserias.php`): bloquea texto, rúbrica y alias en el servidor; deshace acentos, leetspeak, letras repetidas y separadas. "vergüenza", "computadora" y "disputa" pasan. Para agregar una palabra: lista `GROSERIAS`.
 - **Respaldo desde la app** (`api/admin/respaldo.php`): solo datos, con `COPY` en orden de llaves foráneas (el `pg_dump` del contenedor es 15 y la base 17). Probado restaurándolo en un Postgres 17 vacío. Ver `docs/respaldo.md`.
 - **Subir los horarios desde la app** (`api/admin/horarios.php` + `api/admin/periodos.php`, sección **🗓️ Horarios**; usuario, 2026-11-25): el admin sube el HTML de SAES (horario matutino, vespertino y ocupabilidad, por carrera), elige el periodo y ve el mismo reporte que imprime el importador. **Solo admin y con la contraseña confirmada**, y queda en la bitácora como `importar_horarios` (migración `2026-11-25-bitacora-horarios.sql`, que también agrega `periodo_nuevo`).
-  - **El HTML no se guarda en disco** (decisión del usuario): llega, se parsea y se carga. Por eso `./data` sigue montada `:ro` y no hay archivos subidos que cuidar; el respaldo del HTML lo sigue guardando el usuario a mano en `data/<carrera>/`.
+  - **El HTML no se guarda en disco** (decisión del usuario): llega, se parsea y se carga. Por eso `./data` sigue montada `:ro` y no hay archivos subidos que cuidar.
+  - **El HTML de SAES ya no va a git** (usuario, 2026-11-26): pesaba 1 MB en un repo público y se vuelve a bajar de SAES. Lo que traía quedó en `sql/11-ofertas-27-1.sql` (260 profesores, 664 ofertas con sus sesiones y 668 cupos de 27/1; las otras 3 ofertas las pone `08-ofertas-extra.sql`). Comprobado levantando una base de cero con solo `sql/`: sale idéntica a la que está corriendo. Para los importadores de terminal, pega el HTML en `data/<carrera>/` y ahí se queda, sin subir.
   - **Un solo código para los dos caminos:** `importador/carga.php` (`cargarHorarios()`, `cargarCupos()`, `filasDeHorario()`, `filasDeCupos()`, `exigirPeriodo()`) recibe el HTML **ya leído** y devuelve el reporte como arreglo. `importador/horarios.php` y `cupos.php` quedaron como envoltorios de terminal que leen los archivos e imprimen; el endpoint llama a lo mismo y lo manda como JSON. Si un archivo no trae filas de SAES, el endpoint responde 400 **antes** de escribir.
   - **Crear el periodo** ya no necesita pgAdmin: `api/admin/periodos.php` (GET lista con sus ofertas y cupos; POST crea o ajusta fechas). No borra periodos: si ya tiene ofertas, eso sigue siendo a mano.
   - **Ojo al cargar un periodo nuevo:** el vigente es `max(periodo)` de `oferta`, así que la primera oferta de 27/2 cambia el periodo para **todos los alumnos** y el horario que armaron para 27/1 deja de verse (`mis-datos.php` solo trae el del vigente). El panel lo avisa arriba del selector.

@@ -12,3 +12,10 @@ expo-laptop/
 /gestorix.sql
 /env-de-la-pc-*.txt
 /env.txt
+
+# HTML de SAES: pesaba 1 MB en un repo público y se vuelve a bajar de SAES.
+# Los datos que traía ya están en sql/11-ofertas-27-1.sql. Si lo pones en
+# data/<carrera>/ para correr el importador, no se sube.
+data/isc/*.html
+data/ia/*.html
+data/lcd/*.html

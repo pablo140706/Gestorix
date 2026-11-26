@@ -23,8 +23,12 @@ INSERT INTO periodo (codigo, inicio, fin) VALUES ('28/1', '2027-08-16', '2027-12
 
 ## 2. Pegar el HTML de SAES
 
-En SAES copia el HTML de la tabla (o guarda la página) y **reemplaza** estos archivos (git guarda
-las versiones de 27/1 en su historial):
+Tienes dos caminos: **Admin → 🗓️ Horarios** en la app (subes el HTML desde el navegador y no se
+guarda nada en disco) o el importador de terminal, que es lo que sigue.
+
+En SAES copia el HTML de la tabla (o guarda la página) y ponlo en estos archivos. **Ninguno va a
+git**: `data/<carrera>/*.html` está en `.gitignore`, y los datos de 27/1 ya viven en
+`sql/11-ofertas-27-1.sql`.
 
 | Archivo | Qué es |
 |---|---|
